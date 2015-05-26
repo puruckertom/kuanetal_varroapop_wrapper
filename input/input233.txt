@@ -1,0 +1,2 @@
+ICQueenStrength= 4.2874754499644
+RQWkrDrnRatio= 2.9087721509859

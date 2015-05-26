@@ -1,0 +1,6 @@
+ICQueenStrength= 1.58332215296105
+RQWkrDrnRatio= 1.51914158836007
+ICDroneMiteSurvivorship= 22.5911763496697
+ICWorkerMiteSurvivorship= 36.1442546593025
+ICForagerLifespan= 14.7640825882554
+ImmType= Cosine
