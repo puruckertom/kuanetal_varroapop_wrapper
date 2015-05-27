@@ -234,11 +234,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   
     par(mfrow=c(6,5), mar=c(0.5, 4, 1.5, 0.5), oma= c(4,4,2,7))
     
-    if (i == drnmitesurvive){ x = "Drone Mite Survivorship (%)"}
+    if (i == drnmitesurvive){ x = "Drone-Mite Survivorship (%)"}
     if (i == fgrlifespan){ x = "Forager Lifespan (days)"}
     if (i == queenstrength){ x = "Queen Strength"}
     if (i == wkrdrnratio){ x = "Worker:Drone"}
-    if (i == wkrmitesurvive){ x = "Worker Mite Survivorship (%)"}
+    if (i == wkrmitesurvive){ x = "Worker-Mite Survivorship (%)"}
   
   #COLONY SIZE
     plot(i, tdarray[122, 1, 1:1000], type="p", pch=20, main= "May 1999", ylab= "Colony Size", ylim=c(0,71000), xaxt='n', xlab=NA)
