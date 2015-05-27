@@ -183,13 +183,8 @@ qs4 <- which(queenstrength >=4 & queenstrength <5)
 qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #list response variables to plot
-inputparam<- list(DroneMiteSurvivorship= drnmitesurvive,
-                  ForagerLifespan= fgrlifespan, 
-                  QueenStrength= queenstrength, 
-                  WorkerDroneRatio= wkrdrnratio, 
-                  WorkerMiteSurvivorship= wkrmitesurvive)
+inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive)
 
-inputnames <- names(inputparam)
 
 time <- as.Date(df[,1], "%m / %d / %y")
 
