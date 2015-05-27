@@ -189,7 +189,7 @@ inputparam<- list(DroneMiteSurvivorship= drnmitesurvive,
                   WorkertoDroneRatio= wkrdrnratio, 
                   WorkerMiteSurvivorship= wkrmitesurvive)
 
-inputnames <- c("DroneMiteSurvivorship","ForagerLifespan", "QueenStrength", "WorkertoDroneRatio","WorkerMiteSurvivorship")
+inputnames <- names(inputparam)
 
 time <- as.Date(df[,1], "%m / %d / %y")
 
@@ -480,7 +480,13 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     
   
   #COLONY NECTAR
-    plot(i, tdarray[122, 20, 1:1000], type="p", pch=20, ylab= "Colony Nectar", ylim=c(0,30000), xlab=NA)
+    plot(i, tdarray[122, 20, 1:1000], type="p", pch=20, ylab= "Colony Nectar", ylim=c(0,30000), 
+         xlab= if (i = drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
+              if (i = fgrlifespan){ paste("Forager Lifespan (days)")}
+              if (i = queenstrength){ paste("Queen Strength")}
+              if (i = wkrdrnratio){ paste("Worker:Drone")}
+              if (i = wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
+           )
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Colony Nectar")
     points(i[qs1],tdarray[122,20, qs1], type="p", col=1, pch=20)
@@ -489,7 +495,13 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs4],tdarray[122,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,20, qs5], type="p", col=5, pch=20)
   
-    plot(i, tdarray[153, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xlab=NA)
+    plot(i, tdarray[153, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
+         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
+                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
+                                               else if (i = QueenStrength) paste("Queen Strength")
+                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
+                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+          )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[153,20, qs1], type="p", col=1, pch=20)
@@ -498,7 +510,13 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs4],tdarray[153,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,20, qs5], type="p", col=5, pch=20)
   
-    plot(i, tdarray[183, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xlab=NA)
+    plot(i, tdarray[183, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
+         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
+                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
+                                               else if (i = QueenStrength) paste("Queen Strength")
+                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
+                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+           )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[183,20, qs1], type="p", col=1, pch=20)
@@ -507,7 +525,13 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs4],tdarray[183,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,20, qs5], type="p", col=5, pch=20)
   
-    plot(i, tdarray[214, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xlab=NA)
+    plot(i, tdarray[214, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
+         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
+                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
+                                               else if (i = QueenStrength) paste("Queen Strength")
+                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
+                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+           )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[214,20, qs1], type="p", col=1, pch=20)
@@ -516,7 +540,13 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs4],tdarray[214,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,20, qs5], type="p", col=5, pch=20)
   
-    plot(i, tdarray[245, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xlab=NA)
+    plot(i, tdarray[245, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
+         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
+                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
+                                               else if (i = QueenStrength) paste("Queen Strength")
+                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
+                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+           )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[245,20, qs1], type="p", col=1, pch=20)
@@ -530,7 +560,6 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   #add legend and marginal text  
  
   par(mfrow=c(1,1), oma= c(1,4,1,4), new= TRUE, xpd=NA)
-  mtext(text = names(inputparam[i]), side = 1)
   plot(0:1,0:1, type="n", xlab=NA, ylab=NA, axes=FALSE)
   legend("right",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
            title= "Queen Strength", cex=0.65, bty="n")
