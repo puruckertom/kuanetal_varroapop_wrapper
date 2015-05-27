@@ -197,31 +197,31 @@ pdf(file= paste(vpdir,"graphics_output.pdf", sep=""), width = 8, height = 10, on
 #start figures
 par(mfrow=c(5,5), mar=c(1.5,4,1.5,0.5), oma=c(2,2,2,2))
 
-plot(time[1:366], cp[1:366], type="l", ylab = "Colony Size", main= "1999", ylim=c(0,1))
+plot(time[1:366], cp[1:366], type="l", ylab = "P(Colony Size) > 0", main= "1999", ylim=c(0,1))
 plot(time[367:732], cp[367:732], type="l", main= "2000", ylim=c(0,1), ylab=NA)
 plot(time[733:1097], cp[733:1097], type="l", main= "2001", ylim=c(0,1), ylab=NA)
 plot(time[1098:1462], cp[1098:1462], type="l", main= "2002", ylim=c(0,1), ylab=NA)
 plot(time[1463:1827], cp[1463:1827], type="l", main= "2003", ylim=c(0,1), ylab=NA)
 
-plot(time[1:366], fa[1:366], type="l", ylab= "Foragers", ylim=c(0,1)) 
+plot(time[1:366], fa[1:366], type="l", ylab= "P(Foragers) > 0", ylim=c(0,1)) 
 plot(time[367:732], fa[367:732], type="l", ylim=c(0,1), ylab=NA)
 plot(time[733:1097], fa[733:1097], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1098:1462], fa[1098:1462], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1463:1827], fa[1463:1827], type="l", ylim=c(0,1), ylab=NA)
 
-plot(time[1:366], aw[1:366], type="l", ylab= "Adult Workers", ylim=c(0,1)) 
+plot(time[1:366], aw[1:366], type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1)) 
 plot(time[367:732], aw[367:732], type="l", ylim=c(0,1), ylab=NA)
 plot(time[733:1097], aw[733:1097], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1098:1462], aw[1098:1462], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1463:1827], aw[1463:1827], type="l", ylim=c(0,1), ylab=NA)
 
-plot(time[1:366], fm[1:366], type="l", ylab= "Free Mites", ylim=c(0,1)) 
+plot(time[1:366], fm[1:366], type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1)) 
 plot(time[367:732], fm[367:732], type="l", ylim=c(0,1), ylab=NA)
 plot(time[733:1097], fm[733:1097], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1098:1462], fm[1098:1462], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1463:1827], fm[1463:1827], type="l", ylim=c(0,1), ylab=NA)
 
-plot(time[1:366], dfr[1:366], type="l", ylab= "Dead Foragers", ylim=c(0,1)) 
+plot(time[1:366], dfr[1:366], type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1)) 
 plot(time[367:732], dfr[367:732], type="l", ylim=c(0,1), ylab=NA)
 plot(time[733:1097], dfr[733:1097], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA)
