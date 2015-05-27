@@ -239,11 +239,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   
     par(mfrow=c(6,5), mar=c(0.5, 4, 1.5, 0.5), oma= c(4,4,2,7))
     
-    if (i == drnmitesurvive){ xlab = "Drone Mite Survivorship (%)"}
-    if (i == fgrlifespan){ xlab = "Forager Lifespan (days)"}
-    if (i == queenstrength){ xlab = "Queen Strength"}
-    if (i == wkrdrnratio){ xlab = "Worker:Drone"}
-    if (i == wkrmitesurvive){ xlab= "Worker Mite Survivorship (%)"}
+    if (i == drnmitesurvive){ x = "Drone Mite Survivorship (%)"}
+    if (i == fgrlifespan){ x = "Forager Lifespan (days)"}
+    if (i == queenstrength){ x = "Queen Strength"}
+    if (i == wkrdrnratio){ x = "Worker:Drone"}
+    if (i == wkrmitesurvive){ x = "Worker Mite Survivorship (%)"}
   
   #COLONY SIZE
     plot(i, tdarray[122, 1, 1:1000], type="p", pch=20, main= "May 1999", ylab= "Colony Size", ylim=c(0,71000), xaxt='n', xlab=NA)
@@ -487,7 +487,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   
   #COLONY NECTAR
     plot(i, tdarray[122, 20, 1:1000], type="p", pch=20, ylab= "Colony Nectar", ylim=c(0,30000), 
-         xlab= T)
+         xlab= x)
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Colony Nectar")
     points(i[qs1],tdarray[122,20, qs1], type="p", col=1, pch=20)
@@ -497,7 +497,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[122,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[153, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= T)
+         xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[153,20, qs1], type="p", col=1, pch=20)
@@ -507,7 +507,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[153,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[183, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= T)
+         xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[183,20, qs1], type="p", col=1, pch=20)
@@ -517,7 +517,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[183,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[214, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= T)
+         xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[214,20, qs1], type="p", col=1, pch=20)
@@ -527,7 +527,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[214,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[245, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= T)
+         xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[245,20, qs1], type="p", col=1, pch=20)
