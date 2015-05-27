@@ -27,7 +27,7 @@ if(Sys.info()[4]=="ACKUAN-PC"){
 #create input files #########
 
 
-#ICQueenStrength
+#ICqueenstrength
 queenstrength<- runif(1000, 1, 6)
 #RQWkrDrnRatio
 wkrdrnratio<- runif(1000, 1, 5)
@@ -186,7 +186,7 @@ qs5 <- which(queenstrength >=5 & queenstrength <6)
 inputparam<- list(DroneMiteSurvivorship= drnmitesurvive,
                   ForagerLifespan= fgrlifespan, 
                   QueenStrength= queenstrength, 
-                  WorkertoDroneRatio= wkrdrnratio, 
+                  WorkerDroneRatio= wkrdrnratio, 
                   WorkerMiteSurvivorship= wkrmitesurvive)
 
 inputnames <- names(inputparam)
@@ -481,11 +481,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   
   #COLONY NECTAR
     plot(i, tdarray[122, 20, 1:1000], type="p", pch=20, ylab= "Colony Nectar", ylim=c(0,30000), 
-         xlab= if (i = drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
-              if (i = fgrlifespan){ paste("Forager Lifespan (days)")}
-              if (i = queenstrength){ paste("Queen Strength")}
-              if (i = wkrdrnratio){ paste("Worker:Drone")}
-              if (i = wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
+         xlab= if (i == drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
+               if (i == fgrlifespan){ paste("Forager Lifespan (days)")}
+               if (i == queenstrength){ paste("Queen Strength")}
+               if (i == wkrdrnratio){ paste("Worker:Drone")}
+               if (i == wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
            )
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Colony Nectar")
@@ -496,11 +496,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[122,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[153, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
-                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
-                                               else if (i = QueenStrength) paste("Queen Strength")
-                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
-                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+         xlab= if (i == drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
+               if (i == fgrlifespan){ paste("Forager Lifespan (days)")}
+               if (i == QueenStrength){ paste("Queen Strength")}
+               if (i == wkrdrnratio){ paste("Worker:Drone")}
+               if (i == wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
           )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -511,11 +511,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[153,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[183, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
-                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
-                                               else if (i = QueenStrength) paste("Queen Strength")
-                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
-                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+         xlab= if (i == drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
+               if (i == fgrlifespan){ paste("Forager Lifespan (days)")}
+               if (i == QueenStrength){ paste("Queen Strength")}
+               if (i == wkrdrnratio){ paste("Worker:Drone")}
+               if (i == wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
            )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -526,11 +526,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[183,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[214, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
-                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
-                                               else if (i = QueenStrength) paste("Queen Strength")
-                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
-                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+         xlab= if (i == drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
+               if (i == fgrlifespan){ paste("Forager Lifespan (days)")}
+               if (i == queenstrength){ paste("Queen Strength")}
+               if (i == wkrdrnratio){ paste("Worker:Drone")}
+               if (i == wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
            )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -541,11 +541,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
     points(i[qs5],tdarray[214,20, qs5], type="p", col=5, pch=20)
   
     plot(i, tdarray[245, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
-         xlab= if (i = DroneMiteSurvivorship){ paste("Drone Mite Survivorship (%)")
-                                               else if (i = ForagerLifespan) paste("Forager Lifespan (days)")
-                                               else if (i = QueenStrength) paste("Queen Strength")
-                                               else if (i = WorkertoDroneRatio) paste("Worker:Drone")
-                                               else if (i = WorkerMiteSurvivorship) paste("Worker Mite Survivorship (%)")}
+         xlab= if (i == drnmitesurvive){ paste("Drone Mite Survivorship (%)")}
+               if (i == fgrlifespan){ paste("Forager Lifespan (days)")}
+               if (i == queenstrength){ paste("Queen Strength")}
+               if (i == wkrdrnratio){ paste("Worker:Drone")}
+               if (i == wkrmitesurvive){ paste("Worker Mite Survivorship (%)")}
            )
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
