@@ -20,7 +20,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 #carmen personal laptop
 
 if(Sys.info()[4]=="ACKUAN-PC"){
-  vpdir<-path.expand("C:\\Users\\ackuan\\VarroaPop\\")
+  vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
 }
 
 
@@ -66,17 +66,17 @@ for (i in 1:1000) {
   inputvalue6 <- miteimmtype[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
-  write(varroainput, file = paste(vpdir,"input",i,".txt", sep = ""), append = FALSE)
+  write(varroainput, file = paste(vpdir,"input\\", "input",i,".txt", sep = ""), append = FALSE)
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
-  write(varroainput2, file = paste(vpdir,"input",i,".txt", sep = ""), append = TRUE)
+  write(varroainput2, file = paste(vpdir,"input\\", "input",i,".txt", sep = ""), append = TRUE)
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
-  write(varroainput3, file = paste(vpdir, "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput3, file = paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
   varroainput4 <- paste(parameter4, inputvalue4, sep=" ")
-  write(varroainput4, file= paste(vpdir, "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput4, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
   varroainput5 <- paste(parameter5, inputvalue5, sep= " ")
-  write(varroainput5, file= paste(vpdir, "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput5, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
   varroainput6 <- paste(parameter6, inputvalue6, sep= " ")
-  write(varroainput6, file= paste(vpdir, "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput6, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
@@ -87,8 +87,8 @@ for (i in 1:1000) {
 
 for (i in 1:1000) {
   inputfile<- paste("input",i,".txt", sep="")
-  vpdir_command <- paste(vpdir,"VarroaPop.exe ", vpdir, "Default.vrp", 
-                         " /b /or ", vpdir, "results",i,".txt", 
+  vpdir_command <- paste(vpdir, "exe\\", "VarroaPop.exe ", vpdir, "exe\\", "Default.vrp", 
+                         " /b /or ", vpdir, "output\\", "results",i,".txt", 
                          " /i ", vpdir, inputfile, sep="")
   print(vpdir_command)
   system(vpdir_command)
@@ -104,7 +104,7 @@ dim(tdarray)
 library(abind)
 
 for (i in 1:1000) {
-  df<- read.table(paste(vpdir,"results",i,".txt", sep=""), header= FALSE, sep= "", 
+  df<- read.table(paste(vpdir, "output\\","results",i,".txt", sep=""), header= FALSE, sep= "", 
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
   newarray <- df[,2:27]
   newarray2<- data.matrix(newarray)
@@ -191,7 +191,7 @@ time <- as.Date(df[,1], "%m / %d / %y")
 
 #create PDF
 
-pdf(file= paste(vpdir,"graphics_output.pdf", sep=""), width = 8, height = 10, onefile = TRUE, paper = "letter")
+pdf(file= paste(vpdir, "output\\", "graphics_output.pdf", sep=""), width = 8, height = 10, onefile = TRUE, paper = "letter")
 
 
 #start figures
