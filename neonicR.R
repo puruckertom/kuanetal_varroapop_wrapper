@@ -190,49 +190,48 @@ time <- as.Date(df[,1], "%m / %d / %y")
 
 #create PDF
 
-pdf(file= paste(vpdir, "output\\", "graphics_output.pdf", sep=""), width = 8, height = 10, onefile = TRUE, paper = "letter")
+pdf(file= paste(vpdir, "output\\", "graphics_output.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
 
 
 #start figures
-par(mfrow=c(5,5), mar=c(1.5,4,1.5,0.5), oma=c(2,2,2,2))
+par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,2,2,2))
 
-plot(time[1:366], cp[1:366], type="l", ylab = "P(Colony Size) > 0", main= "1999", ylim=c(0,1))
-plot(time[367:732], cp[367:732], type="l", main= "2000", ylim=c(0,1), ylab=NA)
-plot(time[733:1097], cp[733:1097], type="l", main= "2001", ylim=c(0,1), ylab=NA)
-plot(time[1098:1462], cp[1098:1462], type="l", main= "2002", ylim=c(0,1), ylab=NA)
-plot(time[1463:1827], cp[1463:1827], type="l", main= "2003", ylim=c(0,1), ylab=NA)
+plot(time[1:366], cp[1:366], type="l", ylab = "P(Colony Size) > 0", main= "1999", ylim=c(0,1), xlab=NA)
+plot(time[367:732], cp[367:732], type="l", main= "2000", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[733:1097], cp[733:1097], type="l", main= "2001", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1098:1462], cp[1098:1462], type="l", main= "2002", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:1827], cp[1463:1827], type="l", main= "2003", ylim=c(0,1), ylab=NA, xlab=NA)
 
-plot(time[1:366], fa[1:366], type="l", ylab= "P(Foragers) > 0", ylim=c(0,1)) 
-plot(time[367:732], fa[367:732], type="l", ylim=c(0,1), ylab=NA)
-plot(time[733:1097], fa[733:1097], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1098:1462], fa[1098:1462], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1463:1827], fa[1463:1827], type="l", ylim=c(0,1), ylab=NA)
+plot(time[1:366], fa[1:366], type="l", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
+plot(time[367:732], fa[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[733:1097], fa[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1098:1462], fa[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:1827], fa[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
-plot(time[1:366], aw[1:366], type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1)) 
-plot(time[367:732], aw[367:732], type="l", ylim=c(0,1), ylab=NA)
-plot(time[733:1097], aw[733:1097], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1098:1462], aw[1098:1462], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1463:1827], aw[1463:1827], type="l", ylim=c(0,1), ylab=NA)
+plot(time[1:366], aw[1:366], type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
+plot(time[367:732], aw[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[733:1097], aw[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1098:1462], aw[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:1827], aw[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
-plot(time[1:366], fm[1:366], type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1)) 
-plot(time[367:732], fm[367:732], type="l", ylim=c(0,1), ylab=NA)
-plot(time[733:1097], fm[733:1097], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1098:1462], fm[1098:1462], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1463:1827], fm[1463:1827], type="l", ylim=c(0,1), ylab=NA)
+plot(time[1:366], fm[1:366], type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
+plot(time[367:732], fm[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[733:1097], fm[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1098:1462], fm[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:1827], fm[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
-plot(time[1:366], dfr[1:366], type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1)) 
-plot(time[367:732], dfr[367:732], type="l", ylim=c(0,1), ylab=NA)
-plot(time[733:1097], dfr[733:1097], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA)
-plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
+plot(time[1:366], dfr[1:366], type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
+plot(time[367:732], dfr[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[733:1097], dfr[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
-mtext(text = "Fig. 1 Proportion of 1000 simulations with values greater than zero during 1999")
+mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater than zero during 1999"), side = 1, line = 1, outer = T)
 
-  
   
   for (i in inputparam){
   
-    par(mfrow=c(6,5), mar=c(0.5, 4, 1.5, 0.5), oma= c(4,4,2,7))
+    par(mfrow=c(6,5), mar=c(4, 4, 1.5, 0.5), oma= c(4,2,2,7))
     
     if (i == drnmitesurvive)
       { x = "Drone-Mite Survivorship (%)"
@@ -541,11 +540,11 @@ mtext(text = "Fig. 1 Proportion of 1000 simulations with values greater than zer
   
   #add legend and marginal text  
  
-  par(mfrow=c(1,1), oma= c(4,4,1,4), new= TRUE, xpd=NA)
+  par(mfrow=c(1,1), oma= c(6,4,1,4), new= TRUE, xpd=NA)
   plot(0:1,0:1, type="n", xlab=NA, ylab=NA, axes=FALSE)
   legend("topright",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
            title= "Queen Strength", cex=0.65, bty="n")
-  mtext(text = paste("Fig.",n, "Scatterplot of 1000 random simulations of response variables vs.",x,"input", sep= " "), side = 1, outer = T, line = 3)    
+  mtext(text = paste("Fig.",n, "Scatterplot of 1000 random simulations of response variables vs.",x,"input", sep= " "), side = 1, outer = T, line = 5)    
   }
 
 
