@@ -194,7 +194,7 @@ pdf(file= paste(vpdir, "output\\", "graphics_output.pdf", sep=""), width = 8, he
 
 
 #start figures
-par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,2,2,2))
+par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,4,2,2))
 
 plot(time[1:366], cp[1:366], type="l", ylab = "P(Colony Size) > 0", main= "1999", ylim=c(0,1), xlab=NA)
 plot(time[367:732], cp[367:732], type="l", main= "2000", ylim=c(0,1), ylab=NA, xlab=NA)
@@ -231,7 +231,7 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
   
   for (i in inputparam){
   
-    par(mfrow=c(6,5), mar=c(4, 4, 1.5, 0.5), oma= c(4,2,2,7))
+    par(mfrow=c(6,5), mar=c(2, 2, 1.5, 0.5), oma= c(2,2,2,7))
     
     if (i == drnmitesurvive)
       { x = "Drone-Mite Survivorship (%)"
@@ -544,7 +544,7 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
   plot(0:1,0:1, type="n", xlab=NA, ylab=NA, axes=FALSE)
   legend("topright",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
            title= "Queen Strength", cex=0.65, bty="n")
-  mtext(text = paste("Fig.",n, "Scatterplot of 1000 random simulations of response variables vs.",x,"input", sep= " "), side = 1, outer = T, line = 5)    
+  mtext(text = paste("Fig.",n, "Scatterplots of response variables vs.",x,"input values for 1000 simulations", sep= " "), side = 1, outer = T, line = 5)    
   }
 
 
