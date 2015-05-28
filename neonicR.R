@@ -226,6 +226,7 @@ plot(time[733:1097], dfr[733:1097], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA)
 plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
 
+mtext(text = "Fig. 1 Proportion of 1000 simulations with values greater than zero during 1999")
 
   
   
@@ -544,7 +545,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   plot(0:1,0:1, type="n", xlab=NA, ylab=NA, axes=FALSE)
   legend("topright",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
            title= "Queen Strength", cex=0.65, bty="n")
-  mtext(text = paste("Fig.",n, "Scatterplot of 1000 simulations of response variables vs.",x,"input values"), side = 1, outer = T, sep=" ")    
+  mtext(text = paste("Fig.",n, "Scatterplot of 1000 random simulations of response variables vs.",x,"input", sep= " "), side = 1, outer = T, line = 3)    
   }
 
 
