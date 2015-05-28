@@ -185,7 +185,6 @@ qs5 <- which(queenstrength >=5 & queenstrength <6)
 #list response variables to plot
 inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive)
 
-
 time <- as.Date(df[,1], "%m / %d / %y")
 
 
@@ -234,11 +233,17 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   
     par(mfrow=c(6,5), mar=c(0.5, 4, 1.5, 0.5), oma= c(4,4,2,7))
     
-    if (i == drnmitesurvive){ x = "Drone-Mite Survivorship (%)"}
-    if (i == fgrlifespan){ x = "Forager Lifespan (days)"}
-    if (i == queenstrength){ x = "Queen Strength"}
-    if (i == wkrdrnratio){ x = "Worker:Drone"}
-    if (i == wkrmitesurvive){ x = "Worker-Mite Survivorship (%)"}
+    if (i == drnmitesurvive)
+      { x = "Drone-Mite Survivorship (%)"
+        n = 2}
+    if (i == fgrlifespan){ x = "Forager Lifespan (days)"
+                           n = 3}
+    if (i == queenstrength){ x = "Queen Strength"
+                             n = 4}
+    if (i == wkrdrnratio){ x = "Worker:Drone"
+                           n = 5}
+    if (i == wkrmitesurvive){ x = "Worker-Mite Survivorship (%)"
+                              n = 6}
   
   #COLONY SIZE
     plot(i, tdarray[122, 1, 1:1000], type="p", pch=20, main= "May 1999", ylab= "Colony Size", ylim=c(0,71000), xaxt='n', xlab=NA)
@@ -535,10 +540,11 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA)
   
   #add legend and marginal text  
  
-  par(mfrow=c(1,1), oma= c(1,4,1,4), new= TRUE, xpd=NA)
+  par(mfrow=c(1,1), oma= c(4,4,1,4), new= TRUE, xpd=NA)
   plot(0:1,0:1, type="n", xlab=NA, ylab=NA, axes=FALSE)
-  legend("right",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
+  legend("topright",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
            title= "Queen Strength", cex=0.65, bty="n")
+  mtext(text = paste("Fig.",n, "Scatterplot of 1000 simulations of response variables vs.",x,"input values"), side = 1, outer = T, sep=" ")    
   }
 
 
