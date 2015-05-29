@@ -173,6 +173,18 @@ for (n in 1:1827){
 }
 
 
+#SENSITIVITY ANALYSIS
+
+#create x input dataframe
+#assign results
+#results$PCC[[1]][n]
+src(i, tdarray[122,1,1:1000], nboot = 1000, conf = 0.95)    #standard regression coefficients
+pcc(i, tdarray[122,1,1:1000], nboot = 1000, conf = 0.95)    #partial correlation coefficients
+
+
+
+
+
 #plot crunching ###########
 
 #separate and query QS values
@@ -236,14 +248,18 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     if (i == drnmitesurvive)
       { x = "Drone-Mite Survivorship (%)"
         n = 2}
-    if (i == fgrlifespan){ x = "Forager Lifespan (days)"
-                           n = 3}
-    if (i == queenstrength){ x = "Queen Strength"
-                             n = 4}
-    if (i == wkrdrnratio){ x = "Worker:Drone"
-                           n = 5}
-    if (i == wkrmitesurvive){ x = "Worker-Mite Survivorship (%)"
-                              n = 6}
+    if (i == fgrlifespan)
+      { x = "Forager Lifespan (days)"
+        n = 3}
+    if (i == queenstrength)
+      { x = "Queen Strength"
+        n = 4}
+    if (i == wkrdrnratio)
+      { x = "Worker:Drone"
+        n = 5}
+    if (i == wkrmitesurvive)
+      { x = "Worker-Mite Survivorship (%)"
+        n = 6}
   
   #COLONY SIZE
     plot(i, tdarray[122, 1, 1:1000], type="p", pch=20, main= "May 1999", ylab= "Colony Size", ylim=c(0,71000), xaxt='n', xlab=NA)
@@ -254,10 +270,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,1, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,1, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,1, qs5], type="p", col=5, pch=20)
-    lofit<- loess(tdarray[122,1,1:1000]~i)
+    lofit<- loess(tdarray[122,1,1:1000]~i)        #loess line
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-     
+ 
     plot(i, tdarray[153, 1, 1:1000], type="p", pch=20, main= "June 1999", ylab= NA, ylim=c(0,71000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick= T)
