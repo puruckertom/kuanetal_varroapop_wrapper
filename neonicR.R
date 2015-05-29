@@ -231,7 +231,7 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
   
   for (i in inputparam){
   
-    par(mfrow=c(6,5), mar=c(2, 2, 1.5, 0.5), oma= c(2,2,2,7))
+    par(mfrow=c(6,5), mar=c(2, 2, 1.5, 0.5), oma= c(4,2,2,7))
     
     if (i == drnmitesurvive)
       { x = "Drone-Mite Survivorship (%)"
@@ -254,6 +254,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,1, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,1, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,1, qs5], type="p", col=5, pch=20)
+    lofit<- loess(tdarray[122,1,1:1000]~i)
+    j<- order(i)
+    lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
      
     plot(i, tdarray[153, 1, 1:1000], type="p", pch=20, main= "June 1999", ylab= NA, ylim=c(0,71000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -263,7 +266,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[153,1, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[153,1, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,1, qs5], type="p", col=5, pch=20)
-    
+    lofit<- loess(tdarray[153,1,1:1000]~i)
+    j<- order(i)
+    lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
+  
     plot(i, tdarray[183, 1, 1:1000], type="p", pch=20, main= "July 1999", ylab= NA, ylim=c(0,71000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick= T)
@@ -272,7 +278,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[183,1, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[183,1, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,1, qs5], type="p", col=5, pch=20)
-  
+    lofit<- loess(tdarray[183,1,1:1000]~i)
+    j<- order(i)
+    lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
+    
     plot(i, tdarray[214, 1, 1:1000], type="p", pch=20, main= "Aug 1999", ylab= NA, ylim=c(0,71000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick= T)
@@ -281,7 +290,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[214,1, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[214,1, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,1, qs5], type="p", col=5, pch=20)
-    
+    lofit<- loess(tdarray[214,1,1:1000]~i)
+    j<- order(i)
+    lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
+      
     plot(i, tdarray[245, 1, 1:1000], type="p", pch=20, main= "Sept 1999", ylab= NA, ylim=c(0,71000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)  
     axis(2, labels= F, tick= T)
@@ -290,8 +302,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[245,1, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[245,1, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[245,1, qs5], type="p", col=5, pch=20)
-  
-  
+    lofit<- loess(tdarray[245,1,1:1000]~i)
+    j<- order(i)
+    lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
+    
     
   #ADULT WORKERS
     plot(i, tdarray[122, 3, 1:1000], type="p", pch=20,  ylab="Adult Workers", ylim=c(0,45000), xaxt='n', xlab=NA)
@@ -302,6 +316,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,3, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,3, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,3, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[122,3,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[153, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,45000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -311,7 +328,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[153,3, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[153,3, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,3, qs5], type="p", col=5, pch=20)
-      
+  lofit<- loess(tdarray[153,3,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
+  
     plot(i, tdarray[183, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,45000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
@@ -320,6 +340,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[183,3, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[183,3, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,3, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[183,3,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[214, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,45000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -329,6 +352,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[214,3, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[214,3, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,3, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[214,3,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[245, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,45000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -338,6 +364,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[245,3, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[245,3, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[245,3, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[245,3,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
   
   
@@ -350,6 +379,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,4, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,4, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,4, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[122,4,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[153, 4, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -359,6 +391,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[153,4, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[153,4, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,4, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[53,4,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[183, 4, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -368,6 +403,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[183,4, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[183,4, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,4, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[183,4,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[214, 4, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -377,6 +415,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[214,4, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[214,4, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,4, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[214,4,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[245, 4, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)  
@@ -386,6 +427,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[245,4, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[245,4, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[245,4, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[245,4,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     
     
@@ -398,6 +442,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,10, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,10, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,10, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[122,10,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[153, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -407,6 +454,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[153,10, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[153,10, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,10, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[153,10,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[183, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -416,7 +466,10 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[183,10, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[183,10, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,10, qs5], type="p", col=5, pch=20)
-    
+  lofit<- loess(tdarray[183,10,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
+  
     plot(i, tdarray[214, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
@@ -425,6 +478,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[214,10, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[214,10, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,10, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[214,10,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[245, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -434,6 +490,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[245,10, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[245,10, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[245,10, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[245,10,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
   
    
@@ -446,6 +505,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,18, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,18, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,18, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[122,18,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[153, 18, 1:1000], type="p", pch=20, ylim=c(0,5), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -455,6 +517,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[153,18, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[153,18, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,18, qs5], type="p", col=3, pch=20)
+  lofit<- loess(tdarray[153,18,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[183, 18, 1:1000], type="p", pch=20, ylim=c(0,5), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -464,6 +529,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[183,18, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[183,18, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,18, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[183,18,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     plot(i, tdarray[214, 18, 1:1000], type="p", pch=20, ylim=c(0,5), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -473,6 +541,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[214,18, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[214,18, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,18, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[214,18,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
    
     plot(i, tdarray[245, 18, 1:1000], type="p", pch=20, ylim=c(0,5), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -482,6 +553,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[245,18, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[245,18, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[245,18, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[245,18,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     
     
   
@@ -495,6 +569,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[122,20, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[122,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[122,20, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[122,20,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[153, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
          xlab= x)
@@ -505,6 +582,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[153,20, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[153,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[153,20, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[153,20,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[183, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
          xlab= x)
@@ -515,6 +595,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[183,20, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[183,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[183,20, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[183,20,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[214, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
          xlab= x)
@@ -525,6 +608,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[214,20, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[214,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[214,20, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[214,20,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
     plot(i, tdarray[245, 20, 1:1000], type="p", pch=20, ylim=c(0,30000), ylab= NA, 
          xlab= x)
@@ -535,6 +621,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     points(i[qs3],tdarray[245,20, qs3], type="p", col=3, pch=20)
     points(i[qs4],tdarray[245,20, qs4], type="p", col=4, pch=20)
     points(i[qs5],tdarray[245,20, qs5], type="p", col=5, pch=20)
+  lofit<- loess(tdarray[245,20,1:1000]~i)
+  j<- order(i)
+  lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
   
   
   
