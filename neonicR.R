@@ -176,10 +176,31 @@ for (n in 1:1827){
 #SENSITIVITY ANALYSIS
 
 #create x input dataframe
-#assign results
+d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive))
+
+#standard regression coefficients
+stdreg<- matrix(data=NA,nrow=5, ncol=30)
+for (i in c(1,3,4,10,18,20)){
+  j <- src(d, tdarray[122,i,1:1000]) #1999
+  k <- src(d, tdarray[153,i,1:1000]) #2000
+  l <- src(d, tdarray[183,i,1:1000]) #2001
+  m <- src(d, tdarray[214,i,1:1000]) #2002
+  n <- src(d, tdarray[245,i,1:1000]) #2003
+
+  for (i in c("j","k","l","m","n")){
+    cbind(i$SRC[[1]])
+  }
+}
+
+#partial correlation coefficients
+pcc(d, tdarray[122,1,1:1000]) #1999
+pcc(d, tdarray[153,1,1:1000]) #2000
+pcc(d, tdarray[183,1,1:1000]) #2001
+pcc(d, tdarray[214,1,1:1000]) #2002
+pcc(d, tdarray[245,1,1:1000]) #2003
+
+
 #results$PCC[[1]][n]
-src(i, tdarray[122,1,1:1000], nboot = 1000, conf = 0.95)    #standard regression coefficients
-pcc(i, tdarray[122,1,1:1000], nboot = 1000, conf = 0.95)    #partial correlation coefficients
 
 
 
