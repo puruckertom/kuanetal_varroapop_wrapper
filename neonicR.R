@@ -173,34 +173,46 @@ for (n in 1:1827){
 }
 
 
+
+
 #SENSITIVITY ANALYSIS
 
-#create x input dataframe
+#create input dataframes and arrays
 d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive))
+year<- c(122, 153, 183, 214, 245)
+resvar<- c(1,3,4,10,18,20)
+tdoutput <- tdarray[year,resvar,1:1000]
+srctdarray<- array(data=NA, c(5,6,5), dimnames = list(c("1999","2000","2001","2002","2003"),
+                                                      c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
+                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)")))
+pcctdarray<- array(data=NA, c(5,6,5), dimnames = list(c("1999","2000","2001","2002","2003"),
+                                                      c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
+                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)")))
 
 #standard regression coefficients
-stdreg<- matrix(data=NA,nrow=5, ncol=30)
-for (i in c(1,3,4,10,18,20)){
-  j <- src(d, tdarray[122,i,1:1000]) #1999
-  k <- src(d, tdarray[153,i,1:1000]) #2000
-  l <- src(d, tdarray[183,i,1:1000]) #2001
-  m <- src(d, tdarray[214,i,1:1000]) #2002
-  n <- src(d, tdarray[245,i,1:1000]) #2003
-
-  for (i in c("j","k","l","m","n")){
-    stdreg<- cbind(i$SRC[[1]])
+for (i in 1:5){  #year
+  for (j in 1:6){   #output variable
+    for (k in 1:5){  #input variable
+    tempinput<- tdoutput[i,j,1:1000]
+    temp<- src(d, tempinput)
+    srctdarray[i,j,k]<- temp$SRC[[1]][k]
+    }
   }
 }
 
+
 #partial correlation coefficients
-pcc(d, tdarray[122,1,1:1000]) #1999
-pcc(d, tdarray[153,1,1:1000]) #2000
-pcc(d, tdarray[183,1,1:1000]) #2001
-pcc(d, tdarray[214,1,1:1000]) #2002
-pcc(d, tdarray[245,1,1:1000]) #2003
+for (i in 1:5){  #year
+  for (j in 1:6){   #output variable
+    for (k in 1:5){  #input variable
+      tempinput<- tdoutput[i,j,1:1000]
+      temp<- pcc(d, tempinput)
+      pcctdarray[i,j,k]<- temp$PCC[[1]][k]
+    }
+  }
+}
 
 
-#results$PCC[[1]][n]
 
 
 
