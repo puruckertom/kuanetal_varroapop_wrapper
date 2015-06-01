@@ -188,7 +188,7 @@ for (i in c(1,3,4,10,18,20)){
   n <- src(d, tdarray[245,i,1:1000]) #2003
 
   for (i in c("j","k","l","m","n")){
-    cbind(i$SRC[[1]])
+    stdreg<- cbind(i$SRC[[1]])
   }
 }
 
