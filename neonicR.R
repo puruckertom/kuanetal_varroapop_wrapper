@@ -220,10 +220,11 @@ for (n in 1:1827){
 
 
 
-#SENSITIVITY ANALYSIS
+#SENSITIVITY ANALYSIS####
 
+library(sensitivity)
 #create input dataframes and arrays
-d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive))
+d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife))
 year<- c(122, 153, 183, 214, 245)
 resvar<- c(1,3,4,10,18,20)
 tdoutput <- tdarray[year,resvar,1:1000]
@@ -271,9 +272,9 @@ qs4 <- which(queenstrength >=4 & queenstrength <5)
 qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #list response variables to plot
-inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive)
+inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive,adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
 
-time <- as.Date(df[,1], "%m / %d / %y")
+time <- as.Date(df[2:1000,1], "%m/%d/%y")
 
 
 #create PDF
