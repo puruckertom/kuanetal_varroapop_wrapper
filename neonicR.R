@@ -225,15 +225,15 @@ for (n in 1:1827){
 library(sensitivity)
 #create input dataframes and arrays
 d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife))
-year<- c(122, 153, 183, 214, 245)
+year<- c(153, 519, 884, 1249, 1614)
 resvar<- c(1,3,4,10,18,20)
 tdoutput <- tdarray[year,resvar,1:1000]
 srctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"),
-                                                      c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
-                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
-pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"),
-                                                      c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
-                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
+                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
+                                                       c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
+pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"), 
+                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"), 
+                                                       c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
 
 #standard regression coefficients
 for (i in 1:5){  #year
@@ -283,7 +283,7 @@ pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8, height 
 
 
 #start figures
-par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,4,2,2))
+par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,2,2,2))
 
 plot(time[1:366], cp[1:366], type="l", ylab = "P(Colony Size) > 0", main= "1999", ylim=c(0,1), xlab=NA)
 plot(time[367:732], cp[367:732], type="l", main= "2000", ylim=c(0,1), ylab=NA, xlab=NA)
