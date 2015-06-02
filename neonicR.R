@@ -54,7 +54,7 @@ apprate<- runif(1000, 0, 2) #EAppRate (lb/A)
 
 
 
-for (i in 1:20) {
+for (i in 1:1000) {
   
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]
@@ -68,8 +68,8 @@ for (i in 1:20) {
   inputvalue5 <- fgrlifespan[i]
   parameter6 <- ("ImmType=")   #Mite Immigration Type
   inputvalue6 <- miteimmtype[i]
-  parameter7 <- ("AIAdultSlope=") #ai adult slope
-  inputvalue7 <- adslope[i]
+  #parameter7 <- ("AIAdultSlope=") #ai adult slope
+  #inputvalue7 <- adslope[i]
   #parameter8 <- ("AIAdultLD50=") #ai adult LD50
   #inputvalue8 <- adLD50[i]
   parameter9 <- ("AIAdultSlopeContact=") #ai adult slope contact
@@ -87,7 +87,7 @@ for (i in 1:20) {
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
   #parameter16 <- ("EAppRate=") #application rate (lb/A)
-  #inputvalue16<- apprate[i]
+  #nputvalue16<- apprate[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_input, "input",i,".txt", sep = ""), append = FALSE)
@@ -101,8 +101,8 @@ for (i in 1:20) {
   write(varroainput5, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput6 <- paste(parameter6, inputvalue6, sep= " ")
   write(varroainput6, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
-  write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  #varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
+  #write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   #varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
   #write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput9 <- paste(parameter9, inputvalue9, sep= " ")
@@ -129,7 +129,7 @@ for (i in 1:20) {
 #command to run simulations in varroapop with relative directory structure and write output files
 
 
-for (i in 1:20) {
+for (i in 1:1000) {
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
   vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "Default.vrp", 
