@@ -128,9 +128,10 @@ for (i in 1:1000) {
 
 for (i in 1:1000) {
   inputfile<- paste("input",i,".txt", sep="")
+  outputfile<- paste("results",i,".txt", sep="")
   vpdir_command <- paste(vpdir, "exe\\", "VarroaPop.exe ", vpdir, "exe\\", "Default.vrp", 
-                         " /b /or ", vpdir, "output\\", "results",i,".txt", 
-                         " /i ", vpdir, inputfile, sep="")
+                         " /b /or ", vpdir, "output\\", outputfile, 
+                         " /i ", vpdir, "input\\", inputfile, sep="")
   print(vpdir_command)
   system(vpdir_command)
 }
