@@ -21,6 +21,9 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
+  vpdir_input<-path.expand("C:\\gitrepo\\beeRpop\\input\\")
+  vpdir_output<-path.expand("C:\\gitrepo\\beeRpop\\output\\")
+  vpdir_exe<-path.expand("C:\\gitrepo\\beeRpop\\exe\\")
 }
 
 
@@ -51,7 +54,7 @@ apprate<- runif(1000, 0, 2) #EAppRate (lb/A)
 
 
 
-for (i in 1:1000) {
+for (i in 1:20) {
   
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]
@@ -67,8 +70,8 @@ for (i in 1:1000) {
   inputvalue6 <- miteimmtype[i]
   parameter7 <- ("AIAdultSlope=") #ai adult slope
   inputvalue7 <- adslope[i]
-  parameter8 <- ("AIAdultLD50=") #ai adult LD50
-  inputvalue8 <- adLD50[i]
+  #parameter8 <- ("AIAdultLD50=") #ai adult LD50
+  #inputvalue8 <- adLD50[i]
   parameter9 <- ("AIAdultSlopeContact=") #ai adult slope contact
   inputvalue9 <- adslopec[i]
   parameter10 <- ("AIAdultLD50Contact=") #ai adult LD50 contact
@@ -83,41 +86,41 @@ for (i in 1:1000) {
   inputvalue14 <- koc[i]
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
-  parameter16 <- ("EAppRate=") #application rate (lb/A)
-  inputvalue16<- apprate[i]
+  #parameter16 <- ("EAppRate=") #application rate (lb/A)
+  #inputvalue16<- apprate[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
-  write(varroainput, file = paste(vpdir,"input\\", "input",i,".txt", sep = ""), append = FALSE)
+  write(varroainput, file = paste(vpdir_input, "input",i,".txt", sep = ""), append = FALSE)
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
-  write(varroainput2, file = paste(vpdir,"input\\", "input",i,".txt", sep = ""), append = TRUE)
+  write(varroainput2, file = paste(vpdir_input, "input",i,".txt", sep = ""), append = TRUE)
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
-  write(varroainput3, file = paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput3, file = paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput4 <- paste(parameter4, inputvalue4, sep=" ")
-  write(varroainput4, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput4, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput5 <- paste(parameter5, inputvalue5, sep= " ")
-  write(varroainput5, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput5, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput6 <- paste(parameter6, inputvalue6, sep= " ")
-  write(varroainput6, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput6, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
-  write(varroainput7, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
-  varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
-  write(varroainput8, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  #varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
+  #write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput9 <- paste(parameter9, inputvalue9, sep= " ")
-  write(varroainput9, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput9, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput10 <- paste(parameter10, inputvalue10, sep= " ")
-  write(varroainput10, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput10, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput11 <- paste(parameter11, inputvalue11, sep= " ")
-  write(varroainput11, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput11, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput12 <- paste(parameter12, inputvalue12, sep= " ")
-  write(varroainput12, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput12, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput13 <- paste(parameter13, inputvalue13, sep= " ")
-  write(varroainput13, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput13, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput14 <- paste(parameter14, inputvalue14, sep= " ")
-  write(varroainput14, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput14, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput15 <- paste(parameter15, inputvalue15, sep= " ")
-  write(varroainput15, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
-  varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
-  write(varroainput16, file= paste(vpdir,"input\\", "input", i, ".txt", sep=""), append= TRUE)
+  write(varroainput15, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  #varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
+  #write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
@@ -126,12 +129,12 @@ for (i in 1:1000) {
 #command to run simulations in varroapop with relative directory structure and write output files
 
 
-for (i in 1:1000) {
+for (i in 1:20) {
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
-  vpdir_command <- paste(vpdir, "exe\\", "VarroaPop.exe ", vpdir, "exe\\", "Default.vrp", 
-                         " /b /or ", vpdir, "output\\", outputfile, 
-                         " /i ", vpdir, "input\\", inputfile, sep="")
+  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "Default.vrp", 
+                         " /b /or ", vpdir_output, outputfile, 
+                         " /i ", vpdir_input, inputfile, sep="")
   print(vpdir_command)
   system(vpdir_command)
 }
@@ -146,7 +149,7 @@ dim(tdarray)
 library(abind)
 
 for (i in 1:1000) {
-  df<- read.table(paste(vpdir, "output\\","results",i,".txt", sep=""), header= FALSE, sep= "", 
+  df<- read.table(paste(vpdir_output,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
   newarray <- df[,2:27]
   newarray2<- data.matrix(newarray)
