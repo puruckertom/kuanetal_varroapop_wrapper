@@ -228,17 +228,17 @@ d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio
 year<- c(122, 153, 183, 214, 245)
 resvar<- c(1,3,4,10,18,20)
 tdoutput <- tdarray[year,resvar,1:1000]
-srctdarray<- array(data=NA, c(5,6,5), dimnames = list(c("1999","2000","2001","2002","2003"),
+srctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"),
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
-                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)")))
-pcctdarray<- array(data=NA, c(5,6,5), dimnames = list(c("1999","2000","2001","2002","2003"),
+                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
+pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"),
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
-                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)")))
+                                                      c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
 
 #standard regression coefficients
 for (i in 1:5){  #year
   for (j in 1:6){   #output variable
-    for (k in 1:5){  #input variable
+    for (k in 1:12){  #input variable
     tempinput<- tdoutput[i,j,1:1000]
     temp<- src(d, tempinput)
     srctdarray[i,j,k]<- temp$SRC[[1]][k]
@@ -272,14 +272,14 @@ qs4 <- which(queenstrength >=4 & queenstrength <5)
 qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #list response variables to plot
-inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive,adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
+inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
 
-time <- as.Date(df[2:1000,1], "%m/%d/%y")
+time <- as.Date(df[,1], "%m/%d/%y")
 
 
 #create PDF
 
-pdf(file= paste(vpdir, "output\\", "graphics_output.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
+pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
 
 
 #start figures
@@ -318,7 +318,7 @@ plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater than zero during 1999"), side = 1, line = 1, outer = T)
 
   
-  for (i in inputparam){
+  for (i in inputparam){      #margin labels
   
     par(mfrow=c(6,5), mar=c(2, 2, 1.5, 0.5), oma= c(4,2,2,7))
     
@@ -337,6 +337,27 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
     if (i == wkrmitesurvive)
       { x = "Worker-Mite Survivorship (%)"
         n = 6}
+    if (i == adslopec)
+      { x = "Adult Slope Contact"
+        n = 7}
+    if (i == adLD50c)
+      { x = "Adult LD50 Contact"
+        n = 8}
+    if (i == lslope)
+      { x = "Larva Slope"
+        n = 9}
+    if (i == lLD50)
+      { x = "Larva LD50"
+        n = 10}
+    if (i == kow)
+      { x = "KOW"
+        n = 11}
+    if (i == koc) 
+      { x = "KOC"
+        n = 12}
+    if (i == halflife) 
+      { x = "Half Life"
+        n = 13}
   
   #COLONY SIZE
     plot(i, tdarray[122, 1, 1:1000], type="p", pch=20, main= "May 1999", ylab= "Colony Size", ylim=c(0,71000), xaxt='n', xlab=NA)
