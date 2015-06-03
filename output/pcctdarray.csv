@@ -1,0 +1,84 @@
+,Drone Mite Survivorship (%),,,,,
+,Colony.Size.Drone.Mite.Survivorship....,Adult.Workers.Drone.Mite.Survivorship....,Foragers.Drone.Mite.Survivorship....,Worker.Eggs.Drone.Mite.Survivorship....,Colony.Pollen..g..Drone.Mite.Survivorship....,Colony.Nectar..g..Drone.Mite.Survivorship....
+May '99,-0.00170575,0.020643599,-0.006506908,0.02125085,-0.041809421,-0.020131202
+June '99,-0.023785144,-0.002876466,-0.037149434,0.005265324,0.042449755,0.026015367
+July '99,0.05656903,0.05656903,NA,NA,0.027958531,0.013755784
+Aug '99,NA,NA,NA,NA,0.027958531,0.013472729
+Sept '99,NA,NA,NA,NA,0.027958531,0.013472729
+,Forager Lifespan (days),,,,,
+,Colony.Size.Forager.Lifespan..days.,Adult.Workers.Forager.Lifespan..days.,Foragers.Forager.Lifespan..days.,Worker.Eggs.Forager.Lifespan..days.,Colony.Pollen..g..Forager.Lifespan..days.,Colony.Nectar..g..Forager.Lifespan..days.
+May '99,0.838513801,0.027334781,0.843288744,0.870327529,0.958688845,0.968219461
+June '99,0.865071762,0.891405853,0.781965146,0.557542298,0.596537566,0.886293897
+July '99,-0.334623963,-0.334623963,NA,NA,0.661419609,0.921444934
+Aug '99,NA,NA,NA,NA,0.661419609,0.921571415
+Sept '99,NA,NA,NA,NA,0.661419609,0.921571415
+,Queen Strength,,,,,
+,Colony.Size.Queen.Strength,Adult.Workers.Queen.Strength,Foragers.Queen.Strength,Worker.Eggs.Queen.Strength,Colony.Pollen..g..Queen.Strength,Colony.Nectar..g..Queen.Strength
+May '99,0.776800681,0.978649411,0.233702972,0.813542693,-0.548817091,0.0413851
+June '99,0.918313097,0.94611965,0.831844942,0.961018845,-0.442683364,0.04780087
+July '99,0.624724166,0.624724166,NA,NA,-0.542588329,0.176903644
+Aug '99,NA,NA,NA,NA,-0.542588329,0.180356712
+Sept '99,NA,NA,NA,NA,-0.542588329,0.180356712
+,Worker to Drone,,,,,
+,Colony.Size.Worker.to.Drone,Adult.Workers.Worker.to.Drone,Foragers.Worker.to.Drone,Worker.Eggs.Worker.to.Drone,Colony.Pollen..g..Worker.to.Drone,Colony.Nectar..g..Worker.to.Drone
+May '99,-0.085884525,-0.028866102,-0.081804025,-0.024729911,0.012295017,-0.011629327
+June '99,-0.026827109,-0.034920258,-0.016560312,-0.00585334,0.025867644,0.016742453
+July '99,0.03366341,0.03366341,NA,NA,0.029589263,0.010028424
+Aug '99,NA,NA,NA,NA,0.029589263,0.010080048
+Sept '99,NA,NA,NA,NA,0.029589263,0.010080048
+,Worker Mite Survivorship (%),,,,,
+,Colony.Size.Worker.Mite.Survivorship....,Adult.Workers.Worker.Mite.Survivorship....,Foragers.Worker.Mite.Survivorship....,Worker.Eggs.Worker.Mite.Survivorship....,Colony.Pollen..g..Worker.Mite.Survivorship....,Colony.Nectar..g..Worker.Mite.Survivorship....
+May '99,-0.035234246,-0.015640414,-0.032773178,0.01881467,0.077258198,0.036657123
+June '99,-0.001003912,-0.004370068,0.001499018,-0.002964847,0.019348685,0.0029672
+July '99,-0.028272413,-0.028272413,NA,NA,0.0077703,0.007698417
+Aug '99,NA,NA,NA,NA,0.0077703,0.007012433
+Sept '99,NA,NA,NA,NA,0.0077703,0.007012433
+,Adult Slope Contact,,,,,
+,Colony.Size.Adult.Slope.Contact,Adult.Workers.Adult.Slope.Contact,Foragers.Adult.Slope.Contact,Worker.Eggs.Adult.Slope.Contact,Colony.Pollen..g..Adult.Slope.Contact,Colony.Nectar..g..Adult.Slope.Contact
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA
+,Adult LD50 Contact,,,,,
+,Colony.Size.Adult.LD50.Contact,Adult.Workers.Adult.LD50.Contact,Foragers.Adult.LD50.Contact,Worker.Eggs.Adult.LD50.Contact,Colony.Pollen..g..Adult.LD50.Contact,Colony.Nectar..g..Adult.LD50.Contact
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA
+,Larva Slope,,,,,
+,Colony.Size.Larva.slope,Adult.Workers.Larva.slope,Foragers.Larva.slope,Worker.Eggs.Larva.slope,Colony.Pollen..g..Larva.slope,Colony.Nectar..g..Larva.slope
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA
+,Larva LD50,,,,,
+,Colony.Size.Larva.LD50,Adult.Workers.Larva.LD50,Foragers.Larva.LD50,Worker.Eggs.Larva.LD50,Colony.Pollen..g..Larva.LD50,Colony.Nectar..g..Larva.LD50
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA
+,KOW,,,,,
+,Colony.Size.KOW,Adult.Workers.KOW,Foragers.KOW,Worker.Eggs.KOW,Colony.Pollen..g..KOW,Colony.Nectar..g..KOW
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA
+,Koc,,,,,
+,Colony.Size.KOC,Adult.Workers.KOC,Foragers.KOC,Worker.Eggs.KOC,Colony.Pollen..g..KOC,Colony.Nectar..g..KOC
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA
+,Half-life,,,,,
+,Colony.Size.Half.life,Adult.Workers.Half.life,Foragers.Half.life,Worker.Eggs.Half.life,Colony.Pollen..g..Half.life,Colony.Nectar..g..Half.life
+May '99,NA,NA,NA,NA,NA,NA
+June '99,NA,NA,NA,NA,NA,NA
+July '99,NA,NA,NA,NA,NA,NA
+Aug '99,NA,NA,NA,NA,NA,NA
+Sept '99,NA,NA,NA,NA,NA,NA

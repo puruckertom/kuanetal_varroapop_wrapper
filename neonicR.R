@@ -228,10 +228,10 @@ d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio
 year<- c(122,153,183,214,245)
 resvar<- c(1,3,4,10,18,20)
 tdoutput <- tdarray[year,resvar,1:1000]
-srctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"),
+srctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("May 1999","June 1999","July 1999","August 1999","September 1999"),
                                                        c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
                                                        c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
-pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002","2003"), 
+pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("May 1999","June 1999","July 1999","August 1999","September 1999"), 
                                                        c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"), 
                                                        c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
 
@@ -257,6 +257,9 @@ for (i in 1:5){  #year
     }
   }
 }
+
+
+
 
 
 

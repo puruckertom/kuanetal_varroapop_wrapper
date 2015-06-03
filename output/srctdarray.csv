@@ -1,0 +1,84 @@
+,Drone Mite Survivorship,,,,,
+,Colony.Size.Drone.Mite.Survivorship....,Adult.Workers.Drone.Mite.Survivorship....,Foragers.Drone.Mite.Survivorship....,Worker.Eggs.Drone.Mite.Survivorship....,Colony.Pollen..g..Drone.Mite.Survivorship....,Colony.Nectar..g..Drone.Mite.Survivorship....
+May '99,-0.000755261,0.004229291,-0.00345053,0.008438678,-0.011776393,-0.00502817
+June '99,-0.007601439,-0.000767637,-0.016575558,0.001415662,0.031968723,0.012019507
+July '99,0.042904519,0.042904519,NA,NA,0.019071629,0.0053063
+Aug '99,NA,NA,NA,NA,0.019071629,0.005192175
+Sept '99,NA,NA,NA,NA,0.019071629,0.005192175
+,Forager Lifespan (days),,,,,
+,Colony.Size.Forager.Lifespan..days.,Adult.Workers.Forager.Lifespan..days.,Foragers.Forager.Lifespan..days.,Worker.Eggs.Forager.Lifespan..days.,Colony.Pollen..g..Forager.Lifespan..days.,Colony.Nectar..g..Forager.Lifespan..days.
+May '99,0.682273533,0.005608358,0.833105006,0.702535385,0.949702814,0.968003391
+June '99,0.551681324,0.525584776,0.560091667,0.180808465,0.559981061,0.885032224
+July '99,-0.26924058,-0.26924058,NA,NA,0.602113463,0.916013602
+Aug '99,NA,NA,NA,NA,0.602113463,0.915980248
+Sept '99,NA,NA,NA,NA,0.602113463,0.915980248
+,Queen Strength,,,,,
+,Colony.Size.Queen.Strength,Adult.Workers.Queen.Strength,Foragers.Queen.Strength,Worker.Eggs.Queen.Strength,Colony.Pollen..g..Queen.Strength,Colony.Nectar..g..Queen.Strength
+May '99,0.548061178,0.978658892,0.127898764,0.557353495,-0.185401589,0.010379405
+June '99,0.743748204,0.782428616,0.670599314,0.937769663,-0.372751258,0.022179216
+July '99,0.607932651,0.607932651,NA,NA,-0.441976739,0.069568135
+Aug '99,NA,NA,NA,NA,-0.441976739,0.070904135
+Sept '99,NA,NA,NA,NA,-0.441976739,0.070904135
+,Worker to Drone,,,,,
+,Colony.Size.Worker.to.Drone,Adult.Workers.Worker.to.Drone,Foragers.Worker.to.Drone,Worker.Eggs.Worker.to.Drone,Colony.Pollen..g..Worker.to.Drone,Colony.Nectar..g..Worker.to.Drone
+May '99,-0.038227193,-0.005924168,-0.043591647,-0.009836124,0.003465683,-0.002908739
+June '99,-0.008587484,-0.009339113,-0.00739627,-0.001576189,0.01949976,0.007745656
+July '99,0.025544724,0.025544724,NA,NA,0.020216062,0.003874258
+Aug '99,NA,NA,NA,NA,0.020216062,0.00389052
+Sept '99,NA,NA,NA,NA,0.020216062,0.00389052
+,Worker Mite Survivorship (%),,,,,
+,Colony.Size.Worker.Mite.Survivorship....,Adult.Workers.Worker.Mite.Survivorship....,Foragers.Worker.Mite.Survivorship....,Worker.Eggs.Worker.Mite.Survivorship....,Colony.Pollen..g..Worker.Mite.Survivorship....,Colony.Nectar..g..Worker.Mite.Survivorship....
+May '99,-0.015701265,-0.003222624,-0.017489307,0.007514363,0.021934184,0.009213429
+June '99,-0.000322613,-0.001173021,0.000672267,-0.000801773,0.014645692,0.001378406
+July '99,-0.021541875,-0.021541875,NA,NA,0.005329337,0.002986747
+Aug '99,NA,NA,NA,NA,0.005329337,0.002718019
+Sept '99,NA,NA,NA,NA,0.005329337,0.002718019
+,Adult Slope Contact,,,,,
+,Colony.Size.Adult.Slope.Contact,Adult.Workers.Adult.Slope.Contact,Foragers.Adult.Slope.Contact,Worker.Eggs.Adult.Slope.Contact,Colony.Pollen..g..Adult.Slope.Contact,Colony.Nectar..g..Adult.Slope.Contact
+May '99,-0.032152737,-0.012071639,-0.032761611,0.003265799,0.009839646,0.004564427
+June '99,-0.012195202,-0.007373991,-0.018027379,-0.004043316,0.026827964,-0.005051791
+July '99,-0.0040593,-0.0040593,NA,NA,0.02305961,-0.005413962
+Aug '99,NA,NA,NA,NA,0.02305961,-0.005180911
+Sept '99,NA,NA,NA,NA,0.02305961,-0.005180911
+,Adult LD50,,,,,
+,Colony.Size.Adult.LD50.Contact,Adult.Workers.Adult.LD50.Contact,Foragers.Adult.LD50.Contact,Worker.Eggs.Adult.LD50.Contact,Colony.Pollen..g..Adult.LD50.Contact,Colony.Nectar..g..Adult.LD50.Contact
+May '99,-0.009385817,0.013970427,-0.01917529,-0.008744588,0.00149326,-0.000511336
+June '99,0.017121269,0.008328278,0.028195363,0.015120401,-0.003516644,0.011380117
+July '99,0.015371871,0.015371871,NA,NA,-0.000409813,0.012146642
+Aug '99,NA,NA,NA,NA,-0.000409813,0.012296376
+Sept '99,NA,NA,NA,NA,-0.000409813,0.012296376
+,Larva Slope,,,,,
+,Colony.Size.Larva.slope,Adult.Workers.Larva.slope,Foragers.Larva.slope,Worker.Eggs.Larva.slope,Colony.Pollen..g..Larva.slope,Colony.Nectar..g..Larva.slope
+May '99,-0.011477164,0.002068542,-0.015134413,-0.00434071,0.020559778,0.023362224
+June '99,0.021633031,0.006919893,0.040204397,0.011647711,-0.014017858,-0.003897448
+July '99,-0.051015702,-0.051015702,NA,NA,-0.014208522,0.0039746
+Aug '99,NA,NA,NA,NA,-0.014208522,0.003879326
+Sept '99,NA,NA,NA,NA,-0.014208522,0.003879326
+,Larva LD50,,,,,
+,Colony.Size.Larva.LD50,Adult.Workers.Larva.LD50,Foragers.Larva.LD50,Worker.Eggs.Larva.LD50,Colony.Pollen..g..Larva.LD50,Colony.Nectar..g..Larva.LD50
+May '99,0.011367042,0.003265314,0.012239234,0.017078639,0.002586177,0.001402422
+June '99,-0.002379917,0.00401462,-0.01039641,-0.00112649,-0.015182357,0.00510065
+July '99,-0.003582357,-0.003582357,NA,NA,-0.018849595,0.004971248
+Aug '99,NA,NA,NA,NA,-0.018849595,0.004965942
+Sept '99,NA,NA,NA,NA,-0.018849595,0.004965942
+,KOW,,,,,
+,Colony.Size.KOW,Adult.Workers.KOW,Foragers.KOW,Worker.Eggs.KOW,Colony.Pollen..g..KOW,Colony.Nectar..g..KOW
+May '99,-0.03314838,-0.008644803,-0.035868147,-0.018281376,-0.010817758,-0.0074056
+June '99,-0.005594185,-0.010307065,0.00057917,-0.007948618,0.012137454,-0.012008312
+July '99,-0.001556995,-0.001556995,NA,NA,0.003984229,-0.011161841
+Aug '99,NA,NA,NA,NA,0.003984229,-0.011485091
+Sept '99,NA,NA,NA,NA,0.003984229,-0.011485091
+,KOC,,,,,
+,Colony.Size.KOC,Adult.Workers.KOC,Foragers.KOC,Worker.Eggs.KOC,Colony.Pollen..g..KOC,Colony.Nectar..g..KOC
+May '99,-0.008264966,-0.007649884,-0.005909394,-0.008513909,-0.008058261,-0.003225934
+June '99,-0.013171866,-0.013770297,-0.012110134,-0.016495312,0.006258411,-0.00338931
+July '99,-0.034789276,-0.034789276,NA,NA,0.024561488,-0.001694839
+Aug '99,NA,NA,NA,NA,0.024561488,-0.001760684
+Sept '99,NA,NA,NA,NA,0.024561488,-0.001760684
+,Half-life,,,,,
+,Colony.Size.Half.life,Adult.Workers.Half.life,Foragers.Half.life,Worker.Eggs.Half.life,Colony.Pollen..g..Half.life,Colony.Nectar..g..Half.life
+May '99,-0.004640686,-0.001206647,-0.005055097,-0.008971442,-0.006521767,-0.003444162
+June '99,-0.001553126,0.002271958,-0.00646534,0.004399315,-0.003517806,0.01132521
+July '99,-0.020788731,-0.020788731,NA,NA,0.009319682,0.013850645
+Aug '99,NA,NA,NA,NA,0.009319682,0.013916159
+Sept '99,NA,NA,NA,NA,0.009319682,0.013916159
