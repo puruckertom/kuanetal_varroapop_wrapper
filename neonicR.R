@@ -278,7 +278,7 @@ qs5 <- which(queenstrength >=5 & queenstrength <6)
 inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
 inputnames<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
 
-time <- as.Date(df[,1], "%m/%d/%y")
+time <- seq(as.Date("1998/12/31"), as.Date("2003/12/31"), by="days")
 
 
 #create PDF
@@ -817,21 +817,34 @@ dev.off()
 
 
 #time series
-
-for (r in resvar){
+temparray <- tdarray[1:1827,resvar,1:1000]
+tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(time), 
+                                                      c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
+                                                      c("25%","50%","75%")))
+for (r in 1:6){
   for (t in 1:1827){
-    p<- summary(tdarray[t, r, 1:1000])
-    p[[2]] #1st quantile
-    p[[4]] #mean
-    p[[5]] #3rd quantile
+    p<- quantile(temparray[t, r, 1:1000])
+    for (s in 1:3){
+      quant<- c(p[[2]], p[[3]], p[[4]])
+      tempout[t,r,s]<- quant[s]
+    }
   }
 }
+
+
+
+
+
+
+
+
 
 
 pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
 
 
 par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
+
 for (j in resvar){
   plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(inputnames[1]), main = "1999")
     for (i in 2:1000){
