@@ -276,6 +276,7 @@ qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #list response variables to plot
 inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
+inputnames<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
 
 time <- as.Date(df[,1], "%m/%d/%y")
 
@@ -811,9 +812,23 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
   mtext(text = paste("Fig.",n, "Scatterplots of response variables vs.",x,"input values for 1000 simulations", sep= " "), side = 1, outer = T, line = 5)    
   }
 
+dev.off()
 
-inputnames<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
+
+
 #time series
+
+pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
+
+for (r in resvar){
+  for (t in 1:1827){
+    p<- summary(tdarray[t, r, 1:1000])
+    p[[2]] #1st quantile
+    p[[5]] #3rd quantile
+  }
+}
+
+
 par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
 for (j in resvar){
   plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(inputnames[1]), main = "1999")
