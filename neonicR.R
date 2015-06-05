@@ -818,7 +818,7 @@ dev.off()
 
 #time series
 temparray <- tdarray[1:1827,resvar,1:1000]
-tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(time), 
+tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(as.character(time)), 
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
                                                       c("25%","50%","75%")))
 for (r in 1:6){
@@ -831,6 +831,17 @@ for (r in 1:6){
   }
 }
 
+t <- c()
+for (r in 1:6){
+  for (t in 1:5){
+    for (s in 1:3){
+      x <- time[t]
+      y <- temparray[t, r, s]
+    }
+  }
+}
+
+par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
 
 
 
