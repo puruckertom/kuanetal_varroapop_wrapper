@@ -818,15 +818,17 @@ dev.off()
 
 #time series
 
-pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
-
 for (r in resvar){
   for (t in 1:1827){
     p<- summary(tdarray[t, r, 1:1000])
     p[[2]] #1st quantile
+    p[[4]] #mean
     p[[5]] #3rd quantile
   }
 }
+
+
+pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
 
 
 par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
