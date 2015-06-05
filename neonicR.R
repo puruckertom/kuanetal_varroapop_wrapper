@@ -318,7 +318,7 @@ plot(time[733:1097], dfr[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
-mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater than zero during 1999"), side = 1, line = 1, outer = T)
+mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater than zero"), side = 1, line = 1, outer = T)
 
   
   for (i in inputparam){      #margin labels
@@ -802,7 +802,6 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
   
   
   
-  
   #add legend and marginal text  
  
   par(mfrow=c(1,1), oma= c(6,4,1,4), new= TRUE, xpd=NA)
@@ -811,6 +810,34 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
            title= "Queen Strength", cex=0.65, bty="n")
   mtext(text = paste("Fig.",n, "Scatterplots of response variables vs.",x,"input values for 1000 simulations", sep= " "), side = 1, outer = T, line = 5)    
   }
+
+
+inputnames<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
+#time series
+par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
+for (j in resvar){
+  plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(inputnames[1]), main = "1999")
+    for (i in 2:1000){
+      lines(time[1:366], tdarray[1:366, j, i], type = "l")
+    }
+  plot(time[367:732], tdarray[367:732, j, 1], type = "l", ylab= paste(inputnames[2]), main = "2000")
+    for (i in 2:1000){    
+      lines(time[367:732], tdarray[367:732, j, i], type = "l")
+    }
+  plot(time[733:1097], tdarray[733:1097, j, 1], type = "l", ylab = paste(inputnames[3]), main = "2001")
+    for (i in 2:1000) {
+      lines(time[733:1097], tdarray[733:1097, j, i], type = "l")
+    }
+  plot(time[1098:1462], tdarray[1098:1462, j, 1], type = "l", ylab = paste(inputnames[4]), main = "2002")
+    for (i in 2:1000){
+      lines(time[1098:1462], tdarray[1098:1462, j, i], type = "l")
+    }
+  plot(time[1463:1827], tdarray[1463:1827, j, 1], type = "l", ylab = paste(inputnames[5]), main = "2003")
+    for (i in 2:1000) {
+      lines(time[1463:1827], tdarray[1463:1827, j, i], type = "l")
+    }
+}
+
 
 
 dev.off()
