@@ -375,7 +375,7 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
   lofit<- loess(tdarray[122,1,1:1000]~i)        #loess line
   j<- order(i)
   lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = 3, y = 22000, labels = paste("pcc=", pcctdarray[1, 1, n-1], "\n src=", srctdarray[1,1,n-1], sep = ""), cex = 0.75)
+    text(x = 3, y = 22000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1], 3), "\n src=", signif(srctdarray[1,1,n-1], 3), sep = ""), cex = 0.75)
  
     plot(i, tdarray[153, 1, 1:1000], type="p", pch=20, main= "June 1999", ylab= NA, ylim=c(0,50000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -816,7 +816,7 @@ dev.off()
 
 
 
-#time series
+#time series plotting #######
 temparray <- tdarray[1:1827,resvar,1:1000]
 tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(as.character(time)), 
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
@@ -831,48 +831,58 @@ for (r in 1:6){
   }
 }
 
-for (s in 1:3){
-  
-}
-
-
-par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
-
-
-
-
-
-
-
-
 
 pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
 
+par(mfrow=c(6,5), mar=c(1.5, 4, 2, 0.5), oma= c(4,2,2,7))
 
-par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
-
-for (j in resvar){
-  plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(inputnames[1]), main = "1999")
-    for (i in 2:1000){
-      lines(time[1:366], tdarray[1:366, j, i], type = "l")
-    }
-  plot(time[367:732], tdarray[367:732, j, 1], type = "l", ylab= paste(inputnames[2]), main = "2000")
-    for (i in 2:1000){    
-      lines(time[367:732], tdarray[367:732, j, i], type = "l")
-    }
-  plot(time[733:1097], tdarray[733:1097, j, 1], type = "l", ylab = paste(inputnames[3]), main = "2001")
-    for (i in 2:1000) {
-      lines(time[733:1097], tdarray[733:1097, j, i], type = "l")
-    }
-  plot(time[1098:1462], tdarray[1098:1462, j, 1], type = "l", ylab = paste(inputnames[4]), main = "2002")
-    for (i in 2:1000){
-      lines(time[1098:1462], tdarray[1098:1462, j, i], type = "l")
-    }
-  plot(time[1463:1827], tdarray[1463:1827, j, 1], type = "l", ylab = paste(inputnames[5]), main = "2003")
-    for (i in 2:1000) {
-      lines(time[1463:1827], tdarray[1463:1827, j, i], type = "l")
-    }
+for (r in 1:6){
+  plot(time[1:366], tempout[1:366,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main= "1999")
+  lines(time[1:366],tempout[1:366,r,1], type = "l", col = "red")
+  lines(time[1:366], tempout[1:366,r,3], type = "l", col = "blue")
+  
+  plot(time[367:732], tempout[367:732,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2000")
+  lines(time[367:732],tempout[367:732,r,1], type = "l", col = "red")
+  lines(time[367:732], tempout[367:732,r,3], type = "l", col = "blue")
+  
+  plot(time[733:1097], tempout[733:1097,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2001")
+  lines(time[733:1097],tempout[733:1097,r,1], type = "l", col = "red")
+  lines(time[733:1097], tempout[733:1097,r,3], type = "l", col = "blue")
+  
+  plot(time[1098:1462], tempout[1098:1462,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2002")
+  lines(time[1098:1462],tempout[1098:1462,r,1], type = "l", col = "red")
+  lines(time[1098:1462], tempout[1098:1462,r,3], type = "l", col = "blue")
+  
+  plot(time[1463:1827], tempout[1463:1827,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2003")
+  lines(time[1463:1827],tempout[1463:1827,r,1], type = "l", col = "red")
+  lines(time[1463:1827], tempout[1463:1827,r,3], type = "l", col = "blue")
 }
+
+
+#par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
+
+#for (j in resvar){
+#  plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(inputnames[1]), main = "1999", ylim = c(0,max(tdarray[1:366, j, 1])))
+#    for (i in 2:1000){
+#      lines(time[1:366], tdarray[1:366, j, i], type = "l")
+#    }
+#  plot(time[367:732], tdarray[367:732, j, 1], type = "l", ylab= paste(inputnames[2]), main = "2000", ylim = c(0,max(tdarray[1:366, j, 1])))
+#    for (i in 2:1000){    
+#      lines(time[367:732], tdarray[367:732, j, i], type = "l")
+#    }
+#  plot(time[733:1097], tdarray[733:1097, j, 1], type = "l", ylab = paste(inputnames[3]), main = "2001", ylim = c(0,max(tdarray[1:366, j, 1])))
+#    for (i in 2:1000) {
+#      lines(time[733:1097], tdarray[733:1097, j, i], type = "l")
+#    }
+#  plot(time[1098:1462], tdarray[1098:1462, j, 1], type = "l", ylab = paste(inputnames[4]), main = "2002", ylim = c(0,max(tdarray[1:366, j, 1])))
+#    for (i in 2:1000){
+#      lines(time[1098:1462], tdarray[1098:1462, j, i], type = "l")
+#    }
+#  plot(time[1463:1827], tdarray[1463:1827, j, 1], type = "l", ylab = paste(inputnames[5]), main = "2003", ylim = c(0,max(tdarray[1:366, j, 1])))
+#    for (i in 2:1000) {
+#      lines(time[1463:1827], tdarray[1463:1827, j, i], type = "l")
+#    }
+#}
 
 
 
