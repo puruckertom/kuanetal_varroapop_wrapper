@@ -838,24 +838,24 @@ par(mfrow=c(6,5), mar=c(1.5, 4, 2, 0.5), oma= c(4,2,2,7))
 
 for (r in 1:6){
   plot(time[1:366], tempout[1:366,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main= "1999")
-  lines(time[1:366],tempout[1:366,r,1], type = "l", col = "red")
-  lines(time[1:366], tempout[1:366,r,3], type = "l", col = "blue")
+  lines(time[1:366],tempout[1:366,r,1], type = "l", lty= 2, col = "red")
+  lines(time[1:366], tempout[1:366,r,3], type = "l", lty=4, col = "blue")
   
   plot(time[367:732], tempout[367:732,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2000")
-  lines(time[367:732],tempout[367:732,r,1], type = "l", col = "red")
-  lines(time[367:732], tempout[367:732,r,3], type = "l", col = "blue")
+  lines(time[367:732],tempout[367:732,r,1], type = "l", lty= 2, col = "red")
+  lines(time[367:732], tempout[367:732,r,3], type = "l", lty=4, col = "blue")
   
   plot(time[733:1097], tempout[733:1097,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2001")
-  lines(time[733:1097],tempout[733:1097,r,1], type = "l", col = "red")
-  lines(time[733:1097], tempout[733:1097,r,3], type = "l", col = "blue")
+  lines(time[733:1097],tempout[733:1097,r,1], type = "l", lty= 2, col = "red")
+  lines(time[733:1097], tempout[733:1097,r,3], type = "l", lty=4, col = "blue")
   
   plot(time[1098:1462], tempout[1098:1462,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2002")
-  lines(time[1098:1462],tempout[1098:1462,r,1], type = "l", col = "red")
-  lines(time[1098:1462], tempout[1098:1462,r,3], type = "l", col = "blue")
+  lines(time[1098:1462],tempout[1098:1462,r,1], type = "l", lty= 2, col = "red")
+  lines(time[1098:1462], tempout[1098:1462,r,3], type = "l",lty=4, col = "blue")
   
   plot(time[1463:1827], tempout[1463:1827,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2003")
-  lines(time[1463:1827],tempout[1463:1827,r,1], type = "l", col = "red")
-  lines(time[1463:1827], tempout[1463:1827,r,3], type = "l", col = "blue")
+  lines(time[1463:1827],tempout[1463:1827,r,1], type = "l", lty= 2, col = "red")
+  lines(time[1463:1827], tempout[1463:1827,r,3], type = "l",lty=4, col = "blue")
 }
 
 
