@@ -831,15 +831,10 @@ for (r in 1:6){
   }
 }
 
-t <- c()
-for (r in 1:6){
-  for (t in 1:5){
-    for (s in 1:3){
-      x <- time[t]
-      y <- temparray[t, r, s]
-    }
-  }
+for (s in 1:3){
+  
 }
+
 
 par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
 
