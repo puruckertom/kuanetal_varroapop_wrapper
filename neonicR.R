@@ -27,14 +27,13 @@ if(Sys.info()[4]=="ACKUAN-PC"){
 }
 
 
+
 #create input files #########
 
 queenstrength<- runif(1000, 1, 6) #ICQueenStrength
 wkrdrnratio<- runif(1000, 1, 5) #RQWkrDrnRatio
 drnmitesurvive<- runif(1000, 0, 100) #ICDroneMiteSurvivorship
 wkrmitesurvive<- runif(1000, 0, 100) #ICWorkerMiteSurvivorship
-miteimm <- c("TRUE","FALSE") #ImmEnabled
-miteimmigration <- sample(miteimm, size= 1000, replace=T) 
 fgrlifespan <- runif(1000, 4, 16) #ICForagerLifespan
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=1000, replace=T) #ImmType
@@ -142,7 +141,6 @@ for (i in 1:1000) {
 
 
 # 3d array ######
-#create a three dimension array that is 1827,26,1000
 
 tdarray <- array(data=NA,c(1827,26,1000))
 dim(tdarray)
@@ -219,7 +217,6 @@ for (n in 1:1827){
 
 
 
-
 #SENSITIVITY ANALYSIS####
 
 library(sensitivity)
@@ -260,8 +257,6 @@ for (i in 1:5){  #year
 
 write.table(srctdarray, file = paste(vpdir_output, "srctdarray.csv", sep=""))
 write.table(pcctdarray, file = paste(vpdir_output, "pcctdarray.csv", sep=""))
-
-
 
 
 
@@ -884,6 +879,16 @@ for (r in 1:6){
 #    }
 #}
 
-
-
 dev.off()
+
+
+
+#stacking arrays for .csv file #####
+dimnames(temparray)<- list(c(as.character(time)), c(inputnames))
+library(plyr)
+mat<- aaply(temparray[,1:3,],2, cbind)
+write.csv(mat, file = paste(vpdir_output,"sim_results1.csv", sep= ""), row.names= T)
+mat2<- aaply(temparray[,4:6,],2, cbind)
+write.csv(mat2, file = paste(vpdir_output,"sim_results2.csv", sep=""), row.names= T)
+
+
