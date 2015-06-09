@@ -813,6 +813,7 @@ dev.off()
 
 #time series plotting #######
 temparray <- tdarray[1:1827,resvar,1:1000]
+dimnames(temparray)<- list(c(as.character(time)), c(inputnames))
 tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(as.character(time)), 
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
                                                       c("25%","50%","75%")))
@@ -884,11 +885,19 @@ dev.off()
 
 
 #stacking arrays for .csv file #####
-dimnames(temparray)<- list(c(as.character(time)), c(inputnames))
+
 library(plyr)
-mat<- aaply(temparray[,1:3,],2, cbind)
-write.csv(mat, file = paste(vpdir_output,"sim_results1.csv", sep= ""), row.names= T)
-mat2<- aaply(temparray[,4:6,],2, cbind)
-write.csv(mat2, file = paste(vpdir_output,"sim_results2.csv", sep=""), row.names= T)
+
+now<- Sys.time()
+now<- as.POSIXlt(now)
+
+now<- paste(now$mon, now$mday, now$hour, now$min, sep="")
+
+tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
+row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
+write.csv(tempdf, file = paste(vpdir_output,"sim_results1_2015", now, ".csv", sep= ""))
+tempdf2<- adply(temparray[,4:6,],2, cbind)
+row.names(tempdf2)<- make.names(as.character(rep(time,3)), unique = T)
+write.csv(tempdf2, file = paste(vpdir_output,"sim_results2.csv", sep=""), row.names= T)
 
 
