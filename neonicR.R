@@ -67,8 +67,8 @@ for (i in 1:1000) {
   inputvalue5 <- fgrlifespan[i]
   parameter6 <- ("ImmType=")   #Mite Immigration Type
   inputvalue6 <- miteimmtype[i]
-  #parameter7 <- ("AIAdultSlope=") #ai adult slope
-  #inputvalue7 <- adslope[i]
+  parameter7 <- ("AIAdultSlope=") #ai adult slope
+  inputvalue7 <- adslope[i]
   #parameter8 <- ("AIAdultLD50=") #ai adult LD50
   #inputvalue8 <- adLD50[i]
   parameter9 <- ("AIAdultSlopeContact=") #ai adult slope contact
@@ -85,8 +85,8 @@ for (i in 1:1000) {
   inputvalue14 <- koc[i]
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
-  #parameter16 <- ("EAppRate=") #application rate (lb/A)
-  #nputvalue16<- apprate[i]
+  parameter16 <- ("EAppRate=") #application rate (lb/A)
+  inputvalue16<- apprate[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_input, "input",i,".txt", sep = ""), append = FALSE)
@@ -102,8 +102,8 @@ for (i in 1:1000) {
   write(varroainput6, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   #varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
   #write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  #varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
-  #write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
+  write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput9 <- paste(parameter9, inputvalue9, sep= " ")
   write(varroainput9, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput10 <- paste(parameter10, inputvalue10, sep= " ")
@@ -118,8 +118,8 @@ for (i in 1:1000) {
   write(varroainput14, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput15 <- paste(parameter15, inputvalue15, sep= " ")
   write(varroainput15, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  #varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
-  #write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
+  write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
