@@ -887,17 +887,15 @@ dev.off()
 #stacking arrays for .csv file #####
 
 library(plyr)
-
 now<- Sys.time()
 now<- as.POSIXlt(now)
-
-now<- paste(now$mon, now$mday, now$hour, now$min, sep="")
+now<- format(now, "%Y%m%d%H%M", tz="")
 
 tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
 row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
-write.csv(tempdf, file = paste(vpdir_output,"sim_results1_2015", now, ".csv", sep= ""))
-tempdf2<- adply(temparray[,4:6,],2, cbind)
+write.csv(tempdf, file = paste(vpdir_output,"sim_results1_", now, ".csv", sep= ""))
+tempdf2<- adply(temparray[,4:6,],2, cbind) #worker eggs, colony pollen, colony nectar
 row.names(tempdf2)<- make.names(as.character(rep(time,3)), unique = T)
-write.csv(tempdf2, file = paste(vpdir_output,"sim_results2.csv", sep=""), row.names= T)
+write.csv(tempdf2, file = paste(vpdir_output,"sim_results2_", now, ".csv", sep=""))
 
 
