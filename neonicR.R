@@ -40,7 +40,7 @@ miteimmtype <- sample(immtype, size=1000, replace=T) #ImmType
 
 #pesticide exposure
 adslope<- runif(1000, 0, 3.4) #AIAdultSlope
-adLD50<- runif(1000, 0, 0.2) #AIAdultLD50 (ug/bee)
+adLD50<- runif(1000, 0, 3) #AIAdultLD50 (ug/bee)
 adslopec<- runif(1000, 0, 3.93) #AIAdultSlopeContact
 adLD50c<- runif(1000, 0, 0.05) #AIAdultLD50Contact (ug/bee)
 lslope<- runif(1000, 0, 3.4) #AILarvaSlope
@@ -48,7 +48,7 @@ lLD50<- runif(1000, 0, 0.9) #AILarvaLD50 (ug/larva)
 kow<- runif(1000, 2, 8) #AIKOW
 koc<- runif(1000, 5, 30) #AIKOC
 halflife<- runif(1000, 0, 14) #AIHalfLife (days)
-apprate<- runif(1000, 0, 2) #EAppRate (lb/A)
+apprate<- runif(1000, 0, 1) #EAppRate (lb/A)
 
 
 
@@ -102,8 +102,8 @@ for (i in 1:1000) {
   write(varroainput6, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
   write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  #varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
-  #write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
+  write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput9 <- paste(parameter9, inputvalue9, sep= " ")
   write(varroainput9, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput10 <- paste(parameter10, inputvalue10, sep= " ")
@@ -118,8 +118,8 @@ for (i in 1:1000) {
   write(varroainput14, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput15 <- paste(parameter15, inputvalue15, sep= " ")
   write(varroainput15, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  #varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
-  #write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
+  write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
@@ -261,7 +261,7 @@ for (i in 1:5){  #year
 #partial correlation coefficients
 for (i in 1:5){  #year
   for (j in 1:6){   #output variable
-    for (k in 1:5){  #input variable
+    for (k in 1:12){  #input variable
       tempinput<- tdoutput[i,j,1:1000]
       temp<- pcc(d, tempinput)
       pcctdarray[i,j,k]<- temp$PCC[[1]][k]
