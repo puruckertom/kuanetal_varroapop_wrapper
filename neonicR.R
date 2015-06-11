@@ -69,8 +69,8 @@ for (i in 1:1000) {
   inputvalue6 <- miteimmtype[i]
   parameter7 <- ("AIAdultSlope=") #ai adult slope
   inputvalue7 <- adslope[i]
-  #parameter8 <- ("AIAdultLD50=") #ai adult LD50
-  #inputvalue8 <- adLD50[i]
+  parameter8 <- ("AIAdultLD50=") #ai adult LD50
+  inputvalue8 <- adLD50[i]
   parameter9 <- ("AIAdultSlopeContact=") #ai adult slope contact
   inputvalue9 <- adslopec[i]
   parameter10 <- ("AIAdultLD50Contact=") #ai adult LD50 contact
@@ -100,10 +100,10 @@ for (i in 1:1000) {
   write(varroainput5, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput6 <- paste(parameter6, inputvalue6, sep= " ")
   write(varroainput6, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  #varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
-  #write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
-  write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
+  write(varroainput7, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  #varroainput8 <- paste(parameter8, inputvalue8, sep= " ")
+  #write(varroainput8, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput9 <- paste(parameter9, inputvalue9, sep= " ")
   write(varroainput9, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput10 <- paste(parameter10, inputvalue10, sep= " ")
@@ -118,8 +118,8 @@ for (i in 1:1000) {
   write(varroainput14, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
   varroainput15 <- paste(parameter15, inputvalue15, sep= " ")
   write(varroainput15, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
-  write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
+  #varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
+  #write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
@@ -153,8 +153,6 @@ for (i in 1:1000) {
   newarray2<- data.matrix(newarray)
   tdarray[1:1827,1:26,i] <- abind(newarray2[1:1827,1:26], along=3)
 }
-
-
 
 
 # data crunching #####
@@ -216,6 +214,22 @@ for (n in 1:1827){
 }
 
 
+#stacking arrays for .csv file #####
+
+now<- Sys.time()
+now<- as.POSIXlt(now)
+now<- format(now, "%Y%m%d%H%M", tz="")
+
+library(plyr)
+temparray <- tdarray[1:1827,resvar,1:1000]
+tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
+row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
+write.csv(tempdf, file = paste(vpdir_output,"sim_results1_", now, ".csv", sep= ""))
+tempdf2<- adply(temparray[,4:6,],2, cbind) #worker eggs, colony pollen, colony nectar
+row.names(tempdf2)<- make.names(as.character(rep(time,3)), unique = T)
+write.csv(tempdf2, file = paste(vpdir_output,"sim_results2_", now, ".csv", sep=""))
+
+
 
 #SENSITIVITY ANALYSIS####
 
@@ -255,8 +269,13 @@ for (i in 1:5){  #year
   }
 }
 
-write.table(srctdarray, file = paste(vpdir_output, "srctdarray.csv", sep=""))
-write.table(pcctdarray, file = paste(vpdir_output, "pcctdarray.csv", sep=""))
+srcoutput<- adply(srctdarray[,,],2, cbind)
+row.names(srcoutput)<- make.names(rep(c("1999", "2000", "2001", "2002", "2003"), 6), unique = T)
+write.csv(srcoutput, file = paste(vpdir_output, "srcoutput_", now, ".csv", sep=""))
+pccoutput<- adply(pcctdarray[,,],2, cbind)
+row.names(pccoutput)<- make.names(rep(c("1999", "2000", "2001", "2002", "2003"), 6), unique = T)
+write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep=""))
+
 
 
 
@@ -882,20 +901,5 @@ for (r in 1:6){
 
 dev.off()
 
-
-
-#stacking arrays for .csv file #####
-
-library(plyr)
-now<- Sys.time()
-now<- as.POSIXlt(now)
-now<- format(now, "%Y%m%d%H%M", tz="")
-
-tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
-row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
-write.csv(tempdf, file = paste(vpdir_output,"sim_results1_", now, ".csv", sep= ""))
-tempdf2<- adply(temparray[,4:6,],2, cbind) #worker eggs, colony pollen, colony nectar
-row.names(tempdf2)<- make.names(as.character(rep(time,3)), unique = T)
-write.csv(tempdf2, file = paste(vpdir_output,"sim_results2_", now, ".csv", sep=""))
 
 
