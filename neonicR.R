@@ -280,6 +280,27 @@ write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep="
 
 
 #plot crunching ###########
+#tornado plots
+library(mvtnorm)
+library(mc2d)
+
+cssrc<- sort(srctdarray[1,1,1:12], decreasing = TRUE)
+awsrc<- sort(srctdarray[1,2,1:12], decreasing = TRUE)
+fgsrc<- sort(srctdarray[1,3,1:12], decreasing = TRUE)
+wesrc<- sort(srctdarray[1,4,1:12], decreasing = TRUE)
+cpsrc<- sort(srctdarray[1,5,1:12], decreasing = TRUE)
+cnsrc<- sort(srctdarray[1,6,1:12], decreasing = TRUE)
+
+cspcc<- sort(pcctdarray[1,1,1:12], decreasing = TRUE)
+awpcc<- sort(pcctdarray[1,2,1:12], decreasing = TRUE)
+fgpcc<- sort(pcctdarray[1,3,1:12], decreasing = TRUE)
+wepcc<- sort(pcctdarray[1,4,1:12], decreasing = TRUE)
+cppcc<- sort(pcctdarray[1,5,1:12], decreasing = TRUE)
+cnpcc<- sort(pcctdarray[1,6,1:12], decreasing = TRUE)
+
+
+
+
 
 #separate and query QS values
 qs1 <- which(queenstrength >=1 & queenstrength <2)
@@ -825,8 +846,9 @@ mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater th
            title= "Queen Strength", cex=0.65, bty="n")
   mtext(text = paste("Fig.",n, "Scatterplots of response variables vs.",x,"input values for 1000 simulations", sep= " "), side = 1, outer = T, line = 5)    
   }
-
+ 
 dev.off()
+
 
 
 
@@ -845,6 +867,9 @@ for (r in 1:6){
     }
   }
 }
+
+
+
 
 
 pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
