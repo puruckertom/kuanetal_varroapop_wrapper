@@ -281,8 +281,6 @@ write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep="
 
 #plot crunching ###########
 #tornado plots
-library(mvtnorm)
-library(mc2d)
 
 cssrc<- sort(srctdarray[1,1,1:12], decreasing = TRUE)
 awsrc<- sort(srctdarray[1,2,1:12], decreasing = TRUE)
@@ -298,8 +296,13 @@ wepcc<- sort(pcctdarray[1,4,1:12], decreasing = TRUE)
 cppcc<- sort(pcctdarray[1,5,1:12], decreasing = TRUE)
 cnpcc<- sort(pcctdarray[1,6,1:12], decreasing = TRUE)
 
+dfsrc<- abind(cssrc,awsrc,fgsrc,wesrc,cpsrc,cnsrc, along = 2)
+dfpcc<- abind(cspcc,awpcc,fgpcc,wepcc,cppcc,cnpcc, along = 2)
 
-
+df<-data.frame(v=dfsrc[,1], p= )
+ggplot(data=df, aes(x=df, ylim= c(-1,1))) + 
+            geom_bar(stat="identity") +
+            coord_flip()
 
 
 #separate and query QS values
