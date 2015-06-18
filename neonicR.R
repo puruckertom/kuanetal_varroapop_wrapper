@@ -236,13 +236,13 @@ write.csv(tempdf2, file = paste(vpdir_output,"sim_results2_", now, ".csv", sep="
 library(sensitivity)
 #create input dataframes and arrays
 d <- as.data.frame(cbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife))
-year<- c(122,153,183,214,245)
+year<- c(183,549,914,1279,1644)
 resvar<- c(1,3,4,10,18,20)
 tdoutput <- tdarray[year,resvar,1:1000]
-srctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("May 1999","June 1999","July 1999","August 1999", "September 1999"),
+srctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002", "2003"),
                                                        c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
                                                        c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
-pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("May 1999","June 1999","July 1999","August 1999", "September 1999"), 
+pcctdarray<- array(data=NA, c(5,6,12), dimnames = list(c("1999","2000","2001","2002", "2003"), 
                                                        c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"), 
                                                        c("Drone-Mite Survivorship (%)", "Forager Lifespan (days)", "Queen Strength","Worker to Drone","Worker-Mite Survivorship (%)", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")))
 
@@ -282,26 +282,16 @@ write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep="
 #plot crunching ###########
 #tornado plots
 
-cssrc<- sort(srctdarray[1,1,1:12], decreasing = TRUE)
-awsrc<- sort(srctdarray[1,2,1:12], decreasing = TRUE)
-fgsrc<- sort(srctdarray[1,3,1:12], decreasing = TRUE)
-wesrc<- sort(srctdarray[1,4,1:12], decreasing = TRUE)
-cpsrc<- sort(srctdarray[1,5,1:12], decreasing = TRUE)
-cnsrc<- sort(srctdarray[1,6,1:12], decreasing = TRUE)
+dfsrc<- mdply(srctdarray[1,1:6,1:12], cbind)
+dfsrc<-cbind(dfsrc,outvar)
+data.frame(dfsrc, row.names=13)
 
-cspcc<- sort(pcctdarray[1,1,1:12], decreasing = TRUE)
-awpcc<- sort(pcctdarray[1,2,1:12], decreasing = TRUE)
-fgpcc<- sort(pcctdarray[1,3,1:12], decreasing = TRUE)
-wepcc<- sort(pcctdarray[1,4,1:12], decreasing = TRUE)
-cppcc<- sort(pcctdarray[1,5,1:12], decreasing = TRUE)
-cnpcc<- sort(pcctdarray[1,6,1:12], decreasing = TRUE)
+dfpcc<- mdply(pcctdarray[1,1:6,1:12], cbind)
 
-dfsrc<- abind(cssrc,awsrc,fgsrc,wesrc,cpsrc,cnsrc, along = 2, heir.names = T)
-dfpcc<- abind(cspcc,awpcc,fgpcc,wepcc,cppcc,cnpcc, along = 2, heir.names = T)
 
-df<- adply()
-ggplot(data=df, aes(x=df, ylim= c(-1,1))) + 
+ggplot(data=dfsrc, aes(x= outvar, y= paste("Half.Life"))) + 
             geom_bar(stat="identity") +
+            scale_y_continuous(limits= c(-1,1)) +
             coord_flip()
 
 
@@ -314,7 +304,7 @@ qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #list response variables to plot
 inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
-inputnames<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
+outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
 
 time <- seq(as.Date("1998/12/31"), as.Date("2003/12/31"), by="days")
 
@@ -857,7 +847,7 @@ dev.off()
 
 #time series plotting #######
 temparray <- tdarray[1:1827,resvar,1:1000]
-dimnames(temparray)<- list(c(as.character(time)), c(inputnames))
+dimnames(temparray)<- list(c(as.character(time)), c(outvar))
 tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(as.character(time)), 
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
                                                       c("25%","50%","75%")))
@@ -880,23 +870,23 @@ pdf(file= paste(vpdir_output, "graphics_output_timeseries.pdf", sep=""), width =
 par(mfrow=c(6,5), mar=c(1.5, 4, 2, 0.5), oma= c(4,2,2,7))
 
 for (r in 1:6){
-  plot(time[1:366], tempout[1:366,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main= "1999")
+  plot(time[1:366], tempout[1:366,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "1999")
   lines(time[1:366],tempout[1:366,r,1], type = "l", lty= 2, col = "red")
   lines(time[1:366], tempout[1:366,r,3], type = "l", lty=4, col = "blue")
   
-  plot(time[367:732], tempout[367:732,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2000")
+  plot(time[367:732], tempout[367:732,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "2000")
   lines(time[367:732],tempout[367:732,r,1], type = "l", lty= 2, col = "red")
   lines(time[367:732], tempout[367:732,r,3], type = "l", lty=4, col = "blue")
   
-  plot(time[733:1097], tempout[733:1097,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2001")
+  plot(time[733:1097], tempout[733:1097,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "2001")
   lines(time[733:1097],tempout[733:1097,r,1], type = "l", lty= 2, col = "red")
   lines(time[733:1097], tempout[733:1097,r,3], type = "l", lty=4, col = "blue")
   
-  plot(time[1098:1462], tempout[1098:1462,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2002")
+  plot(time[1098:1462], tempout[1098:1462,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "2002")
   lines(time[1098:1462],tempout[1098:1462,r,1], type = "l", lty= 2, col = "red")
   lines(time[1098:1462], tempout[1098:1462,r,3], type = "l",lty=4, col = "blue")
   
-  plot(time[1463:1827], tempout[1463:1827,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(inputnames[r]), xlab = NA, main = "2003")
+  plot(time[1463:1827], tempout[1463:1827,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "2003")
   lines(time[1463:1827],tempout[1463:1827,r,1], type = "l", lty= 2, col = "red")
   lines(time[1463:1827], tempout[1463:1827,r,3], type = "l",lty=4, col = "blue")
 }
@@ -904,24 +894,24 @@ for (r in 1:6){
 
 #par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
 
-#for (j in resvar){
-#  plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(inputnames[1]), main = "1999", ylim = c(0,max(tdarray[1:366, j, 1])))
+#for (j in outvar){
+#  plot(time[1:366], tdarray[1:366, j, 1], type = "l", ylab= paste(outvar[1]), main = "1999", ylim = c(0,max(tdarray[1:366, j, 1])))
 #    for (i in 2:1000){
 #      lines(time[1:366], tdarray[1:366, j, i], type = "l")
 #    }
-#  plot(time[367:732], tdarray[367:732, j, 1], type = "l", ylab= paste(inputnames[2]), main = "2000", ylim = c(0,max(tdarray[1:366, j, 1])))
+#  plot(time[367:732], tdarray[367:732, j, 1], type = "l", ylab= paste(outvar[2]), main = "2000", ylim = c(0,max(tdarray[1:366, j, 1])))
 #    for (i in 2:1000){    
 #      lines(time[367:732], tdarray[367:732, j, i], type = "l")
 #    }
-#  plot(time[733:1097], tdarray[733:1097, j, 1], type = "l", ylab = paste(inputnames[3]), main = "2001", ylim = c(0,max(tdarray[1:366, j, 1])))
+#  plot(time[733:1097], tdarray[733:1097, j, 1], type = "l", ylab = paste(outvar[3]), main = "2001", ylim = c(0,max(tdarray[1:366, j, 1])))
 #    for (i in 2:1000) {
 #      lines(time[733:1097], tdarray[733:1097, j, i], type = "l")
 #    }
-#  plot(time[1098:1462], tdarray[1098:1462, j, 1], type = "l", ylab = paste(inputnames[4]), main = "2002", ylim = c(0,max(tdarray[1:366, j, 1])))
+#  plot(time[1098:1462], tdarray[1098:1462, j, 1], type = "l", ylab = paste(outvar[4]), main = "2002", ylim = c(0,max(tdarray[1:366, j, 1])))
 #    for (i in 2:1000){
 #      lines(time[1098:1462], tdarray[1098:1462, j, i], type = "l")
 #    }
-#  plot(time[1463:1827], tdarray[1463:1827, j, 1], type = "l", ylab = paste(inputnames[5]), main = "2003", ylim = c(0,max(tdarray[1:366, j, 1])))
+#  plot(time[1463:1827], tdarray[1463:1827, j, 1], type = "l", ylab = paste(outvar[5]), main = "2003", ylim = c(0,max(tdarray[1:366, j, 1])))
 #    for (i in 2:1000) {
 #      lines(time[1463:1827], tdarray[1463:1827, j, i], type = "l")
 #    }
