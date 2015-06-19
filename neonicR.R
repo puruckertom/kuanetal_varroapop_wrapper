@@ -281,20 +281,53 @@ write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep="
 
 #plot crunching ###########
 #tornado plots
+library(reshape2)
+invar<- c("Drone-Mite Survivorship", "Forager Lifespan", "Queen Strength", "Worker:Drone","Worker-Mite Survivorship", "Adult Slope Contact","Adult LD50 Contact", "Larva Slope", "Larva LD50","KOW","KOC","Half Life")
 
 dfsrc<- mdply(srctdarray[1,1:6,1:12], cbind)
-dfsrc<-cbind(dfsrc,outvar)
-data.frame(dfsrc, row.names=13)
+tdfsrc<- t(dfsrc)
+colnames(tdfsrc)<- outvar
+tdfsrc<- melt(tdfsrc)
 
 dfpcc<- mdply(pcctdarray[1,1:6,1:12], cbind)
+tdfpcc<- t(dfpcc)
+colnames(tdfpcc)<- outvar
+tdfpcc<- melt(tdfpcc)
 
-
-ggplot(data=dfsrc, aes(x= outvar, y= paste("Half.Life"))) + 
-            geom_bar(stat="identity") +
-            scale_y_continuous(limits= c(-1,1)) +
-            coord_flip()
-
-
+dat<- list(tdfsrc, tdfpcc)
+#start figures
+for (i in 1:2) {
+ggplot(data=dat[i], aes(x= dat[i]$Var1[1:12], y= dat[i]$value[1:12])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Colony Size 1999", x=" ", y= "standardized regression coefficient")
+ggplot(data=dat[i], aes(x= dat[i]$Var1[13:24], y= dat[i]$value[13:24])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Adult Workers 1999", x=" ", y= "standardized regression coefficient")
+ggplot(data=dat[i], aes(x= dat[i]$Var1[25:36], y= dat[i]$value[25:36])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Foragers 1999", x=" ", y= "standardized regression coefficient")
+ggplot(data=dat[i], aes(x= dat[i]$Var1[37:48], y= dat[i]$value[37:48])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Worker Eggs 1999", x=" ", y= "standardized regression coefficient")
+ggplot(data=dat[i], aes(x= dat[i]$Var1[49:60], y= dat[i]$value[49:60])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Colony Pollen 1999", x=" ", y= "standardized regression coefficient")
+ggplot(data=dat[i], aes(x= dat[i]$Var1[61:72], y= dat[i]$value[61:72])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Colony Nectar 1999", x=" ", y= "standardized regression coefficient")
+}
 #separate and query QS values
 qs1 <- which(queenstrength >=1 & queenstrength <2)
 qs2 <- which(queenstrength >=2 & queenstrength <3)
