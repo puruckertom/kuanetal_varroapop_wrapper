@@ -283,51 +283,94 @@ write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep="
 #tornado plots
 library(reshape2)
 invar<- c("Drone-Mite Survivorship", "Forager Lifespan", "Queen Strength", "Worker:Drone","Worker-Mite Survivorship", "Adult Slope Contact","Adult LD50 Contact", "Larva Slope", "Larva LD50","KOW","KOC","Half Life")
+datsrc<- list()
+datpcc<- list()
 
-dfsrc<- mdply(srctdarray[1,1:6,1:12], cbind)
+for (i in 1:5) {
+dfsrc<- mdply(srctdarray[i,1:6,1:12], cbind)
 tdfsrc<- t(dfsrc)
 colnames(tdfsrc)<- outvar
-tdfsrc<- melt(tdfsrc)
+s<- melt(tdfsrc)
+datsrc[[i]]<- s
+}
 
-dfpcc<- mdply(pcctdarray[1,1:6,1:12], cbind)
+
+for (i in 1:5){
+dfpcc<- mdply(pcctdarray[i,1:6,1:12], cbind)
 tdfpcc<- t(dfpcc)
 colnames(tdfpcc)<- outvar
-tdfpcc<- melt(tdfpcc)
+p<- melt(tdfpcc)
+datpcc[[i]]<- p
+}
 
-dat<- list(tdfsrc, tdfpcc)
+
 #start figures
-for (i in 1:2) {
-ggplot(data=dat[i], aes(x= dat[i]$Var1[1:12], y= dat[i]$value[1:12])) + 
+for (i in 1:5) { #loops by year
+ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][1:12], y= datsrc[[i]][[3]][1:12])) + 
   geom_bar(stat="identity", position = "identity") +
   scale_y_continuous(limits= c(-1,1)) +
   coord_flip() +
   labs(title= "Colony Size 1999", x=" ", y= "standardized regression coefficient")
-ggplot(data=dat[i], aes(x= dat[i]$Var1[13:24], y= dat[i]$value[13:24])) + 
+ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][13:24], y= datsrc[[i]][[3]][13:24])) + 
   geom_bar(stat="identity", position = "identity") +
   scale_y_continuous(limits= c(-1,1)) +
   coord_flip() +
   labs(title= "Adult Workers 1999", x=" ", y= "standardized regression coefficient")
-ggplot(data=dat[i], aes(x= dat[i]$Var1[25:36], y= dat[i]$value[25:36])) + 
+ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][25:36], y= datsrc[[i]][[3]][25:36])) + 
   geom_bar(stat="identity", position = "identity") +
   scale_y_continuous(limits= c(-1,1)) +
   coord_flip() +
   labs(title= "Foragers 1999", x=" ", y= "standardized regression coefficient")
-ggplot(data=dat[i], aes(x= dat[i]$Var1[37:48], y= dat[i]$value[37:48])) + 
+ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][37:48], y= datsrc[[i]][[3]][37:48])) + 
   geom_bar(stat="identity", position = "identity") +
   scale_y_continuous(limits= c(-1,1)) +
   coord_flip() +
   labs(title= "Worker Eggs 1999", x=" ", y= "standardized regression coefficient")
-ggplot(data=dat[i], aes(x= dat[i]$Var1[49:60], y= dat[i]$value[49:60])) + 
+ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][49:60], y= datsrc[[i]][[3]][49:60])) + 
   geom_bar(stat="identity", position = "identity") +
   scale_y_continuous(limits= c(-1,1)) +
   coord_flip() +
   labs(title= "Colony Pollen 1999", x=" ", y= "standardized regression coefficient")
-ggplot(data=dat[i], aes(x= dat[i]$Var1[61:72], y= dat[i]$value[61:72])) + 
+ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][61:72], y= datsrc[[i]][[3]][61:72])) + 
   geom_bar(stat="identity", position = "identity") +
   scale_y_continuous(limits= c(-1,1)) +
   coord_flip() +
   labs(title= "Colony Nectar 1999", x=" ", y= "standardized regression coefficient")
 }
+
+for (i in 1:5) { #loops by year
+  ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][1:12], y= datpcc[[i]][[3]][1:12])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Colony Size 1999", x=" ", y= "partial correlation coefficient")
+  ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][13:24], y= datpcc[[i]][[3]][13:24])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Adult Workers 1999", x=" ", y= "partial correlation coefficient")
+  ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][25:36], y= datpcc[[i]][[3]][25:36])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Foragers 1999", x=" ", y= "partial correlation coefficient")
+  ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][37:48], y= datpcc[[i]][[3]][37:48])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Worker Eggs 1999", x=" ", y= "partial correlation coefficient")
+  ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][49:60], y= datpcc[[i]][[3]][49:60])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Colony Pollen 1999", x=" ", y= "partial correlation coefficient")
+  ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][61:72], y= datpcc[[i]][[3]][61:72])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Colony Nectar 1999", x=" ", y= "partial correlation coefficient")
+}
+
 #separate and query QS values
 qs1 <- which(queenstrength >=1 & queenstrength <2)
 qs2 <- which(queenstrength >=2 & queenstrength <3)
