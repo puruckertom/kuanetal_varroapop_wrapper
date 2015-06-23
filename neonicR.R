@@ -892,8 +892,8 @@ for (i in 1:5){
   datpcc[[i]]<- p
 }
 
-pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
-pushViewport(viewport(layout=grid.layout(5,6)))
+pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "letter")
+pushViewport(viewport(layout=grid.layout(5,6), gp= gpar(cex = 0.6)))
 
 library(gridExtra)
 #start figures
@@ -938,7 +938,7 @@ for (i in 1:5) { #loops by year
 }
 
 grid.newpage()
-
+pushViewport(viewport(layout=grid.layout(5,6)))
 for (i in 1:5) { #loops by year
   aa<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][1:12], y= datpcc[[i]][[3]][1:12])) + 
     geom_bar(stat="identity", position = "identity") +
@@ -970,7 +970,7 @@ for (i in 1:5) { #loops by year
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
     labs(title= "Colony Nectar 1999", x=" ", y= "partial correlation coefficient")
-  pushViewport(viewport(layout=grid.layout(5,6)))
+  
   print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= F)
   print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 3), newpage= F)
