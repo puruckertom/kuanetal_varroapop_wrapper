@@ -893,7 +893,7 @@ for (i in 1:5){
 }
 
 pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8, height = 11, onefile = TRUE, paper = "letter")
-
+pushViewport(viewport(layout=grid.layout(5,6)))
 
 library(gridExtra)
 #start figures
@@ -928,7 +928,7 @@ for (i in 1:5) { #loops by year
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
     labs(title= "Colony Nectar", x=" ", y= "standardized regression coefficient")
-  pushViewport(viewport(layout=grid.layout(5,6)))
+
   print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= F)
   print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 3), newpage= F)
