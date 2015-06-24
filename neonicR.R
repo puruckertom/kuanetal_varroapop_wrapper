@@ -26,7 +26,12 @@ if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir_exe<-path.expand("C:\\gitrepo\\beeRpop\\exe\\")
 }
 
-
+#library packages
+library(plyr)
+library(reshape2)
+library(ggplot2)
+library(grid)
+library(gridExtra)
 
 #create input files #########
 
@@ -296,7 +301,7 @@ time <- seq(as.Date("1998/12/31"), as.Date("2003/12/31"), by="days")
 
 
 #create PDF
-
+pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "letter")
 
 #start figures
 par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,2,2,2))
@@ -892,30 +897,31 @@ for (i in 1:5){
   datpcc[[i]]<- p
 }
 
-pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "letter")
+grid.newpage()
 pushViewport(viewport(layout=grid.layout(5,1), gp= gpar(cex = 0.6)))
-
 library(gridExtra)
 #start figures
 for (i in 1:5) { #loops by year
-  aa<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][1:12], y= datsrc[[i]][[3]][1:12])) + 
+  aa<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]], y= datsrc[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
     labs(title= paste("Year", i, sep=" "), x=" ", y= "standardized regression coefficient") +
-    facet_grid(. ~ Var2)
+    facet_grid(. ~ Var2) +
+    theme_bw()
   print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
 }
 
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(5,1), gp= gpar(cex = 0.6)))
 for (i in 1:5) { #loops by year
-  bb<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][1:12], y= datpcc[[i]][[3]][1:12])) + 
+  bb<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]], y= datpcc[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
     labs(title= paste("Year", i, sep = " "), x=" ", y= "partial correlation coefficient") +
-    facet_grid(. ~ Var2)
+    facet_grid(. ~ Var2) +
+    theme_bw()
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
 }
 
