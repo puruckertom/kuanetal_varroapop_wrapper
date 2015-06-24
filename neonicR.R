@@ -893,7 +893,7 @@ for (i in 1:5){
 }
 
 pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "letter")
-pushViewport(viewport(layout=grid.layout(5,6), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(5,1), gp= gpar(cex = 0.6)))
 
 library(gridExtra)
 #start figures
@@ -902,81 +902,21 @@ for (i in 1:5) { #loops by year
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= "Colony Size", x=" ", y= "standardized regression coefficient")
-  bb<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][13:24], y= datsrc[[i]][[3]][13:24])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Adult Workers", x=" ", y= "standardized regression coefficient")
-  cc<-ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][25:36], y= datsrc[[i]][[3]][25:36])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Foragers", x=" ", y= "standardized regression coefficient")
-  dd<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][37:48], y= datsrc[[i]][[3]][37:48])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Worker Eggs", x=" ", y= "standardized regression coefficient")
-  ee<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][49:60], y= datsrc[[i]][[3]][49:60])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Colony Pollen", x=" ", y= "standardized regression coefficient")
-  ff<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]][61:72], y= datsrc[[i]][[3]][61:72])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Colony Nectar", x=" ", y= "standardized regression coefficient")
-
+    labs(title= paste("Year", i, sep=" "), x=" ", y= "standardized regression coefficient") +
+    facet_grid(. ~ Var2)
   print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
-  print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= F)
-  print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 3), newpage= F)
-  print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 4), newpage= F)
-  print(ee, vp= viewport(layout.pos.row= i, layout.pos.col= 5), newpage= F)
-  print(ff, vp= viewport(layout.pos.row= i, layout.pos.col= 6), newpage= F)
 }
 
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(5,6)))
+pushViewport(viewport(layout=grid.layout(5,1), gp= gpar(cex = 0.6)))
 for (i in 1:5) { #loops by year
-  aa<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][1:12], y= datpcc[[i]][[3]][1:12])) + 
+  bb<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][1:12], y= datpcc[[i]][[3]][1:12])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= "Colony Size 1999", x=" ", y= "partial correlation coefficient")
-  bb<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][13:24], y= datpcc[[i]][[3]][13:24])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Adult Workers 1999", x=" ", y= "partial correlation coefficient")
-  cc<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][25:36], y= datpcc[[i]][[3]][25:36])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Foragers 1999", x=" ", y= "partial correlation coefficient")
-  dd<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][37:48], y= datpcc[[i]][[3]][37:48])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Worker Eggs 1999", x=" ", y= "partial correlation coefficient")
-  ee<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][49:60], y= datpcc[[i]][[3]][49:60])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Colony Pollen 1999", x=" ", y= "partial correlation coefficient")
-  ff<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]][61:72], y= datpcc[[i]][[3]][61:72])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Colony Nectar 1999", x=" ", y= "partial correlation coefficient")
-  
-  print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
-  print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= F)
-  print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 3), newpage= F)
-  print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 4), newpage= F)
-  print(ee, vp= viewport(layout.pos.row= i, layout.pos.col= 5), newpage= F)
-  print(ff, vp= viewport(layout.pos.row= i, layout.pos.col= 6), newpage= F)
+    labs(title= paste("Year", i, sep = " "), x=" ", y= "partial correlation coefficient") +
+    facet_grid(. ~ Var2)
+  print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
 }
 
 
