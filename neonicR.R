@@ -256,8 +256,8 @@ for (i in 1:5){  #year
   for (j in 1:6){   #output variable
     for (k in 1:12){  #input variable
     tempinput<- tdoutput[i,j,1:1000]
-    temp<- src(d, tempinput)
-    srctdarray[i,j,k]<- temp$SRC[[1]][k]
+    temp<- src(d, tempinput, rank = T)
+    srctdarray[i,j,k]<- temp$SRRC[[1]][k]
     }
   }
 }
@@ -268,8 +268,8 @@ for (i in 1:5){  #year
   for (j in 1:6){   #output variable
     for (k in 1:12){  #input variable
       tempinput<- tdoutput[i,j,1:1000]
-      temp<- pcc(d, tempinput)
-      pcctdarray[i,j,k]<- temp$PCC[[1]][k]
+      temp<- pcc(d, tempinput, rank = T)
+      pcctdarray[i,j,k]<- temp$PRCC[[1]][k]
     }
   }
 }
