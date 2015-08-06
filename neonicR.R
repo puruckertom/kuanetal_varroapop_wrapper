@@ -25,6 +25,12 @@ if(Sys.info()[4]=="Ashleys-MBP"){
   vpdir_output<-path.expand("C:\\git\\beeRpop\\output\\")
   vpdir_exe<-path.expand("C:\\git\\beeRpop\\exe\\")
 }
+if(Sys.info()[4]=="ACKUAN-PC"){
+  vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
+  vpdir_input<-path.expand("C:\\gitrepo\\beeRpop\\input\\")
+  vpdir_output<-path.expand("C:\\gitrepo\\beeRpop\\output\\")
+  vpdir_exe<-path.expand("C:\\gitrepo\\beeRpop\\exe\\")
+}
 
 #library packages
 library(plyr)
@@ -158,7 +164,7 @@ for (i in 1:1000) {
   newarray2<- data.matrix(newarray)
   tdarray[1:1827,1:26,i] <- abind(newarray2[1:1827,1:26], along=3)
 }
-
+save(tdarray, file = paste(vpdir_output,"tdarray.RData", sep = ""))
 
 # data crunching #####
 
