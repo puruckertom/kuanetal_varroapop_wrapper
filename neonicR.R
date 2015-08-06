@@ -19,11 +19,11 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 
 #carmen personal laptop
 
-if(Sys.info()[4]=="ACKUAN-PC"){
-  vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
-  vpdir_input<-path.expand("C:\\gitrepo\\beeRpop\\input\\")
-  vpdir_output<-path.expand("C:\\gitrepo\\beeRpop\\output\\")
-  vpdir_exe<-path.expand("C:\\gitrepo\\beeRpop\\exe\\")
+if(Sys.info()[4]=="Ashleys-MBP"){
+  vpdir<-path.expand("C:\\git\\beeRpop\\")
+  vpdir_input<-path.expand("C:\\git\\beeRpop\\input\\")
+  vpdir_output<-path.expand("C:\\git\\beeRpop\\output\\")
+  vpdir_exe<-path.expand("C:\\git\\beeRpop\\exe\\")
 }
 
 #library packages
