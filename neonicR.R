@@ -19,11 +19,11 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 
 #carmen personal laptop
 
-if(Sys.info()[4]=="Ashleys-MBP"){
-  vpdir<-path.expand("C:\\git\\beeRpop\\")
-  vpdir_input<-path.expand("C:\\git\\beeRpop\\input\\")
-  vpdir_output<-path.expand("C:\\git\\beeRpop\\output\\")
-  vpdir_exe<-path.expand("C:\\git\\beeRpop\\exe\\")
+if(Sys.info()[4]=="Ashleys-MacBook-Pro.local"){
+  vpdir<-path.expand("/git/beeRpop/")
+  vpdir_input<-path.expand("/git/beeRpop/input/")
+  vpdir_output<-path.expand("/git/beeRpop/output/")
+  vpdir_exe<-path.expand("/git/beeRpop/exe/")
 }
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
@@ -310,7 +310,6 @@ time <- seq(as.Date("1998/12/31"), as.Date("2003/12/31"), by="days")
 
 #create PDF
 pdf(file= paste(vpdir_output, "graphics_output.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "letter")
-
 #start figures
 par(mfrow=c(5,5), mar=c(2,2,1,0.5), oma=c(4,2,2,2))
 
