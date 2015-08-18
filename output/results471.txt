@@ -1,5 +1,5 @@
-Varroa Population Simulation - Aug 07,2015  10:06:37 AM
-VarroaPop Version 3.2.5.7  May, 2015
+Varroa Population Simulation - Aug 18,2015  03:56:02 PM
+VarroaPop Version 3.2.5.8  June, 2015
 
                                         Capped  Capped                                                                      Prop           Conc          Conc                                     
             Colony  Adult  Adult         Drone   Wkr    Drone  Wkr    Drone  Wkr  Free   DBrood WBrood DMite  WMite  Mites  Mites  Colony Pollen Colony Nectar   Dead   Dead   Dead   Dead   Dead

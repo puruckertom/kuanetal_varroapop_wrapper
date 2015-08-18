@@ -164,7 +164,7 @@ for (i in 1:1000) {
   newarray2<- data.matrix(newarray)
   tdarray[1:1827,1:26,i] <- abind(newarray2[1:1827,1:26], along=3)
 }
-#save(tdarray, file = paste(vpdir_output,"tdarray.RData", sep = ""))
+save(tdarray, file = paste(vpdir_output,"tdarray.RData", sep = ""))
 #load("/git/beeRpop/output/tdarray.RData")
 
 
