@@ -142,9 +142,10 @@ for (i in 1:1000) {
 for (i in 1:1000) {
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
+  logfile<- paste("log",i,".txt", sep="")
   vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "Default.vrp", 
                          " /b /or ", vpdir_output, outputfile, 
-                         " /i ", vpdir_input, inputfile, sep="")
+                         " /i ", vpdir_input, inputfile, " /ol ", vpdir_output, logfile, sep="")
   print(vpdir_command)
   system(vpdir_command)
 }
