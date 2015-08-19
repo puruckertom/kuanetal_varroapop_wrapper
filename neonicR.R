@@ -19,11 +19,11 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 
 #carmen personal laptop
 
-if(Sys.info()[4]=="Ashleys-MacBook-Pro.local"){
-  vpdir<-path.expand("/git/beeRpop/")
-  vpdir_input<-path.expand("/git/beeRpop/input/")
-  vpdir_output<-path.expand("/git/beeRpop/output/")
-  vpdir_exe<-path.expand("/git/beeRpop/exe/")
+if(Sys.info()[4]=="Ashleys-MBP"){
+  vpdir<-path.expand("~/git/beeRpop/")
+  vpdir_input<-path.expand("~/git/beeRpop/input/")
+  vpdir_output<-path.expand("~/git/beeRpop/output/")
+  vpdir_exe<-path.expand("~/git/beeRpop/exe/")
 }
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
