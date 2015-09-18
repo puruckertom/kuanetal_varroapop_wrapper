@@ -1,7 +1,4 @@
-
 #Determine path directory ######
-
-
 #windows
 if(Sys.info()[4]=="DC2626UTPURUCKE"){
   vpdir_input<-path.expand("C:\\git\\Dropbox\\NeonicR\\input\\")
@@ -19,7 +16,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 
 #carmen personal laptop
 
-if(Sys.info()[4]=="Ashleys-MBP"){
+if(Sys.info()[4]=="Ashleys-MacBook-Pro.local"){
   vpdir<-path.expand("~/git/beeRpop/")
   vpdir_input<-path.expand("~/git/beeRpop/input/")
   vpdir_output<-path.expand("~/git/beeRpop/output/")
@@ -152,12 +149,13 @@ for (i in 1:1000) {
 
 
 
+
 # 3d array ######
 
 tdarray <- array(data=NA,c(1827,26,1000))
 dim(tdarray)
 library(abind)
-
+# read output files
 for (i in 1:1000) {
   df<- read.table(paste(vpdir_output,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
@@ -166,7 +164,38 @@ for (i in 1:1000) {
   tdarray[1:1827,1:26,i] <- abind(newarray2[1:1827,1:26], along=3)
 }
 save(tdarray, file = paste(vpdir_output,"tdarray.RData", sep = ""))
-#load("/git/beeRpop/output/tdarray.RData")
+load("~/git/beeRpop/output/tdarray.RData")
+
+#read input files
+inparam<- c("ICQueenStrength", "RQWkrDrnRatio", "ICDroneMiteSurvivorship", "ICWorkerMiteSurvivorship", "ICForagerLifespan", 
+            "ImmType", "AIAdultSlope", "AIAdultLD50", "AIAdultSlopeContact", "AIAdultLD50Contact", "AILarvaSlope", 
+            "AILarvaLD50", "AIKOW", "AIKOC", "AIHalfLife", "EAppRate")
+for (i in 1:1000) {
+  if(!exists("indf")){
+    indf<- read.table(paste(vpdir_input,"input",i,".txt", sep = ""), header= FALSE, sep= "=", row.names = inparam)
+  }
+  if(exists("indf")){
+    temp_indf<- read.table(paste(vpdir_input,"input",i,".txt", sep = ""), header= FALSE, sep= "=", row.names = inparam, colClasses= c("NULL","factor"))
+    indf<- cbind(temp_indf, indf)
+  }
+}
+
+ICQueenStrength<- indf[1,]
+RQWkrDrnRatio<- indf[2,]
+ICDroneMiteSurvivorship<- indf[3,] 
+ICWorkerMiteSurvivorship<- indf[4,]
+ICForagerLifespan<- indf[5,]
+ImmType<- indf[6,]
+AIAdultSlope<- indf[7,]
+AIAdultLD50<- indf[8,]
+AIAdultSlopeContact<- indf[9,]
+AIAdultLD50Contact<- indf[10,]
+AILarvaSlope<- indf[11,]
+AILarvaLD50<- indf[12,]
+AIKOW<- indf[13,]
+AIKOC<- indf[14,]
+AIHalfLife<- indf[15,]
+EAppRate<- indf[16,]
 
 
 # data crunching #####
@@ -228,23 +257,6 @@ for (n in 1:1827){
 }
 
 
-#stacking arrays for .csv file #####
-
-now<- Sys.time()
-now<- as.POSIXlt(now)
-now<- format(now, "%Y%m%d%H%M", tz="")
-
-library(plyr)
-temparray <- tdarray[1:1827,resvar,1:1000]
-tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
-row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
-write.csv(tempdf, file = paste(vpdir_output,"sim_results1_", now, ".csv", sep= ""))
-tempdf2<- adply(temparray[,4:6,],2, cbind) #worker eggs, colony pollen, colony nectar
-row.names(tempdf2)<- make.names(as.character(rep(time,3)), unique = T)
-write.csv(tempdf2, file = paste(vpdir_output,"sim_results2_", now, ".csv", sep=""))
-
-
-
 #SENSITIVITY ANALYSIS####
 
 library(sensitivity)
@@ -289,6 +301,22 @@ write.csv(srcoutput, file = paste(vpdir_output, "srcoutput_", now, ".csv", sep="
 pccoutput<- adply(pcctdarray[,,],2, cbind)
 row.names(pccoutput)<- make.names(rep(c("1999", "2000", "2001", "2002", "2003"), 6), unique = T)
 write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep=""))
+
+
+#stacking arrays for .csv file #####
+
+now<- Sys.time()
+now<- as.POSIXlt(now)
+now<- format(now, "%Y%m%d%H%M", tz="")
+
+library(plyr)
+temparray <- tdarray[1:1827,resvar,1:1000]
+tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
+row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
+write.csv(tempdf, file = paste(vpdir_output,"sim_results1_", now, ".csv", sep= ""))
+tempdf2<- adply(temparray[,4:6,],2, cbind) #worker eggs, colony pollen, colony nectar
+row.names(tempdf2)<- make.names(as.character(rep(time,3)), unique = T)
+write.csv(tempdf2, file = paste(vpdir_output,"sim_results2_", now, ".csv", sep=""))
 
 
 
@@ -835,7 +863,7 @@ for (i in inputparam){      #margin labels
   legend("topright",inset=c(-0.15,0), xpd=NA, legend=c("qs1", "qs2", "qs3", "qs4", "qs5"), fill=c(1:5),
            title= "Queen Strength", cex=0.65, bty="n")
   mtext(text = paste("Fig.",n, "Scatterplots of response variables vs.",x,"input values for 1000 simulations", sep= " "), side = 1, outer = T, line = 5)    
-  }
+}
 
 
 
