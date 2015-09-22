@@ -170,8 +170,8 @@ outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pol
 time <- seq(as.Date("1998/12/31"), as.Date("2003/12/31"), by="days")
 
 
-#create PDF
-pdf(file= paste(vpdir_output, "graphics_output_test.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#create PDF 1
+pdf(file= paste(vpdir_output, "graphics_output_1.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 par(mfrow=c(5,5), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
 
@@ -206,8 +206,12 @@ plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
 mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater than zero"), side = 1, line = 1, outer = T)
+dev.off()
 
 
+#create PDF 2
+pdf(file= paste(vpdir_output, "graphics_output_2.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#start figures
 for (i in inputparam){      #margin labels
   if (i == drnmitesurvive)
   { x = "Drone-Mite Survivorship (%)"
@@ -697,7 +701,7 @@ for (i in inputparam){      #margin labels
          title= "Queen Strength", cex=0.65, bty="n")
   mtext(text = paste("Fig.",n, "Scatterplots of response variables vs.",x,"input values for 1000 simulations", sep= " "), side = 1, outer = T, line = 5)
 }
-
+dev.off()
 
 
 #time series plotting #######
@@ -716,7 +720,9 @@ for (r in 1:6){
   }
 }
 
-
+#create PDF 3
+pdf(file= paste(vpdir_output, "graphics_output_3.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#start figures
 #time series plots
 par(mfrow=c(6,5), mar=c(1.5, 4, 2, 0.5), oma= c(4,2,2,7))
 
@@ -741,7 +747,8 @@ for (r in 1:6){
   lines(time[1463:1827],tempout[1463:1827,r,1], type = "l", lty= 2, col = "red")
   lines(time[1463:1827], tempout[1463:1827,r,3], type = "l",lty=4, col = "blue")
 }
-
+mtext(text = paste("Fig. 3 Time series plots across a 4-year period of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
+dev.off()
 
 #tornado plots
 invar<- c("Drone-Mite Survivorship", "Forager Lifespan", "Queen Strength", "Worker:Drone","Worker-Mite Survivorship", "Adult Slope Contact","Adult LD50 Contact", "Larva Slope", "Larva LD50","KOW","KOC","Half Life")
@@ -765,6 +772,9 @@ for (i in 1:5){
   datpcc[[i]]<- p
 }
 
+#create PDF 4
+pdf(file= paste(vpdir_output, "graphics_output_4.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#start figures
 #create plot pages
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(5,1), gp= gpar(cex = 0.6)))
