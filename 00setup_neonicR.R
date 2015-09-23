@@ -48,7 +48,6 @@ wkrmitesurvive<- runif(1000, 0, 100) #ICWorkerMiteSurvivorship
 fgrlifespan <- runif(1000, 4, 16) #ICForagerLifespan
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=1000, replace=T) #ImmType
-
 #pesticide exposure
 adslope<- runif(1000, 0, 3.4) #AIAdultSlope
 adLD50<- runif(1000, 0, 3) #AIAdultLD50 (ug/bee)
@@ -61,6 +60,9 @@ koc<- runif(1000, 5, 30) #AIKOC
 halflife<- runif(1000, 0, 14) #AIHalfLife (days)
 apprate<- runif(1000, 0, 1) #EAppRate (lb/A)
 
+inputdata<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
+                       adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate)
+write.csv(inputdata, file = paste(vpdir_output, "inputdata.csv", sep = ""))
 
 for (i in 1:1000) {
   
