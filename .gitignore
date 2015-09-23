@@ -1,8 +1,4 @@
 /output/tdarray.csv
 /output/*.txt
 /input/*.txt
-<<<<<<< HEAD
 /input/*.log
-=======
-/input/*.log
->>>>>>> 1309e4b430d32e386d69694a7cbe767def820663
