@@ -5,32 +5,34 @@ load("~/git/beeRpop/output/tdarray.RData")
 inparam<- c("ICQueenStrength", "RQWkrDrnRatio", "ICDroneMiteSurvivorship", "ICWorkerMiteSurvivorship", "ICForagerLifespan", 
             "ImmType", "AIAdultSlope", "AIAdultLD50", "AIAdultSlopeContact", "AIAdultLD50Contact", "AILarvaSlope", 
             "AILarvaLD50", "AIKOW", "AIKOC", "AIHalfLife", "EAppRate")
-for (i in 1:1000) {
-  if(!exists("indf")){
-    indf<- read.table(paste(vpdir_input,"input",i,".txt", sep = ""), header= FALSE, sep= "=", row.names = inparam)
-  }
-  if(exists("indf")){
-    temp_indf<- read.table(paste(vpdir_input,"input",i,".txt", sep = ""), header= FALSE, sep= "=", row.names = inparam, colClasses= c("NULL","factor"))
-    indf<- cbind(temp_indf, indf)
-  }
-}
 
-queenstrength<- indf[1,]
-wkrdrnratio<- indf[2,]
-drnmitesurvive<- indf[3,] 
-wkrmitesurvive<- indf[4,]
-fgrlifespan<- indf[5,]
-immtype<- indf[6,]
-adslope<- indf[7,]
-adLD50<- indf[8,]
-adslopec<- indf[9,]
-adLD50c<- indf[10,]
-lslope<- indf[11,]
-lLD50<- indf[12,]
-kow<- indf[13,]
-koc<- indf[14,]
-halflife<- indf[15,]
-apprate<- indf[16,]
+
+
+#for (i in 1:1000) {
+#  if(!exists("indf")){
+#    indf<- read.table(paste(vpdir_input,"input",i,".txt", sep = ""), header= FALSE, sep= "=", row.names = inparam)
+#  }
+#  if(exists("indf")){
+#    temp_indf<- read.table(paste(vpdir_input,"input",i,".txt", sep = ""), header= FALSE, sep= "=", row.names = inparam, colClasses= c("NULL","factor"))
+#    indf<- cbind(temp_indf, indf)
+#  }
+#}
+#queenstrength<- indf[1,]
+#wkrdrnratio<- indf[2,]
+#drnmitesurvive<- indf[3,] 
+#wkrmitesurvive<- indf[4,]
+#fgrlifespan<- indf[5,]
+#immtype<- indf[6,]
+#adslope<- indf[7,]
+#adLD50<- indf[8,]
+#adslopec<- indf[9,]
+#adLD50c<- indf[10,]
+#lslope<- indf[11,]
+#lLD50<- indf[12,]
+#kow<- indf[13,]
+#koc<- indf[14,]
+#halflife<- indf[15,]
+#apprate<- indf[16,]
 
 
 
@@ -251,7 +253,7 @@ for (i in inputparam){      #margin labels
   n = 13}
   
   
-  par(mfrow=c(6,5), mar=c(2, 2, 1.5, 0.5), oma= c(4,2,2,7))
+  par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
   
   #COLONY SIZE
   plot(i, tdarray[122, 1, 1:1000], type="p", pch=20, main= "May 1999", ylab= "Colony Size", ylim=c(0,80000), xaxt='n', xlab=NA)
@@ -802,6 +804,5 @@ for (i in 1:5) { #loops by year
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
 }
-
 
 dev.off()
