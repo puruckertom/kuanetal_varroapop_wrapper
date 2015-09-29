@@ -1,11 +1,7 @@
 #load output files
 load("~/git/beeRpop/output/tdarray.RData")
-
 #read input files
-inparam<- c("ICQueenStrength", "RQWkrDrnRatio", "ICDroneMiteSurvivorship", "ICWorkerMiteSurvivorship", "ICForagerLifespan", 
-            "ImmType", "AIAdultSlope", "AIAdultLD50", "AIAdultSlopeContact", "AIAdultLD50Contact", "AILarvaSlope", 
-            "AILarvaLD50", "AIKOW", "AIKOC", "AIHalfLife", "EAppRate")
-
+indata<- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header = TRUE)
 
 
 #for (i in 1:1000) {
