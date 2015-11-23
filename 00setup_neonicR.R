@@ -60,9 +60,9 @@ if(Sys.info()[4]=="ACKUAN-PC"){
 }
 
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
-  vpdir_input<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\input\\")
-  vpdir_output<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\output\\")
-  vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\exe\\")
+  vpdir_input<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\input\\")
+  vpdir_output<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\output\\")
+  vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\exe\\")
 } 
 
 #library packages
