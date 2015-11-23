@@ -34,57 +34,57 @@ indata<- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header 
 
 
 #colony persistence
-cp <- rep(NA, 1827)
-for (n in 1:1827){
+cp <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,1,1:1000] > 1000) # queries colony size > 0 for 1000 simulations at each time point
   cp[n] <- length(x)/1000 #appends vector x with proportion of simulations per time step with Col Size > 0
 }
 
 #foragers
-fa <- rep(NA, 1827)
-for (n in 1:1827){
+fa <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,4,1:1000] > 0) 
   fa[n] <- length(x)/1000 
 }
 
 #adult workers
-aw <- rep(NA, 1827)
-for (n in 1:1827){
+aw <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,3,1:1000] > 0) 
   aw[n] <- length(x)/1000 
 }
 
 #free mites
-fm <- rep(NA, 1827)
-for (n in 1:1827){
+fm <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,11,1:1000] > 0) 
   fm[n] <- length(x)/1000 
 }
 
 #dead foragers
-dfr <- rep(NA, 1827)
-for (n in 1:1827){
+dfr <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,1,1:1000] > 0) 
   dfr[n] <- length(x)/1000 
 }
 
 #dead mites
-dm <- rep(NA, 1827)
-for (n in 1:1827){
+dm <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,16,1:1000] > 0)
   dm[n] <- length(x)/1000
 }
 
 #capped drone brood
-cdb <- rep(NA, 1827)
-for (n in 1:1827){
+cdb <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n, 5, 1:1000] > 0)
   cdb[n] <- length(x)/1000
 }
 
 #capped worker brood
-cwb <- rep(NA, 1827)
-for (n in 1:1827){
+cwb <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n, 6, 1:1000] > 0)
   cwb[n] <- length(x)/1000
 }
@@ -141,7 +141,7 @@ row.names(pccoutput)<- make.names(rep(c("1999", "2000", "2001", "2002", "2003"),
 #now<- as.POSIXlt(now)
 #now<- format(now, "%Y%m%d%H%M", tz="")
 
-#temparray <- tdarray[1:1827,resvar,1:1000]
+#temparray <- tdarray[1:nrows,resvar,1:1000]
 #tempdf<- adply(temparray[,1:3,],2, cbind) #colony size, adult workers, foragers
 #row.names(tempdf)<- make.names(as.character(rep(time,3)), unique = T)
 #write.csv(tempdf, file = paste(vpdir_output,"sim_results1_", now, ".csv", sep= ""))
@@ -177,31 +177,31 @@ plot(time[1:366], cp[1:366], type="l", ylab = "P(Colony Size) > 0", main= "1999"
 plot(time[367:732], cp[367:732], type="l", main= "2000", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[733:1097], cp[733:1097], type="l", main= "2001", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1098:1462], cp[1098:1462], type="l", main= "2002", ylim=c(0,1), ylab=NA, xlab=NA)
-plot(time[1463:1827], cp[1463:1827], type="l", main= "2003", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:nrows], cp[1463:nrows], type="l", main= "2003", ylim=c(0,1), ylab=NA, xlab=NA)
 
 plot(time[1:366], fa[1:366], type="l", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
 plot(time[367:732], fa[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[733:1097], fa[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1098:1462], fa[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
-plot(time[1463:1827], fa[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:nrows], fa[1463:nrows], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
 plot(time[1:366], aw[1:366], type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
 plot(time[367:732], aw[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[733:1097], aw[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1098:1462], aw[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
-plot(time[1463:1827], aw[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:nrows], aw[1463:nrows], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
 plot(time[1:366], fm[1:366], type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
 plot(time[367:732], fm[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[733:1097], fm[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1098:1462], fm[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
-plot(time[1463:1827], fm[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:nrows], fm[1463:nrows], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
 plot(time[1:366], dfr[1:366], type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
 plot(time[367:732], dfr[367:732], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[733:1097], dfr[733:1097], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 plot(time[1098:1462], dfr[1098:1462], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
-plot(time[1463:1827], dfr[1463:1827], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
+plot(time[1463:nrows], dfr[1463:nrows], type="l", ylim=c(0,1), ylab=NA, xlab=NA)
 
 mtext(text = paste("Fig. 1 Proportion of 1000 simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
@@ -703,13 +703,13 @@ dev.off()
 
 
 #time series plotting #######
-temparray <- tdarray[1:1827,resvar,1:1000]
+temparray <- tdarray[1:nrows,resvar,1:1000]
 dimnames(temparray)<- list(c(as.character(time)), c(outvar))
-tempout<- array(data=NA, c(1827,6,3), dimnames = list(c(as.character(time)), 
+tempout<- array(data=NA, c(nrows,6,3), dimnames = list(c(as.character(time)), 
                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
                                                       c("25%","50%","75%")))
 for (r in 1:6){
-  for (t in 1:1827){
+  for (t in 1:nrows){
     p<- quantile(temparray[t, r, 1:1000])
     for (s in 1:3){
       quant<- c(p[[2]], p[[3]], p[[4]])
@@ -741,9 +741,9 @@ for (r in 1:6){
   lines(time[1098:1462],tempout[1098:1462,r,1], type = "l", lty= 2, col = "red")
   lines(time[1098:1462], tempout[1098:1462,r,3], type = "l",lty=4, col = "blue")
   
-  plot(time[1463:1827], tempout[1463:1827,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "2003")
-  lines(time[1463:1827],tempout[1463:1827,r,1], type = "l", lty= 2, col = "red")
-  lines(time[1463:1827], tempout[1463:1827,r,3], type = "l",lty=4, col = "blue")
+  plot(time[1463:nrows], tempout[1463:nrows,r,2], type = "l", ylim = c(0,max(tempout[1:366,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "2003")
+  lines(time[1463:nrows],tempout[1463:nrows,r,1], type = "l", lty= 2, col = "red")
+  lines(time[1463:nrows], tempout[1463:nrows,r,3], type = "l",lty=4, col = "blue")
 }
 mtext(text = paste("Fig. 3 Time series plots across a 4-year period of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
