@@ -2,3 +2,5 @@
 /output/*.txt
 /input/*.txt
 /input/*.log
+.Rproj.user
+beeRpop.Rproj
