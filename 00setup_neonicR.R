@@ -1,3 +1,32 @@
+#git stuff - you only need to do this once
+#install
+https://help.github.com/desktop/guides/getting-started/installing-github-desktop/
+
+# to clone this onto a machine with github installed
+#navigate in the github shell to a directory where you have read/write privileges
+#then from the directory above where you want to install the R source code:
+git clone https://github.com/puruckertom/beeRpop.git
+#####
+
+#git stuff you have to do more often
+#switch into that directory
+cd beeRpop
+#check status (you should be )
+git status
+#check for changes on this and other branches
+git fetch
+#checkout a different branch
+git branch
+git checkout andrew
+
+#after making some changes and you want to push those changes to the cloud
+git fetch
+git pull
+git commit -am "some explanatory message about what this commit was about"
+git push
+
+
+
 #Determine path directory ######
 
 #windows
