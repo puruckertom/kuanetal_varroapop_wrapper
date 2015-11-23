@@ -30,6 +30,12 @@ if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir_exe<-path.expand("C:\\gitrepo\\beeRpop\\exe\\")
 }
 
+if(Sys.info()[4]=="LZ2032EAKANAREK"){
+  vpdir_input<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\input\\")
+  vpdir_output<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\output\\")
+  vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\exe\\")
+} 
+
 #library packages
 library(plyr)
 library(reshape2)
@@ -49,16 +55,16 @@ fgrlifespan <- runif(1000, 4, 16) #ICForagerLifespan
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=1000, replace=T) #ImmType
 #pesticide exposure
-adslope<- runif(1000, 0, 3.4) #AIAdultSlope
-adLD50<- runif(1000, 0, 3) #AIAdultLD50 (ug/bee)
+adslope<- runif(1000, 0, 3.93) #AIAdultSlope
+adLD50<- runif(1000, 0, 0.5) #AIAdultLD50 (ug/bee)
 adslopec<- runif(1000, 0, 3.93) #AIAdultSlopeContact
 adLD50c<- runif(1000, 0, 0.05) #AIAdultLD50Contact (ug/bee)
 lslope<- runif(1000, 0, 3.4) #AILarvaSlope
 lLD50<- runif(1000, 0, 0.9) #AILarvaLD50 (ug/larva)
 kow<- runif(1000, 2, 8) #AIKOW
 koc<- runif(1000, 5, 30) #AIKOC
-halflife<- runif(1000, 0, 14) #AIHalfLife (days)
-apprate<- runif(1000, 0, 1) #EAppRate (lb/A)
+halflife<- runif(1000, 0, 5) #AIHalfLife (days)
+apprate<- runif(1000, 0, 0.7) #EAppRate (lb/A)
 
 inputdata<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                        adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate)
