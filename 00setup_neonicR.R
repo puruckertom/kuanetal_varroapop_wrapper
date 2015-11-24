@@ -65,6 +65,13 @@ if(Sys.info()[4]=="LZ2032EAKANAREK"){
   vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\exe\\")
 } 
 
+if(Sys.info()[4]=="stp-air.local"){
+  vpdir<-path.expand("~/git/beeRpop/")
+  vpdir_input<-path.expand("~/git/beeRpop/input/")
+  vpdir_output<-path.expand("~/git/beeRpop/output/")
+  vpdir_exe<-path.expand("~/git/beeRpop/exe/")
+}
+
 #library packages
 library(plyr)
 library(reshape2)
