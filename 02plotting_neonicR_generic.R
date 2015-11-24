@@ -168,8 +168,6 @@ qs5 <- which(queenstrength >=5 & queenstrength <6)
 inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
 outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
 
-#andrew what are real dates
-time <- seq(as.Date("2010/4/1"), as.Date("2010/12/2"), by="days")
 nrows
 length(time)
 

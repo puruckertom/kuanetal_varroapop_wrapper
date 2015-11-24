@@ -81,8 +81,12 @@ library(gridExtra)
 library(sensitivity)
 library(abind)
 
-#create input files #########
 
+#specify daily simulation period
+#start to stop dates
+time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
+
+#create input files #########
 queenstrength<- runif(1000, 1, 6) #ICQueenStrength
 wkrdrnratio<- runif(1000, 1, 5) #RQWkrDrnRatio
 drnmitesurvive<- runif(1000, 0, 100) #ICDroneMiteSurvivorship
