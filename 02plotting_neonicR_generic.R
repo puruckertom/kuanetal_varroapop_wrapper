@@ -1,5 +1,5 @@
 #load output files
-load("~/git/beeRpop/output/tdarray.RData")
+load("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\output\\tdarray.RData")
 #read input files
 indata<- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header = TRUE)
 
@@ -706,6 +706,7 @@ dev.off()
 
 
 #time series plotting #######
+nrows<-nrows-1
 temparray <- tdarray[1:nrows,resvar,1:1000]
 dimnames(temparray)<- list(c(as.character(time)), c(outvar))
 tempout<- array(data=NA, c(nrows,6,3), dimnames = list(c(as.character(time)), 
