@@ -1,76 +1,61 @@
-#git stuff - you only need to do this once
-#install
-https://help.github.com/desktop/guides/getting-started/installing-github-desktop/
+# #git stuff - you only need to do this once
+# #install
+# https://help.github.com/desktop/guides/getting-started/installing-github-desktop/
+# 
+# # to clone this onto a machine with github installed
+# #navigate in the github shell to a directory where you have read/write privileges
+# #then from the directory above where you want to install the R source code:
+# git clone https://github.com/puruckertom/beeRpop.git
+# #####
+# 
+# #git stuff you have to do more often
+# #switch into that directory
+# cd beeRpop
+# #check status (you should be )
+# git status
+# #check for changes on this and other branches
+# git fetch
+# #checkout a different branch
+# git branch
+# git checkout andrew
+# 
+# #after making some changes and you want to push those changes to the cloud
+# git fetch
+# git pull
+# git commit -am "some explanatory message about what this commit was about"
+# git push
 
-# to clone this onto a machine with github installed
-#navigate in the github shell to a directory where you have read/write privileges
-#then from the directory above where you want to install the R source code:
-git clone https://github.com/puruckertom/beeRpop.git
-#####
+#Determine path directory based on the user machine######
 
-#git stuff you have to do more often
-#switch into that directory
-cd beeRpop
-#check status (you should be )
-git status
-#check for changes on this and other branches
-git fetch
-#checkout a different branch
-git branch
-git checkout andrew
-
-#after making some changes and you want to push those changes to the cloud
-git fetch
-git pull
-git commit -am "some explanatory message about what this commit was about"
-git push
-
-
-
-#Determine path directory ######
-
-#windows
+#tom epa windows
 if(Sys.info()[4]=="DC2626UTPURUCKE"){
-  vpdir_input<-path.expand("C:\\git\\Dropbox\\NeonicR\\input\\")
-  vpdir_output<-path.expand("C:\\git\\Dropbox\\NeonicR\\output\\")
-  #vpdir_exe<-path.expand("C:\\Program Files (x86)\\VarroaPop\\")
-  vpdir_exe<-path.expand("C:\\git\\Dropbox\\NeonicR\\exe\\")
+  vpdir<-path.expand("C:/git/beeRpop/")
 }
-
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
-  vpdir<-path.expand("C:\\Users\\msnyde02\\varroapoptest2\\")
+  vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
 }
-
-#system("C:\\Users\\msnyde02\\varroapoptest2\\VarroaPop.exe C:\\Users\\msnyde02\\varroapoptest2\\Default.vrp /b /or C:\\Users\\msnyde02\\varroapoptest2\\results7.txt /i C:\\Users\\msnyde02\\varroapoptest2\\queenvar.txt")
-
 #carmen personal laptop
-
 if(Sys.info()[4]=="Ashleys-MBP"){
   vpdir<-path.expand("~/git/beeRpop/")
-  vpdir_input<-path.expand("~/git/beeRpop/input/")
-  vpdir_output<-path.expand("~/git/beeRpop/output/")
-  vpdir_exe<-path.expand("~/git/beeRpop/exe/")
 }
+#carmen epa desktop
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
-  vpdir_input<-path.expand("C:\\gitrepo\\beeRpop\\input\\")
-  vpdir_output<-path.expand("C:\\gitrepo\\beeRpop\\output\\")
-  vpdir_exe<-path.expand("C:\\gitrepo\\beeRpop\\exe\\")
 }
-
+#andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
-  vpdir_input<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\input\\")
-  vpdir_output<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\output\\")
-  vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\exe\\")
+  vpdir <- path.expand("C:/Users/AKanarek/Documents/GitHub/beeRpop/")
 } 
-
+#tom laptop
 if(Sys.info()[4]=="stp-air.local"){
   vpdir<-path.expand("~/git/beeRpop/")
-  vpdir_input<-path.expand("~/git/beeRpop/input/")
-  vpdir_output<-path.expand("~/git/beeRpop/output/")
-  vpdir_exe<-path.expand("~/git/beeRpop/exe/")
 }
+
+#subdirectories
+vpdir_input <- paste(vpdir + "input/", paste = "")
+vpdir_output <- paste(vpdir + "output/", paste = "")
+vpdir_exe <- paste(vpdir + "exe/", paste = "")
 
 #library packages
 library(plyr)
@@ -84,6 +69,7 @@ library(abind)
 
 #specify daily simulation period
 #start to stop dates
+#TODO: read from varroapop output at end of 01
 time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
 
 #create input files #########
@@ -178,3 +164,8 @@ for (i in 1:1000) {
   varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
   write(varroainput16, file= paste(vpdir_input, "input", i, ".txt", sep=""), append= TRUE)
 }
+
+#run everything
+source(paste(vpdir,"01simulation_neonic.R",sep = ""))
+source(paste(vpdir,"02sensitivity_analyses.R",sep = ""))
+source(paste(vpdir,"03plotting_neonicR_generic.R",sep = ""))

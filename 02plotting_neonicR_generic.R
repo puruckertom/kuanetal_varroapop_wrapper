@@ -1,5 +1,8 @@
 #load output files
 load("~/git/beeRpop/output/tdarray.RData")
+dim(tdarray)
+str(tdarray)
+
 #read input files
 indata<- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header = TRUE)
 
