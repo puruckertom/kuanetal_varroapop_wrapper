@@ -20,7 +20,8 @@ apprate<- runif(Nsims, 0, 0.7) #EAppRate (lb/A)
 
 inputdata<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                        adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate)
-write.csv(inputdata, file = paste(vpdir_output, "inputdata.csv", sep = ""))
+#putting the input in the io directory so it can be read from there later
+write.csv(iodata, file = paste(vpdir_output, "inputdata.csv", sep = ""))
 
 for (i in 1:Nsims) {
   

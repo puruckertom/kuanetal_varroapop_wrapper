@@ -1,5 +1,5 @@
 /output/tdarray.csv
-/output/*.txt
+/output/results*.txt
 /input/*.txt
 /input/*.log
 .Rproj.user

@@ -17,7 +17,7 @@ for (i in 1:Nsims) {
   logfile<- paste("log",i,".txt", sep="")
   vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison.vrp", 
                          " /b /or ", vpdir_output, outputfile, 
-                         " /i ", vpdir_input, inputfile, " /ol ", vpdir_output, logfile, sep="")
+                         " /i ", vpdir_input, inputfile, " /ol ", vpdir_log, logfile, sep="")
   print(vpdir_command)
   system(vpdir_command)
 }

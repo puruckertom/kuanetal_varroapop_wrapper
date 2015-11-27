@@ -49,6 +49,7 @@ vpdir_output <- paste(vpdir, "output/", sep = "")
 vpdir_log <- paste(vpdir, "log/", sep = "")
 vpdir_fig <- paste(vpdir, "fig/", sep = "")
 vpdir_exe <- paste(vpdir, "exe/", sep = "")
+vpdir_io <- paste(vpdir, "io/", sep = "")
 
 #specify daily simulation period
 #start to stop dates
