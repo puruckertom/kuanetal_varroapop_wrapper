@@ -9,6 +9,7 @@
 #              798, 799, 805, 807, 848, 855, 857, 871, 875, 877, 888, 889, 909, 928, 943,
 #              949, 954, 962, 996)
 
+#the .vrp file has to know where the weather file is, R cannot tell it!
 for (i in 1:Nsims) {
   # n<-inputtest[i]
   inputfile<- paste("input",i,".txt", sep="")

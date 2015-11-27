@@ -50,10 +50,9 @@ vpdir_log <- paste(vpdir, "log/", sep = "")
 vpdir_fig <- paste(vpdir, "fig/", sep = "")
 vpdir_exe <- paste(vpdir, "exe/", sep = "")
 
-
 #specify daily simulation period
 #start to stop dates
-#TODO: read from varroapop output at end of 02
+#TODO: read date range from varroapop output at end of 02
 time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
 Nsims <- 1000
 
