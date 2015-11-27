@@ -9,7 +9,7 @@
 #              798, 799, 805, 807, 848, 855, 857, 871, 875, 877, 888, 889, 909, 928, 943,
 #              949, 954, 962, 996)
 
-for (i in 1:1000) {
+for (i in 1:Nsims) {
   # n<-inputtest[i]
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")

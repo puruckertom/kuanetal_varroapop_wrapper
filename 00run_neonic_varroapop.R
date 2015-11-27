@@ -47,10 +47,11 @@ time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
 Nsims <- 1000
 
 #run everything
-source(paste(vpdir,"01simulation_neonic.R",sep = ""))
-source(paste(vpdir,"02sensitivity_analyses.R",sep = ""))
-source(paste(vpdir,"03plotting_neonicR_generic.R",sep = ""))
-
+source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
+source(paste(vpdir,"02simulate_w_exe.R",sep = ""))
+source(paste(vpdir,"03read_output.R",sep = ""))
+source(paste(vpdir,"04sensitivity_analyses.R",sep = ""))
+source(paste(vpdir,"05plotting_neonic_generic.R",sep = ""))
 
 ##########################################################
 # #git stuff - you only need to do this once
