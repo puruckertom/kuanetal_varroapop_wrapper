@@ -7,10 +7,19 @@ library(gridExtra)
 library(sensitivity)
 library(abind)
 
+#echo environment
+Sys.info()
+Sys.info()[4]
+.Platform
+version
 
 #Determine path directory based on the user machine######
 #tom epa windows
 if(Sys.info()[4]=="DC2626UTPURUCKE"){
+  vpdir<-path.expand("C:/git/beeRpop/")
+}
+#tom epa windows 2
+if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("C:/git/beeRpop/")
 }
 #marcia epa computer
@@ -35,16 +44,24 @@ if(Sys.info()[4]=="stp-air.local"){
 }
 
 #subdirectories
-vpdir_input <- paste(vpdir + "input/", paste = "")
-vpdir_output <- paste(vpdir + "output/", paste = "")
-vpdir_exe <- paste(vpdir + "exe/", paste = "")
+vpdir_input <- paste(vpdir, "input/", sep = "")
+vpdir_output <- paste(vpdir, "output/", sep = "")
+vpdir_log <- paste(vpdir, "log/", sep = "")
+vpdir_fig <- paste(vpdir, "fig/", sep = "")
+vpdir_exe <- paste(vpdir, "exe/", sep = "")
 
 
 #specify daily simulation period
 #start to stop dates
-#TODO: read from varroapop output at end of 01
+#TODO: read from varroapop output at end of 02
 time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
 Nsims <- 1000
+
+# varroapop file (without directory, the file needs to be in vpdir_exe above)
+vrp_filename <- "comparison.vrp"
+
+#weather
+#the .vrp file has to know where the weather file is, R cannot tell it!
 
 #run everything
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
