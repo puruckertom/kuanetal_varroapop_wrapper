@@ -44,7 +44,7 @@ vpdir_exe <- paste(vpdir + "exe/", paste = "")
 #start to stop dates
 #TODO: read from varroapop output at end of 01
 time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
-
+Nsims <- 1000
 
 #run everything
 source(paste(vpdir,"01simulation_neonic.R",sep = ""))
