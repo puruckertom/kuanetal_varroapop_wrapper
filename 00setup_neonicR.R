@@ -22,7 +22,9 @@ git checkout andrew
 #after making some changes and you want to push those changes to the cloud
 git fetch
 git pull
+#commit your change to your local repository
 git commit -am "some explanatory message about what this commit was about"
+#push your change to the github cloud
 git push
 
 
