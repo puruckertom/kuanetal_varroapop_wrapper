@@ -1,11 +1,11 @@
 #load output files
 load("~/git/beeRpop/output/tdarray.RData")
 dim(tdarray)
+rownames(tdarray)
 #days, outputs, simulations
 
 #read input files
-indata<- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header = TRUE)
-
+indata <- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header = TRUE)
 
 #for (i in 1:1000) {
 #  if(!exists("indf")){
@@ -32,9 +32,6 @@ indata<- read.csv(file = paste(vpdir_output, "inputdata.csv", sep = ""), header 
 #koc<- indf[14,]
 #halflife<- indf[15,]
 #apprate<- indf[16,]
-
-
-
 
 #colony persistence
 cp <- rep(NA, nrows)
@@ -91,7 +88,6 @@ for (n in 1:nrows){
   x <- which(tdarray[n, 6, 1:1000] > 0)
   cwb[n] <- length(x)/1000
 }
-
 
 #SENSITIVITY ANALYSIS####
 #create input dataframes and arrays

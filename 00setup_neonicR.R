@@ -66,37 +66,37 @@ library(gridExtra)
 library(sensitivity)
 library(abind)
 
-
 #specify daily simulation period
 #start to stop dates
 #TODO: read from varroapop output at end of 01
 time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
+Nsims <- 1000
 
 #create input files #########
-queenstrength<- runif(1000, 1, 6) #ICQueenStrength
-wkrdrnratio<- runif(1000, 1, 5) #RQWkrDrnRatio
-drnmitesurvive<- runif(1000, 0, 100) #ICDroneMiteSurvivorship
-wkrmitesurvive<- runif(1000, 0, 100) #ICWorkerMiteSurvivorship
-fgrlifespan <- runif(1000, 4, 16) #ICForagerLifespan
+queenstrength<- runif(Nsims, 1, 6) #ICQueenStrength
+wkrdrnratio<- runif(Nsims, 1, 5) #RQWkrDrnRatio
+drnmitesurvive<- runif(Nsims, 0, 100) #ICDroneMiteSurvivorship
+wkrmitesurvive<- runif(Nsims, 0, 100) #ICWorkerMiteSurvivorship
+fgrlifespan <- runif(Nsims, 4, 16) #ICForagerLifespan
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
-miteimmtype <- sample(immtype, size=1000, replace=T) #ImmType
+miteimmtype <- sample(immtype, size=Nsims, replace=T) #ImmType
 #pesticide exposure
-adslope<- runif(1000, 0, 3.93) #AIAdultSlope
-adLD50<- runif(1000, 0, 0.5) #AIAdultLD50 (ug/bee)
-adslopec<- runif(1000, 0, 3.93) #AIAdultSlopeContact
-adLD50c<- runif(1000, 0, 0.05) #AIAdultLD50Contact (ug/bee)
-lslope<- runif(1000, 0, 3.4) #AILarvaSlope
-lLD50<- runif(1000, 0, 0.9) #AILarvaLD50 (ug/larva)
-kow<- runif(1000, 2, 8) #AIKOW
-koc<- runif(1000, 5, 30) #AIKOC
-halflife<- runif(1000, 0, 5) #AIHalfLife (days)
-apprate<- runif(1000, 0, 0.7) #EAppRate (lb/A)
+adslope<- runif(Nsims, 0, 3.93) #AIAdultSlope
+adLD50<- runif(Nsims, 0, 0.5) #AIAdultLD50 (ug/bee)
+adslopec<- runif(Nsims, 0, 3.93) #AIAdultSlopeContact
+adLD50c<- runif(Nsims, 0, 0.05) #AIAdultLD50Contact (ug/bee)
+lslope<- runif(Nsims, 0, 3.4) #AILarvaSlope
+lLD50<- runif(Nsims, 0, 0.9) #AILarvaLD50 (ug/larva)
+kow<- runif(Nsims, 2, 8) #AIKOW
+koc<- runif(Nsims, 5, 30) #AIKOC
+halflife<- runif(Nsims, 0, 5) #AIHalfLife (days)
+apprate<- runif(Nsims, 0, 0.7) #EAppRate (lb/A)
 
 inputdata<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                        adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate)
 write.csv(inputdata, file = paste(vpdir_output, "inputdata.csv", sep = ""))
 
-for (i in 1:1000) {
+for (i in 1:Nsims) {
   
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]

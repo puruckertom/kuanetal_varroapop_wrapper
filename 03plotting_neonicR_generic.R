@@ -8,7 +8,7 @@ qs4 <- which(queenstrength >=4 & queenstrength <5)
 qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #list response variables to plot
-inputparam<- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
+inputparam <- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
 outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
 
 nrows
@@ -141,8 +141,6 @@ for (i in inputparam){      #margin labels
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     text(x = min(i), y = 80000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
-    
-    
     #ADULT WORKERS
     plot(i, tdarray[1, 3, 1:1000], type="p", pch=20,  ylab="Adult Workers", ylim=c(0,60000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
@@ -157,7 +155,6 @@ for (i in inputparam){      #margin labels
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
-    
     plot(i, tdarray[31, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,60000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
@@ -170,7 +167,6 @@ for (i in inputparam){      #margin labels
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
     text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
-    
     
     plot(i, tdarray[61, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,60000), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
