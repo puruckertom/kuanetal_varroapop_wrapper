@@ -1,33 +1,31 @@
-#git stuff - you only need to do this once
-#install
-https://help.github.com/desktop/guides/getting-started/installing-github-desktop/
+# #git stuff - you only need to do this once
+# #install
+# https://help.github.com/desktop/guides/getting-started/installing-github-desktop/
+# 
+# # to clone this onto a machine with github installed
+# #navigate in the github shell to a directory where you have read/write privileges
+# #then from the directory above where you want to install the R source code:
+# git clone https://github.com/puruckertom/beeRpop.git
+# #####
+# 
+# #git stuff you have to do more often
+# #switch into that directory
+# cd beeRpop
+# #check status (you should be )
+# git status
+# #check for changes on this and other branches
+# git fetch
+# #checkout a different branch
+# git branch
+# git checkout andrew
+# 
+# #after making some changes and you want to push those changes to the cloud
+# git fetch
+# git pull
+# git commit -am "some explanatory message about what this commit was about"
+# git push
 
-# to clone this onto a machine with github installed
-#navigate in the github shell to a directory where you have read/write privileges
-#then from the directory above where you want to install the R source code:
-git clone https://github.com/puruckertom/beeRpop.git
-#####
-
-#git stuff you have to do more often
-#switch into that directory
-cd beeRpop
-#check status (you should be )
-git status
-#check for changes on this and other branches
-git fetch
-#checkout a different branch
-git branch
-git checkout andrew
-
-#after making some changes and you want to push those changes to the cloud
-git fetch
-git pull
-#commit your change to your local repository
-git commit -am "some explanatory message about what this commit was about"
-#push your change to the github cloud
-git push
-
-
+rm(list = ls())
 
 #Determine path directory ######
 
@@ -62,10 +60,17 @@ if(Sys.info()[4]=="ACKUAN-PC"){
 }
 
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
-  vpdir_input<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\input\\")
-  vpdir_output<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\output\\")
-  vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\BeePop\\DERs\\Rwrapper\\exe\\")
+  vpdir_input<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\input\\")
+  vpdir_output<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\output\\")
+  vpdir_exe<-path.expand("C:\\Users\\AKanarek\\Documents\\GitHub\\beeRpop\\exe\\")
 } 
+
+if(Sys.info()[4]=="stp-air.local"){
+  vpdir<-path.expand("~/git/beeRpop/")
+  vpdir_input<-path.expand("~/git/beeRpop/input/")
+  vpdir_output<-path.expand("~/git/beeRpop/output/")
+  vpdir_exe<-path.expand("~/git/beeRpop/exe/")
+}
 
 #library packages
 library(plyr)
@@ -76,8 +81,12 @@ library(gridExtra)
 library(sensitivity)
 library(abind)
 
-#create input files #########
 
+#specify daily simulation period
+#start to stop dates
+time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
+
+#create input files #########
 queenstrength<- runif(1000, 1, 6) #ICQueenStrength
 wkrdrnratio<- runif(1000, 1, 5) #RQWkrDrnRatio
 drnmitesurvive<- runif(1000, 0, 100) #ICDroneMiteSurvivorship
@@ -95,7 +104,7 @@ lLD50<- runif(1000, 0, 0.9) #AILarvaLD50 (ug/larva)
 kow<- runif(1000, 2, 8) #AIKOW
 koc<- runif(1000, 5, 30) #AIKOC
 halflife<- runif(1000, 0, 5) #AIHalfLife (days)
-apprate<- runif(1000, 0, 0.7) #EAppRate (lb/A)
+apprate<- runif(1000, 0, .7) #EAppRate (lb/A)
 
 inputdata<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                        adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate)

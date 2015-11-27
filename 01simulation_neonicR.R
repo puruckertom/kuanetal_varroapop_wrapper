@@ -14,7 +14,7 @@ for (i in 1:1000) {
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
   logfile<- paste("log",i,".txt", sep="")
-  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "Default.vrp", 
+  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison.vrp", 
                          " /b /or ", vpdir_output, outputfile, 
                          " /i ", vpdir_input, inputfile, " /ol ", vpdir_output, logfile, sep="")
   print(vpdir_command)
@@ -22,8 +22,10 @@ for (i in 1:1000) {
 }
 
 # 3d array ######
-
-tdarray <- array(data=NA,c(1827,26,1000))
+df<- read.table(paste(vpdir_output,"results",i,".txt", sep=""), header= FALSE, sep= "", 
+                skip = 6, stringsAsFactors = FALSE, row.names=NULL)
+nrows<-dim(df[1])[[1]] #this is dependent on the duration of the simulation as set in the comparison.vrp file
+tdarray <- array(data=NA,c(nrows,26,1000))
 dim(tdarray)
 # read output files
 for (i in 1:1000) {
@@ -31,7 +33,7 @@ for (i in 1:1000) {
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
   newarray <- df[,2:27]
   newarray2<- data.matrix(newarray)
-  tdarray[1:1827,1:26,i] <- abind(newarray2[1:1827,1:26], along=3)
+  tdarray[1:nrows,1:26,i] <- abind(newarray2[1:nrows,1:26], along=3)
 }
 # save tdarray
 save(tdarray, file = paste(vpdir_output,"tdarray.RData", sep = ""))
