@@ -1,6 +1,14 @@
 VarroaPop Log File
-Created Nov-27, 2015  06:05 PM
+Created Nov-30, 2015  03:15 PM
 
 
-  Reading Session File: The Specified Weather file  C:\Users\AKanarek\Documents\BeePop\DERs\w93193-tempadj.dvf was not found
-You will have to specify one before you run a simulation
+Input File Variable Name aiadultslope not Recognized
+Input File Variable Name aiadultld50 not Recognized
+Input File Variable Name aiadultslopecontact not Recognized
+Input File Variable Name aiadultld50contact not Recognized
+Input File Variable Name ailarvaslope not Recognized
+Input File Variable Name ailarvald50 not Recognized
+Input File Variable Name aikow not Recognized
+Input File Variable Name aikoc not Recognized
+Input File Variable Name aihalflife not Recognized
+Input File Variable Name eapprate not Recognized

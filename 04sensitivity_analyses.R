@@ -1,5 +1,5 @@
 #load output files
-load("~/git/beeRpop/output/tdarray.RData")
+load(paste(vpdir_output,"tdarray.RData", sep =""))
 dim(tdarray)
 rownames(tdarray)
 #days, outputs, simulations
@@ -130,10 +130,10 @@ for (i in 1:1){  #year
 }
 
 srcoutput<- adply(srctdarray[,,],2, cbind)
-row.names(srcoutput)<- make.names(rep(c("day"), 6), unique = T)
+row.names(srcoutput)<- make.names(rep(c("day"), times = 6, length.out = 72), unique = T)
 # write.csv(srcoutput, file = paste(vpdir_output, "srcoutput_", now, ".csv", sep=""))
 pccoutput<- adply(pcctdarray[,,],2, cbind)
-row.names(pccoutput)<- make.names(rep(c("day"), 6), unique = T)
+row.names(pccoutput)<- make.names(rep(c("day"), times = 6, length.out = 72), unique = T)
 # write.csv(pccoutput, file = paste(vpdir_output, "pccoutput_", now, ".csv", sep=""))
 
 

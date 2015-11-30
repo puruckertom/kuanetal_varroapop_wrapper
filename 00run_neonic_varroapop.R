@@ -32,7 +32,7 @@ if(Sys.info()[4]=="Ashleys-MBP"){
 }
 #carmen epa desktop
 if(Sys.info()[4]=="ACKUAN-PC"){
-  vpdir<-path.expand("C:\\gitrepo\\beeRpop\\")
+  vpdir<-path.expand("C:/gitrepo/beeRpop/")
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
@@ -54,7 +54,7 @@ vpdir_io <- paste(vpdir, "io/", sep = "")
 #specify daily simulation period
 #start to stop dates
 #TODO: read date range from varroapop output at end of 02
-time <- seq(as.Date("2010/5/1"), as.Date("2010/12/31"), by="days")
+time <- seq(as.Date("1988/1/1"), as.Date("1990/12/31"), by="week")
 Nsims <- 1000
 
 # varroapop file (without directory, the file needs to be in vpdir_exe above)
