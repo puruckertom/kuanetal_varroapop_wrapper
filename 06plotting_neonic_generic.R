@@ -7,12 +7,61 @@ qs3 <- which(queenstrength >=3 & queenstrength <4)
 qs4 <- which(queenstrength >=4 & queenstrength <5)
 qs5 <- which(queenstrength >=5 & queenstrength <6)
 
-#list response variables to plot
-inputparam <- list(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife)
-outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
+#colony persistence
+cp <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n,1,1:1000] > 1000) # queries colony size > 0 for 1000 simulations at each time point
+  cp[n] <- length(x)/1000 #appends vector x with proportion of simulations per time step with Col Size > 0
+}
 
-nrows
-length(time)
+#foragers
+fa <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n,4,1:1000] > 0) 
+  fa[n] <- length(x)/1000 
+}
+
+#adult workers
+aw <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n,3,1:1000] > 0) 
+  aw[n] <- length(x)/1000 
+}
+
+#free mites
+fm <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n,11,1:1000] > 0) 
+  fm[n] <- length(x)/1000 
+}
+
+#dead foragers
+dfr <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n,1,1:1000] > 0) 
+  dfr[n] <- length(x)/1000 
+}
+
+#dead mites
+dm <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n,16,1:1000] > 0)
+  dm[n] <- length(x)/1000
+}
+
+#capped drone brood
+cdb <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n, 5, 1:1000] > 0)
+  cdb[n] <- length(x)/1000
+}
+
+#capped worker brood
+cwb <- rep(NA, length(time))
+for (n in 1:length(time)){
+  x <- which(tdarray[n, 6, 1:1000] > 0)
+  cwb[n] <- length(x)/1000
+}
 
 #create figure 1
 pdf(file= paste(vpdir_output, "fig_1_MCproportions.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
@@ -28,54 +77,67 @@ dev.off()
 
 #create PDF 2
 #start figures
-for (i in inputparam){      #margin labels
-  if (i == drnmitesurvive)
-  { x = "Drone-Mite Survivorship (%)"
-  n = 2}
-  if (i == fgrlifespan)
-  { x = "Forager Lifespan (days)"
-  n = 3}
+for (i in listinput){      #margin labels
   if (i == queenstrength)
   { x = "Queen Strength"
-  n = 4}
+  n = 2}
   if (i == wkrdrnratio)
   { x = "Worker:Drone"
-  n = 5}
+  n = 3}
+  if (i == drnmitesurvive)
+  { x = "Drone-Mite Survivorship (%)"
+  n = 4}
   if (i == wkrmitesurvive)
   { x = "Worker-Mite Survivorship (%)"
+  n = 5}
+  if (i == fgrlifespan)
+  { x = "Forager Lifespan (days)"
   n = 6}
+#  if (i == miteimmtype)
+#  { x = "Mite Imm Type"
+#  n = 7}
+  if (i == adslope)
+  { x = "Adult Slope"
+  n = 8}
+  if (i == adLD50)
+  { x = "Adult LD50"
+  n = 9}
   if (i == adslopec)
   { x = "Adult Slope Contact"
-  n = 7}
+  n = 10}
   if (i == adLD50c)
   { x = "Adult LD50 Contact"
-  n = 8}
+  n = 11}
   if (i == lslope)
   { x = "Larva Slope"
-  n = 9}
+  n = 12}
   if (i == lLD50)
   { x = "Larva LD50"
-  n = 10}
+  n = 13}
   if (i == kow)
   { x = "KOW"
-  n = 11}
+  n = 14}
   if (i == koc) 
   { x = "KOC"
-  n = 12}
+  n = 15}
   if (i == halflife) 
   { x = "Half Life"
-  n = 13}
+  n = 16}
+  if (i == apprate)
+  { x = "App Rate (lb/A)"
+  n = 17}
+
   
   #generate figure names insode of the loop
   fig_name <- paste("fig_",n,".pdf",sep="")
   pdf(file= paste(vpdir_output, fig_name, sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
   
-    par(mfrow=c(6,5), mar=c(2, 3, 1.5, 0.5), oma= c(4,2,2,7))
+    par(mfrow=c(6,5), mar=c(1, 2, 2, 0.5), oma= c(4,2,2,7))
     
     #COLONY SIZE
-    plot(i, tdarray[1, 1, 1:1000], type="p", pch=20, main= "May time1", ylab= "Colony Size", ylim=c(0,80000), xaxt='n', xlab=NA)
+    plot(i, tdarray[1, 1, 1:1000], type="p", pch=20, main= "timebreak1", ylab= "Colony Size", ylim=c(0,max(tdarray[year,1,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
-    axis(2, labels=T, tick= T, ylab= "Colony Size")
+    axis(2, labels=T, tick=T, ylab= "Colony Size")
     points(i[qs1],tdarray[1,1, qs1], type="p", col=1, pch=20)
     points(i[qs2],tdarray[1,1, qs2], type="p", col=2, pch=20)
     points(i[qs3],tdarray[1,1, qs3], type="p", col=3, pch=20)
@@ -84,9 +146,9 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[1,1,1:1000]~i)        #loess line
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 80000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1], 3), "\n src=", signif(srctdarray[1,1,n-1], 3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,1,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 1, n-1], 3), "\n src=", signif(srctdarray[1,1,n-1], 3), sep = ""), cex = 0.75, adj= c(0,1))
     
-    plot(i, tdarray[31, 1, 1:1000], type="p", pch=20, main= "June time1", ylab= NA, ylim=c(0,80000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[1], 1, 1:1000], type="p", pch=20, main= "timebreak2", ylab= NA, ylim=c(0,max(tdarray[year,1,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick= T)
     points(i[qs1],tdarray[31,1, qs1], type="p", col=1, pch=20)
@@ -97,10 +159,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[31,1,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 80000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1], 3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,1,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 1, n-1], 3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[61, 1, 1:1000], type="p", pch=20, main= "July time1", ylab= NA, ylim=c(0,80000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[2], 1, 1:1000], type="p", pch=20, main= "July time1", ylab= NA, ylim=c(0,max(tdarray[year,1,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick= T)
     points(i[qs1],tdarray[61,1, qs1], type="p", col=1, pch=20)
@@ -111,10 +173,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[61,1,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 80000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,1,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[91, 1, 1:1000], type="p", pch=20, main= "Aug time1", ylab= NA, ylim=c(0,80000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[3], 1, 1:1000], type="p", pch=20, main= "Aug time1", ylab= NA, ylim=c(0,max(tdarray[year,1,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick= T)
     points(i[qs1],tdarray[91,1, qs1], type="p", col=1, pch=20)
@@ -125,10 +187,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[91,1,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 80000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,1,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[121, 1, 1:1000], type="p", pch=20, main= "Sept time1", ylab= NA, ylim=c(0,80000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[4], 1, 1:1000], type="p", pch=20, main= "Sept time1", ylab= NA, ylim=c(0,max(tdarray[year,1,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)  
     axis(2, labels= F, tick= T)
     points(i[qs1],tdarray[121,1, qs1], type="p", col=1, pch=20)
@@ -139,10 +201,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[121,1,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 80000, labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,1,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 1, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     #ADULT WORKERS
-    plot(i, tdarray[1, 3, 1:1000], type="p", pch=20,  ylab="Adult Workers", ylim=c(0,60000), xaxt='n', xlab=NA)
+    plot(i, tdarray[1, 3, 1:1000], type="p", pch=20,  ylab="Adult Workers", ylim=c(0,max(tdarray[year,3,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Adult Workers")
     points(i[qs1],tdarray[1,3, qs1], type="p", col=1, pch=20)
@@ -153,9 +215,9 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[1,3,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,3,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,2,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
-    plot(i, tdarray[31, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,60000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[1], 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,max(tdarray[year,3,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[31,3, qs1], type="p", col=1, pch=20)
@@ -166,9 +228,9 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[31,3,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,3,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,2,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
-    plot(i, tdarray[61, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,60000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[2], 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,max(tdarray[year,3,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[61,3, qs1], type="p", col=1, pch=20)
@@ -179,10 +241,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[61,3,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,3,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,2,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[91, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,60000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[3], 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,max(tdarray[year,3,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[91,3, qs1], type="p", col=1, pch=20)
@@ -193,10 +255,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[91,3,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,3,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,2,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[121, 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,60000), xaxt='n', xlab=NA)
+    plot(i, tdarray[year[4], 3, 1:1000], type="p", pch=20, ylab= NA, ylim=c(0,max(tdarray[year,3,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[121,3, qs1], type="p", col=1, pch=20)
@@ -207,13 +269,13 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[121,3,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 60000, labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,3,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 2, n-1],3), "\n src=", signif(srctdarray[1,2,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
     
     
     #FORAGERS
-    plot(i, tdarray[1, 4, 1:1000], type="p", pch=20, ylab= "Foragers", ylim=c(0,40000), xaxt='n', xlab=NA)
+    plot(i, tdarray[1, 4, 1:1000], type="p", pch=20, ylab= "Foragers", ylim=c(0,max(tdarray[year,4,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Foragers")
     points(i[qs1],tdarray[1,4, qs1], type="p", col=1, pch=20)
@@ -224,10 +286,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[1,4,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 40000, labels = paste("pcc=", signif(pcctdarray[1, 3, n-1], 3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,4,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 3, n-1], 3), "\n src=", signif(srctdarray[1,3,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[31, 4, 1:1000], type="p", pch=20, ylim=c(0,40000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[1], 4, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,4,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[31,4, qs1], type="p", col=1, pch=20)
@@ -238,10 +300,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[53,4,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 40000, labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,4,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,3,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[61, 4, 1:1000], type="p", pch=20, ylim=c(0,40000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[2], 4, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,4,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[61,4, qs1], type="p", col=1, pch=20)
@@ -252,10 +314,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[61,4,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 40000, labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,4,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,3,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[91, 4, 1:1000], type="p", pch=20, ylim=c(0,40000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[3], 4, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,4,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[91,4, qs1], type="p", col=1, pch=20)
@@ -266,10 +328,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[91,4,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 40000, labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,4,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,3,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[121, 4, 1:1000], type="p", pch=20, ylim=c(0,40000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[4], 4, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,4,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[121,4, qs1], type="p", col=1, pch=20)
@@ -280,13 +342,13 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[121,4,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 40000, labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,4,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 3, n-1],3), "\n src=", signif(srctdarray[1,3,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
     
     
     #WORKER EGGS
-    plot(i, tdarray[1, 10, 1:1000], type="p", pch=20, ylab="Worker Eggs", ylim=c(0,8000), xaxt='n', xlab=NA)
+    plot(i, tdarray[1, 10, 1:1000], type="p", pch=20, ylab="Worker Eggs", ylim=c(0,max(tdarray[year,10,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Worker Eggs")
     points(i[qs1],tdarray[1,10, qs1], type="p", col=1, pch=20)
@@ -297,10 +359,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[1,10,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 8000, labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,10,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,4,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[31, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[1], 10, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,10,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[31,10, qs1], type="p", col=1, pch=20)
@@ -311,10 +373,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[31,10,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 8000, labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,10,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,4,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[61, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[2], 10, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,10,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[61,10, qs1], type="p", col=1, pch=20)
@@ -325,10 +387,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[61,10,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 8000, labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,10,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,4,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[91, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[3], 10, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,10,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[91,10, qs1], type="p", col=1, pch=20)
@@ -339,10 +401,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[91,10,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 8000, labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,10,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,4,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[121, 10, 1:1000], type="p", pch=20, ylim=c(0,8000), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[4], 10, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,10,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[121,10, qs1], type="p", col=1, pch=20)
@@ -353,13 +415,13 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[121,10,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 8000, labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,10,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 4, n-1],3), "\n src=", signif(srctdarray[1,4,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
     
     
     #COLONY POLLEN
-    plot(i, tdarray[1, 18, 1:1000], type="p", pch=20, ylab= "Colony Pollen (g)", ylim=c(0,10), xaxt='n', xlab=NA)
+    plot(i, tdarray[1, 18, 1:1000], type="p", pch=20, ylab= "Colony Pollen (g)", ylim=c(0,max(tdarray[year,18,1:1000])), xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Colony Pollen (g)")
     points(i[qs1],tdarray[1,18, qs1], type="p", col=1, pch=20)
@@ -370,10 +432,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[1,18,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 10, labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,18,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,5,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[31, 18, 1:1000], type="p", pch=20, ylim=c(0,10), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[1], 18, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,18,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[31,18, qs1], type="p", col=1, pch=20)
@@ -384,10 +446,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[31,18,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 10, labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,18,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,5,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[61, 18, 1:1000], type="p", pch=20, ylim=c(0,10), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[2], 18, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,18,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[61,18, qs1], type="p", col=1, pch=20)
@@ -398,10 +460,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[61,18,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 10, labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,18,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,5,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[91, 18, 1:1000], type="p", pch=20, ylim=c(0,10), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[3], 18, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,18,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[91,18, qs1], type="p", col=1, pch=20)
@@ -412,10 +474,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[91,18,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 10, labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,18,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,5,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[121, 18, 1:1000], type="p", pch=20, ylim=c(0,10), ylab= NA, xaxt='n', xlab=NA)
+    plot(i, tdarray[year[4], 18, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,18,1:1000])), ylab= NA, xaxt='n', xlab=NA)
     axis(1, labels=F, tick=T)
     axis(2, labels=F, tick=T)
     points(i[qs1],tdarray[121,18, qs1], type="p", col=1, pch=20)
@@ -426,13 +488,13 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[121,18,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 10, labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,18,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 5, n-1],3), "\n src=", signif(srctdarray[1,5,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
     
     
     #COLONY NECTAR
-    plot(i, tdarray[1, 20, 1:1000], type="p", pch=20, ylab= "Colony Nectar", ylim=c(0,400), 
+    plot(i, tdarray[1, 20, 1:1000], type="p", pch=20, ylab= "Colony Nectar", ylim=c(0,max(tdarray[year,20,1:1000])), 
          xlab= x)
     axis(1, labels=F, tick=T)
     axis(2, labels=T, tick=T, ylab= "Colony Nectar")
@@ -444,10 +506,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[1,20,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 400, labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,20,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,6,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[31, 20, 1:1000], type="p", pch=20, ylim=c(0,400), ylab= NA, 
+    plot(i, tdarray[year[1], 20, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,20,1:1000])), ylab= NA, 
          xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -459,10 +521,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[31,20,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = max(tdarray[year,20,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,20,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,6,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[61, 20, 1:1000], type="p", pch=20, ylim=c(0,400), ylab= NA, 
+    plot(i, tdarray[year[2], 20, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,20,1:1000])), ylab= NA, 
          xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -474,10 +536,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[61,20,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 400, labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,20,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,6,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[91, 20, 1:1000], type="p", pch=20, ylim=c(0,400), ylab= NA, 
+    plot(i, tdarray[year[3], 20, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,20,1:1000])), ylab= NA, 
          xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -489,10 +551,10 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[91,20,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 400, labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,20,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,6,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
-    plot(i, tdarray[121, 20, 1:1000], type="p", pch=20, ylim=c(0,400), ylab= NA, 
+    plot(i, tdarray[year[4], 20, 1:1000], type="p", pch=20, ylim=c(0,max(tdarray[year,20,1:1000])), ylab= NA, 
          xlab= x)
     axis(1, labels=F, tick=T)  
     axis(2, labels=F, tick=T)
@@ -504,7 +566,7 @@ for (i in inputparam){      #margin labels
     lofit<- loess(tdarray[121,20,1:1000]~i)
     j<- order(i)
     lines(i[j], lofit$fitted[j], col = "yellow", lwd = 3)
-    text(x = min(i), y = 400, labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,1,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
+    text(x = min(i), y = max(tdarray[year,20,1:1000]), labels = paste("pcc=", signif(pcctdarray[1, 6, n-1],3), "\n src=", signif(srctdarray[1,6,n-1],3), sep = ""), cex = 0.75, adj= c(0,1))
     
     
     
@@ -536,32 +598,32 @@ for (r in 1:6){
   }
 }
 
-#create PDF 14
-pdf(file= paste(vpdir_output, "fig_14.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#create PDF timeseries
+pdf(file= paste(vpdir_output, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
   #start figures
   #time series plots
   par(mfrow=c(6,5), mar=c(1.5, 4, 2, 0.5), oma= c(4,2,2,7))
   
   for (r in 1:6){
-    plot(time[1:breaks], tempout[1:breaks,r,2], type = "l", ylim = c(0,max(tempout[1:breaks,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "time1")
-    lines(time[1:breaks],tempout[1:breaks,r,1], type = "l", lty= 2, col = "red")
-    lines(time[1:breaks], tempout[1:breaks,r,3], type = "l", lty=4, col = "blue")
+    plot(time[1:year[1]], tempout[1:year[1],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "time1")
+    lines(time[1:year[1]],tempout[1:year[1],r,1], type = "l", lty= 2, col = "red")
+    lines(time[1:year[1]], tempout[1:year[1],r,3], type = "l", lty=4, col = "blue")
     
-    plot(time[(breaks + 1):(2*breaks)], tempout[(breaks + 1):(2*breaks),r,2], type = "l", ylim = c(0,max(tempout[1:breaks,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time2")
-    lines(time[(breaks + 1):(2*breaks)],tempout[(breaks + 1):(2*breaks),r,1], type = "l", lty= 2, col = "red")
-    lines(time[(breaks + 1):(2*breaks)], tempout[(breaks + 1):(2*breaks),r,3], type = "l", lty=4, col = "blue")
+    plot(time[(year[1] + 1):year[2]], tempout[(year[1] + 1):year[2],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time2")
+    lines(time[(year[1] + 1):year[2]],tempout[(year[1] + 1):year[2],r,1], type = "l", lty= 2, col = "red")
+    lines(time[(year[1] + 1):year[2]], tempout[(year[1] + 1):year[2],r,3], type = "l", lty=4, col = "blue")
     
-    plot(time[(2*breaks + 1):(3*breaks)], tempout[(2*breaks + 1):(3*breaks),r,2], type = "l", ylim = c(0,max(tempout[1:breaks,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time3")
-    lines(time[(2*breaks + 1):(3*breaks)],tempout[(2*breaks + 1):(3*breaks),r,1], type = "l", lty= 2, col = "red")
-    lines(time[(2*breaks + 1):(3*breaks)], tempout[(2*breaks + 1):(3*breaks),r,3], type = "l", lty=4, col = "blue")
+    plot(time[(year[2] + 1):year[3]], tempout[(year[2] + 1):year[3],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time3")
+    lines(time[(year[2] + 1):year[3]],tempout[(year[2] + 1):year[3],r,1], type = "l", lty= 2, col = "red")
+    lines(time[(year[2] + 1):year[3]], tempout[(year[2] + 1):year[3],r,3], type = "l", lty=4, col = "blue")
     
-    plot(time[(3*breaks + 1):(4*breaks)], tempout[(3*breaks + 1):(4*breaks),r,2], type = "l", ylim = c(0,max(tempout[1:breaks,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time4")
-    lines(time[(3*breaks + 1):(4*breaks)],tempout[(3*breaks + 1):(4*breaks),r,1], type = "l", lty= 2, col = "red")
-    lines(time[(3*breaks + 1):(4*breaks)], tempout[(3*breaks + 1):(4*breaks),r,3], type = "l",lty=4, col = "blue")
+    plot(time[(year[3] + 1):year[4]], tempout[(year[3] + 1):year[4],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time4")
+    lines(time[(year[3] + 1):year[4]],tempout[(year[3] + 1):year[4],r,1], type = "l", lty= 2, col = "red")
+    lines(time[(year[3] + 1):year[4]], tempout[(year[3] + 1):year[4],r,3], type = "l",lty=4, col = "blue")
     
-    plot(time[(4*breaks + 1):nrows], tempout[(4*breaks + 1):nrows,r,2], type = "l", ylim = c(0,max(tempout[1:breaks,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time5")
-    lines(time[(4*breaks + 1):nrows],tempout[(4*breaks + 1):nrows,r,1], type = "l", lty= 2, col = "red")
-    lines(time[(4*breaks + 1):nrows], tempout[(4*breaks + 1):nrows,r,3], type = "l",lty=4, col = "blue")
+    plot(time[(year[4] + 1):nrows], tempout[(year[4] + 1):nrows,r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time5")
+    lines(time[(year[4] + 1):nrows],tempout[(year[4] + 1):nrows,r,1], type = "l", lty= 2, col = "red")
+    lines(time[(year[4] + 1):nrows], tempout[(year[4] + 1):nrows,r,3], type = "l",lty=4, col = "blue")
   }
   mtext(text = paste("Fig. 14 Time series plots across a 4-year period of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
@@ -571,7 +633,7 @@ invar<- c("Drone-Mite Survivorship", "Forager Lifespan", "Queen Strength", "Work
 datsrc<- list()
 datpcc<- list()
 
-for (i in 1:1) {
+for (i in 1:5) {
   dfsrc<- mdply(srctdarray[i,1:6,1:12], cbind)
   tdfsrc<- t(dfsrc)
   colnames(tdfsrc)<- outvar
@@ -580,7 +642,7 @@ for (i in 1:1) {
 }
 
 
-for (i in 1:1){
+for (i in 1:5){
   dfpcc<- mdply(pcctdarray[i,1:6,1:12], cbind)
   tdfpcc<- t(dfpcc)
   colnames(tdfpcc)<- outvar
@@ -588,14 +650,14 @@ for (i in 1:1){
   datpcc[[i]]<- p
 }
 
-#create PDF 15
-pdf(file= paste(vpdir_output, "fig_15.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#create PDF tornado
+pdf(file= paste(vpdir_output, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
   #start figures
   #create plot pages
   grid.newpage()
-  pushViewport(viewport(layout=grid.layout(1,1), gp= gpar(cex = 0.6)))
+  pushViewport(viewport(layout=grid.layout(length(year),1), gp= gpar(cex = 0.6)))
   #start figures
-  for (i in 1:1) { #loops by year
+  for (i in 1:length(year)) { #loops by year
     aa<- ggplot(data=datsrc[[i]], aes(x= datsrc[[i]][[1]], y= datsrc[[i]][[3]])) + 
       geom_bar(stat="identity", position = "identity") +
       scale_y_continuous(limits= c(-1,1)) +
@@ -603,12 +665,12 @@ pdf(file= paste(vpdir_output, "fig_15.pdf", sep=""), width = 8.5, height = 11, o
       labs(title= paste("Year", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
       facet_grid(. ~ Var2) +
       theme_bw()
-    print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
+    print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
   }
   
   grid.newpage()
-  pushViewport(viewport(layout=grid.layout(5,1), gp= gpar(cex = 0.6)))
-  for (i in 1:1) { #loops by year
+  pushViewport(viewport(layout=grid.layout(length(year),1), gp= gpar(cex = 0.6)))
+  for (i in 1:length(year)) { #loops by year
     bb<- ggplot(data=datpcc[[i]], aes(x= datpcc[[i]][[1]], y= datpcc[[i]][[3]])) + 
       geom_bar(stat="identity", position = "identity") +
       scale_y_continuous(limits= c(-1,1)) +
@@ -616,7 +678,7 @@ pdf(file= paste(vpdir_output, "fig_15.pdf", sep=""), width = 8.5, height = 11, o
       labs(title= paste("Year", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
       facet_grid(. ~ Var2) +
       theme_bw()
-    print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= F)
+    print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
   }
 
 dev.off()

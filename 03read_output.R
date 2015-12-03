@@ -11,9 +11,9 @@ dim(tdarray)
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_output,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
-  newarray <- df[,2:27]
+  newarray <- df[,1:27]
   newarray2 <- data.matrix(newarray)
-  tdarray[1:nrows,1:26,i] <- abind(newarray2[1:nrows,1:26], along=3)
+  tdarray[1:nrows,1:27,i] <- abind(newarray2[1:nrows,1:26], along=3)
 }
 
 # save tdarray
