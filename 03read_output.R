@@ -4,16 +4,16 @@ df <- read.table(paste(vpdir_output,"results",i,".txt", sep=""), header= FALSE, 
 dim(df)
 
 nrows <- dim(df[1])[[1]] #this is dependent on the duration of the simulation as set in the comparison.vrp file
-tdarray <- array(data=NA,c(nrows,26,Nsims))
+tdarray <- array(data=NA,c(nrows,27,Nsims))
 dim(tdarray)
 
 # read output files
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_output,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
-  newarray <- df[,1:27]
-  newarray2 <- data.matrix(newarray)
-  tdarray[1:nrows,1:27,i] <- abind(newarray2[1:nrows,1:26], along=3)
+#  newarray <- df[,1:27]
+#  newarray <- data.matrix(df)
+  tdarray[1:nrows,1:27,i] <- abind(df[1:nrows,1:27], along=3)
 }
 
 # save tdarray
