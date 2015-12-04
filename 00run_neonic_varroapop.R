@@ -27,7 +27,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
 }
 #carmen personal laptop
-if(Sys.info()[4]=="Ashleys-MBP"){
+if(Sys.info()[4]or("Ashleys-MBP","Ashleys-MacBook-Pro.local")) {
   vpdir<-path.expand("~/git/beeRpop/")
 }
 #carmen epa desktop
@@ -51,10 +51,7 @@ vpdir_fig <- paste(vpdir, "fig/", sep = "")
 vpdir_exe <- paste(vpdir, "exe/", sep = "")
 vpdir_io <- paste(vpdir, "io/", sep = "")
 
-#specify daily simulation period
-#start to stop dates
-#TODO: read date range from varroapop output at end of 02
-time <- seq(as.Date("1988/1/1"), as.Date("1990/12/31"), by="week")
+#number of simulations 
 Nsims <- 1000
 
 # varroapop file (without directory, the file needs to be in vpdir_exe above)
@@ -67,8 +64,9 @@ vrp_filename <- "comparison.vrp"
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
 source(paste(vpdir,"02simulate_w_exe.R",sep = ""))
 source(paste(vpdir,"03read_output.R",sep = ""))
-source(paste(vpdir,"04sensitivity_analyses.R",sep = ""))
-source(paste(vpdir,"05plotting_neonic_generic.R",sep = ""))
+source(paste(vpdir,"04load_io.R",sep = ""))
+source(paste(vpdir,"05sensitivity_analyses.R",sep = ""))
+source(paste(vpdir,"06plotting_neonic_generic.R",sep = ""))
 
 ##########################################################
 # #git stuff - you only need to do this once
