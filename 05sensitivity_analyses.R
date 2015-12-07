@@ -7,7 +7,7 @@
 breaks <- floor(length(timearray)/5)
 timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(time))
 resvar<- c(1,3,4,10,18,20)
-tdoutput <- tdarray2[timebreak,resvar,1:1000]
+tdoutput <- tdarray[timebreak,resvar,1:1000]
 dim(tdoutput)
 srctdarray<- array(data=NA, c(5,6,16), dimnames = list(c("break1", "break2", "break3", "break4", "break5"),
                                                        c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),

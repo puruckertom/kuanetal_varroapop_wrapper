@@ -1,7 +1,6 @@
 #load output files
 load(paste(vpdir_output,"tdarray.RData", sep =""))
 dim(tdarray)
-tdarray2<- tdarray[,2:27,]
 load(paste(vpdir_output,"timearray.RData", sep = ""))
 nrows<- length(timearray)
 #rownames(tdarray)
