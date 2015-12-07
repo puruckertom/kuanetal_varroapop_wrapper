@@ -16,7 +16,7 @@ lLD50<- runif(Nsims, 0, 0.9) #AILarvaLD50 (ug/larva)
 kow<- runif(Nsims, 2, 8) #AIKOW
 koc<- runif(Nsims, 5, 30) #AIKOC
 halflife<- runif(Nsims, 0, 5) #AIHalfLife (days)
-apprate<- runif(Nsims, 0, 0.7) #EAppRate (lb/A)
+apprate<- runif(Nsims, 0, 0.0) #EAppRate (lb/A)
 
 inputdata<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                        adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate)
