@@ -8,57 +8,57 @@ qs4 <- which(queenstrength >=4 & queenstrength <5)
 qs5 <- which(queenstrength >=5 & queenstrength <6)
 
 #colony persistence
-cp <- rep(NA, length(time))
-for (n in 1:length(time)){
+cp <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,1,1:Nsims] > 1000) # queries colony size > 1000 for 1000 simulations at each time point
   cp[n] <- length(x)/Nsims #appends vector x with proportion of simulations per time step with Col Size > 0
 }
 
 #foragers
-fa <- rep(NA, length(time))
-for (n in 1:length(time)){
+fa <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,4,1:Nsims] > 0) 
   fa[n] <- length(x)/Nsims 
 }
 
 #adult workers
-aw <- rep(NA, length(time))
-for (n in 1:length(time)){
+aw <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,3,1:Nsims] > 0) 
   aw[n] <- length(x)/Nsims 
 }
 
 #free mites
-fm <- rep(NA, length(time))
-for (n in 1:length(time)){
+fm <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,11,1:Nsims] > 0) 
   fm[n] <- length(x)/Nsims 
 }
 
 #dead foragers
-dfr <- rep(NA, length(time))
-for (n in 1:length(time)){
+dfr <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,1,1:Nsims] > 0) 
   dfr[n] <- length(x)/Nsims 
 }
 
 #dead mites
-dm <- rep(NA, length(time))
-for (n in 1:length(time)){
+dm <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n,16,1:Nsims] > 0)
   dm[n] <- length(x)/Nsims
 }
 
 #capped drone brood
-cdb <- rep(NA, length(time))
-for (n in 1:length(time)){
+cdb <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n, 5, 1:Nsims] > 0)
   cdb[n] <- length(x)/Nsims
 }
 
 #capped worker brood
-cwb <- rep(NA, length(time))
-for (n in 1:length(time)){
+cwb <- rep(NA, nrows)
+for (n in 1:nrows){
   x <- which(tdarray[n, 6, 1:Nsims] > 0)
   cwb[n] <- length(x)/Nsims
 }
@@ -67,11 +67,11 @@ for (n in 1:length(time)){
 pdf(file= paste(vpdir_output, "fig_1_MCproportions.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
   #start figures
   par(mfrow=c(5,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
-  plot(time, cp, type="l", ylab = "P(Colony Size) > 0", main= "time1", ylim=c(0,1), xlab=NA)
-  plot(time, fa, type="l", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
-  plot(time, aw, type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
-  plot(time, fm, type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
-  plot(time, dfr, type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
+  plot(timearray, cp, type="l", ylab = "P(Colony Size) > 0", main= "time1", ylim=c(0,1), xlab=NA)
+  plot(timearray, fa, type="l", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
+  plot(timearray, aw, type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
+  plot(timearray, fm, type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
+  plot(timearray, dfr, type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
   mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
 
@@ -602,30 +602,30 @@ for (r in 1:6){
 pdf(file= paste(vpdir_output, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
   #start figures
   #time series plots
-  par(mfrow=c(6,5), mar=c(2, 4, 1, 0.5), oma= c(3,2,2,6.5))
+  par(mfrow=c(6,1), mar=c(2, 4, 1, 0.5), oma= c(3,2,2,6.5))
   
   for (r in 1:6){
-    plot(timearray[1:(timebreak[1])], tempout[1:timebreak[1],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "time1")
-    lines(timearray[1:(timebreak[1])],tempout[1:timebreak[1],r,1], type = "l", lty= 2, col = "red")
-    lines(timearray[1:(timebreak[1])], tempout[1:timebreak[1],r,3], type = "l", lty=4, col = "blue")
+    plot(timearray, tempout[,r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= paste(outvar[r]))
+    lines(timearray, tempout[,r,1], type = "l", lty= 2, col = "red")
+    lines(timearray, tempout[,r,3], type = "l", lty=4, col = "blue")
     
-    plot(timearray[(timebreak[1] + 1):timebreak[2]], tempout[(timebreak[1] + 1):timebreak[2],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time2")
-    lines(timearray[(timebreak[1] + 1):timebreak[2]],tempout[(timebreak[1] + 1):timebreak[2],r,1], type = "l", lty= 2, col = "red")
-    lines(timearray[(timebreak[1] + 1):timebreak[2]], tempout[(timebreak[1] + 1):timebreak[2],r,3], type = "l", lty=4, col = "blue")
-    
-    plot(timearray[(timebreak[2] + 1):timebreak[3]], tempout[(timebreak[2] + 1):timebreak[3],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time3")
-    lines(timearray[(timebreak[2] + 1):timebreak[3]],tempout[(timebreak[2] + 1):timebreak[3],r,1], type = "l", lty= 2, col = "red")
-    lines(timearray[(timebreak[2] + 1):timebreak[3]], tempout[(timebreak[2] + 1):timebreak[3],r,3], type = "l", lty=4, col = "blue")
-    
-    plot(timearray[(timebreak[3] + 1):timebreak[4]], tempout[(timebreak[3] + 1):timebreak[4],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time4")
-    lines(timearray[(timebreak[3] + 1):timebreak[4]],tempout[(timebreak[3] + 1):timebreak[4],r,1], type = "l", lty= 2, col = "red")
-    lines(timearray[(timebreak[3] + 1):timebreak[4]], tempout[(timebreak[3] + 1):timebreak[4],r,3], type = "l",lty=4, col = "blue")
-    
-    plot(timearray[(timebreak[4] + 1):nrows], tempout[(timebreak[4] + 1):nrows,r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time5")
-    lines(timearray[(timebreak[4] + 1):nrows],tempout[(timebreak[4] + 1):nrows,r,1], type = "l", lty= 2, col = "red")
-    lines(timearray[(timebreak[4] + 1):nrows], tempout[(timebreak[4] + 1):nrows,r,3], type = "l",lty=4, col = "blue")
+#     plot(timearray[(timebreak[1] + 1):timebreak[2]], tempout[(timebreak[1] + 1):timebreak[2],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time2")
+#     lines(timearray[(timebreak[1] + 1):timebreak[2]],tempout[(timebreak[1] + 1):timebreak[2],r,1], type = "l", lty= 2, col = "red")
+#     lines(timearray[(timebreak[1] + 1):timebreak[2]], tempout[(timebreak[1] + 1):timebreak[2],r,3], type = "l", lty=4, col = "blue")
+#     
+#     plot(timearray[(timebreak[2] + 1):timebreak[3]], tempout[(timebreak[2] + 1):timebreak[3],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time3")
+#     lines(timearray[(timebreak[2] + 1):timebreak[3]],tempout[(timebreak[2] + 1):timebreak[3],r,1], type = "l", lty= 2, col = "red")
+#     lines(timearray[(timebreak[2] + 1):timebreak[3]], tempout[(timebreak[2] + 1):timebreak[3],r,3], type = "l", lty=4, col = "blue")
+#     
+#     plot(timearray[(timebreak[3] + 1):timebreak[4]], tempout[(timebreak[3] + 1):timebreak[4],r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time4")
+#     lines(timearray[(timebreak[3] + 1):timebreak[4]],tempout[(timebreak[3] + 1):timebreak[4],r,1], type = "l", lty= 2, col = "red")
+#     lines(timearray[(timebreak[3] + 1):timebreak[4]], tempout[(timebreak[3] + 1):timebreak[4],r,3], type = "l",lty=4, col = "blue")
+#     
+#     plot(timearray[(timebreak[4] + 1):nrows], tempout[(timebreak[4] + 1):nrows,r,2], type = "l", ylim = c(0,max(tempout[,r,3])), ylab= paste(outvar[r]), xlab = NA, main = "time5")
+#     lines(timearray[(timebreak[4] + 1):nrows],tempout[(timebreak[4] + 1):nrows,r,1], type = "l", lty= 2, col = "red")
+#     lines(timearray[(timebreak[4] + 1):nrows], tempout[(timebreak[4] + 1):nrows,r,3], type = "l",lty=4, col = "blue")
   }
-  mtext(text = paste("Fig. 14 Time series plots across a 4-timebreak period of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
+  mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
 
 #tornado plots
