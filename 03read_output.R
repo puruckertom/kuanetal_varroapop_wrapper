@@ -5,14 +5,15 @@ dim(df)
 nrows <- dim(df[1])[[1]] #this is dependent on the duration of the simulation as set in the comparison.vrp file
 
 tdarray_con <- array(data=NA, c(nrows,26,Nsims))
-dim(tdarray)
+dim(tdarray_con)
 tdarray_exp <- array(data=NA, c(nrows,26,Nsims))
-
+dim(tdarray_exp)
 timearray<- array(data=NA, c(nrows))
 timearray[2:nrows]<- df[2:nrows,1]
 timearray<- as.Date(timearray,"%m/%d/%Y")
 timediff <- timearray[3]-timearray[2]
 timearray[1] <- timearray[2]-timediff
+length(timearray)
 
 # read output files
 #CONTROL
