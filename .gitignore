@@ -1,6 +1,10 @@
 /output/tdarray.csv
 /output/results*.txt
+/output/control/results*.txt
+/output/exposed/results*.txt
 /input/*.txt
+/input/control/input*.txt
+/input/exposed/input*.txt
 /input/*.log
 .Rproj.user
 beeRpop.Rproj
