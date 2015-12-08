@@ -50,6 +50,10 @@ vpdir_log <- paste(vpdir, "log/", sep = "")
 vpdir_fig <- paste(vpdir, "fig/", sep = "")
 vpdir_exe <- paste(vpdir, "exe/", sep = "")
 vpdir_io <- paste(vpdir, "io/", sep = "")
+vpdir_in_exp <- paste(vpdir_input, "exposed/", sep = "")
+vpdir_in_con <- paste(vpdir_input, "control/", sep = "")
+vpdir_out_exp <- paste(vpdir_output, "exposed/", sep = "")
+vpdir_out_con <- paste(vpdir_output, "control/", sep = "")
 
 #number of simulations 
 Nsims <- 1000

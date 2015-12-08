@@ -10,15 +10,28 @@
 #              949, 954, 962, 996)
 
 #the .vrp file has to know where the weather file is, R cannot tell it!
+#CONTROL
 for (i in 1:Nsims) {
   # n<-inputtest[i]
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
   logfile<- paste("log",i,".txt", sep="")
   vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison.vrp", 
-                         " /b /or ", vpdir_output, outputfile, 
-                         " /i ", vpdir_input, inputfile, " /ol ", vpdir_log, logfile, sep="")
+                         " /b /or ", vpdir_out_con, outputfile, 
+                         " /i ", vpdir_in_con, inputfile, " /ol ", vpdir_log, logfile, sep="")
   print(vpdir_command)
   system(vpdir_command)
 }
 
+#EXPOSED
+for (i in 1:Nsims) {
+  # n<-inputtest[i]
+  inputfile<- paste("input",i,".txt", sep="")
+  outputfile<- paste("results",i,".txt", sep="")
+  logfile<- paste("log",i,".txt", sep="")
+  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison.vrp", 
+                         " /b /or ", vpdir_out_exp, outputfile, 
+                         " /i ", vpdir_in_exp, inputfile, " /ol ", vpdir_log, logfile, sep="")
+  print(vpdir_command)
+  system(vpdir_command)
+}
