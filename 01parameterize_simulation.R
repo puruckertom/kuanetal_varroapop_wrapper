@@ -17,7 +17,7 @@ kow<- runif(Nsims, 2, 8) #AIKOW
 koc<- runif(Nsims, 5, 30) #AIKOC
 halflife<- runif(Nsims, 0, 5) #AIHalfLife (days)
 apprate_con<- runif(Nsims, 0, 0.0) #EAppRate (lb/A)
-apprate_exp<- runif(Nsims, 0, 10) #EAppRate (lb/A)
+apprate_exp<- runif(Nsims, 0, 20) #EAppRate (lb/A)
 
 inputdata_con<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                        adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_con)
