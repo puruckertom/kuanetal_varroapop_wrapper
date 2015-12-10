@@ -34,5 +34,5 @@ for (i in 1:Nsims) {
 
 # save tdarray
 save(tdarray_con, file = paste(vpdir_out_con,"tdarray_con.RData", sep = ""))
-save(tdarray_exp, file = paste(vpdir_out_exp,"tdarray_exp.RData"))
+save(tdarray_exp, file = paste(vpdir_out_exp,"tdarray_exp.RData", sep = ""))
 save(timearray,file = paste(vpdir_output,"timearray.RData", sep = ""))
