@@ -16,7 +16,7 @@ for (i in 1:Nsims) {
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
   logfile<- paste("log",i,".txt", sep="")
-  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison.vrp", 
+  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison_stp.vrp", 
                          " /b /or ", vpdir_out_con, outputfile, 
                          " /i ", vpdir_in_con, inputfile, " /ol ", vpdir_log, logfile, sep="")
   print(vpdir_command)
@@ -29,7 +29,7 @@ for (i in 1:Nsims) {
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
   logfile<- paste("log",i,"exp.txt", sep="")
-  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison.vrp", 
+  vpdir_command <- paste(vpdir_exe, "VarroaPop.exe ", vpdir_exe, "comparison_stp.vrp", 
                          " /b /or ", vpdir_out_exp, outputfile, 
                          " /i ", vpdir_in_exp, inputfile, " /ol ", vpdir_log, logfile, sep="")
   print(vpdir_command)
