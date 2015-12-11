@@ -1,5 +1,5 @@
 VarroaPop Log File
-Created Dec-10, 2015  01:32 PM
+Created Dec-10, 2015  03:17 PM
 
 
 Input File Variable Name aiadultslope not Recognized
