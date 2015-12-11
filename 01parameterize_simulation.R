@@ -11,7 +11,7 @@ adslope<- runif(Nsims, 0, 10) #AIAdultSlope
 adLD50<- runif(Nsims, 0, 0.5) #AIAdultLD50 (ug/bee)
 adslopec<- runif(Nsims, 0, 3.93) #AIAdultSlopeContact
 adLD50c<- runif(Nsims, 0, 0.05) #AIAdultLD50Contact (ug/bee)
-lslope<- runif(Nsims, 0, 3.4) #AILarvaSlope
+lslope<- runif(Nsims, 0, 10) #AILarvaSlope
 lLD50<- runif(Nsims, 0, 0.9) #AILarvaLD50 (ug/larva)
 kow<- runif(Nsims, 2, 8) #AIKOW
 koc<- runif(Nsims, 5, 30) #AIKOC

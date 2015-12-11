@@ -1,4 +1,4 @@
-Varroa Population Simulation - Dec 11,2015  02:21:57 PM
+Varroa Population Simulation - Dec 11,2015  03:53:56 PM
 VarroaPop Version 3.2.5.5  March, 2015
 
                                         Capped  Capped                                                                      Prop                                                                 
