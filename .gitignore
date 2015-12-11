@@ -2,6 +2,7 @@
 /output/results*.txt
 /output/control/results*.txt
 /output/exposed/results*.txt
+/log/log*.txt
 /input/*.txt
 /input/control/input*.txt
 /input/exposed/input*.txt
