@@ -7,12 +7,12 @@ fgrlifespan <- runif(Nsims, 4, 16) #ICForagerLifespan
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=Nsims, replace=T) #ImmType
 #pesticide exposure
-adslope<- runif(Nsims, 0, 10) #AIAdultSlope
-adLD50<- runif(Nsims, 0, 0.5) #AIAdultLD50 (ug/bee)
-adslopec<- runif(Nsims, 0, 3.93) #AIAdultSlopeContact
-adLD50c<- runif(Nsims, 0, 0.05) #AIAdultLD50Contact (ug/bee)
-lslope<- runif(Nsims, 0, 10) #AILarvaSlope
-lLD50<- runif(Nsims, 0, 0.9) #AILarvaLD50 (ug/larva)
+adslope<- runif(Nsims, 0, 100) #AIAdultSlope
+adLD50<- runif(Nsims, 0, 0.005) #AIAdultLD50 (ug/bee)
+adslopec<- runif(Nsims, 0, 100) #AIAdultSlopeContact
+adLD50c<- runif(Nsims, 0, 0.005) #AIAdultLD50Contact (ug/bee)
+lslope<- runif(Nsims, 0, 100) #AILarvaSlope
+lLD50<- runif(Nsims, 0, 0.005) #AILarvaLD50 (ug/larva)
 kow<- runif(Nsims, 2, 8) #AIKOW
 koc<- runif(Nsims, 5, 30) #AIKOC
 halflife<- runif(Nsims, 0, 5) #AIHalfLife (days)
