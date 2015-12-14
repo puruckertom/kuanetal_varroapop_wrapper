@@ -1,5 +1,5 @@
 VarroaPop Log File
-Created Dec-11, 2015  03:57 PM
+Created Dec-14, 2015  11:28 AM
 
 
 Input File Variable Name aiadultslope not Recognized
@@ -12,3 +12,4 @@ Input File Variable Name aikow not Recognized
 Input File Variable Name aikoc not Recognized
 Input File Variable Name aihalflife not Recognized
 Input File Variable Name eapprate not Recognized
+Input File Variable Name foliarenabled not Recognized

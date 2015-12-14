@@ -18,11 +18,13 @@ koc<- runif(Nsims, 5, 30) #AIKOC
 halflife<- runif(Nsims, 0, 5) #AIHalfLife (days)
 apprate_con<- runif(Nsims, 0, 0.0) #EAppRate (lb/A)
 apprate_exp<- runif(Nsims, 0, 10) #EAppRate (lb/A)
+foliar_true<- rep("true", Nsims)
+foliar_false<- rep("false", Nsims)
 
 inputdata_con<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
-                       adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_con)
+                       adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_con, foliar_false)
 inputdata_exp<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
-                           adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_exp)
+                           adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_exp, foliar_true)
 #putting the input in the io directory so it can be read from there later
 write.csv(inputdata_con, file = paste(vpdir_out_con, "inputdata_con.csv", sep = ""))
 write.csv(inputdata_exp, file = paste(vpdir_out_exp, "inputdata_exp.csv", sep = ""))
@@ -63,6 +65,8 @@ for (i in 1:Nsims) {
   inputvalue15 <- halflife[i]
   parameter16 <- ("EAppRate=") #application rate (lb/A)
   inputvalue16<- apprate_con[i]
+  parameter17 <- ("FoliarEnabled=")
+  inputvalue17<- foliar_false[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
@@ -96,6 +100,8 @@ for (i in 1:Nsims) {
   write(varroainput15, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
   varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
   write(varroainput16, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
+  write(varroainput17, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
@@ -134,6 +140,8 @@ for (i in 1:Nsims) {
   inputvalue15 <- halflife[i]
   parameter16 <- ("EAppRate=") #application rate (lb/A)
   inputvalue16<- apprate_exp[i]
+  parameter17 <- ("FoliarEnabled=") #foliar spray enabled
+  inputvalue17<- foliar_true[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
@@ -167,4 +175,6 @@ for (i in 1:Nsims) {
   write(varroainput15, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
   varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
   write(varroainput16, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
+  write(varroainput17, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
 }
