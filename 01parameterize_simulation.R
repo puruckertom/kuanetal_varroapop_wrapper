@@ -26,6 +26,8 @@ inputdata_con<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesur
 inputdata_exp<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                            adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_exp, foliar_true)
 #putting the input in the io directory so it can be read from there later
+write.csv(inputdata_con, file = paste(vpdir_in_con, "inputdata_con.csv", sep = ""))
+write.csv(inputdata_exp, file = paste(vpdir_in_exp, "inputdata_exp.csv", sep = ""))
 write.csv(inputdata_con, file = paste(vpdir_out_con, "inputdata_con.csv", sep = ""))
 write.csv(inputdata_exp, file = paste(vpdir_out_exp, "inputdata_exp.csv", sep = ""))
 
