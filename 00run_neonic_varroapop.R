@@ -1,4 +1,9 @@
-#library dependencies
+#check to make sure required packages are installed
+list.of.packages <- c("plyr", "reshape2", "ggplot2", "grid", "gridExtra", "sensitivity", "abind")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)>0) {install.packages(new.packages)}
+
+#load library dependencies
 library(plyr)
 library(reshape2)
 library(ggplot2)
@@ -20,14 +25,14 @@ if(Sys.info()[4]=="DC2626UTPURUCKE"){
 }
 #tom epa windows 2
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
-  vpdir<-path.expand("C:/git/beeRpop/")
+  vpdir<-path.expand("k:/git/beeRpop/")
 }
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
 }
 #carmen personal laptop
-if(Sys.info()[4]or("Ashleys-MBP","Ashleys-MacBook-Pro.local")) {
+if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
   vpdir<-path.expand("~/git/beeRpop/")
 }
 #carmen epa desktop
