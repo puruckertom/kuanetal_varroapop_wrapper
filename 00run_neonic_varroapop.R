@@ -71,6 +71,8 @@ vrp_filename <- "comparison.vrp"
 
 #run everything
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
+#echo the first log file
+scan(file = paste(vpdir_log, "log1.txt", sep=""), what = "raw")
 source(paste(vpdir,"02simulate_w_exe.R",sep = ""))
 source(paste(vpdir,"03read_output.R",sep = ""))
 source(paste(vpdir,"04load_io.R",sep = ""))
