@@ -203,7 +203,7 @@ for (i in 1:length(timebreak)) { #loops by timebreak
 }
 
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(length(timebreak),2), gp= gpar(cex = 0.6)))
 for (i in 1:length(timebreak)) { #loops by timebreak
   bb<- ggplot(data=datpcc_con[[i]], aes(x= datpcc_con[[i]][[1]], y= datpcc_con[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
