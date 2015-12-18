@@ -1,5 +1,4 @@
 VarroaPop Log File
-Created Dec-17, 2015  03:42 PM
+Created Dec-18, 2015  02:45 PM
 
 
-Input File Variable Name ailarvaeslope not Recognized
