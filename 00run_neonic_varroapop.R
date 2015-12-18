@@ -59,6 +59,7 @@ vpdir_in_exp <- paste(vpdir_input, "exposed/", sep = "")
 vpdir_in_con <- paste(vpdir_input, "control/", sep = "")
 vpdir_out_exp <- paste(vpdir_output, "exposed/", sep = "")
 vpdir_out_con <- paste(vpdir_output, "control/", sep = "")
+vpdir_weather <- paste(vpdir, "weather/", sep = "")
 
 #number of simulations 
 Nsims <- 1000
@@ -66,8 +67,13 @@ Nsims <- 1000
 # varroapop file (without directory, the file needs to be in vpdir_exe above)
 vrp_filename <- "comparison.vrp"
 
-#weather
-#the .vrp file has to know where the weather file is, R cannot tell it!
+#weather file
+#can be .dvf or .wth
+vrp_weather <- "w93193-tempadj.dvf"
+#simulation start and end
+#must have mm/dd/yyyy format
+simstart <- "01/01/1988"
+simend <- "12/31/1990"
 
 #run everything
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
