@@ -59,7 +59,6 @@ vpdir_in_exp <- paste(vpdir_input, "exposed/", sep = "")
 vpdir_in_con <- paste(vpdir_input, "control/", sep = "")
 vpdir_out_exp <- paste(vpdir_output, "exposed/", sep = "")
 vpdir_out_con <- paste(vpdir_output, "control/", sep = "")
-vpdir_weather <- paste(vpdir, "weather/", sep = "")
 
 #number of simulations 
 Nsims <- 1000

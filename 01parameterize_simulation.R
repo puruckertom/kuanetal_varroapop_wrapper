@@ -43,14 +43,38 @@ wkrmitesurvive<- runif(Nsims, 0, 100) #ICWorkerMiteSurvivorship
 #PlotWL
 #PlotIM
 
-##
-wkrdrnratio<- runif(Nsims, 1, 5) #RQWkrDrnRatio
-
-
+#DENone
+#DESwarm
+#DEChalkbrood
+#DEResource
+#DESupercedure
+#DEPesticide
 
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=Nsims, replace=T) #ImmType
-#pesticide exposure
+#TotalImmMites
+#PctImmMitesResistant
+#ImmStart
+#ImmEnd
+#ImmEnabled
+
+##Requeening
+#RQEggLayDelay
+wkrdrnratio<- runif(Nsims, 1, 5) #RQWkrDrnRatio
+#RQReQueenDate
+#RQEnableReQueen
+#RQScheduled
+#RQQueenStrength
+#RQOnce
+
+##Viticide
+#VTTreatmentDuration
+#VTMortality
+#VTEnable
+#VTTreatmentStart
+#InitMitePctResistant
+
+##pesticide exposure
 adslope<- runif(Nsims, 0, 3.93) #AIAdultSlope
 adLD50<- runif(Nsims, 0, 0.2) #AIAdultLD50 (ug/bee)
 adslopec<- runif(Nsims, 0, 3.93) #AIAdultSlopeContact
@@ -60,11 +84,48 @@ lLD50<- runif(Nsims, 0, 0.9) #AILarvaLD50 (ug/larva)
 kow<- runif(Nsims, 2, 6) #AIKOW
 koc<- runif(Nsims, 5, 30) #AIKOC
 halflife<- runif(Nsims, 0, 2.9) #AIHalfLife (days)
-apprate_con<- runif(Nsims, 0, 0.0) #EAppRate (lb/A)
-apprate_exp<- runif(Nsims, 0, 10) #EAppRate (lb/A)
-foliar_true<- rep("true", Nsims)
-foliar_false<- rep("false", Nsims)
+#AIContactFactor
 
+#CL4Pollen
+#CL4Nectar
+#CL5Pollen
+#CL5Nectar
+#CLDPollen
+#CLDNectar
+#CA13Pollen
+#CA13Nectar
+#CA410Pollen
+#CA410Nectar
+#CA1120Pollen
+#CA1120Nectar
+
+#IPollenTrips
+#INectarTrips
+#IPercentNectarForagers
+#IPollenLoad
+#INectarLoad
+foliar_true<- rep("true", Nsims) #FoliarEnabled
+foliar_false<- rep("false", Nsims)
+#SoilEnabled
+#SeedEnabled
+apprate_con<- runif(Nsims, 0, 0.0) #EAppRate (lb/A) control
+apprate_exp<- runif(Nsims, 0, 10) #EAppRate (lb/A) exposed
+#ESoilTheta
+# ESoilP
+# ESoilFoc
+# ESoilConcentration
+# ESeedConcentration
+# FoliarAppDate
+# FoliarForageBegin
+# FoliarForageEnd
+# SoilForageBegin
+# SoilForageEnd
+# SeedForageBegin
+# SeedForageEnd
+
+
+
+######## Create input dataframe
 inputdata_con<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                            adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_con, foliar_false)
 inputdata_exp<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
