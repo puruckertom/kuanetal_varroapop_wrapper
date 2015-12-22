@@ -15,3 +15,4 @@ AIKOC= 26.5670918871183
 AIHalfLife= 0.269514782424085
 EAppRate= 0
 FoliarEnabled= false
+WeatherFileName= w93193-tempadj.dvf

@@ -3,6 +3,8 @@
 #CONTROL
 for (i in 1:Nsims) {
   
+  weather <- ("WeatherFileName=")
+  weathervalue <- weather_file[i]
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]
   parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
@@ -72,12 +74,16 @@ for (i in 1:Nsims) {
   write(varroainput16, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
   varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
   write(varroainput17, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput18 <- paste(weather, weathervalue, sep= " ")
+  write(varroainput18, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
 #EXPOSED
 for (i in 1:Nsims) {
   
+  weather <- ("WeatherFileName=")
+  weathervalue <- weather_file[i]
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]
   parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
@@ -147,4 +153,6 @@ for (i in 1:Nsims) {
   write(varroainput16, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
   varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
   write(varroainput17, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput18 <- paste(weather, weathervalue, sep= " ")
+  write(varroainput18, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
 }

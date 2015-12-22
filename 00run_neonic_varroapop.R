@@ -68,7 +68,7 @@ vrp_filename <- "comparison.vrp"
 
 #weather file
 #can be .dvf or .wth
-vrp_weather <- "w93193-tempadj.dvf"
+vrp_weather <- "Midwest5Yr.wth"
 #simulation start and end
 #must have mm/dd/yyyy format
 simstart <- "01/01/1988"

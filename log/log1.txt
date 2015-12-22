@@ -1,4 +1,6 @@
 VarroaPop Log File
-Created Dec-18, 2015  03:46 PM
+Created Dec-22, 2015  09:51 AM
 
 
+  Processing Input File: The Specified Weather file   w93193-tempadj.dvf was not found
+You will have to specify one before you run a simulation
