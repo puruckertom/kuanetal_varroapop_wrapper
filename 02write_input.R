@@ -35,10 +35,6 @@ for (i in 1:Nsims) {
   inputvalue14 <- koc[i]
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
-  parameter16 <- ("EAppRate=") #application rate (lb/A)
-  inputvalue16<- apprate_con[i]
-  parameter17 <- ("FoliarEnabled=") #foliar spray enable
-  inputvalue17<- foliar_false[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
@@ -70,12 +66,8 @@ for (i in 1:Nsims) {
   write(varroainput14, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
   varroainput15 <- paste(parameter15, inputvalue15, sep= " ")
   write(varroainput15, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
-  write(varroainput16, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
-  write(varroainput17, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput18 <- paste(weather, weathervalue, sep= " ")
-  write(varroainput18, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
+  varroainputweather <- paste(weather, weathervalue, sep= " ")
+  write(varroainputweather, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
@@ -115,9 +107,9 @@ for (i in 1:Nsims) {
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
   parameter16 <- ("EAppRate=") #application rate (lb/A)
-  inputvalue16<- apprate_exp[i]
+  inputvalue16<- apprate[i]
   parameter17 <- ("FoliarEnabled=") #foliar spray enabled
-  inputvalue17<- foliar_true[i]
+  inputvalue17<- foliarenable[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
@@ -153,6 +145,6 @@ for (i in 1:Nsims) {
   write(varroainput16, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
   varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
   write(varroainput17, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
-  varroainput18 <- paste(weather, weathervalue, sep= " ")
-  write(varroainput18, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
+  varroainputweather <- paste(weather, weathervalue, sep= " ")
+  write(varroainputweather, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
 }

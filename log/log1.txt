@@ -1,6 +1,6 @@
 VarroaPop Log File
-Created Dec-22, 2015  09:51 AM
+Created Jan-05, 2016  11:30 AM
 
 
-  Processing Input File: The Specified Weather file   w93193-tempadj.dvf was not found
+  Processing Input File: The Specified Weather file   midwest5yr.wth was not found
 You will have to specify one before you run a simulation

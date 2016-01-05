@@ -1,4 +1,6 @@
 VarroaPop Log File
-Created Dec-18, 2015  03:56 PM
+Created Jan-05, 2016  11:43 AM
 
 
+  Processing Input File: The Specified Weather file   midwest5yr.wth was not found
+You will have to specify one before you run a simulation
