@@ -75,15 +75,21 @@ vrp_weather <- "w93193-tempadj.dvf"
 simstart <- "01/01/1988"
 simend <- "12/31/1990"
 
-#run everything
+# define distributions for input parameters
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
 #echo the first log file
 scan(file = paste(vpdir_log, "log1.txt", sep=""), what = "raw")
+# create and save input text files for simulations
 source(paste(vpdir,"02write_input.R",sep = ""))
+# automate simulations for 'Nsims' number of simulations
 source(paste(vpdir,"03simulate_w_exe.R",sep = ""))
+# read text files and save results in 3d arrays
 source(paste(vpdir,"04read_output.R",sep = ""))
+# load input and output objects into environment
 source(paste(vpdir,"05load_io.R",sep = ""))
+# run sensitivity analysis on tdarrays
 source(paste(vpdir,"06sensitivity_analysis.R",sep = ""))
+# plot results
 source(paste(vpdir,"07plotting_neonic_convsexp.R",sep = ""))
 
 ##########################################################
