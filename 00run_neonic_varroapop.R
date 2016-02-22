@@ -32,7 +32,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
 }
 #carmen personal laptop
-if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
+if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local"||Sys.info()[4]=="Ashleys-MBP-2") {
   vpdir<-path.expand("~/git/beeRpop/")
 }
 #carmen epa desktop
@@ -79,11 +79,12 @@ simend <- "12/31/1990"
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
 #echo the first log file
 scan(file = paste(vpdir_log, "log1.txt", sep=""), what = "raw")
-source(paste(vpdir,"02simulate_w_exe.R",sep = ""))
-source(paste(vpdir,"03read_output.R",sep = ""))
-source(paste(vpdir,"04load_io.R",sep = ""))
-source(paste(vpdir,"05sensitivity_analyses.R",sep = ""))
-source(paste(vpdir,"06plotting_neonic_generic.R",sep = ""))
+source(paste(vpdir,"02write_input.R",sep = ""))
+source(paste(vpdir,"03simulate_w_exe.R",sep = ""))
+source(paste(vpdir,"04read_output.R",sep = ""))
+source(paste(vpdir,"05load_io.R",sep = ""))
+source(paste(vpdir,"06sensitivity_analysis.R",sep = ""))
+source(paste(vpdir,"07plotting_neonic_convsexp.R",sep = ""))
 
 ##########################################################
 # #git stuff - you only need to do this once
