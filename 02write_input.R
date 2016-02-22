@@ -109,9 +109,15 @@ for (i in 1:Nsims) {
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
   parameter16 <- ("EAppRate=") #application rate (lb/A)
-  inputvalue16<- apprate_exp[i]
+  inputvalue16 <- apprate_exp[i]
   parameter17 <- ("FoliarEnabled=") #foliar spray enabled
-  inputvalue17<- foliar_true[i]
+  inputvalue17 <- foliar_true[i]
+  parameter18 <- ("FoliarAppDate=") #foliar spray application date
+  inputvalue18 <- foliar_appdate[i]
+  parameter19 <- ("FoliarForageBegin=") #foliar spray exposure interval begin
+  inputvalue19 <- foliar_begin[i]
+  parameter20 <- ("FoliarForageEnd=") #foliar spray exposure interval end
+  inputvalue20 <- foliar_end[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
@@ -147,4 +153,10 @@ for (i in 1:Nsims) {
   write(varroainput16, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
   write(varroainput17, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  varroainput18 <- paste(parameter18, inputvalue18, sep= " ")
+  write(varroainput18, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  varroainput19 <- paste(parameter19, inputvalue19, sep= " ")
+  write(varroainput19, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  varroainput20 <- paste(parameter20, inputvalue20, sep= " ")
+  write(varroainput20, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
 }
