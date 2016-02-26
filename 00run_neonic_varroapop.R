@@ -36,8 +36,8 @@ if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local"||Sys
   vpdir<-path.expand("~/git/beeRpop/")
 }
 #carmen epa desktop
-if(Sys.info()[4]=="ACKUAN-PC"){
-  vpdir<-path.expand("C:/gitrepo/beeRpop/")
+if(Sys.info()[4]=="DZ2626UCKUAN"){
+  vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
