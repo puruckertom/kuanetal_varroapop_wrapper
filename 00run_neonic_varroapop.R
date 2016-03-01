@@ -19,13 +19,10 @@ Sys.info()[4]
 version
 
 #Determine path directory based on the user machine######
-#tom epa windows
-if(Sys.info()[4]=="DC2626UTPURUCKE"){
-  vpdir<-path.expand("C:/git/beeRpop/")
-}
-#tom epa windows 2
+#tom epa windows 
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("k:/git/beeRpop/")
+  vrp_filename <- "comparison_stp.vrp"
 }
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
@@ -34,6 +31,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
 #carmen personal laptop
 if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local"||Sys.info()[4]=="Ashleys-MBP-2") {
   vpdir<-path.expand("~/git/beeRpop/")
+  vrp_filename <- "comparison.vrp"
 }
 #carmen epa desktop
 if(Sys.info()[4]=="DZ2626UCKUAN"){
@@ -64,9 +62,6 @@ vpdir_weather <- paste(vpdir, "weather/", sep = "")
 #number of simulations 
 Nsims <- 1000
 
-# varroapop file (without directory, the file needs to be in vpdir_exe above)
-vrp_filename <- "comparison.vrp"
-
 #weather file
 #can be .dvf or .wth
 vrp_weather <- "w93193-tempadj.dvf"
@@ -81,6 +76,7 @@ source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
 scan(file = paste(vpdir_log, "log1.txt", sep=""), what = "raw")
 # create and save input text files for simulations
 source(paste(vpdir,"02write_input.R",sep = ""))
+#may need to turn off virus checker!
 # automate simulations for 'Nsims' number of simulations
 source(paste(vpdir,"03simulate_w_exe.R",sep = ""))
 # read text files and save results in 3d arrays
@@ -88,7 +84,7 @@ source(paste(vpdir,"04read_output.R",sep = ""))
 # load input and output objects into environment
 source(paste(vpdir,"05load_io.R",sep = ""))
 # run sensitivity analysis on tdarrays
-source(paste(vpdir,"06sensitivity_analysis.R",sep = ""))
+source(paste(vpdir,"06sensitivity_analyses.R",sep = ""))
 # plot results
 source(paste(vpdir,"07plotting_neonic_convsexp.R",sep = ""))
 
