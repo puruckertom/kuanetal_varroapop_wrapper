@@ -79,8 +79,18 @@ for (n in 1:nrows){
   cwb_exp[n] <- length(y)/Nsims
 }
 
+#colony nectar
+cn_con <- rep(NA, nrows)
+cn_exp <- rep(NA, nrows)
+for (n in 1:nrows){
+  x <- which(tdarray_con[n, 20, 1:Nsims] > 0)
+  y <- which(tdarray_exp[n, 20, 1:Nsims] > 0)
+  cn_con[n] <- length(x)/Nsims
+  cn_exp[n] <- length(y)/Nsims
+}
+
 #create figure 1
-pdf(file= paste(vpdir_output, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_output, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE)
 #start figures
 par(mfrow=c(5,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
 plot(timearray, cp_con, type="l", ylab = "P(Colony Size) > 0", main= "time1", ylim=c(0,1), xlab=NA)
@@ -93,6 +103,8 @@ plot(timearray, fm_con, type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=N
 lines(timearray, fm_exp, type="l", lty = 2, col="blue")
 plot(timearray, dfr_con, type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
 lines(timearray, dfr_exp, type="l", lty = 2, col="blue")
+plot(timearray, cn_con, type="l", ylab= "P(Colony Nectar) > 0", ylim=c(0,1), xlab=NA) 
+lines(timearray, cn_exp, type="l", lty = 2, col="blue")
 mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
 
@@ -122,7 +134,7 @@ for (r in 1:6){
 }
 
 #create PDF timeseries
-pdf(file= paste(vpdir_output, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_output, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE)
 #start figures
 #time series plots
 par(mfrow=c(6,2), mar=c(2, 4, 1, 0.5), oma= c(3,2,2,6.5))
@@ -156,8 +168,8 @@ for (i in 1:5) {
   dfsrc_exp<- mdply(srctdarray_exp[i,1:6,1:12], cbind)
   tdfsrc_exp<- t(dfsrc_exp)
   colnames(tdfsrc_exp)<- outvar
-  s<- melt(tdfsrc_exp)
-  datsrc_exp[[i]]<- s
+  v<- melt(tdfsrc_exp)
+  datsrc_exp[[i]]<- v
 }
 
 
@@ -171,12 +183,12 @@ for (i in 1:5){
   dfpcc_exp<- mdply(pcctdarray_exp[i,1:6,1:12], cbind)
   tdfpcc_exp<- t(dfpcc_exp)
   colnames(tdfpcc_exp)<- outvar
-  p<- melt(tdfpcc_exp)
-  datpcc_exp[[i]]<- p
+  u<- melt(tdfpcc_exp)
+  datpcc_exp[[i]]<- u
 }
 
 #create PDF tornado
-pdf(file= paste(vpdir_output, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_output, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE)
 #start figures
 #create plot pages
 grid.newpage()
@@ -197,9 +209,9 @@ for (i in 1:length(timebreak)) { #loops by timebreak
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
     labs(title= paste("timebreak", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
-    facet_grid(. ~ Var2) +
+    facet_grid(. ~ Var2,) +
     theme_bw()
-  print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
+  print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
 }
 
 grid.newpage()
@@ -221,7 +233,7 @@ for (i in 1:length(timebreak)) { #loops by timebreak
     labs(title= paste("timebreak", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
-  print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
+  print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
 }
 
 dev.off()
