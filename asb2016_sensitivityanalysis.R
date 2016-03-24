@@ -47,7 +47,7 @@ dim(tdoutput_exp)
 srctdarray_con<- array(data=NA, c(124,6,16), dimnames = list(seq(as.Date("1989/05/01"), as.Date("1989/09/01"), by = "days"),
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
                                                            c("Queen Strength", "Worker to Drone", "Drone-Mite Survivorship (%)", "Worker-Mite Survivorship (%)", "Forager Lifespan (days)", "Mite Imm Type", "Adult Slope", "Adult LD50", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life", "App Rate Control")))
-pcctdarray_con<- array(data=NA, c(124,6,16), dimnames = list(seq(as.Date("1989/05/01"), as.Date("1989/09/01"), by = "days"), 
+pcctdarray_con<- array(data=NA, c(2,6,16), dimnames = list(c(as.Date("1989/06/01"), as.Date("1989/08/01")), 
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"), 
                                                            c("Queen Strength", "Worker to Drone", "Drone-Mite Survivorship (%)", "Worker-Mite Survivorship (%)", "Forager Lifespan (days)", "Mite Imm Type", "Adult Slope", "Adult LD50", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life", "App Rate Control")))
 #standard regression coefficients
@@ -62,15 +62,14 @@ for (i in 1:124){  #4 month period around application exposure
 }
 
 #partial correlation coefficients
-for (i in 1:124){  #4 month period around application exposure
   for (j in 1:6){   #output variable
     for (k in 1:16){  #input variable
-      tempinput<- tdoutput_con[i,j,1:1000]
+      tempinput<- tdoutput_con[93,j,1:1000]
       temp<- pcc(inputdata_con[1:1000,], tempinput, rank = T)
-      pcctdarray_con[i,j,k]<- temp$PRCC[[1]][k]
+      pcctdarray_con[2,j,k]<- temp$PRCC[[1]][k]
     }
   }
-}
+
 
 srcoutput_con<- adply(srctdarray_con[,,],2, cbind)
 # write.csv(srcoutput, file = paste(vpdir_output, "srcoutput.csv", sep=""))
@@ -82,32 +81,30 @@ pccoutput_con<- adply(pcctdarray_con[,,],2, cbind)
 srctdarray_exp<- array(data=NA, c(124,6,16), dimnames = list(seq(as.Date("1989/05/01"), as.Date("1989/09/01"), by = "days"),
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"),
                                                            c("Queen Strength", "Worker to Drone", "Drone-Mite Survivorship (%)", "Worker-Mite Survivorship (%)", "Forager Lifespan (days)", "Mite Imm Type", "Adult Slope", "Adult LD50", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life", "App Rate Exposed")))
-pcctdarray_exp<- array(data=NA, c(124,6,16), dimnames = list(seq(as.Date("1989/05/01"), as.Date("1989/09/01"), by = "days"), 
+pcctdarray_exp<- array(data=NA, c(2,6,16), dimnames = list(c(as.Date("1989/06/01"), as.Date("1989/08/01")), 
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)", "Colony Nectar (g)"), 
                                                            c("Queen Strength", "Worker to Drone", "Drone-Mite Survivorship (%)", "Worker-Mite Survivorship (%)", "Forager Lifespan (days)", "Mite Imm Type", "Adult Slope", "Adult LD50", "Adult Slope Contact", "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life", "App Rate Exposed")))
 
 #standard regression coefficients
-for (i in 1:124){  #4 month period around application exposure
+for (i in c(31,93)){  #4 month period around application exposure
   for (j in 1:6){   #output variable
     for (k in 1:16){  #input variable
       tempinput<- tdoutput_exp[i,j,1:1000]
       temp<- src(inputdata_exp[1:1000,], tempinput, rank = T)
-      srctdarray_exp[i,j,k]<- temp$SRRC[[1]][k]
+      srctdarray_exp[j,j,k]<- temp$SRRC[[1]][k]
     }
   }
 }
 
 
 #partial correlation coefficients
-for (i in 1:124){  #4 month period around application exposure
   for (j in 1:6){   #output variable
     for (k in 1:16){  #input variable
-      tempinput<- tdoutput_exp[i,j,1:1000]
+      tempinput<- tdoutput_exp[31,j,1:1000]
       temp<- pcc(inputdata_exp[1:1000,], tempinput, rank = T)
-      pcctdarray_exp[i,j,k]<- temp$PRCC[[1]][k]
+      pcctdarray_exp[1,j,k]<- temp$PRCC[[1]][k]
     }
   }
-}
 
 srcoutput_exp<- adply(srctdarray_exp[,,],2, cbind)
 # write.csv(srcoutput, file = paste(vpdir_output, "srcoutput.csv", sep=""))

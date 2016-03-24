@@ -23,10 +23,10 @@ for (r in 1:6){
 }
 
 #create PDF timeseries
-jpeg(filename= "fig_quantile_timeseries_asb.jpg", width = 200, height = 200, units= "px", quality=100, bg="white")
+pdf(file= paste(vpdir_output, "fig_quantile_timeseries_asb.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #time series plots
-par(mfrow=c(2,2), mar=c(2, 4, 2, 2), oma= c(2,2,2,2))
+par(mfrow=c(2,2), mar=c(2, 4, 2, 1), oma= c(5,1,5,1))
 
 for (r in c(1,5,2,4)){
   plot(timearray, tempout_con[,r,2], type = "l", ylim = c(0,max(tempout_con[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= paste(outvar[r], sep=" "))
@@ -38,10 +38,9 @@ for (r in c(1,5,2,4)){
   lines(timearray, tempout_exp[,r,3], type = "l", lty=2, col = "blue")
 }
 
-legend("topright", legend=c("Control 1st Quartile", "Control Median", "Control 3rd Quartile", "Exposed 1st Quartile", "Exposed Median", "Exposed 3rd Quartile"), col = c("blue","black","red","blue","black","red"), lty= c(1,1,1,2,2,2), cex=0.85)
-mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
-
+plot.new()
+legend("right",cex = 0.65,bty="n",xpd=TRUE,legend=c("Control Q1", "Control Q2", "Control Q3", "Exposed Q1", "Exposed Q2", "Exposed Q3"), col = c("blue","black","red","blue","black","red"), lty= c(1,1,1,2,2,2), horiz=TRUE)
 
 
 #TORNADO PLOTS ###########
@@ -51,70 +50,52 @@ datsrc_exp<- list()
 datpcc_con<- list()
 datpcc_exp<- list()
 
-for (i in 1:5) {
-  dfsrc_con<- mdply(srctdarray_con[i,1:6,1:12], cbind)
-  tdfsrc_con<- t(dfsrc_con)
-  colnames(tdfsrc_con)<- outvar
-  s<- melt(tdfsrc_con)
-  datsrc_con[[i]]<- s
-  
-  dfsrc_exp<- mdply(srctdarray_exp[i,1:6,1:12], cbind)
-  tdfsrc_exp<- t(dfsrc_exp)
-  colnames(tdfsrc_exp)<- outvar
-  v<- melt(tdfsrc_exp)
-  datsrc_exp[[i]]<- v
+for (i in c(31,93)) {
+  for(j in c(1,2)){
+    dfsrc_con<- mdply(srctdarray_con[i,1:6,1:12], cbind)
+    tdfsrc_con<- t(dfsrc_con)
+    colnames(tdfsrc_con)<- outvar
+    s<- melt(tdfsrc_con)
+    datsrc_con[[j]]<- s
+    
+    dfsrc_exp<- mdply(srctdarray_exp[i,1:6,1:12], cbind)
+    tdfsrc_exp<- t(dfsrc_exp)
+    colnames(tdfsrc_exp)<- outvar
+    v<- melt(tdfsrc_exp)
+    datsrc_exp[[j]]<- v
+  }
 }
 
 
-for (i in 1:5){
-  dfpcc_con<- mdply(pcctdarray_con[i,1:6,1:12], cbind)
-  tdfpcc_con<- t(dfpcc_con)
-  colnames(tdfpcc_con)<- outvar
-  p<- melt(tdfpcc_con)
-  datpcc_con[[i]]<- p
-  
-  dfpcc_exp<- mdply(pcctdarray_exp[i,1:6,1:12], cbind)
-  tdfpcc_exp<- t(dfpcc_exp)
-  colnames(tdfpcc_exp)<- outvar
-  u<- melt(tdfpcc_exp)
-  datpcc_exp[[i]]<- u
+for (i in c(31,93)){
+  for(j in c(1,2)){
+    dfpcc_con<- mdply(pcctdarray_con[i,1:6,1:12], cbind)
+    tdfpcc_con<- t(dfpcc_con)
+    colnames(tdfpcc_con)<- outvar
+    p<- melt(tdfpcc_con)
+    datpcc_con[[j]]<- p
+    
+    dfpcc_exp<- mdply(pcctdarray_exp[i,1:6,1:12], cbind)
+    tdfpcc_exp<- t(dfpcc_exp)
+    colnames(tdfpcc_exp)<- outvar
+    u<- melt(tdfpcc_exp)
+    datpcc_exp[[j]]<- u
+  }
 }
 
 #create PDF tornado
-pdf(file= paste(vpdir_output, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE)
+pdf(file= paste(vpdir_output, "fig_tornado_asb.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper="USr")
 #start figures
 #create plot pages
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),2), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(2,2), gp= gpar(cex = 0.6)))
 #start figures
-for (i in 1:length(timebreak)) { #loops by timebreak
-  aa<- ggplot(data=datsrc_con[[i]], aes(x= datsrc_con[[i]][[1]], y= datsrc_con[[i]][[3]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= paste("timebreak", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
-    facet_grid(. ~ Var2) +
-    theme_bw()
-  print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-  
-  cc<- ggplot(data=datsrc_exp[[i]], aes(x= datsrc_exp[[i]][[1]], y= datsrc_exp[[i]][[3]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= paste("timebreak", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
-    facet_grid(. ~ Var2,) +
-    theme_bw()
-  print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
-}
-
-grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),2), gp= gpar(cex = 0.6)))
-for (i in 1:length(timebreak)) { #loops by timebreak
+for (i in 1:2) { #loops by timebreak
   bb<- ggplot(data=datpcc_con[[i]], aes(x= datpcc_con[[i]][[1]], y= datpcc_con[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= paste("timebreak", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
+    labs(title= paste("Control PCC", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
@@ -123,7 +104,7 @@ for (i in 1:length(timebreak)) { #loops by timebreak
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= paste("timebreak", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
+    labs(title= paste("Exposed PCC", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
   print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
