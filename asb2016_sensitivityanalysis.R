@@ -62,13 +62,13 @@ for (i in 1:124){  #4 month period around application exposure
 }
 
 #partial correlation coefficients
-  for (j in 1:6){   #output variable
-    for (k in 1:16){  #input variable
-      tempinput<- tdoutput_con[93,j,1:1000]
-      temp<- pcc(inputdata_con[1:1000,], tempinput, rank = T)
-      pcctdarray_con[2,j,k]<- temp$PRCC[[1]][k]
-    }
+for (j in 1:6){   #output variable
+  for (k in 1:16){  #input variable
+    tempinput<- tdoutput_con[31,j,1:1000]
+    temp<- pcc(inputdata_con[1:1000,], tempinput, rank = T)
+    pcctdarray_con[1,j,k]<- temp$PRCC[[1]][k]
   }
+}
 
 
 srcoutput_con<- adply(srctdarray_con[,,],2, cbind)
@@ -98,13 +98,13 @@ for (i in c(31,93)){  #4 month period around application exposure
 
 
 #partial correlation coefficients
-  for (j in 1:6){   #output variable
-    for (k in 1:16){  #input variable
-      tempinput<- tdoutput_exp[31,j,1:1000]
-      temp<- pcc(inputdata_exp[1:1000,], tempinput, rank = T)
-      pcctdarray_exp[1,j,k]<- temp$PRCC[[1]][k]
-    }
+for (j in 1:6){   #output variable
+  for (k in 1:16){  #input variable
+    tempinput<- tdoutput_exp[93,j,1:1000]
+    temp<- pcc(inputdata_exp[1:1000,], tempinput, rank = T)
+    pcctdarray_exp[2,j,k]<- temp$PRCC[[1]][k]
   }
+}
 
 srcoutput_exp<- adply(srctdarray_exp[,,],2, cbind)
 # write.csv(srcoutput, file = paste(vpdir_output, "srcoutput.csv", sep=""))
