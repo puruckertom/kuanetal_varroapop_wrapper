@@ -107,3 +107,29 @@ for (i in 1:2) { #loops by timebreak
 }
 
 dev.off()
+
+
+
+df_plot <- data.frame(tdarray_exp[,1,], row.names=timearray)
+dfm_plot<- melt(df_plot)
+dfm_plot$timearray<- rep(timearray,1000)
+pdf(file= paste(vpdir_output, "fig_exposed_simulations_asb.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+ggplot() +
+  geom_line(data = dfm_plot, aes(x = timearray, y = value, group = variable)) +
+  xlab("Simulated Time Period") +
+  ylab("Colony Size") +
+  theme(aspect.ratio=0.5) +
+  ggtitle("Time Series of 1000 VarroaPop Exposed Simulations")
+dev.off()
+
+df_plot <- data.frame(tdarray_con[,1,], row.names=timearray)
+dfm_plot<- melt(df_plot)
+dfm_plot$timearray<- rep(timearray,1000)
+pdf(file= paste(vpdir_output, "fig_control_simulations_asb.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+ggplot() +
+  geom_line(data = dfm_plot, aes(x = timearray, y = value, group = variable)) +
+  xlab("Simulated Time Period") +
+  ylab("Colony Size") +
+  theme(aspect.ratio=0.5) +
+  ggtitle("Time Series of 1000 VarroaPop Non-exposed Simulations")
+dev.off()
