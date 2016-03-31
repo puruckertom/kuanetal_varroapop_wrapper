@@ -11,6 +11,7 @@ library(grid)
 library(gridExtra)
 library(sensitivity)
 library(abind)
+library(RColorBrewer)
 
 #echo environment
 Sys.info()
