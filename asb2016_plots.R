@@ -134,3 +134,7 @@ ggplot() +
   theme(aspect.ratio=0.5) +
   ggtitle("Time Series of 1000 VarroaPop Non-exposed Simulations")
 dev.off()
+
+
+#### SPIDER PLOTS ####
+

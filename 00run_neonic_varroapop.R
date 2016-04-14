@@ -30,7 +30,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
 }
 #carmen personal laptop
-if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local"||Sys.info()[4]=="Ashleys-MBP-2") {
+if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||Sys.info()[4]=="Ashleys-MBP-2") {
   vpdir<-path.expand("~/git/beeRpop/")
   vrp_filename <- "comparison.vrp"
 }
