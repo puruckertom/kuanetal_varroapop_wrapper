@@ -10,7 +10,5 @@
 /input/*.log
 .Rproj.user
 beeRpop.Rproj
-/sobol/input1/input*.txt
-/sobol/input2/input*.txt
-/sobol/output1/results*.txt
-/sobol/output2/results*.txt
+/sobol/input*/input*.txt
+/sobol/output*/results*.txt
