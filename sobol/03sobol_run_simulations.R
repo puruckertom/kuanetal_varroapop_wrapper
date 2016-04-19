@@ -34,9 +34,9 @@ vpdir_sobol_log <- c(paste(vpdir_sobol, "log1/", sep = ""), paste(vpdir_sobol, "
 #run simulations###########
 for (i in 1:32){
   for (ite in 1:Nsims){
-    input_file <- paste(vpdir_sobol_input[i], "input", ite, ".txt", sep="")
-    output_file <-  paste(vpdir_sobol_output[i], "output", ite, ".txt", sep="")
-    log_file <- paste(vpdir_sobol_log[i], "log", ite, ".txt", sep="")
+    input_file <- paste("input", ite, ".txt", sep="")
+    output_file <-  paste("output", ite, ".txt", sep="")
+    log_file <- paste("log", ite, ".txt", sep="")
     sobol_command<- paste(vpdir_exe, "VarroaPop_3_2_6_0.exe ", vpdir_exe, vrp_filename, " /b /or ", 
                           vpdir_sobol_output[i], output_file, " /i ", vpdir_sobol_input[i], input_file,
                           " /ol ", vpdir_sobol_log[i], log_file, sep="")
@@ -44,6 +44,3 @@ for (i in 1:32){
     system(sobol_command)
   }
 }
-
-uncoupledsobol <- sobol2007(model = NULL, inputdata_sobol, inputdata_sobol2)
-coupledsobol <- tell(uncoupledsobol, )

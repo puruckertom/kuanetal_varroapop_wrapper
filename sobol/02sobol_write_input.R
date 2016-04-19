@@ -76,6 +76,9 @@ for (i in 1:32){
     for (n in 1:Nparam){
       varroainput <- paste(parname[n], b[[n]], sep= "")
       write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= TRUE)
+      print(n)
+      print(ite)
+      print(i)
     }
   }
 }
