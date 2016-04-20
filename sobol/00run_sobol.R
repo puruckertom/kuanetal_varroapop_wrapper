@@ -16,8 +16,8 @@ version
 #tom epa windows 
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("k:/git/beeRpop/")
-  #vrp_filename <- "comparison_stp.vrp"
-  vrp_filename <- "comparison.vrp"
+  vrp_filename <- "comparison_stp.vrp"
+  #vrp_filename <- "comparison.vrp"
 }
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
