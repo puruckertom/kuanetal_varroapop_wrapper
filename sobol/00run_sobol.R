@@ -16,7 +16,8 @@ version
 #tom epa windows 
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("k:/git/beeRpop/")
-  vrp_filename <- "comparison_stp.vrp"
+  #vrp_filename <- "comparison_stp.vrp"
+  vrp_filename <- "comparison.vrp"
 }
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
@@ -69,10 +70,10 @@ simend <- "12/31/1990"
 # define distributions for input parameters
 source(paste(vpdir_sobol,"01sobol_parameterization.R",sep = ""))
 # create and save input text files for simulations
-source(paste(vpdir,"02sobol_write_input.R",sep = ""))
+source(paste(vpdir_sobol,"02sobol_write_input.R",sep = ""))
 #may need to turn off virus checker!
 # automate simulations for 'Nsims' number of simulations
-source(paste(vpdir,"03sobol_run_simulations.R",sep = ""))
+source(paste(vpdir_sobol,"03sobol_run_simulations.R",sep = ""))
 # read text files and save results in 3d arrays
 #source(paste(vpdir,"04sobol_read_output.R",sep = ""))
 # load input and output objects into environment

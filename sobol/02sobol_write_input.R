@@ -71,7 +71,9 @@ parname <- c(parameter1, parameter2, parameter3, parameter4, parameter5, paramet
 inputs<- array(data=NA, Nparam)
 for (i in 1:32){
   pth <- vpdir_sobol_input[i]
+  df <- sb_inputs[,,i]
   for (ite in 1:Nsims){
+    b <- df[ite,]
     con <- file(paste(pth,"input", ite, ".txt", sep=""))
     for (n in 1:Nparam){
       varroainput <- paste(parname[n], b[[n]], sep= "")
