@@ -66,24 +66,44 @@ parname <- c(parameter1, parameter2, parameter3, parameter4, parameter5, paramet
              parameter32, parameter33, parameter34, parameter35, parameter36, parameter37,
              parameter38, parameter39, parameter40, parameter41)
 
-#######
-# save each set of inputs for simulation to txt files
-#######
+
+
+inputs<- array(data=NA, Nparam)
 for (i in 1:32){
-  df <- sb_inputs[,,i]
+  pth <- vpdir_sobol_input[i]
   for (ite in 1:Nsims){
-    b <- df[ite,]
+    con <- file(paste(pth,"input", ite, ".txt", sep=""))
     for (n in 1:Nparam){
       varroainput <- paste(parname[n], b[[n]], sep= "")
-      if (n == 1){
-        write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= FALSE)
-      }
-      else {
-        write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= TRUE)
-      }
-      print(n)
-      print(ite)
-      print(i)
+      inputs[n]<- varroainput
     }
+    writeLines(inputs,con)
+    close(con)
   }
 }
+
+
+
+
+# #######
+# # save each set of inputs for simulation to txt files
+# #######
+# for (i in 1:32){
+#   df <- sb_inputs[,,i]
+#   for (ite in 1:Nsims){
+#     b <- df[ite,]
+#     for (n in 1:Nparam){
+#       varroainput <- paste(parname[n], b[[n]], sep= "")
+#       if (n == 1){
+#         write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= FALSE)
+#       }
+#       else {
+#         write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= TRUE)
+#       }
+#       print(n)
+#       print(ite)
+#       print(i)
+#     }
+#   }
+# }
+
