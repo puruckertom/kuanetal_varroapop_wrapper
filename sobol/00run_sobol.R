@@ -40,6 +40,10 @@ if(Sys.info()[4]=="LZ2032EAKANAREK"){
 if(Sys.info()[4]=="stp-air.local"){
   vpdir<-path.expand("~/git/beeRpop/")
 }
+#kurt epa
+if(Sys.info()[4]=="L2626UKWOLFE2"){
+  vpdir<-path.expand("G:/Carmen/beeRpop/")
+}
 
 #subdirectories
 vpdir_input <- paste(vpdir, "input/", sep = "")
