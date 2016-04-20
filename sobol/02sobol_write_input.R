@@ -75,7 +75,12 @@ for (i in 1:32){
     b <- df[ite,]
     for (n in 1:Nparam){
       varroainput <- paste(parname[n], b[[n]], sep= "")
-      write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= TRUE)
+      if (n == 1){
+        write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= FALSE)
+      }
+      else {
+        write(varroainput, file= paste(vpdir_sobol_input[i], "input", ite, ".txt", sep=""), append= TRUE)
+      }
       print(n)
       print(ite)
       print(i)

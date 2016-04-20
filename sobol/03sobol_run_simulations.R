@@ -37,7 +37,7 @@ for (i in 1:32){
     input_file <- paste("input", ite, ".txt", sep="")
     output_file <-  paste("output", ite, ".txt", sep="")
     log_file <- paste("log", ite, ".txt", sep="")
-    sobol_command<- paste(vpdir_exe, "VarroaPop_3_2_6_0.exe ", vpdir_exe, vrp_filename, " /b /or ", 
+    sobol_command<- paste(vpdir_exe, "VarroaPop_3_2_6_2.exe ", vpdir_exe, vrp_filename, " /b /or ", 
                           vpdir_sobol_output[i], output_file, " /i ", vpdir_sobol_input[i], input_file,
                           " /ol ", vpdir_sobol_log[i], log_file, sep="")
     print(sobol_command)
