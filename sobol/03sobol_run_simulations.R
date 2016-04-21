@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 vpdir_sobol_output <- c(paste(vpdir_sobol, "output01/", sep = ""), paste(vpdir_sobol, "output02/", sep = ""),
                        paste(vpdir_sobol, "output03/", sep = ""), paste(vpdir_sobol, "output04/", sep = ""),
                        paste(vpdir_sobol, "output05/", sep = ""), paste(vpdir_sobol, "output06/", sep = ""),
@@ -8,12 +9,7 @@ vpdir_sobol_output <- c(paste(vpdir_sobol, "output01/", sep = ""), paste(vpdir_s
                        paste(vpdir_sobol, "output15/", sep = ""), paste(vpdir_sobol, "output16/", sep = ""),
                        paste(vpdir_sobol, "output17/", sep = ""), paste(vpdir_sobol, "output18/", sep = ""),
                        paste(vpdir_sobol, "output19/", sep = ""), paste(vpdir_sobol, "output20/", sep = ""),
-                       paste(vpdir_sobol, "output21/", sep = ""), paste(vpdir_sobol, "output22/", sep = ""),
-                       paste(vpdir_sobol, "output23/", sep = ""), paste(vpdir_sobol, "output24/", sep = ""),
-                       paste(vpdir_sobol, "output25/", sep = ""), paste(vpdir_sobol, "output26/", sep = ""),
-                       paste(vpdir_sobol, "output27/", sep = ""), paste(vpdir_sobol, "output28/", sep = ""),
-                       paste(vpdir_sobol, "output29/", sep = ""), paste(vpdir_sobol, "output30/", sep = ""),
-                       paste(vpdir_sobol, "output31/", sep = ""), paste(vpdir_sobol, "output32/", sep = ""))
+                       paste(vpdir_sobol, "output21/", sep = ""), paste(vpdir_sobol, "output22/", sep = ""))
 vpdir_sobol_log <- c(paste(vpdir_sobol, "log01/", sep = ""), paste(vpdir_sobol, "log02/", sep = ""),
                      paste(vpdir_sobol, "log03/", sep = ""), paste(vpdir_sobol, "log04/", sep = ""),
                      paste(vpdir_sobol, "log05/", sep = ""), paste(vpdir_sobol, "log06/", sep = ""),
@@ -24,13 +20,7 @@ vpdir_sobol_log <- c(paste(vpdir_sobol, "log01/", sep = ""), paste(vpdir_sobol, 
                      paste(vpdir_sobol, "log15/", sep = ""), paste(vpdir_sobol, "log16/", sep = ""),
                      paste(vpdir_sobol, "log17/", sep = ""), paste(vpdir_sobol, "log18/", sep = ""),
                      paste(vpdir_sobol, "log19/", sep = ""), paste(vpdir_sobol, "log20/", sep = ""),
-                     paste(vpdir_sobol, "log21/", sep = ""), paste(vpdir_sobol, "log22/", sep = ""),
-                     paste(vpdir_sobol, "log23/", sep = ""), paste(vpdir_sobol, "log24/", sep = ""),
-                     paste(vpdir_sobol, "log25/", sep = ""), paste(vpdir_sobol, "log26/", sep = ""),
-                     paste(vpdir_sobol, "log27/", sep = ""), paste(vpdir_sobol, "log28/", sep = ""),
-                     paste(vpdir_sobol, "log29/", sep = ""), paste(vpdir_sobol, "log30/", sep = ""),
-                     paste(vpdir_sobol, "log31/", sep = ""), paste(vpdir_sobol, "log32/", sep = ""))
-
+                     paste(vpdir_sobol, "log21/", sep = ""), paste(vpdir_sobol, "log22/", sep = ""))
 #run simulations###########
 for (i in 1:length(vpdir_sobol_input)){
   for (ite in 1:5000){
@@ -44,3 +34,5 @@ for (i in 1:length(vpdir_sobol_input)){
     system(sobol_command)
   }
 }
+
+>>>>>>> 2c7cf3c3b104687c1622318617f01ebba336abb9
