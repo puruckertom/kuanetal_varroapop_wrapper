@@ -31,6 +31,7 @@ if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||S
 #carmen epa desktop
 if(Sys.info()[4]=="DZ2626UCKUAN"){
   vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
+  vrp_filename <- "comparison.vrp"
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){

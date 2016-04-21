@@ -14,11 +14,11 @@ vpdir_sobol_output <- c(paste(vpdir_sobol, "output01/", sep = ""), paste(vpdir_s
                        paste(vpdir_sobol, "output27/", sep = ""), paste(vpdir_sobol, "output28/", sep = ""),
                        paste(vpdir_sobol, "output29/", sep = ""), paste(vpdir_sobol, "output30/", sep = ""),
                        paste(vpdir_sobol, "output31/", sep = ""), paste(vpdir_sobol, "output32/", sep = ""))
-vpdir_sobol_log <- c(paste(vpdir_sobol, "log1/", sep = ""), paste(vpdir_sobol, "log2/", sep = ""),
-                     paste(vpdir_sobol, "log3/", sep = ""), paste(vpdir_sobol, "log4/", sep = ""),
-                     paste(vpdir_sobol, "log5/", sep = ""), paste(vpdir_sobol, "log6/", sep = ""),
-                     paste(vpdir_sobol, "log7/", sep = ""), paste(vpdir_sobol, "log8/", sep = ""),
-                     paste(vpdir_sobol, "log9/", sep = ""), paste(vpdir_sobol, "log10/", sep = ""),
+vpdir_sobol_log <- c(paste(vpdir_sobol, "log01/", sep = ""), paste(vpdir_sobol, "log02/", sep = ""),
+                     paste(vpdir_sobol, "log03/", sep = ""), paste(vpdir_sobol, "log04/", sep = ""),
+                     paste(vpdir_sobol, "log05/", sep = ""), paste(vpdir_sobol, "log06/", sep = ""),
+                     paste(vpdir_sobol, "log07/", sep = ""), paste(vpdir_sobol, "log08/", sep = ""),
+                     paste(vpdir_sobol, "log09/", sep = ""), paste(vpdir_sobol, "log10/", sep = ""),
                      paste(vpdir_sobol, "log11/", sep = ""), paste(vpdir_sobol, "log12/", sep = ""),
                      paste(vpdir_sobol, "log13/", sep = ""), paste(vpdir_sobol, "log14/", sep = ""),
                      paste(vpdir_sobol, "log15/", sep = ""), paste(vpdir_sobol, "log16/", sep = ""),
@@ -32,12 +32,12 @@ vpdir_sobol_log <- c(paste(vpdir_sobol, "log1/", sep = ""), paste(vpdir_sobol, "
                      paste(vpdir_sobol, "log31/", sep = ""), paste(vpdir_sobol, "log32/", sep = ""))
 
 #run simulations###########
-for (i in 1:32){
-  for (ite in 1:Nsims){
+for (i in 1:length(vpdir_sobol_input)){
+  for (ite in 1:5000){
     input_file <- paste("input", ite, ".txt", sep="")
     output_file <-  paste("output", ite, ".txt", sep="")
     log_file <- paste("log", ite, ".txt", sep="")
-    sobol_command<- paste(vpdir_exe, "VarroaPop_3_2_6_2.exe ", vpdir_exe, vrp_filename, " /b /or ", 
+    sobol_command<- paste(vpdir_sobol_input[i], "VarroaPop_3_2_6_2.exe ", vpdir_sobol_input[i], vrp_filename, " /b /or ", 
                           vpdir_sobol_output[i], output_file, " /i ", vpdir_sobol_input[i], input_file,
                           " /ol ", vpdir_sobol_log[i], log_file, sep="")
     print(sobol_command)
