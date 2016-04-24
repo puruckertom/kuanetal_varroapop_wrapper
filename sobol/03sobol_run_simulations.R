@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 vpdir_sobol_output <- c(paste(vpdir_sobol, "output01/", sep = ""), paste(vpdir_sobol, "output02/", sep = ""),
                        paste(vpdir_sobol, "output03/", sep = ""), paste(vpdir_sobol, "output04/", sep = ""),
                        paste(vpdir_sobol, "output05/", sep = ""), paste(vpdir_sobol, "output06/", sep = ""),
@@ -22,7 +21,7 @@ vpdir_sobol_log <- c(paste(vpdir_sobol, "log01/", sep = ""), paste(vpdir_sobol, 
                      paste(vpdir_sobol, "log19/", sep = ""), paste(vpdir_sobol, "log20/", sep = ""),
                      paste(vpdir_sobol, "log21/", sep = ""), paste(vpdir_sobol, "log22/", sep = ""))
 #run simulations###########
-for (i in 1:length(vpdir_sobol_input)){
+for (i in 16:length(vpdir_sobol_input)){
   for (ite in 1:5000){
     input_file <- paste("input", ite, ".txt", sep="")
     output_file <-  paste("output", ite, ".txt", sep="")
@@ -35,4 +34,3 @@ for (i in 1:length(vpdir_sobol_input)){
   }
 }
 
->>>>>>> 2c7cf3c3b104687c1622318617f01ebba336abb9
