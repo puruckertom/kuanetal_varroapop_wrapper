@@ -1,5 +1,4 @@
 # load up results into a 3d array dataframe ######
-
 df <- read.table(paste(vpdir_sobol_output[1],"output",1,".txt", sep=""), header= FALSE, sep= "", 
                  skip = 6, stringsAsFactors = FALSE, row.names=NULL)
 Noutvar<- dim(df)
@@ -13,12 +12,17 @@ timediff <- timearray[3]-timearray[2]
 timearray[1] <- timearray[2]-timediff
 length(timearray)
 
-# read output files
-sb_output <- array(data = NA, c(Noutvar[1], Noutvar[2], Nsims))
-dim(sb_output)
+# parallelize
+library(doParallel)
+cl <- makeCluster(4)
+registerDoParallel(cl)
+memory.limit(size=30000)
 
-for (i in 1:length(vpdir_sobol_output)){
+# read output files
+foreach(i = 1:length(vpdir_sobol_output)) %dopar% {
+  sb_output <- array(data = NA, c(Noutvar[1], Noutvar[2], Nsims))
   for (n in 1:Nsims) {
+    library(abind)
     df <- read.table(paste(vpdir_sobol_output[i],"output",n,".txt", sep=""), header= FALSE, sep= "", 
                      skip = 6, stringsAsFactors = FALSE, row.names=NULL)
     newarray <- cbind(timearray, df[,2:Noutvar[2]])
@@ -27,7 +31,10 @@ for (i in 1:length(vpdir_sobol_output)){
     print(n)
   }
   assign(paste("sb",i,"_output", sep=""), sb_output)
+  con <- paste(vpdir_sobol, "sb",i,"_output.RData", sep="")
+  save(sb_output, file= con, compress = TRUE)
 }
+
 
 VP_results<- abind(sb1_output,sb2_output,sb3_output,sb4_output,sb5_output,sb6_output,sb7_output,
                    sb8_output,sb9_output,sb10_output,sb11_output,sb12_output,sb13_output,
