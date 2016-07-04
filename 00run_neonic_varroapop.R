@@ -23,6 +23,7 @@ version
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("k:/git/beeRpop/")
   vrp_filename <- "comparison_stp.vrp"
+  vpdir_exe <- path.expand("c:/Rtools/")
 }
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
@@ -51,7 +52,7 @@ vpdir_input <- paste(vpdir, "input/", sep = "")
 vpdir_output <- paste(vpdir, "output/", sep = "")
 vpdir_log <- paste(vpdir, "log/", sep = "")
 vpdir_fig <- paste(vpdir, "fig/", sep = "")
-vpdir_exe <- paste(vpdir, "exe/", sep = "")
+#vpdir_exe <- paste(vpdir, "exe/", sep = "")
 vpdir_io <- paste(vpdir, "io/", sep = "")
 vpdir_in_exp <- paste(vpdir_input, "exposed/", sep = "")
 vpdir_in_con <- paste(vpdir_input, "control/", sep = "")
@@ -61,7 +62,7 @@ vpdir_weather <- paste(vpdir, "weather/", sep = "")
 vpdir_sobol <- paste(vpdir, "sobol/", sep = "")
 
 #number of simulations 
-Nsims <- 5000
+Nsims <- 3
 
 #weather file
 #can be .dvf or .wth
