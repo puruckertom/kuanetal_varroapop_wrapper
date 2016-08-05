@@ -80,20 +80,20 @@ for (n in 1:nrows){
 }
 
 #create figure 1
-pdf(file= paste(vpdir_output, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
-#start figures
-par(mfrow=c(5,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
-plot(timearray, cp_con, type="l", ylab = "P(Colony Size) > 0", main= "time1", ylim=c(0,1), xlab=NA)
-lines(timearray, cp_exp, type="l", lty = 2, col="blue")
-plot(timearray, fa_con, type="l", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
-lines(timearray, fa_exp, type="l", lty = 2, col="blue")
-plot(timearray, aw_con, type="l", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
-lines(timearray, aw_exp, type="l", lty = 2, col="blue")
-plot(timearray, fm_con, type="l", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
-lines(timearray, fm_exp, type="l", lty = 2, col="blue")
-plot(timearray, dfr_con, type="l", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
-lines(timearray, dfr_exp, type="l", lty = 2, col="blue")
-mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
+pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
+  #start figures
+  par(mfrow=c(3,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+  plot(timearray, cp_con, type="l", col="blue", ylab = "P(Colony Size) > 0", main= "Time", ylim=c(0,1), xlab=NA)
+  lines(timearray, cp_exp, type="l", lty = 2, col="red")
+  plot(timearray, fa_con, type="l", col="blue", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
+  lines(timearray, fa_exp, type="l", lty = 2, col="red")
+  plot(timearray, aw_con, type="l", col="blue", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
+  lines(timearray, aw_exp, type="l", lty = 2, col="red")
+  #plot(timearray, fm_con, type="l", col="blue", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
+  #lines(timearray, fm_exp, type="l", lty = 2, col="red")
+  #plot(timearray, dfr_con, type="l", col="blue", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
+  #lines(timearray, dfr_exp, type="l", lty = 2, col="red")
+  mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
 
 
