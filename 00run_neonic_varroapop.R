@@ -22,30 +22,44 @@ version
 #tom epa windows
 if(Sys.info()[4]=="DC2626UTPURUCKE"){
   vpdir<-path.expand("C:/git/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
 }
 #tom epa windows 2
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("k:/git/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison_stp_epaw.vrp"
 }
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
-}
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
+  }
 #carmen personal laptop
 if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
   vpdir<-path.expand("~/git/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
 }
 #carmen epa desktop
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:/gitrepo/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
   vpdir <- path.expand("C:/Users/AKanarek/Documents/GitHub/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
 } 
 #tom laptop
 if(Sys.info()[4]=="stp-air.local"){
   vpdir<-path.expand("~/git/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
 }
 
 #subdirectories
@@ -61,15 +75,17 @@ vpdir_out_exp <- paste(vpdir_output, "exposed/", sep = "")
 vpdir_out_con <- paste(vpdir_output, "control/", sep = "")
 vpdir_weather <- paste(vpdir, "weather/", sep = "")
 
+#varroapop executable version
+vp_binary <- "VarroaPop_3_2_6_3.exe"
+vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
+
 #number of simulations 
 Nsims <- 1000
-
-# varroapop file (without directory, the file needs to be in vpdir_exe above)
-vrp_filename <- "comparison.vrp"
 
 #weather file
 #can be .dvf or .wth
 vrp_weather <- "w93193-tempadj.dvf"
+
 #simulation start and end
 #must have mm/dd/yyyy format
 simstart <- "01/01/1988"
