@@ -25,7 +25,8 @@ print(paste(file.exists(weather_input), ": weather file at", weather_input))
 #varroapop <-> weather file message
 print("the .vrp file has to know where the weather file is, R cannot tell it!")
 
-#on epa windows symantec is returnign a security threat every ~45 simulations
+#on epa windows symantec is returning a security threat every ~45 simulations
+#disable it
 #CONTROL
 for (i in 1:Nsims) {
   # n<-inputtest[i]

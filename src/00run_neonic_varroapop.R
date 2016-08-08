@@ -66,7 +66,7 @@ if(Sys.info()[4]=="stp-air.local"){
 vpdir_input <- paste(vpdir, "input/", sep = "")
 vpdir_output <- paste(vpdir, "output/", sep = "")
 vpdir_log <- paste(vpdir, "log/", sep = "")
-vpdir_fig <- paste(vpdir, "fig/", sep = "")
+vpdir_fig <- paste(vpdir, "figures/", sep = "")
 vpdir_exe <- paste(vpdir, "exe/", sep = "")
 vpdir_io <- paste(vpdir, "io/", sep = "")
 vpdir_in_exp <- paste(vpdir_input, "exposed/", sep = "")
