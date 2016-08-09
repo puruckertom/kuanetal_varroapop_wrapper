@@ -1,4 +1,7 @@
-/sobol*
+/sobol/input01/*
+/sobol/output?/results*.txt
+/sobol/output??/results*.txt
+
 /output/tdarray.csv
 /output/results*.txt
 /output/control/results*.txt
@@ -11,3 +14,6 @@
 /input/*.log
 .Rproj.user
 beeRpop.Rproj
+
+
+

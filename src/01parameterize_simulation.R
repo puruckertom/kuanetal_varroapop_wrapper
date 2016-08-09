@@ -64,11 +64,17 @@ apprate_con<- runif(Nsims, 0, 0.0) #EAppRate (lb/A)
 apprate_exp<- runif(Nsims, 0, 10) #EAppRate (lb/A)
 foliar_true<- rep("true", Nsims)
 foliar_false<- rep("false", Nsims)
+foliar_appdate<- rep("06/07/1989", Nsims)
+foliar_begin<- rep("06/05/1989", Nsims)
+foliar_end<- rep("06/28/1989", Nsims)
+
 
 inputdata_con<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
                            adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_con, foliar_false)
 inputdata_exp<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
-                           adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_exp, foliar_true)
+                           adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_exp, foliar_true,
+                           foliar_appdate, foliar_begin, foliar_end)
+
 #putting the input in the io directory so it can be read from there later
 write.csv(inputdata_con, file = paste(vpdir_out_con, "inputdata_con.csv", sep = ""))
 write.csv(inputdata_exp, file = paste(vpdir_out_exp, "inputdata_exp.csv", sep = ""))

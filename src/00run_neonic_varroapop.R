@@ -34,11 +34,12 @@ if(Sys.info()[4]=="DZ2626UTPURUCKE"){
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
+<<<<<<< HEAD:src/00run_neonic_varroapop.R
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
   }
 #carmen personal laptop
-if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
+if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||Sys.info()[4]=="Ashleys-MBP-2") {
   vpdir<-path.expand("~/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
@@ -46,6 +47,12 @@ if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
 #carmen epa desktop
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:/gitrepo/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison.vrp"
+}
+#carmen epa desktop 2
+if(Sys.info()[4]=="DZ2626UCKUAN"){
+  vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
 }
@@ -74,6 +81,7 @@ vpdir_in_con <- paste(vpdir_input, "control/", sep = "")
 vpdir_out_exp <- paste(vpdir_output, "exposed/", sep = "")
 vpdir_out_con <- paste(vpdir_output, "control/", sep = "")
 vpdir_weather <- paste(vpdir, "weather/", sep = "")
+vpdir_sobol <- paste(vpdir, "sobol/", sep = "")
 
 #varroapop executable version
 vp_binary <- "VarroaPop_3_2_6_3.exe"
@@ -81,6 +89,7 @@ vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
 
 #number of simulations 
 Nsims <- 1000
+
 
 #weather file
 #can be .dvf or .wth
@@ -92,14 +101,32 @@ simstart <- "01/01/1988"
 simend <- "12/31/1990"
 
 #run everything
+# define distributions for input parameters
 source(paste(vpdir,"01parameterize_simulation.R",sep = ""))
+
 #echo the first log file
 scan(file = paste(vpdir_log, "log1.txt", sep=""), what = "raw")
-source(paste(vpdir,"02simulate_w_exe.R",sep = ""))
-source(paste(vpdir,"03read_output.R",sep = ""))
-source(paste(vpdir,"04load_io.R",sep = ""))
-source(paste(vpdir,"05sensitivity_analyses.R",sep = ""))
-source(paste(vpdir,"06plotting_neonic_generic.R",sep = ""))
+
+# create and save input text files for simulations
+source(paste(vpdir,"02write_input.R",sep = ""))
+
+#may need to turn off virus checker!
+# automate simulations for 'Nsims' number of simulations
+source(paste(vpdir,"03simulate_w_exe.R",sep = ""))
+
+# read text files and save results in 3d arrays
+source(paste(vpdir,"04read_output.R",sep = ""))
+
+# load input and output objects into environment
+source(paste(vpdir,"05load_io.R",sep = ""))
+
+
+# run sensitivity analysis on tdarrays
+source(paste(vpdir,"06sensitivity_analyses.R",sep = ""))
+
+# plot results
+source(paste(vpdir,"07plotting_neonic_convsexp.R",sep = ""))
+
 
 ##########################################################
 # #git stuff - you only need to do this once
