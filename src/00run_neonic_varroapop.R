@@ -34,12 +34,12 @@ if(Sys.info()[4]=="DZ2626UTPURUCKE"){
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
-<<<<<<< HEAD:src/00run_neonic_varroapop.R
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
   }
 #carmen personal laptop
-if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||Sys.info()[4]=="Ashleys-MBP-2") {
+if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||
+    Sys.info()[4]=="Ashleys-MBP-2"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
   vpdir<-path.expand("~/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
@@ -90,10 +90,10 @@ vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
 #number of simulations 
 Nsims <- 1000
 
-
 #weather file
 #can be .dvf or .wth
 vrp_weather <- "w93193-tempadj.dvf"
+#vrp_weather <- "Midwest5Yr.wth"
 
 #simulation start and end
 #must have mm/dd/yyyy format
@@ -154,4 +154,3 @@ source(paste(vpdir,"07plotting_neonic_convsexp.R",sep = ""))
 # git fetch
 # git pull
 # git commit -am "some explanatory message about what this commit was about"
-# git push
