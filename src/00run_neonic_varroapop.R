@@ -1,4 +1,3 @@
-<<<<<<< HEAD:src/00run_neonic_varroapop.R
 #check to make sure required packages are installed
 list.of.packages <- c("plyr", "reshape2", "ggplot2", "grid", "gridExtra", "sensitivity", "abind")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
@@ -37,7 +36,7 @@ if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
-  }
+}
 #carmen personal laptop
 if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||
     Sys.info()[4]=="Ashleys-MBP-2"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
