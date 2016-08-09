@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/00run_neonic_varroapop.R
 #check to make sure required packages are installed
 list.of.packages <- c("plyr", "reshape2", "ggplot2", "grid", "gridExtra", "sensitivity", "abind")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]

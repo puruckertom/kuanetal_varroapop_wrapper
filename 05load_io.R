@@ -30,3 +30,4 @@ for(i in 1:length(inputdata_exp)){assign(names(inputdata_exp)[i], inputdata_exp[
 #withdraw miteimmtype from list
 #listinput<- as.list(linputdata[c(1:5,7:16)]) 
 outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)", "Colony Nectar")
+resvar<- c(1,3,4,10,18,20)

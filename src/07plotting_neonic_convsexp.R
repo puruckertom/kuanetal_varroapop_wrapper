@@ -223,5 +223,4 @@ for (i in 1:length(timebreak)) { #loops by timebreak
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
 }
-
 dev.off()
