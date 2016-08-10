@@ -102,13 +102,13 @@ temparray_con <- tdarray_con[1:nrows,resvar,1:Nsims]
 temparray_exp <- tdarray_exp[1:nrows,resvar,1:Nsims]
 dimnames(temparray_con)<- list(c(as.character(timearray)), c(outvar))
 dimnames(temparray_exp)<- list(c(as.character(timearray)), c(outvar))
-tempout_con<- array(data=NA, c(nrows,6,3), dimnames = list(c(as.character(timearray)), 
-                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"),
+tempout_con<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
+                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"),
                                                            c("25%","50%","75%")))
-tempout_exp<- array(data=NA, c(nrows,6,3), dimnames = list(c(as.character(timearray)), 
-                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)","Colony Nectar"), 
+tempout_exp<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
+                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
                                                            c("25%","50%","75%")))
-for (r in 1:6){
+for (r in 1:5){
   for (t in 1:nrows){
     p<- quantile(temparray_con[t, r, 1:Nsims])
     z<- quantile(temparray_exp[t, r, 1:Nsims])
@@ -125,54 +125,56 @@ for (r in 1:6){
 pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #time series plots
-par(mfrow=c(6,2), mar=c(2, 4, 1, 0.5), oma= c(3,2,2,6.5))
+par(mfrow=c(5,2), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
 for (r in 1:6){
   plot(timearray, tempout_con[,r,2], type = "l", ylim = c(0,max(tempout_con[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= paste(outvar[r], "Control", sep=" "))
   lines(timearray, tempout_con[,r,1], type = "l", lty= 2, col = "red")
-  lines(timearray, tempout_con[,r,3], type = "l", lty=4, col = "blue")
+  lines(timearray, tempout_con[,r,3], type = "l", lty= 4, col = "blue")
   
   plot(timearray, tempout_exp[,r,2], type = "l", ylim = c(0,max(tempout_exp[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= paste(outvar[r], "Exposed", sep=" "))
   lines(timearray, tempout_exp[,r,1], type = "l", lty= 2, col = "red")
-  lines(timearray, tempout_exp[,r,3], type = "l", lty=4, col = "blue")
+  lines(timearray, tempout_exp[,r,3], type = "l", lty= 4, col = "blue")
 }
 mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
 
 #tornado plots
-invar<- c("Drone-Mite Survivorship", "Forager Lifespan", "Queen Strength", "Worker:Drone","Worker-Mite Survivorship", "Adult Slope Contact","Adult LD50 Contact", "Larva Slope", "Larva LD50","KOW","KOC","Half Life")
+invar<- c("Queen Strength", "Worker to Drone", "Drone-Mite Survivorship (%)", "Worker-Mite Survivorship (%)", 
+  "Forager Lifespan (days)", "Mite Imm Type", "Adult Slope", "Adult LD50", "Adult Slope Contact", 
+  "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")
 datsrc_con<- list()
 datsrc_exp<- list()
 datpcc_con<- list()
 datpcc_exp<- list()
 
 for (i in 1:5) {
-  dfsrc_con<- mdply(srctdarray_con[i,1:6,1:12], cbind)
+  dfsrc_con<- mdply(srctdarray_con[i,1:5,1:15], cbind)
   tdfsrc_con<- t(dfsrc_con)
   colnames(tdfsrc_con)<- outvar
   s<- melt(tdfsrc_con)
   datsrc_con[[i]]<- s
   
-  dfsrc_exp<- mdply(srctdarray_exp[i,1:6,1:12], cbind)
+  dfsrc_exp<- mdply(srctdarray_exp[i,1:5,1:15], cbind)
   tdfsrc_exp<- t(dfsrc_exp)
   colnames(tdfsrc_exp)<- outvar
-  s<- melt(tdfsrc_exp)
-  datsrc_exp[[i]]<- s
+  m<- melt(tdfsrc_exp)
+  datsrc_exp[[i]]<- m
 }
 
 
 for (i in 1:5){
-  dfpcc_con<- mdply(pcctdarray_con[i,1:6,1:12], cbind)
+  dfpcc_con<- mdply(pcctdarray_con[i,1:5,1:15], cbind)
   tdfpcc_con<- t(dfpcc_con)
   colnames(tdfpcc_con)<- outvar
   p<- melt(tdfpcc_con)
   datpcc_con[[i]]<- p
   
-  dfpcc_exp<- mdply(pcctdarray_exp[i,1:6,1:12], cbind)
+  dfpcc_exp<- mdply(pcctdarray_exp[i,1:5,1:15], cbind)
   tdfpcc_exp<- t(dfpcc_exp)
   colnames(tdfpcc_exp)<- outvar
-  p<- melt(tdfpcc_exp)
-  datpcc_exp[[i]]<- p
+  n<- melt(tdfpcc_exp)
+  datpcc_exp[[i]]<- n
 }
 
 #create PDF tornado
