@@ -68,6 +68,11 @@ if(Sys.info()[4]=="stp-air.local"){
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
 }
+if(Sys.info()[4]=="DZ2626UKWOLFE"){
+  vpdir<-path.expand("E:/VarroaPop/beeRpop/")
+  # varroapop file (without directory, the file needs to be in vpdir_exe above)
+  vrp_filename <- "comparison_kurt.vrp"
+}
 
 #subdirectories
 vpdir_input <- paste(vpdir, "input/", sep = "")
