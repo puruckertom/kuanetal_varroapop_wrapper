@@ -122,7 +122,7 @@ for (r in 1:6){
 }
 
 #create PDF timeseries
-pdf(file= paste(vpdir_output, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #time series plots
 par(mfrow=c(6,2), mar=c(2, 4, 1, 0.5), oma= c(3,2,2,6.5))
@@ -176,7 +176,7 @@ for (i in 1:5){
 }
 
 #create PDF tornado
-pdf(file= paste(vpdir_output, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_fig, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #create plot pages
 grid.newpage()
