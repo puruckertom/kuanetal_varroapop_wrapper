@@ -34,6 +34,10 @@ for (i in 1:Nsims) {
   inputvalue14 <- koc[i]
   parameter15 <- ("AIHalfLife=") #ai half life (days)
   inputvalue15 <- halflife[i]
+  parameter16 <- ("EAppRate=") #application rate (lb/A)
+  inputvalue16<- apprate_con[i]
+  parameter17 <- ("FoliarEnabled=") #foliar spray enable
+  inputvalue17<- foliar_false[i]
   
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
