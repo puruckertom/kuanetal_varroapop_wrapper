@@ -14,6 +14,7 @@ inputdf<- data.frame(weather_file, sim_start, sim_end)
 #drneggs <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, drneggs) #ICDroneEggs
 #wkreggs <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, wkreggs) #ICWorkerEggs
 queenstrength<- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, queenstrength) #ICQueenStrength
+RQQueenStrength<- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, RQQueenStrength) #ICQueenStrength
 fgrlifespan <- runif(Nsims, 4, 16) ; inputdf <- cbind(inputdf, fgrlifespan) #ICForagerLifespan
 #drnadultinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, drnadultinfest) #ICDroneAdultInfest
 #drnbroodinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, drnbroodinfest) #ICDroneBroodInfest
