@@ -68,7 +68,7 @@ immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarith
 wkrdrnratio <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, wkrdrnratio) #RQWkrDrnRatio
 
 #requeendate <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, requeendate) #RQReQueenDate
-#rqenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQEnableReQueen
+rqenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQEnableReQueen
 #rqscheduled <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQScheduled
 #rqqueenstrength <- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, rqqueenstrength) #RQQueenStrength
 #rqonce <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqonce) #RQOnce

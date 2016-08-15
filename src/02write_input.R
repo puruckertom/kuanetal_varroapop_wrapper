@@ -5,10 +5,12 @@ for (i in 1:Nsims) {
   ## load monte carlo realization inputs
   #weather <- ("WeatherFileName=")
   #weathervalue <- weather_file[i]
-  parameter00 <- ("RQQueenStrength=") #queen strength
+  parameter00 <- ("RQQueenStrength=") #requeen strength
   inputvalue00 <- RQQueenStrength[i]
-  parameter <- ("ICQueenStrength=") #queen strength
-  inputvalue <- queenstrength[i]
+  parameter0 <- ("RQEnableReQueen=") #requeen enable
+  inputvalue0 <- rqenable[i]
+  parameter1 <- ("ICQueenStrength=") #queen strength
+  inputvalue1 <- queenstrength[i]
   parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
   inputvalue2 <- wkrdrnratio[i]
   parameter3 <- ("ICDroneMiteSurvivorship=") #drone-mite survivorship
@@ -43,8 +45,10 @@ for (i in 1:Nsims) {
   #inputvalue17<- foliar_false[i]
 
   ##write parameter inputs to disk
-  varroainput <- paste(parameter,inputvalue, sep=" ")
-  write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
+  varroainput1 <- paste(parameter1,inputvalue1, sep=" ")
+  write(varroainput1, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
+  varroainput0 <- paste(parameter0, inputvalue0, sep =" ")
+  write(varroainput0, file = paste(vpdir_in_con, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput00 <- paste(parameter00,inputvalue00, sep=" ")  
   write(varroainput00, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = TRUE, sep="\n")
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
@@ -90,8 +94,10 @@ for (i in 1:Nsims) {
   inputvalue00 <- RQQueenStrength[i]
   #weather <- ("WeatherFileName=")
   #weathervalue <- weather_file[i]
-  parameter <- ("ICQueenStrength=") #queen strength
-  inputvalue <- queenstrength[i]
+  parameter0 <- ("RQEnableReQueen=") #requeen enable
+  inputvalue0 <- rqenable[i]
+  parameter1 <- ("ICQueenStrength=") #queen strength
+  inputvalue1 <- queenstrength[i]
   parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
   inputvalue2 <- wkrdrnratio[i]
   parameter3 <- ("ICDroneMiteSurvivorship=") #drone-mite survivorship
@@ -131,10 +137,12 @@ for (i in 1:Nsims) {
   parameter20 <- ("FoliarForageEnd=") #foliar spray exposure interval end
   inputvalue20 <- foliar_end[i]
 
-  varroainput <- paste(parameter,inputvalue, sep=" ")
-  write(varroainput, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
+  varroainput1 <- paste(parameter1,inputvalue1, sep=" ")
+  write(varroainput1, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
   varroainput00 <- paste(parameter00,inputvalue00, sep=" ")  
   write(varroainput00, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = TRUE, sep="\n")
+  varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
+  write(varroainput0, file = paste(vpdir_in_exp, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
   write(varroainput2, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
