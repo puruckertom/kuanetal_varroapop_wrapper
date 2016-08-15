@@ -2,8 +2,11 @@
 
 #CONTROL
 for (i in 1:Nsims) {
+  ## load monte carlo realization inputs
   #weather <- ("WeatherFileName=")
   #weathervalue <- weather_file[i]
+  parameter00 <- ("RQQueenStrength=") #queen strength
+  inputvalue00 <- RQQueenStrength[i]
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]
   parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
@@ -38,9 +41,12 @@ for (i in 1:Nsims) {
   #inputvalue16<- apprate_con[i]
   #parameter17 <- ("FoliarEnabled=") #foliar spray enable
   #inputvalue17<- foliar_false[i]
-  
+
+  ##write parameter inputs to disk
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
+  varroainput00 <- paste(parameter00,inputvalue00, sep=" ")  
+  write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = TRUE, sep="\n")
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
   write(varroainput2, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
@@ -80,9 +86,10 @@ for (i in 1:Nsims) {
 
 #EXPOSED
 for (i in 1:Nsims) {
-  
-  weather <- ("WeatherFileName=")
-  weathervalue <- weather_file[i]
+  parameter00 <- ("RQQueenStrength=") #queen strength
+  inputvalue00 <- RQQueenStrength[i]
+  #weather <- ("WeatherFileName=")
+  #weathervalue <- weather_file[i]
   parameter <- ("ICQueenStrength=") #queen strength
   inputvalue <- queenstrength[i]
   parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
@@ -126,6 +133,8 @@ for (i in 1:Nsims) {
 
   varroainput <- paste(parameter,inputvalue, sep=" ")
   write(varroainput, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
+  varroainput00 <- paste(parameter00,inputvalue00, sep=" ")  
+  write(varroainput, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = TRUE, sep="\n")
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
   write(varroainput2, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
@@ -164,6 +173,6 @@ for (i in 1:Nsims) {
   write(varroainput19, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   varroainput20 <- paste(parameter20, inputvalue20, sep= " ")
   write(varroainput20, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  varroainputweather <- paste(weather, weathervalue, sep= " ")
-  write(varroainputweather, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
+  #varroainputweather <- paste(weather, weathervalue, sep= " ")
+  #write(varroainputweather, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
 }
