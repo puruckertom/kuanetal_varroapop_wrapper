@@ -18,7 +18,7 @@ indata_con <- read.csv(file = paste(vpdir_out_con, "inputdata_con.csv", sep = ""
 inputdata_con<- indata_con[, 5:length(indata_con)]
 #EXPOSED
 indata_exp <- read.csv(file = paste(vpdir_out_exp, "inputdata_exp.csv", sep = ""), header = TRUE)
-inputdata_exp<- indata_exp[, 5:length(indata_exp)]
+inputdata_exp<- indata_exp[, c(5:21,23)]
 
 #extract input vectors from dataframe
 for(i in 1:length(inputdata_con)){assign(names(inputdata_con)[i], inputdata_con[[i]])}

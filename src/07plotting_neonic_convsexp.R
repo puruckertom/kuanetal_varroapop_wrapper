@@ -140,9 +140,7 @@ for (r in 1:4){
 dev.off()
 
 #tornado plots
-invar<- c("Queen Strength", "Worker to Drone", "Drone-Mite Survivorship (%)", "Worker-Mite Survivorship (%)", 
-  "Forager Lifespan (days)", "Mite Imm Type", "Adult Slope", "Adult LD50", "Adult Slope Contact", 
-  "Adult LD50 Contact", "Larva slope", "Larva LD50", "KOW","KOC","Half life")
+invar<- c(colnames(inputdata_exp))
 datsrc_con<- list()
 datsrc_exp<- list()
 datpcc_con<- list()
