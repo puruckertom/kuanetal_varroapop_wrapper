@@ -93,7 +93,7 @@ pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 
   #lines(timearray, fm_exp, type="l", lty = 2, col="red")
   #plot(timearray, dfr_con, type="l", col="blue", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
   #lines(timearray, dfr_exp, type="l", lty = 2, col="red")
-  mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
+  #mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
 
 
@@ -127,16 +127,16 @@ pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, 
 #time series plots
 par(mfrow=c(5,2), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
-for (r in 1:6){
-  plot(timearray, tempout_con[,r,2], type = "l", ylim = c(0,max(tempout_con[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= paste(outvar[r], "Control", sep=" "))
+for (r in 1:4){
+  plot(timearray, tempout_con[,r,2], type = "l", ylim = c(0,max(tempout_con[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
   lines(timearray, tempout_con[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_con[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_exp[,r,2], type = "l", ylim = c(0,max(tempout_exp[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= paste(outvar[r], "Exposed", sep=" "))
+  plot(timearray, tempout_exp[,r,2], type = "l", ylim = c(0,max(tempout_exp[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Exposed")
   lines(timearray, tempout_exp[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_exp[,r,3], type = "l", lty= 4, col = "blue")
 }
-mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
+#mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
 
 #tornado plots
@@ -182,47 +182,55 @@ pdf(file= paste(vpdir_fig, "fig_tornado.pdf", sep=""), width = 8.5, height = 11,
 #start figures
 #create plot pages
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),2), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
 #start figures
 for (i in 1:length(timebreak)) { #loops by timebreak
   aa<- ggplot(data=datsrc_con[[i]], aes(x= datsrc_con[[i]][[1]], y= datsrc_con[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= paste("timebreak", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
+    labs(title= paste("Control", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
   print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-  
+}
+
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+for (i in 1:length(timebreak)) { #loops by timebreak
   cc<- ggplot(data=datsrc_exp[[i]], aes(x= datsrc_exp[[i]][[1]], y= datsrc_exp[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= paste("timebreak", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
+    labs(title= paste("Exposed", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
-  print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
+  print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
 }
 
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),2), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
 for (i in 1:length(timebreak)) { #loops by timebreak
   bb<- ggplot(data=datpcc_con[[i]], aes(x= datpcc_con[[i]][[1]], y= datpcc_con[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= paste("timebreak", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
+    labs(title= paste("Control", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-  
+}
+
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+for (i in 1:length(timebreak)) { #loops by timebreak
   dd<- ggplot(data=datpcc_exp[[i]], aes(x= datpcc_exp[[i]][[1]], y= datpcc_exp[[i]][[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= paste("timebreak", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
+    labs(title= paste("Exposed", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
     facet_grid(. ~ Var2) +
     theme_bw()
-  print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 2), newpage= FALSE)
+  print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
 }
 dev.off()

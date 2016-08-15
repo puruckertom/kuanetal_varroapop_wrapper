@@ -127,7 +127,7 @@ source(paste(vpdir,"src/05load_io.R",sep = ""))
 
 
 # run sensitivity analysis on tdarrays
-source(paste(vpdir,"src/06sensitivity_analyses.R",sep = ""))
+source(paste(vpdir,"src/06sensitivity_analyses_linear.R",sep = ""))
 
 # plot results
 source(paste(vpdir,"src/07plotting_neonic_convsexp.R",sep = ""))
