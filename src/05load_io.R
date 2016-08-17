@@ -15,7 +15,7 @@ nrows<- length(timearray)
 #CONTROL
 indata_con <- read.csv(file = paste(vpdir_out_con, "inputdata_con.csv", sep = ""), header = TRUE)
 #cut out column "X"
-inputdata_con<- indata_con[, 5:length(indata_con)]
+inputdata_con<- indata_con[, c(5:11,13:21)]
 #EXPOSED
 indata_exp <- read.csv(file = paste(vpdir_out_exp, "inputdata_exp.csv", sep = ""), header = TRUE)
 inputdata_exp<- indata_exp[, c(5:21,23)]

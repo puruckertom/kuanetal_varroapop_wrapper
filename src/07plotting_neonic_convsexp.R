@@ -79,7 +79,7 @@ for (n in 1:nrows){
   cwb_exp[n] <- length(y)/Nsims
 }
 
-#create figure 1
+#MC proportions ##########
 pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
   #start figures
   par(mfrow=c(3,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
@@ -139,7 +139,7 @@ for (r in 1:4){
 #mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
 
-#tornado plots
+#tornado plots #########
 invar<- c(colnames(inputdata_exp))
 datsrc_con<- list()
 datsrc_exp<- list()
@@ -147,13 +147,13 @@ datpcc_con<- list()
 datpcc_exp<- list()
 
 for (i in 1:5) {
-  dfsrc_con<- mdply(srctdarray_con[i,1:5,1:15], cbind)
+  dfsrc_con<- mdply(srctdarray_con[i,1:5,], cbind)
   tdfsrc_con<- t(dfsrc_con)
   colnames(tdfsrc_con)<- outvar
   s<- melt(tdfsrc_con)
   datsrc_con[[i]]<- s
   
-  dfsrc_exp<- mdply(srctdarray_exp[i,1:5,1:15], cbind)
+  dfsrc_exp<- mdply(srctdarray_exp[i,1:5,], cbind)
   tdfsrc_exp<- t(dfsrc_exp)
   colnames(tdfsrc_exp)<- outvar
   m<- melt(tdfsrc_exp)
@@ -162,13 +162,13 @@ for (i in 1:5) {
 
 
 for (i in 1:5){
-  dfpcc_con<- mdply(pcctdarray_con[i,1:5,1:15], cbind)
+  dfpcc_con<- mdply(pcctdarray_con[i,1:5,], cbind)
   tdfpcc_con<- t(dfpcc_con)
   colnames(tdfpcc_con)<- outvar
   p<- melt(tdfpcc_con)
   datpcc_con[[i]]<- p
   
-  dfpcc_exp<- mdply(pcctdarray_exp[i,1:5,1:15], cbind)
+  dfpcc_exp<- mdply(pcctdarray_exp[i,1:5,], cbind)
   tdfpcc_exp<- t(dfpcc_exp)
   colnames(tdfpcc_exp)<- outvar
   n<- melt(tdfpcc_exp)
@@ -231,4 +231,112 @@ for (i in 1:length(timebreak)) { #loops by timebreak
     theme_bw()
   print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
 }
+dev.off()
+
+
+#tornado plot of COLONY SIZE #######
+tdoutput_con <- tdarray_con[800,1,1:Nsims]
+tdoutput_exp <- tdarray_exp[800,1,1:Nsims]
+
+pcctdarray_con<- array(data=NA, c(1,1,length(inputdata_con)), dimnames = list(c("x"),
+                                                           c("Colony Size"),
+                                                           c(colnames(inputdata_con))))
+pcctdarray_exp<- array(data=NA, c(1,1,length(inputdata_exp)), dimnames = list(c("x"), 
+                                                           c("Colony Size"), 
+                                                           c(colnames(inputdata_exp))))
+#PCC control
+for (i in 800){  
+  for (j in 1){   #output variable
+    for (k in 1:length(inputdata_con)){  #input variable
+      tempinput<- tdoutput_con[1:Nsims]
+      temp<- pcc(inputdata_con[1:Nsims,], tempinput, rank = T)
+      pcctdarray_con[1,j,k]<- temp$PRCC[[1]][k]
+      print(i)
+    }
+  }
+}
+
+#PCC exposed
+for (i in 800){  #break
+  for (j in 1){   #output variable
+    for (k in 1:length(inputdata_exp)){  #input variable
+      tempinput<- tdoutput_exp[1:Nsims]
+      temp<- pcc(inputdata_exp[1:Nsims,], tempinput, rank = T)
+      pcctdarray_exp[1,j,k]<- temp$PRCC[[1]][k]
+      print(i)
+    }
+  }
+}
+
+
+
+# srctdarray_con<- array(data=NA, c(1,1,length(inputdata_con)), dimnames = list(c("x"),
+#                                                                                   c("Colony Size"),
+#                                                                                   c(colnames(inputdata_con))))
+# srctdarray_exp<- array(data=NA, c(1,1,length(inputdata_exp)), dimnames = list(c("x"), 
+#                                                                                   c("Colony Size"), 
+#                                                                                   c(colnames(inputdata_exp))))
+# #SRC control
+# for (i in 800){  
+#   for (j in 1){   #output variable
+#     for (k in 1:length(inputdata_con)){  #input variable
+#       tempinput<- tdoutput_con[1:Nsims]
+#       temp<- src(inputdata_con[1:Nsims,], tempinput, rank = T)
+#       srctdarray_con[1,j,k]<- temp$SRRC[[1]][k]
+#       print(i)
+#     }
+#   }
+# }
+# 
+# #SRC exposed
+# for (i in 800){  #break
+#   for (j in 1){   #output variable
+#     for (k in 1:length(inputdata_exp)){  #input variable
+#       tempinput<- tdoutput_exp[1:Nsims]
+#       temp<- src(inputdata_exp[1:Nsims,], tempinput, rank = T)
+#       srctdarray_exp[1,j,k]<- temp$SRRC[[1]][k]
+#       print(i)
+#     }
+#   }
+# }
+
+invar<- c(colnames(inputdata_exp))
+datpcc_con<- list()
+datpcc_exp<- list()
+
+  dfpcc_con<- ldply(pcctdarray_con[1,1,], rbind)
+  colnames(dfpcc_con)<- c("Input","Colony Size")
+  s<- melt(dfpcc_con)
+  datpcc_con[[1]]<- s
+  
+  dfpcc_exp <- ldply(pcctdarray_exp[1,1,], rbind)
+  colnames(dfpcc_exp)<- c("Input","Colony Size")
+  n<- melt(dfpcc_exp)
+  datpcc_exp[[1]]<- n
+
+
+pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+#start figures
+#create plot pages
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1,2), gp= gpar(cex = 0.6)))
+#start figures
+  aa<- ggplot(data=dfpcc_con, aes(x= dfpcc_con[[1]], y= dfpcc_con[[2]])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Control", x=" ", y= "Partial Correlation Coefficient") +
+    #facet_grid(. ~ Colony Size) +
+    theme_bw()
+  print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)
+
+  cc<- ggplot(data=dfpcc_exp, aes(x= dfpcc_exp[[1]], y= dfpcc_exp[[2]])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Exposed", x=" ", y= "Partial Correlation Coefficient") +
+    #facet_grid(. ~ Var2) +
+    theme_bw()
+  print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
+
 dev.off()
