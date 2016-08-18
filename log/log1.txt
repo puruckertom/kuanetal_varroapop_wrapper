@@ -1,5 +1,5 @@
 VarroaPop Log File
-Created Aug-15, 2016  02:13 PM
+Created Aug-18, 2016  02:28 PM
 
 
 Warning - The Following Events are Outside the Simulation Period:

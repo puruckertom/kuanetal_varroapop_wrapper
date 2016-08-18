@@ -140,7 +140,7 @@ for (r in 1:4){
 dev.off()
 
 #tornado plots #########
-invar<- c(colnames(inputdata_exp))
+
 datsrc_con<- list()
 datsrc_exp<- list()
 datpcc_con<- list()
@@ -235,8 +235,13 @@ dev.off()
 
 
 #tornado plot of COLONY SIZE #######
-tdoutput_con <- tdarray_con[800,1,1:Nsims]
-tdoutput_exp <- tdarray_exp[800,1,1:Nsims]
+tdoutput_con <- tdarray_con[800,1,1:Nsims] #random timestamp post pesticide application date
+tdoutput_exp <- tdarray_exp[800,1,1:Nsims] #random timestamp post pesticide application date
+
+out_con_colsize <- tdarray_con[,1,1:Nsims] 
+out_exp_colsize <- tdarray_exp[,1,1:Nsims]
+avg_con_colsize <- colMeans(out_con_colsize) #average across entire simulation period
+avg_exp_colsize <- colMeans(out_exp_colsize) #average across enture simulation period
 
 pcctdarray_con<- array(data=NA, c(1,1,length(inputdata_con)), dimnames = list(c("x"),
                                                            c("Colony Size"),
@@ -244,75 +249,45 @@ pcctdarray_con<- array(data=NA, c(1,1,length(inputdata_con)), dimnames = list(c(
 pcctdarray_exp<- array(data=NA, c(1,1,length(inputdata_exp)), dimnames = list(c("x"), 
                                                            c("Colony Size"), 
                                                            c(colnames(inputdata_exp))))
-#PCC control
-for (i in 800){  
-  for (j in 1){   #output variable
-    for (k in 1:length(inputdata_con)){  #input variable
-      tempinput<- tdoutput_con[1:Nsims]
-      temp<- pcc(inputdata_con[1:Nsims,], tempinput, rank = T)
-      pcctdarray_con[1,j,k]<- temp$PRCC[[1]][k]
-      print(i)
-    }
-  }
-}
-
-#PCC exposed
-for (i in 800){  #break
-  for (j in 1){   #output variable
-    for (k in 1:length(inputdata_exp)){  #input variable
-      tempinput<- tdoutput_exp[1:Nsims]
-      temp<- pcc(inputdata_exp[1:Nsims,], tempinput, rank = T)
-      pcctdarray_exp[1,j,k]<- temp$PRCC[[1]][k]
-      print(i)
-    }
-  }
-}
-
-
-
-# srctdarray_con<- array(data=NA, c(1,1,length(inputdata_con)), dimnames = list(c("x"),
-#                                                                                   c("Colony Size"),
-#                                                                                   c(colnames(inputdata_con))))
-# srctdarray_exp<- array(data=NA, c(1,1,length(inputdata_exp)), dimnames = list(c("x"), 
-#                                                                                   c("Colony Size"), 
-#                                                                                   c(colnames(inputdata_exp))))
-# #SRC control
+# #PCC control
 # for (i in 800){  
 #   for (j in 1){   #output variable
 #     for (k in 1:length(inputdata_con)){  #input variable
 #       tempinput<- tdoutput_con[1:Nsims]
-#       temp<- src(inputdata_con[1:Nsims,], tempinput, rank = T)
-#       srctdarray_con[1,j,k]<- temp$SRRC[[1]][k]
+#       temp<- pcc(inputdata_con[1:Nsims,], tempinput, rank = T)
+#       pcctdarray_con[1,j,k]<- temp$PRCC[[1]][k]
 #       print(i)
 #     }
 #   }
 # }
 # 
-# #SRC exposed
+# #PCC exposed
 # for (i in 800){  #break
 #   for (j in 1){   #output variable
 #     for (k in 1:length(inputdata_exp)){  #input variable
 #       tempinput<- tdoutput_exp[1:Nsims]
-#       temp<- src(inputdata_exp[1:Nsims,], tempinput, rank = T)
-#       srctdarray_exp[1,j,k]<- temp$SRRC[[1]][k]
+#       temp<- pcc(inputdata_exp[1:Nsims,], tempinput, rank = T)
+#       pcctdarray_exp[1,j,k]<- temp$PRCC[[1]][k]
 #       print(i)
 #     }
 #   }
 # }
 
-invar<- c(colnames(inputdata_exp))
-datpcc_con<- list()
-datpcc_exp<- list()
+for (k in 1:length(inputdata_con)){  #input variable
+  temp_con<- pcc(inputdata_con, avg_con_colsize, rank = T)
+  pcctdarray_con[,,k]<- temp_con$PRCC[[1]][k]
+}
 
-  dfpcc_con<- ldply(pcctdarray_con[1,1,], rbind)
-  colnames(dfpcc_con)<- c("Input","Colony Size")
-  s<- melt(dfpcc_con)
-  datpcc_con[[1]]<- s
-  
-  dfpcc_exp <- ldply(pcctdarray_exp[1,1,], rbind)
-  colnames(dfpcc_exp)<- c("Input","Colony Size")
-  n<- melt(dfpcc_exp)
-  datpcc_exp[[1]]<- n
+for (k in 1:length(inputdata_exp)){  #input variable
+  temp_exp<- pcc(inputdata_exp, avg_exp_colsize, rank = T)
+  pcctdarray_exp[,,k]<- temp_exp$PRCC[[1]][k]
+}
+
+
+#dfpcc_con<- ldply(pcctdarray_con, rbind)
+#colnames(dfpcc_con)<- c("Colony Size")
+dfpcc_con<- melt(pcctdarray_con)
+dfpcc_exp <- melt(pcctdarray_exp)
 
 
 pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
@@ -321,7 +296,7 @@ pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, h
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(1,2), gp= gpar(cex = 0.6)))
 #start figures
-  aa<- ggplot(data=dfpcc_con, aes(x= dfpcc_con[[1]], y= dfpcc_con[[2]])) + 
+  aa<- ggplot(data=dfpcc_con, aes(x= dfpcc_con[[3]], y= dfpcc_con[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
@@ -330,7 +305,7 @@ pushViewport(viewport(layout=grid.layout(1,2), gp= gpar(cex = 0.6)))
     theme_bw()
   print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)
 
-  cc<- ggplot(data=dfpcc_exp, aes(x= dfpcc_exp[[1]], y= dfpcc_exp[[2]])) + 
+  cc<- ggplot(data=dfpcc_exp, aes(x= dfpcc_exp[[3]], y= dfpcc_exp[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
