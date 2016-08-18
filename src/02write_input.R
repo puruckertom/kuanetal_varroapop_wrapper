@@ -1,56 +1,55 @@
 #create input files #########
-
 #CONTROL
 for (i in 1:Nsims) {
   ## load monte carlo realization inputs
   #weather <- ("WeatherFileName=")
   #weathervalue <- weather_file[i]
-  parameter00 <- ("RQQueenStrength=") #requeen strength
-  inputvalue00 <- RQQueenStrength[i]
-  parameter0 <- ("RQEnableReQueen=") #requeen enable
-  inputvalue0 <- rqenable[i]
-  parameter1 <- ("ICQueenStrength=") #queen strength
-  inputvalue1 <- queenstrength[i]
-  parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
-  inputvalue2 <- wkrdrnratio[i]
-  parameter3 <- ("ICDroneMiteSurvivorship=") #drone-mite survivorship
+  ##initial conditions
+  parameter0 <- ("ICQueenStrength=") #queen strength
+  inputvalue0 <- queenstrength[i]
+  parameter1 <- ("RQQueenStrength=") #requeen strength
+  inputvalue1 <- RQQueenStrength[i]
+  parameter2 <- ("ICForagerLifespan=") #forager lifespan
+  inputvalue2 <- fgrlifespan[i]
+  parameter3 <- ("ICDroneMiteSurvivorship=") #drone mite survivorship
   inputvalue3 <- drnmitesurvive[i]
-  parameter4 <- ("ICWorkerMiteSurvivorship=")  #worker-mite survivorship
+  parameter4 <- ("ICWorkerMiteSurvivorship=") #worker mite survivorship
   inputvalue4 <- wkrmitesurvive[i]
-  parameter5 <- ("ICForagerLifespan=")  #Forager Lifespan
-  inputvalue5 <- fgrlifespan[i]
-  parameter6 <- ("ImmType=")   #Mite Immigration Type
-  inputvalue6 <- miteimmtype[i]
-  parameter7 <- ("AIAdultSlope=") #ai adult slope
-  inputvalue7 <- adslope[i]
-  parameter8 <- ("AIAdultLD50=") #ai adult LD50
-  inputvalue8 <- adLD50[i]
-  parameter9 <- ("AIAdultSlopeContact=") #ai adult slope contact
-  inputvalue9 <- adslopec[i]
-  parameter10 <- ("AIAdultLD50Contact=") #ai adult LD50 contact
-  inputvalue10 <- adLD50c[i]
-  parameter11 <- ("AILarvaSlope=") #ai larva slope
-  inputvalue11 <- lslope[i]
-  parameter12 <- ("AILarvaLD50=") #ai larva LD50
-  inputvalue12 <- lLD50[i]
-  parameter13 <- ("AIKOW=") #ai kow
-  inputvalue13 <- kow[i]
-  parameter14 <- ("AIKOC=") #ai koc
-  inputvalue14 <- koc[i]
-  parameter15 <- ("AIHalfLife=") #ai half life (days)
-  inputvalue15 <- halflife[i]
-  #parameter16 <- ("EAppRate=") #application rate (lb/A)
-  #inputvalue16<- apprate_con[i]
-  #parameter17 <- ("FoliarEnabled=") #foliar spray enable
-  #inputvalue17<- foliar_false[i]
-
+  parameter5 <- ("ImmType=") #mite immigration
+  inputvalue5 <- miteimmtype[i]
+  parameter6 <- ("RQWkrDrnRatio=") #requeen worker to drone ratio
+  inputvalue6 <- wkrdrnratio[i]
+  parameter7 <- ("RQEnableReQueen=") #requeen enable
+  inputvalue7 <- rqenable[i]
+  ##pesticide exposure
+  parameter8 <- ("AIAdultSlope=") #adult slope
+  inputvalue8 <- adslope[i]
+  parameter9 <- ("AIAdultLD50=") #adult LD50 (ug/bee)
+  inputvalue9 <- adLD50[i]
+  parameter10 <- ("AIAdultSlopeContact=") #adult slope contact
+  inputvalue10 <- adslopec[i]
+  parameter11 <- ("AIAdultLD50Contact=") #adult LD50 contact (ug/bee)
+  inputvalue11 <- adLD50c[i]
+  parameter12 <- ("AILarvaSlope=") #larva slope
+  inputvalue12 <- lslope[i]
+  parameter13 <- ("AILarvaLD50=") #larva LD50 (ug/larva)
+  inputvalue13 <- lLD50[i]
+  parameter14 <- ("AIKOW=") #kow
+  inputvalue14 <- kow[i]
+  parameter15 <- ("AIKOC=") #koc
+  inputvalue15 <- koc[i]
+  parameter16 <- ("AIHalfLife=") #half life (days)
+  inputvalue16 <- halflife[i]
+  parameter17 <- ("EAppRate=") #control app rate (lb/A)
+  inputvalue17 <- apprate_con[i]
+  parameter18 <- ("FoliarEnabled=") #foliar enabled
+  inputvalue18 <- foliar_false[i]
+  
   ##write parameter inputs to disk
-  varroainput1 <- paste(parameter1,inputvalue1, sep=" ")
-  write(varroainput1, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
-  varroainput0 <- paste(parameter0, inputvalue0, sep =" ")
-  write(varroainput0, file = paste(vpdir_in_con, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
-  varroainput00 <- paste(parameter00,inputvalue00, sep=" ")  
-  write(varroainput00, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = TRUE, sep="\n")
+  varroainput0 <- paste(parameter0,inputvalue0, sep=" ")
+  write(varroainput0, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = FALSE)
+  varroainput1 <- paste(parameter1, inputvalue1, sep =" ")
+  write(varroainput1, file = paste(vpdir_in_con, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
   write(varroainput2, file = paste(vpdir_in_con, "input",i,".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
@@ -79,70 +78,72 @@ for (i in 1:Nsims) {
   write(varroainput14, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   varroainput15 <- paste(parameter15, inputvalue15, sep= " ")
   write(varroainput15, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  #varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
-  #write(varroainput16, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  #varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
-  #write(varroainput17, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  #varroainputweather <- paste(weather, weathervalue, sep= " ")
-  #write(varroainputweather, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
+  varroainput16 <- paste(parameter16, inputvalue16, sep= " ")
+  write(varroainput16, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  varroainput17 <- paste(parameter17, inputvalue17, sep= " ")
+  write(varroainput17, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  varroainput18 <- paste(parameter17, inputvalue18, sep= " ")
+  write(varroainput18, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  # varroainputweather <- paste(weather, weathervalue, sep= " ")
+  # write(varroainputweather, file= paste(vpdir_in_con, "input", i, ".txt", sep=""), append= TRUE)
 }
 
 
 #EXPOSED
 for (i in 1:Nsims) {
-  parameter00 <- ("RQQueenStrength=") #queen strength
-  inputvalue00 <- RQQueenStrength[i]
   #weather <- ("WeatherFileName=")
   #weathervalue <- weather_file[i]
-  parameter0 <- ("RQEnableReQueen=") #requeen enable
-  inputvalue0 <- rqenable[i]
-  parameter1 <- ("ICQueenStrength=") #queen strength
-  inputvalue1 <- queenstrength[i]
-  parameter2 <- ("RQWkrDrnRatio=") #requeen worker-drone ratio
-  inputvalue2 <- wkrdrnratio[i]
-  parameter3 <- ("ICDroneMiteSurvivorship=") #drone-mite survivorship
+  ##initial conditions
+  parameter0 <- ("ICQueenStrength=") #queen strength
+  inputvalue0 <- queenstrength[i]
+  parameter1 <- ("RQQueenStrength=") #requeen strength
+  inputvalue1 <- RQQueenStrength[i]
+  parameter2 <- ("ICForagerLifespan=") #forager lifespan
+  inputvalue2 <- fgrlifespan[i]
+  parameter3 <- ("ICDroneMiteSurvivorship=") #drone mite survivorship
   inputvalue3 <- drnmitesurvive[i]
-  parameter4 <- ("ICWorkerMiteSurvivorship=")  #worker-mite survivorship
+  parameter4 <- ("ICWorkerMiteSurvivorship=") #worker mite survivorship
   inputvalue4 <- wkrmitesurvive[i]
-  parameter5 <- ("ICForagerLifespan=")  #Forager Lifespan
-  inputvalue5 <- fgrlifespan[i]
-  parameter6 <- ("ImmType=")   #Mite Immigration Type
-  inputvalue6 <- miteimmtype[i]
-  parameter7 <- ("AIAdultSlope=") #ai adult slope
-  inputvalue7 <- adslope[i]
-  parameter8 <- ("AIAdultLD50=") #ai adult LD50
-  inputvalue8 <- adLD50[i]
-  parameter9 <- ("AIAdultSlopeContact=") #ai adult slope contact
-  inputvalue9 <- adslopec[i]
-  parameter10 <- ("AIAdultLD50Contact=") #ai adult LD50 contact
-  inputvalue10 <- adLD50c[i]
-  parameter11 <- ("AILarvaSlope=") #ai larva slope
-  inputvalue11 <- lslope[i]
-  parameter12 <- ("AILarvaLD50=") #ai larva LD50
-  inputvalue12 <- lLD50[i]
-  parameter13 <- ("AIKOW=") #ai kow
-  inputvalue13 <- kow[i]
-  parameter14 <- ("AIKOC=") #ai koc
-  inputvalue14 <- koc[i]
-  parameter15 <- ("AIHalfLife=") #ai half life (days)
-  inputvalue15 <- halflife[i]
-  parameter16 <- ("EAppRate=") #application rate (lb/A)
-  inputvalue16 <- apprate_exp[i]
-  parameter17 <- ("FoliarEnabled=") #foliar spray enabled
-  inputvalue17 <- foliar_true[i]
-  parameter18 <- ("FoliarAppDate=") #foliar spray application date
-  inputvalue18 <- foliar_appdate[i]
-  parameter19 <- ("FoliarForageBegin=") #foliar spray exposure interval begin
-  inputvalue19 <- foliar_begin[i]
-  parameter20 <- ("FoliarForageEnd=") #foliar spray exposure interval end
-  inputvalue20 <- foliar_end[i]
-
-  varroainput1 <- paste(parameter1,inputvalue1, sep=" ")
-  write(varroainput1, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = FALSE)
-  varroainput00 <- paste(parameter00,inputvalue00, sep=" ")  
-  write(varroainput00, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = TRUE, sep="\n")
+  parameter5 <- ("ImmType=") #mite immigration
+  inputvalue5 <- miteimmtype[i]
+  parameter6 <- ("RQWkrDrnRatio=") #requeen worker to drone ratio
+  inputvalue6 <- wkrdrnratio[i]
+  parameter7 <- ("RQEnableReQueen=") #requeen enable
+  inputvalue7 <- rqenable[i]
+  ##pesticide exposure
+  parameter8 <- ("AIAdultSlope=") #adult slope
+  inputvalue8 <- adslope[i]
+  parameter9 <- ("AIAdultLD50=") #adult LD50 (ug/bee)
+  inputvalue9 <- adLD50[i]
+  parameter10 <- ("AIAdultSlopeContact=") #adult slope contact
+  inputvalue10 <- adslopec[i]
+  parameter11 <- ("AIAdultLD50Contact=") #adult LD50 contact (ug/bee)
+  inputvalue11 <- adLD50c[i]
+  parameter12 <- ("AILarvaSlope=") #larva slope
+  inputvalue12 <- lslope[i]
+  parameter13 <- ("AILarvaLD50=") #larva LD50 (ug/larva)
+  inputvalue13 <- lLD50[i]
+  parameter14 <- ("AIKOW=") #kow
+  inputvalue14 <- kow[i]
+  parameter15 <- ("AIKOC=") #koc
+  inputvalue15 <- koc[i]
+  parameter16 <- ("AIHalfLife=") #half life (days)
+  inputvalue16 <- halflife[i]
+  parameter17 <- ("EAppRate=") #exposed app rate (lb/A)
+  inputvalue17 <- apprate_exp[i]
+  parameter18 <- ("FoliarEnabled=") #foliar enabled
+  inputvalue18 <- foliar_true[i]
+  parameter19 <- ("FoliarAppDate=") #foliar app date
+  inputvalue19 <- foliar_appdate[i]
+  parameter20 <- ("FoliarForageBegin=") #foliar forage begin
+  inputvalue20 <- foliar_begin[i]
+  parameter21 <- ("FoliarForageEnd=") #foliar forage end
+  inputvalue21 <- foliar_end[i]
+  
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
-  write(varroainput0, file = paste(vpdir_in_exp, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput0, file = paste(vpdir_in_exp, "input", i, ".txt", sep = ""), append = FALSE)
+  varroainput1 <- paste(parameter1,inputvalue1, sep=" ")
+  write(varroainput1, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput2 <- paste(parameter2,inputvalue2, sep=" ")
   write(varroainput2, file = paste(vpdir_in_exp, "input",i,".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput3 <- paste(parameter3, inputvalue3, sep=" ")
@@ -181,6 +182,8 @@ for (i in 1:Nsims) {
   write(varroainput19, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   varroainput20 <- paste(parameter20, inputvalue20, sep= " ")
   write(varroainput20, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
+  varroainput21 <- paste(parameter21, inputvalue21, sep= " ")
+  write(varroainput21, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
   #write(varroainputweather, file= paste(vpdir_in_exp, "input", i, ".txt", sep=""), append= TRUE)
 }
