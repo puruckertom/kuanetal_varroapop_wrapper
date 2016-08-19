@@ -34,21 +34,47 @@ for (i in 1:Nsims) {
   outputfile<- paste("results",i,".txt", sep="")
   logfile<- paste("log",i,".txt", sep="")
   vpdir_command <- paste(vpdir_exe, vrp_filename, 
-                         " /b /or ", vpdir_out_con, outputfile, 
-                         " /i ", vpdir_in_con, inputfile, " /ol ", vpdir_log, logfile, sep="")
+                         " /b /or ", vpdir_out_control, outputfile, 
+                         " /i ", vpdir_in_control, inputfile, " /ol ", vpdir_log, logfile, sep="")
   print(paste(vpdir_executable, vpdir_command, sep=" "))
   system2(vpdir_executable, vpdir_command)
 }
 
-#EXPOSED
+#FOLIAR
 for (i in 1:Nsims) {
   # n<-inputtest[i]
   inputfile<- paste("input",i,".txt", sep="")
   outputfile<- paste("results",i,".txt", sep="")
   logfile<- paste("log",i,"exp.txt", sep="")
   vpdir_command <- paste(vpdir_exe, vrp_filename, 
-                         " /b /or ", vpdir_out_exp, outputfile, 
-                         " /i ", vpdir_in_exp, inputfile, " /ol ", vpdir_log, logfile, sep="")
+                         " /b /or ", vpdir_out_foliar, outputfile, 
+                         " /i ", vpdir_in_foliar, inputfile, " /ol ", vpdir_log, logfile, sep="")
+  print(paste(vpdir_executable, vpdir_command, sep=" "))
+  system2(vpdir_executable, vpdir_command)
+}
+
+#SEED
+for (i in 1:Nsims) {
+  # n<-inputtest[i]
+  inputfile<- paste("input",i,".txt", sep="")
+  outputfile<- paste("results",i,".txt", sep="")
+  logfile<- paste("log",i,"exp.txt", sep="")
+  vpdir_command <- paste(vpdir_exe, vrp_filename, 
+                         " /b /or ", vpdir_out_seed, outputfile, 
+                         " /i ", vpdir_in_seed, inputfile, " /ol ", vpdir_log, logfile, sep="")
+  print(paste(vpdir_executable, vpdir_command, sep=" "))
+  system2(vpdir_executable, vpdir_command)
+}
+
+#SOIL
+for (i in 1:Nsims) {
+  # n<-inputtest[i]
+  inputfile<- paste("input",i,".txt", sep="")
+  outputfile<- paste("results",i,".txt", sep="")
+  logfile<- paste("log",i,"exp.txt", sep="")
+  vpdir_command <- paste(vpdir_exe, vrp_filename, 
+                         " /b /or ", vpdir_out_soil, outputfile, 
+                         " /i ", vpdir_in_soil, inputfile, " /ol ", vpdir_log, logfile, sep="")
   print(paste(vpdir_executable, vpdir_command, sep=" "))
   system2(vpdir_executable, vpdir_command)
 }

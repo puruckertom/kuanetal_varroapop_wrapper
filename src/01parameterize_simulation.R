@@ -59,8 +59,6 @@ lLD50<- runif(Nsims, 0.001, 100) ; inputdf <- cbind(inputdf, lLD50)  #AILarvaLD5
 kow<- runif(Nsims, 0.01, 100000) ; inputdf <- cbind(inputdf, kow)  #AIKOW
 koc<- runif(Nsims, 1, 100000) ; inputdf <- cbind(inputdf, koc)  #AIKOC
 halflife<- runif(Nsims, 0.1, 35) ; inputdf <- cbind(inputdf, halflife)  #AIHalfLife (days)
-apprate_con<- runif(Nsims, 0, 0.0) #EAppRate (lb/A)
-apprate_exp<- runif(Nsims, 0.001, 10) #EAppRate (lb/A)
 apprate <- runif(Nsims, 0.001, 10) ; inputdf <- cbind(inputdf, apprate) #EAppRate (lb/A)
 contactfactor <- runif(Nsims, 0.26, 2.4) ; inputdf <- cbind(inputdf, halflife) #AIContactFactor
 ## Consumption Data (mg/day)
@@ -89,8 +87,8 @@ foliarenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, foliarenable) #Fo
 foliar_appdate<- rep("06/07/1989", Nsims)
 foliar_begin<- rep("06/05/1989", Nsims)
 foliar_end<- rep("06/28/1989", Nsims)
-#soilenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, soilenable) #SoilEnabled
-#seedenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, seedenable) #SeedEnabled
+soilenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, soilenable) #SoilEnabled
+seedenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, seedenable) #SeedEnabled
 #soiltheta <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, soiltheta) #ESoilTheta
 soilp <- runif(Nsims, 1, 2) ; inputdf <- cbind(inputdf, soilp) #ESoilP
 soilfoc <- runif(Nsims, 0.001, 0.02) ; inputdf <- cbind(inputdf, soilfoc) #ESoilFoc
@@ -146,8 +144,10 @@ soilfoc <- runif(Nsims, 0.001, 0.02) ; inputdf <- cbind(inputdf, soilfoc) #ESoil
 
 
 ######## Create input dataframe
-inputdata_con<- subset(inputdf, select = -c(foliarenable, apprate))
-inputdata_exp<- inputdf
+inputdata_control <- subset(inputdf, select = -c(foliarenable, seedenable, soilenable, apprate))
+inputdata_foliar <- subset(inputdf, select = -c(seedenable, soilenable))
+inputdata_seed <- subset(inputdf, select = -c(foliarenable, soilenable))
+inputdata_soil <- subset(inputdf, select = -c(foliarenable, seedenable))
 #inputdata_con<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
 #                           adslope,adLD50,adslopec,adLD50c,lslope,lLD50,kow,koc,halflife,apprate_con, foliar_false)
 #inputdata_exp<- data.frame(queenstrength,wkrdrnratio, drnmitesurvive, wkrmitesurvive, fgrlifespan, miteimmtype, 
@@ -155,5 +155,7 @@ inputdata_exp<- inputdf
 #                           foliar_appdate, foliar_begin, foliar_end)
 
 #putting the input in the io directory so it can be read from there later
-write.csv(inputdata_con, file = paste(vpdir_out_con, "inputdata_con.csv", sep = ""))
-write.csv(inputdata_exp, file = paste(vpdir_out_exp, "inputdata_exp.csv", sep = ""))
+write.csv(inputdata_control, file = paste(vpdir_out_control, "inputdata_control.csv", sep = ""))
+write.csv(inputdata_foliar, file = paste(vpdir_out_foliar, "inputdata_foliar.csv", sep = ""))
+write.csv(inputdata_seed, file = paste(vpdir_out_seed, "inputdata_seed.csv", sep = ""))
+write.csv(inputdata_soil, file = paste(vpdir_out_soil, "inputdata_soil.csv", sep = ""))

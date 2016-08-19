@@ -5,13 +5,20 @@
 /output/tdarray.csv
 /output/results*.txt
 /output/control/results*.txt
-/output/exposed/results*.txt
+/output/foliar/results*.txt
+/output/seed/results*.txt
+/output/soil/results*.txt
+
 /log/log*exp.txt
 /log/log*.txt
+
 /input/input*.txt
 /input/control/input*.txt
-/input/exposed/input*.txt
+/input/foliar/input*.txt
+/input/seed/input*.txt
+/input/soil/input*.txt
 /input/*.log
+
 .Rproj.user
 beeRpop.Rproj
 
