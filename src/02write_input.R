@@ -89,9 +89,9 @@ for (i in 1:Nsims) {
   parameter40 <- ("ESoilFoc=") #soil Foc
   inputvalue40 <- soilfoc[i]
   parameter41 <- ("SoilEnabled=") #soil enable
-  inputvalue41 <- soilenable
+  inputvalue41 <- soilenable[i]
   parameter42 <- ("SeedEnabled=") #seed enable
-  inputvalue42 <- seedenable
+  inputvalue42 <- seedenable[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
   write(varroainput0, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = FALSE)
@@ -187,17 +187,14 @@ for (i in 1:Nsims) {
   write(varroainput18, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   varroainput19 <- paste(parameter19, inputvalue19, sep= " ")
   write(varroainput19, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  write(varroainput19, file = paste(vpdir_in_control, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput19, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput19, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput20 <- paste(parameter20, inputvalue20, sep= " ")
   write(varroainput20, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  write(varroainput20, file = paste(vpdir_in_control, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput20, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput20, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput21 <- paste(parameter21, inputvalue21, sep= " ")
   write(varroainput21, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
-  write(varroainput21, file = paste(vpdir_in_control, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput21, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput21, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput22 <- paste(parameter22, inputvalue22, sep= " ")

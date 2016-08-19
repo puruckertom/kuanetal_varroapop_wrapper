@@ -14,7 +14,7 @@
 #exe
 print(paste(file.exists(vpdir_executable), ": executable file at", vpdir_executable))
 #sample input
-sample_input_file <- paste(vpdir_in_con, "input1000.txt", sep="")
+sample_input_file <- paste(vpdir_in_control, "input1000.txt", sep="")
 print(paste(file.exists(sample_input_file), ": sample input file at", sample_input_file))
 #varroapop file
 varroapop_file <- paste(vpdir_exe, vrp_filename, sep="")
