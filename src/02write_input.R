@@ -44,7 +44,7 @@ for (i in 1:Nsims) {
   parameter17 <- ("EAppRate=") #exposed app rate (lb/A)
   inputvalue17 <- apprate_exp[i]
   parameter18 <- ("FoliarEnabled=") #foliar enabled
-  inputvalue18 <- foliar_true[i]
+  inputvalue18 <- foliarenable[i]
   parameter19 <- ("FoliarAppDate=") #foliar app date
   inputvalue19 <- foliar_appdate[i]
   parameter20 <- ("FoliarForageBegin=") #foliar forage begin
