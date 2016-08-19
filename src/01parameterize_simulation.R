@@ -86,6 +86,9 @@ ntrips <- runif(Nsims, 5, 15) ; inputdf <- cbind(inputdf, ntrips) #INectarTrips 
 pload <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, pload) #IPollenLoad (mg/bee)
 nload <- runif(Nsims, 0 ,10) ; inputdf <- cbind(inputdf, nload) #INectarLoad (mg/bee)
 foliarenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, foliarenable) #FoliarEnabled
+foliar_appdate<- rep("06/07/1989", Nsims)
+foliar_begin<- rep("06/05/1989", Nsims)
+foliar_end<- rep("06/28/1989", Nsims)
 #soilenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, soilenable) #SoilEnabled
 #seedenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, seedenable) #SeedEnabled
 #soiltheta <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, soiltheta) #ESoilTheta
@@ -97,9 +100,6 @@ soilfoc <- runif(Nsims, 0.001, 0.02) ; inputdf <- cbind(inputdf, soilfoc) #ESoil
 ## leftovers
 #foliar_true<- rep("true", Nsims)
 #foliar_false<- rep("false", Nsims)
-#foliar_appdate<- rep("06/07/1989", Nsims)
-#foliar_begin<- rep("06/05/1989", Nsims)
-#foliar_end<- rep("06/28/1989", Nsims)
 #folappdate <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, folappdate) #FoliarAppDate
 #folforagebeg <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, folforagebeg) #FoliarForageBegin
 #folforageend <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, folforageend) #FoliarForageEnd
