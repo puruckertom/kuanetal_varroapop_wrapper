@@ -92,6 +92,14 @@ for (i in 1:Nsims) {
   inputvalue41 <- soilenable[i]
   parameter42 <- ("SeedEnabled=") #seed enable
   inputvalue42 <- seedenable[i]
+  parameter43 <- ("SoilForageBegin=") #soil forage begin
+  inputvalue43 <- soil_begin[i]
+  parameter44 <- ("SoilForageEnd=") #soil forage end
+  inputvalue44 <- soil_end[i]
+  parameter45 <- ("SeedForageBegin=") #seed forage begin
+  inputvalue45 <- seed_begin[i]
+  parameter46 <- ("SeedForageEnd=") #seed forage end
+  inputvalue46 <- seed_end[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
   write(varroainput0, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = FALSE)
@@ -296,6 +304,14 @@ for (i in 1:Nsims) {
   write(varroainput41, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput42 <- paste(parameter42, inputvalue42, sep= " ")
   write(varroainput42, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput43 <- paste(parameter43, inputvalue43, sep= " ")
+  write(varroainput43, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput44 <- paste(parameter44, inputvalue44, sep= " ")
+  write(varroainput44, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput45 <- paste(parameter45, inputvalue45, sep= " ")
+  write(varroainput45, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput46 <- paste(parameter46, inputvalue46, sep= " ")
+  write(varroainput46, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
   #write(varroainputweather, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE)
 }

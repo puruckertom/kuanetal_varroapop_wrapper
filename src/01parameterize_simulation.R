@@ -84,9 +84,9 @@ ntrips <- runif(Nsims, 5, 15) ; inputdf <- cbind(inputdf, ntrips) #INectarTrips 
 pload <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, pload) #IPollenLoad (mg/bee)
 nload <- runif(Nsims, 0 ,10) ; inputdf <- cbind(inputdf, nload) #INectarLoad (mg/bee)
 foliarenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, foliarenable) #FoliarEnabled
-foliar_appdate<- rep("06/07/1989", Nsims)
-foliar_begin<- rep("06/05/1989", Nsims)
-foliar_end<- rep("06/28/1989", Nsims)
+foliar_appdate<- rep("06/07/1989", Nsims) #FoliarAppDate
+foliar_begin<- rep("06/05/1989", Nsims) #FoliarForageBegin
+foliar_end<- rep("06/28/1989", Nsims) #FoliarForageEnd
 soilenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, soilenable) #SoilEnabled
 seedenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, seedenable) #SeedEnabled
 #soiltheta <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, soiltheta) #ESoilTheta
@@ -94,6 +94,10 @@ soilp <- runif(Nsims, 1, 2) ; inputdf <- cbind(inputdf, soilp) #ESoilP
 soilfoc <- runif(Nsims, 0.001, 0.02) ; inputdf <- cbind(inputdf, soilfoc) #ESoilFoc
 #soilconc <- runif(Nsims, 1, 10) ; inputdf <- cbind(inputdf, soilconc) #ESoilConcentration
 #seedconc <- runif(Nsims, 1, 10) ; inputdf <- cbind(inputdf, seedconc) #ESeedConcentration
+soil_begin <- rep("06/05/1989", Nsims) #SoilForageBegin
+soil_end <- rep("06/28/1989", Nsims) #SoilForageEnd
+seed_begin <- rep("06/05/1989", Nsims) #SeedForageBegin
+seed_end <- rep("06/28/1989", Nsims) #SeedForageEnd
 
 ## leftovers
 #foliar_true<- rep("true", Nsims)
