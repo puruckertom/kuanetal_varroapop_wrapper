@@ -235,20 +235,33 @@ dev.off()
 
 
 #tornado plot of COLONY SIZE #######
-tdoutput_con <- tdarray_con[800,1,1:Nsims] #random timestamp post pesticide application date
-tdoutput_exp <- tdarray_exp[800,1,1:Nsims] #random timestamp post pesticide application date
+tdoutput_control <- tdarray_control[800,1,1:Nsims] #random timestamp post pesticide application date
+tdoutput_foliar <- tdarray_foliar[800,1,1:Nsims] #random timestamp post pesticide application date
+tdoutput_seed <- tdarray_seed[800,1,1:Nsims] #random timestamp post pesticide application date
+tdoutput_soil <- tdarray_soil[800,1,1:Nsims] #random timestamp post pesticide application date
 
-out_con_colsize <- tdarray_con[,1,1:Nsims] 
-out_exp_colsize <- tdarray_exp[,1,1:Nsims]
-avg_con_colsize <- colMeans(out_con_colsize) #average across entire simulation period
-avg_exp_colsize <- colMeans(out_exp_colsize) #average across enture simulation period
+out_control_colsize <- tdarray_control[,1,1:Nsims] 
+out_foliar_colsize <- tdarray_foliar[,1,1:Nsims]
+out_seed_colsize <- tdarray_seed[,1,1:Nsims]
+out_soil_colsize <- tdarray_soil[,1,1:Nsims]
 
-pcctdarray_con<- array(data=NA, c(1,1,length(inputdata_con)), dimnames = list(c("x"),
+avg_control_colsize <- colMeans(out_control_colsize) #average across entire simulation period
+avg_foliar_colsize <- colMeans(out_foliar_colsize) #average across enture simulation period
+avg_seed_colsize <- colMeans(out_seed_colsize) #average across enture simulation period
+avg_soil_colsize <- colMeans(out_soil_colsize) #average across enture simulation period
+
+pcctdarray_control<- array(data=NA, c(1,1,length(inputdata_control)), dimnames = list(c("x"),
                                                            c("Colony Size"),
-                                                           c(colnames(inputdata_con))))
-pcctdarray_exp<- array(data=NA, c(1,1,length(inputdata_exp)), dimnames = list(c("x"), 
+                                                           c(colnames(inputdata_control))))
+pcctdarray_foliar<- array(data=NA, c(1,1,length(inputdata_foliar)), dimnames = list(c("x"), 
                                                            c("Colony Size"), 
-                                                           c(colnames(inputdata_exp))))
+                                                           c(colnames(inputdata_foliar))))
+pcctdarray_seed<- array(data=NA, c(1,1,length(inputdata_seed)), dimnames = list(c("x"), 
+                                                                                    c("Colony Size"), 
+                                                                                    c(colnames(inputdata_seed))))
+pcctdarray_soil<- array(data=NA, c(1,1,length(inputdata_soil)), dimnames = list(c("x"), 
+                                                                                    c("Colony Size"), 
+                                                                                    c(colnames(inputdata_soil))))
 # #PCC control
 # for (i in 800){  
 #   for (j in 1){   #output variable
@@ -273,30 +286,41 @@ pcctdarray_exp<- array(data=NA, c(1,1,length(inputdata_exp)), dimnames = list(c(
 #   }
 # }
 
-for (k in 1:length(inputdata_con)){  #input variable
-  temp_con<- pcc(inputdata_con, avg_con_colsize, rank = T)
-  pcctdarray_con[,,k]<- temp_con$PRCC[[1]][k]
+for (k in 1:length(inputdata_control)){  #input variable
+  temp_control<- pcc(inputdata_control, avg_control_colsize, rank = T)
+  pcctdarray_control[,,k]<- temp_control$PRCC[[1]][k]
 }
 
-for (k in 1:length(inputdata_exp)){  #input variable
-  temp_exp<- pcc(inputdata_exp, avg_exp_colsize, rank = T)
-  pcctdarray_exp[,,k]<- temp_exp$PRCC[[1]][k]
+for (k in 1:length(inputdata_foliar)){  #input variable
+  temp_foliar<- pcc(inputdata_foliar, avg_foliar_colsize, rank = T)
+  pcctdarray_foliar[,,k]<- temp_foliar$PRCC[[1]][k]
+}
+
+for (k in 1:length(inputdata_seed)){  #input variable
+  temp_seed<- pcc(inputdata_seed, avg_seed_colsize, rank = T)
+  pcctdarray_seed[,,k]<- temp_seed$PRCC[[1]][k]
+}
+
+for (k in 1:length(inputdata_soil)){  #input variable
+  temp_soil<- pcc(inputdata_soil, avg_soil_colsize, rank = T)
+  pcctdarray_soil[,,k]<- temp_soil$PRCC[[1]][k]
 }
 
 
 #dfpcc_con<- ldply(pcctdarray_con, rbind)
 #colnames(dfpcc_con)<- c("Colony Size")
-dfpcc_con<- melt(pcctdarray_con)
-dfpcc_exp <- melt(pcctdarray_exp)
-
+dfpcc_control<- melt(pcctdarray_control)
+dfpcc_foliar <- melt(pcctdarray_foliar)
+dfpcc_seed <- melt(pcctdarray_seed)
+dfpcc_soil <- melt(pcctdarray_soil)
 
 pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #create plot pages
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(1,2), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
 #start figures
-  aa<- ggplot(data=dfpcc_con, aes(x= dfpcc_con[[3]], y= dfpcc_con[[4]])) + 
+  aa<- ggplot(data=dfpcc_control, aes(x= dfpcc_control[[3]], y= dfpcc_control[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
@@ -305,13 +329,31 @@ pushViewport(viewport(layout=grid.layout(1,2), gp= gpar(cex = 0.6)))
     theme_bw()
   print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)
 
-  cc<- ggplot(data=dfpcc_exp, aes(x= dfpcc_exp[[3]], y= dfpcc_exp[[4]])) + 
+  bb<- ggplot(data=dfpcc_foliar, aes(x= dfpcc_foliar[[3]], y= dfpcc_foliar[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
-    labs(title= "Exposed", x=" ", y= "Partial Correlation Coefficient") +
+    labs(title= "Foliar", x=" ", y= "Partial Correlation Coefficient") +
     #facet_grid(. ~ Var2) +
     theme_bw()
-  print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
+  print(bb, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
+ 
+  cc<- ggplot(data=dfpcc_seed, aes(x= dfpcc_seed[[3]], y= dfpcc_seed[[4]])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Seed", x=" ", y= "Partial Correlation Coefficient") +
+    #facet_grid(. ~ Var2) +
+    theme_bw()
+  print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
+  
+  dd<- ggplot(data=dfpcc_soil, aes(x= dfpcc_soil[[3]], y= dfpcc_soil[[4]])) + 
+    geom_bar(stat="identity", position = "identity") +
+    scale_y_continuous(limits= c(-1,1)) +
+    coord_flip() +
+    labs(title= "Soil", x=" ", y= "Partial Correlation Coefficient") +
+    #facet_grid(. ~ Var2) +
+    theme_bw()
+  print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 4), newpage= FALSE)
 
 dev.off()
