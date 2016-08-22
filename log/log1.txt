@@ -1,4 +1,10 @@
 VarroaPop Log File
-Created Aug-22, 2016  10:42 AM
+Created Aug-22, 2016  05:02 PM
 
 
+Warning - The Following Events are Outside the Simulation Period:
+
+     ReQueening
+
+Press OK to Continue the Simulation
+Press Cancel to Stop the Simulation
