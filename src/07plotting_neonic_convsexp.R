@@ -1,94 +1,129 @@
 #plot crunching ###########
 #colony persistence
-cp_con <- rep(NA, nrows)
-cp_exp <- rep(NA, nrows)
+cp_control <- rep(NA, nrows)
+cp_foliar <- rep(NA, nrows)
+cp_soil <- rep(NA, nrows)
+cp_seed <- rep(NA, nrows)
 for (n in 1:nrows){
-  x <- which(tdarray_con[n,1,1:Nsims] > 1000) # queries colony size > 1000 for 1000 simulations at each time point
-  y <- which(tdarray_exp[n,1,1:Nsims] > 1000)
-  cp_con[n] <- length(x)/Nsims #appends vector x with proportion of simulations per time step with Col Size > 0
-  cp_exp[n] <- length(y)/Nsims
+  x <- which(tdarray_control[n,1,1:Nsims] > 0) # queries colony size > 1000 for 1000 simulations at each time point
+  y <- which(tdarray_foliar[n,1,1:Nsims] > 0)
+  z <- which(tdarray_soil[n,1,1:Nsims] > 0)
+  zz <- which(tdarray_seed[n,1,1:Nsims] > 0)
+  cp_control[n] <- length(x)/Nsims #appends vector x with proportion of simulations per time step with Col Size > 0
+  cp_foliar[n] <- length(y)/Nsims
+  cp_soil[n] <- length(z)/Nsims
+  cp_seed[n] <- length(zz)/Nsims
 }
 
 #foragers
-fa_con <- rep(NA, nrows)
-fa_exp <- rep(NA, nrows)
+fa_control <- rep(NA, nrows)
+fa_foliar <- rep(NA, nrows)
+fa_soil <- rep(NA, nrows)
+fa_seed <- rep(NA, nrows)
 for (n in 1:nrows){
-  x <- which(tdarray_con[n,4,1:Nsims] > 0) 
-  y <- which(tdarray_exp[n,4,1:Nsims] > 0)
-  fa_con[n] <- length(x)/Nsims
-  fa_exp[n] <- length(y)/Nsims
+  x <- which(tdarray_control[n,4,1:Nsims] > 0) 
+  y <- which(tdarray_foliar[n,4,1:Nsims] > 0)
+  z <- which(tdarray_soil[n,4,1:Nsims] > 0)
+  zz <- which(tdarray_seed[n,4,1:Nsims] > 0)
+  fa_control[n] <- length(x)/Nsims
+  fa_foliar[n] <- length(y)/Nsims
+  fa_soil[n] <- length(z)/Nsims
+  fa_seed[n] <- length(zz)/Nsims
 }
 
 #adult workers
-aw_con <- rep(NA, nrows)
-aw_exp <- rep(NA, nrows)
+aw_control <- rep(NA, nrows)
+aw_foliar <- rep(NA, nrows)
+aw_soil <- rep(NA, nrows)
+aw_seed <- rep(NA, nrows)
 for (n in 1:nrows){
-  x <- which(tdarray_con[n,3,1:Nsims] > 0)
-  y <- which(tdarray_exp[n,3,1:Nsims] > 0)
-  aw_con[n] <- length(x)/Nsims
-  aw_exp[n] <- length(y)/Nsims
-}
-
-#free mites
-fm_con <- rep(NA, nrows)
-fm_exp <- rep(NA, nrows)
-for (n in 1:nrows){
-  x <- which(tdarray_con[n,11,1:Nsims] > 0)
-  y <- which(tdarray_exp[n,11,1:Nsims] > 0)
-  fm_con[n] <- length(x)/Nsims 
-  fm_exp[n] <- length(y)/Nsims 
-}
-
-#dead foragers
-dfr_con <- rep(NA, nrows)
-dfr_exp <- rep(NA, nrows)
-for (n in 1:nrows){
-  x <- which(tdarray_con[n,1,1:Nsims] > 0) 
-  y <- which(tdarray_exp[n,1,1:Nsims] > 0) 
-  dfr_con[n] <- length(x)/Nsims 
-  dfr_exp[n] <- length(y)/Nsims
-}
-
-#dead mites
-dm_con <- rep(NA, nrows)
-dm_exp <- rep(NA, nrows)
-for (n in 1:nrows){
-  x <- which(tdarray_con[n,16,1:Nsims] > 0)
-  y <- which(tdarray_exp[n,16,1:Nsims] > 0)
-  dm_con[n] <- length(x)/Nsims
-  dm_exp[n] <- length(y)/Nsims
-}
-
-#capped drone brood
-cdb_con <- rep(NA, nrows)
-cdb_exp <- rep(NA, nrows)
-for (n in 1:nrows){
-  x <- which(tdarray_con[n, 5, 1:Nsims] > 0)
-  y <- which(tdarray_exp[n, 5, 1:Nsims] > 0)
-  cdb_con[n] <- length(x)/Nsims
-  cdb_exp[n] <- length(y)/Nsims
+  x <- which(tdarray_control[n,3,1:Nsims] > 0)
+  y <- which(tdarray_foliar[n,3,1:Nsims] > 0)
+  z <- which(tdarray_soil[n,3,1:Nsims] > 0)
+  zz <- which(tdarray_seed[n,3,1:Nsims] > 0)
+  aw_control[n] <- length(x)/Nsims
+  aw_foliar[n] <- length(y)/Nsims
+  aw_soil[n] <- length(z)/Nsims
+  aw_seed[n] <- length(zz)/Nsims
 }
 
 #capped worker brood
-cwb_con <- rep(NA, nrows)
-cwb_exp <- rep(NA, nrows)
+cwb_control <- rep(NA, nrows)
+cwb_foliar <- rep(NA, nrows)
+cwb_seed <- rep(NA, nrows)
+cwb_soil <- rep(NA, nrows)
 for (n in 1:nrows){
-  x <- which(tdarray_con[n, 6, 1:Nsims] > 0)
-  y <- which(tdarray_exp[n, 6, 1:Nsims] > 0)
-  cwb_con[n] <- length(x)/Nsims
-  cwb_exp[n] <- length(y)/Nsims
+  x <- which(tdarray_control[n, 6, 1:Nsims] > 0)
+  y <- which(tdarray_foliar[n, 6, 1:Nsims] > 0)
+  z <- which(tdarray_seed[n, 6, 1:Nsims] > 0)
+  zz <- which(tdarray_soil[n, 6, 1:Nsims] > 0)
+  cwb_control[n] <- length(x)/Nsims
+  cwb_foliar[n] <- length(y)/Nsims
+  cwb_seed[n] <- length(z)/Nsims
+  cwb_soil[n] <- length(zz)/Nsims
 }
+
+# #free mites
+# fm_con <- rep(NA, nrows)
+# fm_exp <- rep(NA, nrows)
+# for (n in 1:nrows){
+#   x <- which(tdarray_con[n,11,1:Nsims] > 0)
+#   y <- which(tdarray_exp[n,11,1:Nsims] > 0)
+#   fm_con[n] <- length(x)/Nsims 
+#   fm_exp[n] <- length(y)/Nsims 
+# }
+# 
+# #dead foragers
+# dfr_con <- rep(NA, nrows)
+# dfr_exp <- rep(NA, nrows)
+# for (n in 1:nrows){
+#   x <- which(tdarray_con[n,1,1:Nsims] > 0) 
+#   y <- which(tdarray_exp[n,1,1:Nsims] > 0) 
+#   dfr_con[n] <- length(x)/Nsims 
+#   dfr_exp[n] <- length(y)/Nsims
+# }
+# 
+# #dead mites
+# dm_con <- rep(NA, nrows)
+# dm_exp <- rep(NA, nrows)
+# for (n in 1:nrows){
+#   x <- which(tdarray_con[n,16,1:Nsims] > 0)
+#   y <- which(tdarray_exp[n,16,1:Nsims] > 0)
+#   dm_con[n] <- length(x)/Nsims
+#   dm_exp[n] <- length(y)/Nsims
+# }
+# 
+# #capped drone brood
+# cdb_con <- rep(NA, nrows)
+# cdb_exp <- rep(NA, nrows)
+# for (n in 1:nrows){
+#   x <- which(tdarray_con[n, 5, 1:Nsims] > 0)
+#   y <- which(tdarray_exp[n, 5, 1:Nsims] > 0)
+#   cdb_con[n] <- length(x)/Nsims
+#   cdb_exp[n] <- length(y)/Nsims
+# }
+
 
 #MC proportions ##########
 pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
   #start figures
-  par(mfrow=c(3,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
-  plot(timearray, cp_con, type="l", col="blue", ylab = "P(Colony Size) > 0", main= "Time", ylim=c(0,1), xlab=NA)
-  lines(timearray, cp_exp, type="l", lty = 2, col="red")
-  plot(timearray, fa_con, type="l", col="blue", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
-  lines(timearray, fa_exp, type="l", lty = 2, col="red")
-  plot(timearray, aw_con, type="l", col="blue", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
-  lines(timearray, aw_exp, type="l", lty = 2, col="red")
+  par(mfrow=c(4,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+  plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 0", main= "Time", ylim=c(0,1), xlab=NA)
+  lines(timearray, cp_foliar, type="l", lty = 2, col="red")
+  lines(timearray, cp_seed, type="l", lty = 2, col="black")
+  lines(timearray, cp_soil, type="l", lty = 2, col="green")
+  plot(timearray, fa_control, type="l", col="blue", ylab= "P(Foragers) > 0", ylim=c(0,1), xlab=NA) 
+  lines(timearray, fa_foliar, type="l", lty = 2, col="red")
+  lines(timearray, fa_seed, type="l", lty = 2, col="black")
+  lines(timearray, fa_soil, type="l", lty = 2, col="green")
+  plot(timearray, aw_control, type="l", col="blue", ylab= "P(Adult Workers) > 0", ylim=c(0,1), xlab=NA) 
+  lines(timearray, aw_foliar, type="l", lty = 2, col="red")
+  lines(timearray, aw_seed, type="l", lty = 2, col="black")
+  lines(timearray, aw_soil, type="l", lty = 2, col="green")
+  plot(timearray, cwb_control, type="l", col="blue", ylab = "P(Capped Worker Brood) > 0", ylim=c(0,1), xlab=NA)
+  lines(timearray, cwb_foliar, type="l", lty = 2, col="red")
+  lines(timearray, cwb_seed, type="l", lty = 2, col="black")
+  lines(timearray, cwb_soil, type="l", lty = 2, col="green")  
   #plot(timearray, fm_con, type="l", col="blue", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
   #lines(timearray, fm_exp, type="l", lty = 2, col="red")
   #plot(timearray, dfr_con, type="l", col="blue", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
