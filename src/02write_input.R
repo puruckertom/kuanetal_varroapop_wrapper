@@ -100,6 +100,8 @@ for (i in 1:Nsims) {
   inputvalue45 <- seed_begin[i]
   parameter46 <- ("SeedForageEnd=") #seed forage end
   inputvalue46 <- seed_end[i]
+  parameter47 <- ("ESeedConcentration=") #seed concentration
+  inputvalue47 <- seedconc[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
   write(varroainput0, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = FALSE)
@@ -300,6 +302,8 @@ for (i in 1:Nsims) {
   write(varroainput45, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput46 <- paste(parameter46, inputvalue46, sep= " ")
   write(varroainput46, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput47 <- paste(parameter47, inputvalue47, sep= " ")
+  write(varroainput47, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
   #write(varroainputweather, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE)
 }

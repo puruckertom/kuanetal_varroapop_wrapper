@@ -93,7 +93,7 @@ seedenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, seedenable) #SeedEn
 soilp <- runif(Nsims, 1, 2) ; inputdf <- cbind(inputdf, soilp) #ESoilP
 soilfoc <- runif(Nsims, 0.001, 0.02) ; inputdf <- cbind(inputdf, soilfoc) #ESoilFoc
 #soilconc <- runif(Nsims, 1, 10) ; inputdf <- cbind(inputdf, soilconc) #ESoilConcentration
-#seedconc <- runif(Nsims, 1, 10) ; inputdf <- cbind(inputdf, seedconc) #ESeedConcentration
+seedconc <- runif(Nsims, 1, 1) ; inputdf <- cbind(inputdf, seedconc) #ESeedConcentration
 soil_begin <- rep("06/05/1989", Nsims) #SoilForageBegin
 soil_end <- rep("06/28/1989", Nsims) #SoilForageEnd
 seed_begin <- rep("06/05/1989", Nsims) #SeedForageBegin

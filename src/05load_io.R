@@ -24,11 +24,11 @@ indata_control <- read.csv(file = paste(vpdir_out_control, "inputdata_control.cs
 inputdata_control<- indata_control[, c(5:9,11,13:40)]
 #FOLIAR
 indata_foliar <- read.csv(file = paste(vpdir_out_foliar, "inputdata_foliar.csv", sep = ""), header = TRUE)
-inputdata_foliar<- indata_foliar[, c(5:9,11,13:39,41:42)]
+inputdata_foliar<- indata_foliar[, c(5:9,11,13:39,41:43)]
 indata_seed <- read.csv(file = paste(vpdir_out_seed, "inputdata_seed.csv", sep = ""), header = TRUE)
-inputdata_seed<- indata_foliar[, c(5:9,11,13:39,41:42)]
+inputdata_seed<- indata_seed[, c(5:9,11,13:39,41:43)]
 indata_soil <- read.csv(file = paste(vpdir_out_soil, "inputdata_soil.csv", sep = ""), header = TRUE)
-inputdata_soil<- indata_foliar[, c(5:9,11,13:39,41:42)]
+inputdata_soil<- indata_soil[, c(5:9,11,13:39,41:43)]
 
 #extract input vectors from dataframe
 for(i in 1:length(inputdata_control)){assign(names(inputdata_control)[i], inputdata_control[[i]])}
