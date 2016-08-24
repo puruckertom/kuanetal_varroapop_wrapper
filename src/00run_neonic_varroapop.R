@@ -54,7 +54,7 @@ if(Sys.info()[4]=="ACKUAN-PC"){
 if(Sys.info()[4]=="DZ2626UCKUAN"){
   vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison.vrp"
+  vrp_filename <- "comparison_kurt.vrp"
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
