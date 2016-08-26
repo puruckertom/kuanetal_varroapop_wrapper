@@ -51,7 +51,8 @@ rqenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQEnableRe
 ## pesticide tab of https://docs.google.com/spreadsheets/d/1SG1aceXAoWoxFPag52y09zaYtvnkYH4gXVp9LXj1Yxw/edit#gid=1238958414
 ##pesticide exposure
 adslope<- runif(Nsims, 1, 9) ; inputdf <- cbind(inputdf, adslope)  #AIAdultSlope
-adLD50<- runif(Nsims, 0.001, 100) ; inputdf <- cbind(inputdf, adLD50)  #AIAdultLD50 (ug/bee)
+#adLD50<- runif(Nsims, 0.001, 100) ; inputdf <- cbind(inputdf, adLD50)  #AIAdultLD50 (ug/bee)
+adLD50<- runif(Nsims, 0.001, 1) ; inputdf <- cbind(inputdf, adLD50)  #AIAdultLD50 (ug/bee)
 adslopec<- runif(Nsims, 1,10) ; inputdf <- cbind(inputdf, adslopec)  #AIAdultSlopeContact
 adLD50c<- runif(Nsims, 0.001, 100) ; inputdf <- cbind(inputdf, adLD50c)  #AIAdultLD50Contact (ug/bee)
 lslope<- runif(Nsims, 1, 9) ; inputdf <- cbind(inputdf, lslope)  #AILarvaSlope
