@@ -108,7 +108,7 @@ for (n in 1:nrows){
 pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
   #start figures
   par(mfrow=c(4,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
-  plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 0", main= "Time", ylim=c(0,1), xlab=NA)
+  plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 0", ylim=c(0,1), xlab=NA)
   lines(timearray, cp_foliar, type="l", lty = 2, col="red")
   lines(timearray, cp_seed, type="l", lty = 2, col="black")
   lines(timearray, cp_soil, type="l", lty = 2, col="green")
@@ -133,25 +133,42 @@ dev.off()
 
 
 #time series plotting #######
-temparray_con <- tdarray_con[1:nrows,resvar,1:Nsims]
-temparray_exp <- tdarray_exp[1:nrows,resvar,1:Nsims]
-dimnames(temparray_con)<- list(c(as.character(timearray)), c(outvar))
-dimnames(temparray_exp)<- list(c(as.character(timearray)), c(outvar))
-tempout_con<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
+resvar<- c(1,3,4,10,18)
+temparray_control <- tdarray_control[1:nrows,resvar,1:Nsims]
+temparray_foliar <- tdarray_foliar[1:nrows,resvar,1:Nsims]
+temparray_seed <- tdarray_seed[1:nrows,resvar,1:Nsims]
+temparray_soil <- tdarray_soil[1:nrows, resvar, 1:Nsims]
+dimnames(temparray_control)<- list(c(as.character(timearray)), c(outvar))
+dimnames(temparray_foliar)<- list(c(as.character(timearray)), c(outvar))
+dimnames(temparray_seed)<- list(c(as.character(timearray)), c(outvar))
+dimnames(temparray_soil)<- list(c(as.character(timearray)), c(outvar))
+tempout_control<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"),
                                                            c("25%","50%","75%")))
-tempout_exp<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
+tempout_foliar<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
                                                            c("25%","50%","75%")))
+tempout_seed<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
+                                                              c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
+                                                              c("25%","50%","75%")))
+tempout_soil<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
+                                                              c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
+                                                              c("25%","50%","75%")))
 for (r in 1:5){
   for (t in 1:nrows){
-    p<- quantile(temparray_con[t, r, 1:Nsims])
-    z<- quantile(temparray_exp[t, r, 1:Nsims])
+    p<- quantile(temparray_control[t, r, 1:Nsims])
+    z<- quantile(temparray_foliar[t, r, 1:Nsims])
+    q<- quantile(temparray_seed[t, r, 1:Nsims])
+    n<- quantile(temparray_soil[t,r,1:Nsims])
     for (s in 1:3){
-      quant_con<- c(p[[2]], p[[3]], p[[4]])
-      quant_exp<- c(z[[2]], z[[3]], z[[4]])
-      tempout_con[t,r,s]<- quant_con[s]
-      tempout_exp[t,r,s]<- quant_exp[s]
+      quant_control<- c(p[[2]], p[[3]], p[[4]])
+      quant_foliar<- c(z[[2]], z[[3]], z[[4]])
+      quant_seed<- c(q[[2]],q[[3]],q[[4]])
+      quant_soil<- c(n[[2]],n[[3]],n[[4]])
+      tempout_control[t,r,s]<- quant_control[s]
+      tempout_foliar[t,r,s]<- quant_foliar[s]
+      tempout_seed[t,r,s]<- quant_seed[s]
+      tempout_soil[t,r,s]<- quant_soil[s]
     }
   }
 }
@@ -160,16 +177,24 @@ for (r in 1:5){
 pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #time series plots
-par(mfrow=c(5,2), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
+par(mfrow=c(4,3), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
 for (r in 1:4){
-  plot(timearray, tempout_con[,r,2], type = "l", ylim = c(0,max(tempout_con[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
-  lines(timearray, tempout_con[,r,1], type = "l", lty= 2, col = "red")
-  lines(timearray, tempout_con[,r,3], type = "l", lty= 4, col = "blue")
+  plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
+  lines(timearray, tempout_control[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_control[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_exp[,r,2], type = "l", ylim = c(0,max(tempout_exp[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Exposed")
-  lines(timearray, tempout_exp[,r,1], type = "l", lty= 2, col = "red")
-  lines(timearray, tempout_exp[,r,3], type = "l", lty= 4, col = "blue")
+  plot(timearray, tempout_foliar[,r,2], type = "l", ylim = c(0,max(tempout_foliar[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Foliar")
+  lines(timearray, tempout_foliar[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_foliar[,r,3], type = "l", lty= 4, col = "blue")
+  
+  # plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Seed")
+  # lines(timearray, tempout_seed[,r,1], type = "l", lty= 2, col = "red")
+  # lines(timearray, tempout_seed[,r,3], type = "l", lty= 4, col = "blue")
+  
+  plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Soil")
+  lines(timearray, tempout_soil[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_soil[,r,3], type = "l", lty= 4, col = "blue")
 }
 #mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
@@ -353,7 +378,7 @@ pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, h
 #start figures
 #create plot pages
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(1,3), gp= gpar(cex = 0.6)))
 #start figures
   aa<- ggplot(data=dfpcc_control, aes(x= dfpcc_control[[3]], y= dfpcc_control[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
@@ -373,15 +398,15 @@ pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
  
-  cc<- ggplot(data=dfpcc_seed, aes(x= dfpcc_seed[[3]], y= dfpcc_seed[[4]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= "Seed", x=" ", y= "Partial Correlation Coefficient") +
-    #facet_grid(. ~ Var2) +
-    theme_bw()
-  print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
-  
+  # cc<- ggplot(data=dfpcc_seed, aes(x= dfpcc_seed[[3]], y= dfpcc_seed[[4]])) + 
+  #   geom_bar(stat="identity", position = "identity") +
+  #   scale_y_continuous(limits= c(-1,1)) +
+  #   coord_flip() +
+  #   labs(title= "Seed", x=" ", y= "Partial Correlation Coefficient") +
+  #   #facet_grid(. ~ Var2) +
+  #   theme_bw()
+  # print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
+  # 
   dd<- ggplot(data=dfpcc_soil, aes(x= dfpcc_soil[[3]], y= dfpcc_soil[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
@@ -389,6 +414,6 @@ pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
     labs(title= "Soil", x=" ", y= "Partial Correlation Coefficient") +
     #facet_grid(. ~ Var2) +
     theme_bw()
-  print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 4), newpage= FALSE)
+  print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
 
 dev.off()

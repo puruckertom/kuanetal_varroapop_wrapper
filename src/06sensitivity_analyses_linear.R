@@ -6,7 +6,7 @@
 
 breaks <- floor(length(timearray)/5)
 timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
-resvar<- c(1,3,4,10,18)
+
 tdoutput_con <- tdarray_con[timebreak,resvar,1:Nsims]
 tdoutput_exp <- tdarray_exp[timebreak,resvar,1:Nsims]
 dim(tdoutput_con)
