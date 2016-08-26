@@ -304,6 +304,8 @@ for (i in 1:Nsims) {
   write(varroainput46, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput47 <- paste(parameter47, inputvalue47, sep= " ")
   write(varroainput47, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  
+  write("ESeedConcentration= 0", file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
   #write(varroainputweather, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE)
 }
