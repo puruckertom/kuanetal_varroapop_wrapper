@@ -177,7 +177,7 @@ for (r in 1:5){
 pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #time series plots
-par(mfrow=c(4,3), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
+par(mfrow=c(4,4), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
 for (r in 1:4){
   plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
@@ -188,9 +188,9 @@ for (r in 1:4){
   lines(timearray, tempout_foliar[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_foliar[,r,3], type = "l", lty= 4, col = "blue")
   
-  # plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Seed")
-  # lines(timearray, tempout_seed[,r,1], type = "l", lty= 2, col = "red")
-  # lines(timearray, tempout_seed[,r,3], type = "l", lty= 4, col = "blue")
+  plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Seed")
+  lines(timearray, tempout_seed[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_seed[,r,3], type = "l", lty= 4, col = "blue")
   
   plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Soil")
   lines(timearray, tempout_soil[,r,1], type = "l", lty= 2, col = "red")
@@ -378,7 +378,7 @@ pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, h
 #start figures
 #create plot pages
 grid.newpage()
-pushViewport(viewport(layout=grid.layout(1,3), gp= gpar(cex = 0.6)))
+pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
 #start figures
   aa<- ggplot(data=dfpcc_control, aes(x= dfpcc_control[[3]], y= dfpcc_control[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
@@ -398,15 +398,15 @@ pushViewport(viewport(layout=grid.layout(1,3), gp= gpar(cex = 0.6)))
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
  
-  # cc<- ggplot(data=dfpcc_seed, aes(x= dfpcc_seed[[3]], y= dfpcc_seed[[4]])) + 
-  #   geom_bar(stat="identity", position = "identity") +
-  #   scale_y_continuous(limits= c(-1,1)) +
-  #   coord_flip() +
-  #   labs(title= "Seed", x=" ", y= "Partial Correlation Coefficient") +
-  #   #facet_grid(. ~ Var2) +
-  #   theme_bw()
-  # print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
-  # 
+  cc<- ggplot(data=dfpcc_seed, aes(x= dfpcc_seed[[3]], y= dfpcc_seed[[4]])) + 
+     geom_bar(stat="identity", position = "identity") +
+     scale_y_continuous(limits= c(-1,1)) +
+     coord_flip() +
+     labs(title= "Seed", x=" ", y= "Partial Correlation Coefficient") +
+     #facet_grid(. ~ Var2) +
+     theme_bw()
+   print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
+   
   dd<- ggplot(data=dfpcc_soil, aes(x= dfpcc_soil[[3]], y= dfpcc_soil[[4]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
@@ -414,6 +414,6 @@ pushViewport(viewport(layout=grid.layout(1,3), gp= gpar(cex = 0.6)))
     labs(title= "Soil", x=" ", y= "Partial Correlation Coefficient") +
     #facet_grid(. ~ Var2) +
     theme_bw()
-  print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
+  print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 4), newpage= FALSE)
 
 dev.off()
