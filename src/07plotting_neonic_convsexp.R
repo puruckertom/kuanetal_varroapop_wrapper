@@ -350,29 +350,47 @@ for (k in 1:length(inputdata_control)){  #input variable
   temp_control<- pcc(inputdata_control, avg_control_colsize, rank = T)
   pcctdarray_control[,,k]<- temp_control$PRCC[[1]][k]
 }
+pccdf_control <- adply(pcctdarray_control, c(2,3), .id = c("Colony Size", "Input"))
+ordered_control <- pccdf_control[order(abs(pccdf_control$V1), decreasing = T),]
+control_pcc <- ordered_control[1:10,]
+#control_pcc <- subset(pccdf_control, abs(pccdf_control$V1) > 0.062)
+
 
 for (k in 1:length(inputdata_foliar)){  #input variable
   temp_foliar<- pcc(inputdata_foliar, avg_foliar_colsize, rank = T)
   pcctdarray_foliar[,,k]<- temp_foliar$PRCC[[1]][k]
 }
+pccdf_foliar <- adply(pcctdarray_foliar, c(2,3), .id = c("Colony Size", "Input"))
+ordered_foliar <- pccdf_foliar[order(abs(pccdf_foliar$V1), decreasing = T),]
+foliar_pcc <- ordered_foliar[1:10,]
+#foliar_pcc <- subset(pccdf_foliar, abs(pccdf_foliar$V1) > 0.062)
 
 for (k in 1:length(inputdata_seed)){  #input variable
   temp_seed<- pcc(inputdata_seed, avg_seed_colsize, rank = T)
   pcctdarray_seed[,,k]<- temp_seed$PRCC[[1]][k]
 }
+pccdf_seed <- adply(pcctdarray_seed, c(2,3), .id = c("Colony Size", "Input"))
+ordered_seed <- pccdf_seed[order(abs(pccdf_seed$V1), decreasing = T),]
+seed_pcc <- ordered_seed[1:10,]
+#seed_pcc <- subset(pccdf_seed, abs(pccdf_seed$V1) > 0.062)
 
 for (k in 1:length(inputdata_soil)){  #input variable
   temp_soil<- pcc(inputdata_soil, avg_soil_colsize, rank = T)
   pcctdarray_soil[,,k]<- temp_soil$PRCC[[1]][k]
 }
+pccdf_soil <- adply(pcctdarray_soil, c(2,3), .id = c("Colony Size", "Input"))
+ordered_soil <- pccdf_soil[order(abs(pccdf_soil$V1), decreasing = T),]
+soil_pcc <- ordered_soil[1:10,]
+#soil_pcc <- subset(pccdf_soil, abs(pccdf_soil$V1) > 0.062)
 
 
-#dfpcc_con<- ldply(pcctdarray_con, rbind)
-#colnames(dfpcc_con)<- c("Colony Size")
-dfpcc_control<- melt(pcctdarray_control)
-dfpcc_foliar <- melt(pcctdarray_foliar)
-dfpcc_seed <- melt(pcctdarray_seed)
-dfpcc_soil <- melt(pcctdarray_soil)
+# dfpcc_con<- ldply(pcctdarray_con, rbind)
+# colnames(dfpcc_con)<- c("Colony Size")
+
+# dfpcc_control<- melt(pcctdarray_control)
+# dfpcc_foliar <- melt(pcctdarray_foliar)
+# dfpcc_seed <- melt(pcctdarray_seed)
+# dfpcc_soil <- melt(pcctdarray_soil)
 
 pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
@@ -380,7 +398,7 @@ pdf(file= paste(vpdir_fig, "fig_tornado_colonysize.pdf", sep=""), width = 8.5, h
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
 #start figures
-  aa<- ggplot(data=dfpcc_control, aes(x= dfpcc_control[[3]], y= dfpcc_control[[4]])) + 
+  aa<- ggplot(data=control_pcc, aes(x= control_pcc[[2]], y= control_pcc[[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
@@ -389,7 +407,7 @@ pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
     theme_bw()
   print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)
 
-  bb<- ggplot(data=dfpcc_foliar, aes(x= dfpcc_foliar[[3]], y= dfpcc_foliar[[4]])) + 
+  bb<- ggplot(data=foliar_pcc, aes(x= foliar_pcc[[2]], y= foliar_pcc[[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
@@ -398,7 +416,7 @@ pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
     theme_bw()
   print(bb, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
  
-  cc<- ggplot(data=dfpcc_seed, aes(x= dfpcc_seed[[3]], y= dfpcc_seed[[4]])) + 
+  cc<- ggplot(data=seed_pcc, aes(x= seed_pcc[[2]], y= seed_pcc[[3]])) + 
      geom_bar(stat="identity", position = "identity") +
      scale_y_continuous(limits= c(-1,1)) +
      coord_flip() +
@@ -407,7 +425,7 @@ pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
      theme_bw()
    print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
    
-  dd<- ggplot(data=dfpcc_soil, aes(x= dfpcc_soil[[3]], y= dfpcc_soil[[4]])) + 
+  dd<- ggplot(data=soil_pcc, aes(x= soil_pcc[[2]], y= soil_pcc[[3]])) + 
     geom_bar(stat="identity", position = "identity") +
     scale_y_continuous(limits= c(-1,1)) +
     coord_flip() +
