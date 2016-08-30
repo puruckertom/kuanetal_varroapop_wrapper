@@ -2,6 +2,9 @@
 #CONTROL
 load(paste(vpdir_out_control,"tdarray_control.RData", sep = ""))
 dim(tdarray_control)
+#do we need names here?
+names(tdarray_control)
+
 #FOLIAR
 load(paste(vpdir_out_foliar,"tdarray_foliar.RData", sep = ""))
 dim(tdarray_foliar)
