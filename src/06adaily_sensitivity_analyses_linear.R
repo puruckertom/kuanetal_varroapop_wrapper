@@ -12,8 +12,33 @@ ndays <- length(timearray)
 #tdarray_control[day, output_variable, simulation]
 dim(tdarray_control)
 head(tdarray_control)
-tdoutput_control <- tdarray_control[,outvar,1:Nsims]
-tdoutput_control <- tdarray_control[timebreak,resvar,1:Nsims]
+#colony size is 1
+tdoutput_control <- tdarray_control[,1,1:Nsims]
+#tdoutput_control <- tdarray_control[timebreak,resvar,1:Nsims]
+dim(tdoutput_control)
+dim(inputdata_control)
+nvars <- length(inputdata_control)
+
+#create pcc array for control
+tdarray_pccout_control<- array(data=NA, c(ndays,nvars))
+
+#partial correlation coefficients
+for (i in 1:ndays){  #break
+  tempinput<- tdoutput_control[i,1:1000]
+  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  temp_pcc<- pcc(inputdata_control[1:1000,], tempinput, rank = F)
+  tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
+  #for (k in 1:nvars){  #input variable
+  #  tdpcc_control[i,k]<- temp$PRCC[[1]][k]
+  #}
+}
+
+dim(tdarray_pccout_control)
+
+
+##################
+
+
 
 dim(tdoutput_foliar)
 tdoutput_foliar <- tdarray_foliar[timebreak,resvar,1:Nsims]
