@@ -78,6 +78,10 @@ for (i in 1:ndays){  #break
   tdarray_pccout_foliar[i,] <- temp_pcc$PCC[[1]]
 }
 
+#customize colors
+line_colors_foliar <- rep("#CC6666",nvars)
+line_colors_foliar[1:10] <- "#9999CC"
+
 dim(tdarray_pccout_foliar)
 colnames(tdarray_pccout_foliar) <- colnames(inputdata_foliar)
 colnames(tdarray_pccout_foliar)
@@ -89,10 +93,11 @@ pcc_foliar <- as.data.frame(cbind(date, tdarray_pccout_foliar))
 colnames(pcc_foliar)
 melted_foliar = melt(pcc_foliar, id.vars="date")
 ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
-  geom_line(color='steelblue') +
+  geom_line(color="steelblue") +
   #geom_line(aes(y=qs), colour = "red") +
   xlab("Simulation Day") + 
   ylab("Partial Correlation Coefficient") +
+  scale_color_manual(values=line_colors_foliar) +
   ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
   theme_bw()
 
