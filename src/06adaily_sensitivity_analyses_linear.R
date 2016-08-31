@@ -37,18 +37,30 @@ colnames(tdarray_pccout_control) <- colnames(inputdata_control)
 colnames(tdarray_pccout_control)
 date <- 1:ndays
 
-qs = melted_control$value[which(melted_control$variable=="queenstrength")]
+#qs = melted_control$value[which(melted_control$variable=="queenstrength")]
 #plot control daily sensitivities
 pcc_control <- as.data.frame(cbind(date, tdarray_pccout_control))
 colnames(pcc_control)
 melted_control = melt(pcc_control, id.vars="date")
-ggplot(melted_control, aes(x=date, y=value, group=variable)) +
-    geom_line(color='steelblue') +
-    geom_line(aes(y=qs), colour = "red") +
+pdf(file= paste(vpdir_fig, "daily_sensitivity_control.pdf", sep=""), width = 8, height = 6)
+  ggplot(melted_control, aes(x=date, y=value, group=variable)) +
+    geom_line(aes(colour=melted_control$variable)) +
+    scale_colour_manual(values = c("red","steelblue", "steelblue","steelblue","blue", "darkgreen","steelblue","steelblue", "steelblue",
+                                     "steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue",
+                                     "steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue",
+                                     "steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue","steelblue")) +
+    guides(fill=FALSE) +  
     xlab("Simulation Day") + 
     ylab("Partial Correlation Coefficient") +
     ggtitle("Daily Sensitivity (PCC) for Control Scenario") +
-    theme_bw()
+    theme_bw() +
+    theme(legend.position = "none")
+dev.off()
+
+sa_matches <- c(which(melted_control$variable=="queenstrength"),
+                which(melted_control$variable=="fgrlifespan"),
+                which(melted_control$variable=="RQQueenStrength"))
+melted_control[sa_matches,]
 
 #################  FOLIAR ##################################################
 ndays <- length(timearray)
@@ -79,9 +91,11 @@ for (i in 1:ndays){  #break
 }
 
 #customize colors
-line_colors_foliar <- rep("#CC6666",nvars)
-line_colors_foliar[1:10] <- "#9999CC"
+#line_colors_foliar <- rep("#CC6666",nvars)
+#line_colors_foliar[1:10] <- "#9999CC"
+line_colors_foliar <- unlist(rep(rep("steelblue",35),1097))
 
+length(line_colors_foliar)
 dim(tdarray_pccout_foliar)
 colnames(tdarray_pccout_foliar) <- colnames(inputdata_foliar)
 colnames(tdarray_pccout_foliar)
@@ -89,17 +103,19 @@ date <- 1:ndays
 
 #qs = melted_foliar$value[which(melted_foliar$variable=="queenstrength")]
 #plot foliar daily sensitivities
-pcc_foliar <- as.data.frame(cbind(date, tdarray_pccout_foliar))
-colnames(pcc_foliar)
-melted_foliar = melt(pcc_foliar, id.vars="date")
-ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
-  geom_line(color="steelblue") +
-  #geom_line(aes(y=qs), colour = "red") +
-  xlab("Simulation Day") + 
-  ylab("Partial Correlation Coefficient") +
-  scale_color_manual(values=line_colors_foliar) +
-  ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
-  theme_bw()
+pdf(file= paste(vpdir_fig, "daily_sensitivity_foliar.pdf", sep=""), width = 8, height = 6)
+  pcc_foliar <- as.data.frame(cbind(date, tdarray_pccout_foliar))
+  colnames(pcc_foliar)
+  melted_foliar = melt(pcc_foliar, id.vars="date")
+  ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
+    geom_line(aes(colour=melted_foliar$variable)) +
+    #geom_line(aes(y=qs), colour = "red") +
+    xlab("Simulation Day") + 
+    ylab("Partial Correlation Coefficient") +
+    #scale_color_manual(values=c("coral", "chocolate", "cornsilk", "papayawhip", "blanchedalmond")) +
+    ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
+    theme_bw()
+dev.off()
 
 
 
