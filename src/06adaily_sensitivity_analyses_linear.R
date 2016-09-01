@@ -1,11 +1,3 @@
-#SENSITIVITY ANALYSIS####
-#create input dataframes and arrays
-#d <- as.data.frame(rbind(drnmitesurvive, fgrlifespan, queenstrength, wkrdrnratio, wkrmitesurvive, adslopec, adLD50c, lslope, lLD50, kow, koc, halflife))
-#dt<- as.data.frame(t(d))
-#dim(dt)
-
-
-
 #############################  CONTROL ######################################
 ndays <- length(timearray)
 #timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
@@ -18,10 +10,10 @@ tdoutput_control <- tdarray_control[,1,1:Nsims]
 #tdoutput_control <- tdarray_control[timebreak,resvar,1:Nsims]
 dim(tdoutput_control)
 dim(inputdata_control)
-nvars <- length(inputdata_control)
+nvars_control <- length(inputdata_control)
 
 #create pcc array for control
-tdarray_pccout_control<- array(data=NA, c(ndays,nvars), dimnames =colnames(inputdata_control))
+tdarray_pccout_control<- array(data=NA, c(ndays,nvars_control), dimnames =colnames(inputdata_control))
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
@@ -32,37 +24,107 @@ for (i in 1:ndays){  #break
   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
 }
 
+#write control pcc results to disk
 dim(tdarray_pccout_control)
-colnames(tdarray_pccout_control) <- colnames(inputdata_control)
-colnames(tdarray_pccout_control)
-date <- 1:ndays
+save(tdarray_pccout_control, file = paste(vpdir_out_control,"tdarray_pccout_control.RData", sep = ""))
 
-#qs = melted_control$value[which(melted_control$variable=="queenstrength")]
-#plot control daily sensitivities
-pcc_control <- as.data.frame(cbind(date, tdarray_pccout_control))
-colnames(pcc_control)
-melted_control = melt(pcc_control, id.vars="date")
-pdf(file= paste(vpdir_fig, "daily_sensitivity_control.pdf", sep=""), width = 8, height = 6)
-  ggplot(melted_control, aes(x=date, y=value, group=variable)) +
-    geom_line(aes(colour=melted_control$variable)) +
-    scale_colour_manual(values = c("red","steelblue", "steelblue","steelblue","blue", "darkgreen","steelblue","steelblue", "steelblue",
-                                     "steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue",
-                                     "steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue",
-                                     "steelblue","steelblue", "steelblue","steelblue","steelblue", "steelblue","steelblue")) +
-    guides(fill=FALSE) +  
-    xlab("Simulation Day") + 
-    ylab("Partial Correlation Coefficient") +
-    ggtitle("Daily Sensitivity (PCC) for Control Scenario") +
-    theme_bw() +
-    theme(legend.position = "none")
-dev.off()
-
-sa_matches <- c(which(melted_control$variable=="queenstrength"),
-                which(melted_control$variable=="fgrlifespan"),
-                which(melted_control$variable=="RQQueenStrength"))
-melted_control[sa_matches,]
 
 #################  FOLIAR ##################################################
+ndays <- length(timearray)
+#timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
+## load foliar data
+#tdarray_foliar[day, output_variable, simulation]
+dim(tdarray_foliar)
+head(tdarray_foliar)
+#colony size is 1
+tdoutput_foliar <- tdarray_foliar[,1,1:Nsims]
+#tdoutput_foliar <- tdarray_foliar[timebreak,resvar,1:Nsims]
+dim(tdoutput_foliar)
+dim(inputdata_foliar)
+nvars_foliar <- length(inputdata_foliar)
+
+#create pcc array for foliar
+tdarray_pccout_foliar<- array(data=NA, c(ndays,nvars_foliar), dimnames =colnames(inputdata_foliar))
+
+#partial correlation coefficients
+for (i in 1:ndays){  #break
+  tempinput<- tdoutput_foliar[i,1:1000]
+  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  temp_pcc<- pcc(inputdata_foliar[1:1000,], tempinput, rank = F)
+  print(paste(i,"out of",ndays))
+  tdarray_pccout_foliar[i,] <- temp_pcc$PCC[[1]]
+}
+
+#write foliar pcc results to disk
+dim(tdarray_pccout_foliar)
+save(tdarray_pccout_foliar, file = paste(vpdir_out_foliar,"tdarray_pccout_foliar.RData", sep = ""))
+
+#################  soil ##################################################
+ndays <- length(timearray)
+#timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
+## load soil data
+#tdarray_soil[day, output_variable, simulation]
+dim(tdarray_soil)
+head(tdarray_soil)
+#colony size is 1
+tdoutput_soil <- tdarray_soil[,1,1:Nsims]
+#tdoutput_soil <- tdarray_soil[timebreak,resvar,1:Nsims]
+dim(tdoutput_soil)
+dim(inputdata_soil)
+nvars_soil <- length(inputdata_soil)
+
+#create pcc array for soil
+tdarray_pccout_soil<- array(data=NA, c(ndays,nvars_soil), dimnames =colnames(inputdata_soil))
+
+#partial correlation coefficients
+for (i in 1:ndays){  #break
+  tempinput<- tdoutput_soil[i,1:1000]
+  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  temp_pcc<- pcc(inputdata_soil[1:1000,], tempinput, rank = F)
+  print(paste(i,"out of",ndays))
+  tdarray_pccout_soil[i,] <- temp_pcc$PCC[[1]]
+}
+
+#write soil pcc results to disk
+dim(tdarray_pccout_soil)
+save(tdarray_pccout_soil, file = paste(vpdir_out_soil,"tdarray_pccout_soil.RData", sep = ""))
+
+#################  seed ##################################################
+ndays <- length(timearray)
+#timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
+## load seed data
+#tdarray_seed[day, output_variable, simulation]
+dim(tdarray_seed)
+head(tdarray_seed)
+#colony size is 1
+tdoutput_seed <- tdarray_seed[,1,1:Nsims]
+#tdoutput_seed <- tdarray_seed[timebreak,resvar,1:Nsims]
+dim(tdoutput_seed)
+dim(inputdata_seed)
+nvars_seed <- length(inputdata_seed)
+
+#create pcc array for seed
+tdarray_pccout_seed<- array(data=NA, c(ndays,nvars_seed), dimnames =colnames(inputdata_seed))
+
+#partial correlation coefficients
+for (i in 1:ndays){  #break
+  tempinput<- tdoutput_seed[i,1:1000]
+  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  temp_pcc<- pcc(inputdata_seed[1:1000,], tempinput, rank = F)
+  print(paste(i,"out of",ndays))
+  tdarray_pccout_seed[i,] <- temp_pcc$PCC[[1]]
+}
+
+#write seed pcc results to disk
+dim(tdarray_pccout_seed)
+save(tdarray_pccout_seed, file = paste(vpdir_out_seed,"tdarray_pccout_seed.RData", sep = ""))
+
+
+
+
+
+#############################################################################################
+####
 ndays <- length(timearray)
 #timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
 
@@ -119,85 +181,27 @@ dev.off()
 
 
 
-##################
 
 
-
-dim(tdoutput_foliar)
-tdoutput_foliar <- tdarray_foliar[timebreak,resvar,1:Nsims]
-
-
-
-#CONTROL
-srctdarray_con<- array(data=NA, c(5,5,15), dimnames = list(c("break1", "break2", "break3", "break4", "break5"),
-                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)"),
-                                                       c(colnames(inputdata_con))))
-pcctdarray_con<- array(data=NA, c(5,5,15), dimnames = list(c("break1", "break2", "break3", "break4", "break5"), 
-                                                       c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)"), 
-                                                       c(colnames(inputdata_con))))
-#standard regression coefficients
-for (i in 1:5){  #break
-  for (j in 1:5){   #output variable
-    for (k in 1:15){  #input variable
-      tempinput<- tdoutput_con[i,j,1:1000]
-      temp<- src(inputdata_con[1:1000,], tempinput, rank = T)
-      srctdarray_con[i,j,k]<- temp$SRRC[[1]][k]
-    }
-  }
-}
-
-#partial correlation coefficients
-for (i in 1:5){  #break
-  for (j in 1:5){   #output variable
-    for (k in 1:15){  #input variable
-      tempinput<- tdoutput_con[i,j,1:1000]
-      temp<- pcc(inputdata_con[1:1000,], tempinput, rank = T)
-      pcctdarray_con[i,j,k]<- temp$PRCC[[1]][k]
-    }
-  }
-}
-
-srcoutput_con<- adply(srctdarray_con[,,],2, cbind)
-#write.csv(srcoutput_con, file = paste(vpdir_output, "srcoutput.csv", sep=""))
-pccoutput_con<- adply(pcctdarray_con[,,],2, cbind)
-#write.csv(pccoutput, file = paste(vpdir_output, "pccoutput.csv", sep=""))
-
-
-#EXPOSED
-srctdarray_exp<- array(data=NA, c(5,5,16), dimnames = list(c("break1", "break2", "break3", "break4", "break5"),
-                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)"),
-                                                           c(colnames(inputdata_exp))))
-pcctdarray_exp<- array(data=NA, c(5,5,16), dimnames = list(c("break1", "break2", "break3", "break4", "break5"), 
-                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs","Colony Pollen (g)"), 
-                                                           c(colnames(inputdata_exp))))
-
-#standard regression coefficients
-for (i in 1:5){  #break
-  for (j in 1:5){   #output variable
-    for (k in 1:16){  #input variable
-      tempinput<- tdoutput_exp[i,j,1:1000]
-      temp<- src(inputdata_exp[1:1000,], tempinput, rank = T)
-      srctdarray_exp[i,j,k]<- temp$SRRC[[1]][k]
-    }
-  }
-}
-
-
-#partial correlation coefficients
-for (i in 1:5){  #break
-  for (j in 1:5){   #output variable
-    for (k in 1:16){  #input variable
-      tempinput<- tdoutput_exp[i,j,1:1000]
-      temp<- pcc(inputdata_exp[1:1000,], tempinput, rank = T)
-      pcctdarray_exp[i,j,k]<- temp$PRCC[[1]][k]
-    }
-  }
-}
-
-srcoutput_exp<- adply(srctdarray_exp[,,],2, cbind)
-# write.csv(srcoutput, file = paste(vpdir_output, "srcoutput.csv", sep=""))
-pccoutput_exp<- adply(pcctdarray_exp[,,],2, cbind)
-# write.csv(pccoutput, file = paste(vpdir_output, "pccoutput.csv", sep=""))
-
+#parallel not working for sensitivity:pcc
+# #parallel version
+# library(foreach)
+# if(Sys.info()['sysname'] != "Windows"){
+#   require("doMC")
+#   registerDoMC(Ncores)
+# }else{
+#   require("doParallel")
+#   cl <- makeCluster(2)
+#   registerDoParallel(cl)
+#   #snow is also an option
+# }
+# 
+# foreach(i = 1:ndays, .options.multicore=list(preschedule=TRUE)) %dopar% {
+#   tempinput<- tdoutput_control[i,1:1000]
+#   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+#   temp_pcc<- pcc(inputdata_control[1:1000,], tempinput, rank = F)
+#   print(paste(i,"out of",ndays))
+#   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
+# }
 
 

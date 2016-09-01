@@ -1,0 +1,178 @@
+########### control daily sensitivity plot
+#load control pcc results
+load(paste(vpdir_out_control,"tdarray_pccout_control.RData", sep = ""))
+dim(tdarray_pccout_control)
+
+dim(tdarray_pccout_control)
+colnames(tdarray_pccout_control) <- colnames(inputdata_control)
+colnames(tdarray_pccout_control)
+date <- 61:ndays
+date2 <- seq(as.Date("1910/1/1"), as.Date("1999/1/1"), "years")
+
+#qs = melted_control$value[which(melted_control$variable=="queenstrength")]
+#plot control daily sensitivities
+pcc_control <- as.data.frame(cbind(date, tdarray_pccout_control[61:ndays,]))
+colnames(pcc_control)
+melted_control = melt(pcc_control, id.vars="date")
+pdf(file= paste(vpdir_fig, "daily_sensitivity_control.pdf", sep=""), width = 8, height = 6)
+  ggplot(melted_control, aes(x=date, y=value, group=variable)) +
+    geom_line(aes(colour=melted_control$variable)) +
+    scale_colour_manual(values = c(
+      "firebrick3",  "steelblue", "steelblue",   "steelblue",    "blue",     "firebrick",  "steelblue", "steelblue",
+      #queenstrength wkrdrnratio  drnmitesurvive  wkrmitesurvive fgrlifespan RQQueenStrength adslope     adLD50
+      
+      "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange","steelblue",
+      #adslopec  adLD50c       lslope      lLD50       kow         koc        halflife       cl4pollen
+      
+      "steelblue","goldenrod","deeppink4", "goldenrod3","steelblue","steelblue", "steelblue", "gold4",
+      #cl4nectar  cl5pollen   cl5nectar   cldpollen     cldnectar   ca13pollen    ca13nectar     ca410pollen
+      
+      "steelblue",     "steelblue", "steelblue", "gold",     "steelblue", "gold3",     "deeppink", "steelblue",
+      #ca410nectar    ca1120pollen    ca1120nectar          ptrips          ntrips           pload           nload  soilp
+      
+      "black",  "steelblue")) +
+      #soilfoc        seedconc
+    guides(fill=FALSE) +  
+    xlab("Simulation Day") + 
+    ylab("Partial Correlation Coefficient") +
+    ggtitle("Daily Sensitivity (PCC) for Control Scenario") +
+    theme_bw() +
+    theme(legend.position = "none")
+dev.off()
+
+########### foliar daily sensitivity plot
+#load foliar pcc results
+load(paste(vpdir_out_foliar,"tdarray_pccout_foliar.RData", sep = ""))
+dim(tdarray_pccout_foliar)
+
+colnames(tdarray_pccout_foliar) <- colnames(inputdata_foliar)
+colnames(tdarray_pccout_foliar)
+date <- 61:ndays
+
+#qs = melted_foliar$value[which(melted_foliar$variable=="queenstrength")]
+#plot foliar daily sensitivities
+pcc_foliar <- as.data.frame(cbind(date, tdarray_pccout_foliar[61:ndays,]))
+colnames(pcc_foliar)
+melted_foliar = melt(pcc_foliar, id.vars="date")
+pdf(file= paste(vpdir_fig, "daily_sensitivity_foliar.pdf", sep=""), width = 8, height = 6)
+  ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
+    geom_line(aes(colour=melted_foliar$variable)) +
+    scale_colour_manual(values = c(
+      "firebrick3","steelblue", "steelblue","steelblue",       "blue",    "firebrick",  "steelblue","steelblue", 
+      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,RQQueenStrength,adslope,      adLD50
+      # 0.587356118 -0.038034348 -0.057103768   -0.017899693  0.404958669   0.119566429     0.029776035  -0.028895013
+      
+      "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
+      # adslopec    adLD50c     lslope       lLD50       kow         koc         halflife     apprate 
+      # 0.039323852 0.202252206 -0.010176605 0.027834761 0.001732525 0.005166421 -0.095259743 -0.388147178 
+      
+      "steelblue", "steelblue",   "goldenrod","deeppink4", "goldenrod3","steelblue","steelblue", "steelblue",
+      # cl4pollen    cl4nectar    cl5pollen    cl5nectar       cldpollen       cldnectar      ca13pollen      ca13nectar 
+      # -0.015331272 -0.019469068 0.062647516  0.056994488     0.060106641    -0.022921326     0.026135618    -0.011596841
+      
+      "gold4",   "steelblue",     "steelblue", "steelblue", "gold",     "steelblue", "gold3",     "deeppink", 
+      # ca410pollen  ca410nectar  ca1120pollen ca1120nectar ptrips      ntrips       pload        nload 
+      # 0.060323879  -0.009879763 -0.009316751 0.020296364  0.061448508 -0.006315187 -0.060226437 -0.112289169 
+      
+      "steelblue",   "black",  "steelblue")) +
+      # soilp         soilfoc       seedconc 
+      # -0.035085428  -0.029659169  0.009032147 
+        guides(fill=FALSE) +  
+    xlab("Simulation Day") + 
+    ylab("Partial Correlation Coefficient") +
+    ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
+    theme_bw() +
+    theme(legend.position = "none")
+dev.off()
+
+########### soil daily sensitivity plot
+#load soil pcc results
+load(paste(vpdir_out_soil,"tdarray_pccout_soil.RData", sep = ""))
+dim(tdarray_pccout_soil)
+
+colnames(tdarray_pccout_soil) <- colnames(inputdata_soil)
+colnames(tdarray_pccout_soil)
+date <- 61:ndays
+
+#qs = melted_soil$value[which(melted_soil$variable=="queenstrength")]
+#plot soil daily sensitivities
+pcc_soil <- as.data.frame(cbind(date, tdarray_pccout_soil[61:ndays,]))
+colnames(pcc_soil)
+melted_soil = melt(pcc_soil, id.vars="date")
+pdf(file= paste(vpdir_fig, "daily_sensitivity_soil.pdf", sep=""), width = 8, height = 6)
+  ggplot(melted_soil, aes(x=date, y=value, group=variable)) +
+    geom_line(aes(colour=melted_soil$variable)) +
+    scale_colour_manual(values = c(
+      "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",     "firebrick", "steelblue", "steelblue", 
+      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,RQQueenStrength,adslope,      adLD50
+      # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264 0.111696614   0.035542511   -0.053950074
+      
+      "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
+      # adslopec     adLD50c    lslope       lLD50        kow          koc          halflife      apprate 
+      #-0.094180181 0.011171505 0.017747116  0.020590230  -0.024599057 -0.086616760 -0.009761324  0.003120960 
+      
+      "steelblue", "steelblue",   "goldenrod","deeppink4", "goldenrod3","steelblue","steelblue", "steelblue",
+      # cl4pollen   cl4nectar    cl5pollen    cl5nectar    cldpollen   cldnectar   ca13pollen   ca13nectar 
+      # 0.030652194 -0.008356582 0.044495384  -0.029336352 0.021575527 0.017664115 0.024856777 -0.006705257 
+      
+      "gold4",   "steelblue",     "steelblue", "steelblue", "gold",     "steelblue", "gold3",     "deeppink", 
+      # ca410pollen  ca410nectar  ca1120pollen ca1120nectar ptrips       ntrips      pload        nload 
+      # 0.117236572  -0.008777357 0.048595296  0.015513097  -0.141418576 0.013836205 -0.375044973 0.020742109 
+      
+      "steelblue",   "black",  "steelblue")) +
+      # soilp         soilfoc       seedconc 
+      # -0.012744520  -0.083988351    -0.013500727 
+    guides(fill=FALSE) +  
+    xlab("Simulation Day") + 
+    ylab("Partial Correlation Coefficient") +
+    ggtitle("Daily Sensitivity (PCC) for Soil Scenario") +
+    theme_bw() +
+    theme(legend.position = "none")
+dev.off()
+
+
+########### seed daily sensitivity plot
+#load seed pcc results
+load(paste(vpdir_out_seed,"tdarray_pccout_seed.RData", sep = ""))
+dim(tdarray_pccout_seed)
+
+colnames(tdarray_pccout_seed) <- colnames(inputdata_seed)
+colnames(tdarray_pccout_seed)
+date <- 61:ndays
+
+#qs = melted_seed$value[which(melted_seed$variable=="queenstrength")]
+#plot seed daily sensitivities
+pcc_seed <- as.data.frame(cbind(date, tdarray_pccout_seed[61:ndays,]))
+colnames(pcc_seed)
+melted_seed = melt(pcc_seed, id.vars="date")
+pdf(file= paste(vpdir_fig, "daily_sensitivity_seed.pdf", sep=""), width = 8, height = 6)
+ggplot(melted_seed, aes(x=date, y=value, group=variable)) +
+  geom_line(aes(colour=melted_seed$variable)) +
+  scale_colour_manual(values = c(
+    "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",     "firebrick", "steelblue", "steelblue", 
+    #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,RQQueenStrength,adslope,      adLD50
+    # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264 0.111696614   0.035542511   -0.053950074
+    
+    "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
+    # adslopec     adLD50c    lslope       lLD50        kow          koc          halflife      apprate 
+    #-0.094180181 0.011171505 0.017747116  0.020590230  -0.024599057 -0.086616760 -0.009761324  0.003120960
+    
+    "steelblue", "steelblue",   "goldenrod","deeppink4", "goldenrod3","steelblue","steelblue", "steelblue",
+    # cl4pollen   cl4nectar    cl5pollen    cl5nectar    cldpollen   cldnectar   ca13pollen   ca13nectar 
+    # 0.030652194 -0.008356582 0.044495384  -0.029336352 0.021575527 0.017664115 0.024856777 -0.006705257 
+    
+    "gold4",   "steelblue",     "steelblue", "steelblue", "gold",     "steelblue", "gold3",     "deeppink", 
+    # ca410pollen  ca410nectar  ca1120pollen ca1120nectar ptrips       ntrips      pload        nload 
+    # 0.117236572  -0.008777357 0.048595296  0.015513097  -0.141418576 0.013836205 -0.375044973 0.020742109 
+    
+    "steelblue",   "black",  "steelblue")) +
+  # soilp         soilfoc       soilconc 
+  # -0.012744520  -0.083988351    -0.013500727 
+  guides(fill=FALSE) +  
+  xlab("Simulation Day") + 
+  ylab("Partial Correlation Coefficient") +
+  ggtitle("Daily Sensitivity (PCC) for Seed Scenario") +
+  theme_bw() +
+  theme(legend.position = "none")
+dev.off()
+
