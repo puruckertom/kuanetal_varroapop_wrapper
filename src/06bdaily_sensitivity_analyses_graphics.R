@@ -46,6 +46,8 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 }
 
 
+ndays <- length(timearray)
+
 #load control pcc results
 load(paste(vpdir_out_control,"tdarray_pccout_control.RData", sep = ""))
 dim(tdarray_pccout_control)
@@ -250,6 +252,45 @@ pdf(file= paste(vpdir_fig, "daily_sensitivity_combined.pdf", sep=""), width = 7,
   multiplot(daily_sensitivity_control, daily_sensitivity_foliar, daily_sensitivity_soil, daily_sensitivity_seed, cols=1)
 dev.off()
 
-png(file= paste(vpdir_fig, "daily_sensitivity_combined.png", sep=""), width = 7, height = 10, units='in', pointsize=12)
+png(file= paste(vpdir_fig, "daily_sensitivity_combined.png", sep=""), width = 7, height = 10, units='in', pointsize=12, res=300)
   multiplot(daily_sensitivity_control, daily_sensitivity_foliar, daily_sensitivity_soil, daily_sensitivity_seed, cols=1)
 dev.off()
+
+#create custom legend
+# dummy data
+set.seed(45)
+sens_colors <- c("firebrick3",  "blue",     "firebrick", 
+                 "palegreen4", "darkgreen", "darkorange", "blueviolet",
+                 "goldenrod","deeppink4", "goldenrod3",
+                 "gold4", "gold", "gold3", "deeppink",   
+                 "black",  "steelblue")
+sens_vars_levels <- c("queenstrength","fgrlifespan", "RQQueenStrength",
+                      "adslopec", "adLD50c", "halflife", "apprate",
+                      "cl5pollen", "cl5nectar", "cldpollen", 
+                      "ca410pollen", "ptrips", "pload", "nload",
+                      "soilfoc", "others")
+sens_vars_labels <- c("Queen Strength","Forager Lifespan", "ReQueen Strength",
+               "adslopec", "adLD50c", "Half-life", "Application rate",
+               "cl5pollen", "cl5nectar", "cldpollen", 
+               "ca410pollen", "Pollen trips", "Pollen load", "Nectar load",
+               "Soil foc", "All others")
+sens_colors_list <- rep(sens_colors, each=5)
+order_list <- rep(1:16,each=5)
+Variables <- rep(sens_vars, each=5)
+df <- data.frame(x=rep(1:5, 16), val=sample(1:100, 80), 
+                 variable=rep(sens_vars_levels, each=5), order_list2 = order_list)
+#reorder factor for labeling
+df$variable <- factor(df$variable, levels=sens_vars_levels, labels=sens_vars_labels)
+
+# plot
+png(file= paste(vpdir_fig, "daily_bs_legend.png", sep=""), width = 6, height = 6, units='in', pointsize=12, res=300)
+  ggplot(data = df, aes(x=x, y=val, colour=variable)) + 
+    geom_line() +
+    scale_color_manual(values=sens_colors) +
+    theme_bw()
+dev.off()
+
+
+  
+
+
