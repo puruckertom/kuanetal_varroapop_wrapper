@@ -88,7 +88,7 @@ daily_sensitivity_control <-  ggplot(melted_control, aes(x=date, y=value, group=
     #ggtitle("Daily Sensitivity (PCC) for Control Scenario") +
     annotate("text", x = 1000, y = 0.92, label = "Control", size=6) +
     theme_bw() +
-    scale_x_discrete(breaks = c(61,426,605,791,1035)) +
+    scale_x_discrete(breaks = c(61,426,610,791,1035)) +
     theme(legend.position = "none",  axis.title.x=element_blank(), axis.text.x=element_blank())
 
 pdf(file= paste(vpdir_fig, "daily_sensitivity_control.pdf", sep=""), width = 8, height = 6)
@@ -138,7 +138,7 @@ daily_sensitivity_foliar <- ggplot(melted_foliar, aes(x=date, y=value, group=var
     #ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
     annotate("text", x = 1000, y = 0.92, label = "Foliar", size=6) +
     theme_bw() +
-    scale_x_discrete(breaks = c(61,426,605,791,1035)) +
+    scale_x_discrete(breaks = c(61,426,610,791,1035)) +
     theme(legend.position = "none",  axis.title.x=element_blank(), axis.text.x=element_blank())
 
 pdf(file= paste(vpdir_fig, "daily_sensitivity_foliar.pdf", sep=""), width = 8, height = 6)
@@ -188,7 +188,7 @@ daily_sensitivity_soil <- ggplot(melted_soil, aes(x=date, y=value, group=variabl
     #ggtitle("Daily Sensitivity (PCC) for Soil Scenario") +
     annotate("text", x = 1000, y = 0.92, label = "Soil", size=6) +
     theme_bw() +
-    scale_x_discrete(breaks = c(61,426,605,791,1035)) +
+    scale_x_discrete(breaks = c(61,426,610,791,1035)) +
     theme(legend.position = "none",  axis.title.x=element_blank(), axis.text.x=element_blank())
   
 pdf(file= paste(vpdir_fig, "daily_sensitivity_soil.pdf", sep=""), width = 8, height = 6)
@@ -240,7 +240,7 @@ daily_sensitivity_seed <- ggplot(melted_seed, aes(x=date, y=value, group=variabl
   annotate("text", x = 1000, y = 0.92, label = "Seed", size=6) +
   theme_bw() +
   #august 9 is day 221, +366 (leap year) = 587
-  scale_x_discrete(breaks = c(61,426,605,791,1035), labels = c("3/1/1988","3/1/1989","8/27/1989","3/1/1990","10/31/1990")) +
+  scale_x_discrete(breaks = c(61,426,610,791,1035), labels = c("3/1/1988","3/1/1989","9/1/1989","3/1/1990","10/31/1990")) +
   theme(legend.position = "none")
 
 pdf(file= paste(vpdir_fig, "daily_sensitivity_seed.pdf", sep=""), width = 8, height = 6)

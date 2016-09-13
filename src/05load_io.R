@@ -44,3 +44,4 @@ for(i in 1:length(inputdata_soil)){assign(names(inputdata_soil)[i], inputdata_so
 #withdraw miteimmtype from list
 #listinput<- as.list(linputdata[c(1:5,7:16)]) 
 outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)")
+
