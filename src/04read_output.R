@@ -21,6 +21,7 @@ for (i in 1:Nsims) {
   newarray <- df[,2:27]
   tdarray_control[1:nrows,1:26,i] <- abind(newarray[1:nrows,1:26], along=3)
 }
+
 save(tdarray_control, file = paste(vpdir_out_control,"tdarray_control.RData", sep = ""))
 rm(tdarray_control)
 
