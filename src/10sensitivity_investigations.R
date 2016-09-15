@@ -56,7 +56,7 @@ p.qvf
 #plot of pollen and nectar concentrations over time
 #19 pollen conc
 #21 nectar conc
-melt
+#melt
 
 
 foliar_pollen_concs <- tdarray_foliar[791,19,]
@@ -86,17 +86,27 @@ max(soil_pollen_concs)
 length(soil_pollen_concs)
 
 #log figure
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 plot(1:1000,log(soil_pollen_concs))
 plot(1:1000,log(foliar_pollen_concs))
 
 ## determinants of foliar pollen concentration
 #View(tdarray_foliar[791,19,])
+avh <- tdarray_foliar[821,19,]
+dim(tdarray_foliar)
+plot(600:650,tdarray_foliar[600:650,19,3])
+
+#wtf
+pcc(inputdata_foliar,avh)
+
 colnames(inputdata_foliar)
 p.avh <- ggplot(inputdata_foliar, aes(apprate, halflife))
+p.avh
+
 #day 791 is sep 30, 1989
 #p.avh <- p.avh + geom_point(aes(colour=tdarray_foliar[791,19,])) + 
-p.avh <- p.avh + geom_point(aes(colour=tdarray_foliar[821,19,],size=tdarray_foliar[821,19,])) +
+p.avh <- p.avh + geom_point(aes(colour=avh,size=avh)) +
+  
   scale_colour_gradientn(colours = rainbow(10),guide = guide_legend(title = "Pollen Concentration")) + 
   theme_bw() +
   labs(x = "Application Rate", y="Half-life")

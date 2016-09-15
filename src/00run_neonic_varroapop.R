@@ -32,6 +32,14 @@ if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison_stp_epaw.vrp"
 }
+#tom mac air
+if(Sys.info()[4]=="stp-air"){
+  vpdir<-path.expand("~/git/beeRpop/")
+}
+#tom mac air
+if(Sys.info()[4]=="stp-air.local"){
+  vpdir<-path.expand("~/git/beeRpop/")
+}
 #marcia epa computer
 if(Sys.info()[4]=="LZ2626UMSNYDE02"){
   vpdir<-path.expand("C:/Users/msnyde02/varroapoptest2/")
@@ -63,12 +71,6 @@ if(Sys.info()[4]=="LZ2032EAKANAREK"){
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison.vrp"
 } 
-#tom laptop
-if(Sys.info()[4]=="stp-air.local"){
-  vpdir<-path.expand("~/git/beeRpop/")
-  # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison.vrp"
-}
 if(Sys.info()[4]=="DZ2626UKWOLFE"){
   vpdir<-path.expand("E:/VarroaPop/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
