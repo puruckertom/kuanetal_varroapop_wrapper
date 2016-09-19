@@ -102,19 +102,24 @@ melted_pollen$variable <- factor(melted_pollen$variable,
                                levels = c("95%","75%","50%","25%","5%"),
                                labels=c("95%","75%","50%","25","5%"))
 dim(melted_pollen)
+colnames(melted_pollen)
 #View(melted_pollen)
 
 pollen_plot <- ggplot(melted_pollen, aes(x=Date, y=value, group=variable)) +
   theme_bw() +
+  #scale_x_discrete(breaks = c(1:10000)) +
   #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
-  geom_line(aes(colour=melted_pollen$variable)) +
+  geom_line(aes(x=Date,y=value,colour=melted_pollen$variable)) +
+  guides(fill=FALSE) +
   theme_bw() +
+  #scale_x_discrete(labels = c("3/1/1988","3/1/1989","9/1/1989","3/1/1990","10/31/1990")) +
   scale_colour_manual(values = c("firebrick3","red", "black","steelblue","darkblue")) +
   #theme(legend.position=c(611, 8)) +
   #theme(legend.title="Scenario") +
   guides(col = guide_legend(title="Percentile")) +
   #c(611,791,1035) -> c(7184,7364,7608)
   xlab("Simulation Day") + 
+  #scale_x_discrete(breaks = c(melted_pollen$Date[1],melted_pollen$Date[10],melted_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
 pollen_plot
 
