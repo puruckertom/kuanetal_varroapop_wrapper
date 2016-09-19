@@ -1,3 +1,5 @@
+.DS_Store
+
 /sobol/input01/*
 /sobol/output?/results*.txt
 /sobol/output??/results*.txt

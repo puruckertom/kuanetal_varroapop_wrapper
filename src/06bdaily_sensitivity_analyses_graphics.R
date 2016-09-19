@@ -55,6 +55,7 @@ dim(tdarray_pccout_control)
 dim(tdarray_pccout_control)
 colnames(tdarray_pccout_control) <- colnames(inputdata_control)
 colnames(tdarray_pccout_control)
+#1 or 61
 date <- 61:ndays
 date2 <- seq(as.Date("1988/1/1"), as.Date("1991/1/1"), "days")
 date3 <- date2[61:ndays]
