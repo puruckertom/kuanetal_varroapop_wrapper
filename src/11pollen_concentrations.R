@@ -105,7 +105,7 @@ dim(melted_foliar_pollen)
 colnames(melted_foliar_pollen)
 #View(melted_foliar_pollen)
 
-pollen_plot <- ggplot(melted_foliar_pollen, aes(x=Date, y=value, group=variable)) +
+foliar_pollen_plot <- ggplot(melted_foliar_pollen, aes(x=Date, y=value, group=variable)) +
   theme_bw() +
   #scale_x_discrete(breaks = c(1:10000)) +
   #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
@@ -122,14 +122,14 @@ pollen_plot <- ggplot(melted_foliar_pollen, aes(x=Date, y=value, group=variable)
   xlab("September Simulation Days") + 
   #scale_x_discrete(breaks = c(melted_foliar_pollen$Date[1],melted_foliar_pollen$Date[10],melted_foliar_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
-pollen_plot
+foliar_pollen_plot
 
 pdf(file= paste(vpdir_fig, "foliar_pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
-  pollen_plot
+  foliar_pollen_plot
 dev.off()
 
 png(file= paste(vpdir_fig, "foliar_pollen_ts_plot.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
-  pollen_plot
+  foliar_pollen_plot
 dev.off()
 
 ####runquantile for seed
@@ -169,7 +169,7 @@ dim(melted_seed_pollen)
 colnames(melted_seed_pollen)
 #View(melted_seed_pollen)
 
-pollen_plot <- ggplot(melted_seed_pollen, aes(x=Date, y=value, group=variable)) +
+seed_pollen_plot <- ggplot(melted_seed_pollen, aes(x=Date, y=value, group=variable)) +
   theme_bw() +
   #scale_x_discrete(breaks = c(1:10000)) +
   #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
@@ -186,14 +186,14 @@ pollen_plot <- ggplot(melted_seed_pollen, aes(x=Date, y=value, group=variable)) 
   xlab("September Simulation Days") + 
   #scale_x_discrete(breaks = c(melted_seed_pollen$Date[1],melted_seed_pollen$Date[10],melted_seed_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
-pollen_plot
+seed_pollen_plot
 
 pdf(file= paste(vpdir_fig, "seed_pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
-pollen_plot
+seed_pollen_plot
 dev.off()
 
 png(file= paste(vpdir_fig, "seed_pollen_ts_plot.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
-pollen_plot
+seed_pollen_plot
 dev.off()
 
 ####runquantile for soil
@@ -233,7 +233,7 @@ dim(melted_soil_pollen)
 colnames(melted_soil_pollen)
 #View(melted_soil_pollen)
 
-pollen_plot <- ggplot(melted_soil_pollen, aes(x=Date, y=value, group=variable)) +
+soil_pollen_plot <- ggplot(melted_soil_pollen, aes(x=Date, y=value, group=variable)) +
   theme_bw() +
   #scale_x_discrete(breaks = c(1:10000)) +
   #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
@@ -250,13 +250,18 @@ pollen_plot <- ggplot(melted_soil_pollen, aes(x=Date, y=value, group=variable)) 
   xlab("September Simulation Days") + 
   #scale_x_discrete(breaks = c(melted_soil_pollen$Date[1],melted_soil_pollen$Date[10],melted_soil_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
-pollen_plot
+soil_pollen_plot
 
 pdf(file= paste(vpdir_fig, "soil_pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
-pollen_plot
+soil_pollen_plot
 dev.off()
 
 png(file= paste(vpdir_fig, "soil_pollen_ts_plot.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
-pollen_plot
+soil_pollen_plot
 dev.off()
 
+#multiplot
+
+png(file= paste(vpdir_fig, "combined_pollen_ts_plot.png", sep=""), width = 7, height = 10, units='in', pointsize=12, res=300)
+multiplot(foliar_pollen_plot,soil_pollen_plot,seed_pollen_plot, cols=1)
+dev.off()
