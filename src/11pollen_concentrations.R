@@ -94,17 +94,34 @@ pollen_percentiles <- as.data.frame(cbind(date2[low_bound:up_bound],
                                           pollen_50[low_bound:up_bound],
                                           pollen_75[low_bound:up_bound],
                                           pollen_95[low_bound:up_bound]))
-colnames(pollen_percentiles) <- c("Date","05%","25%","50%","75%","95%")
+colnames(pollen_percentiles) <- c("Date","5%","25%","50%","75%","95%")
 melted_pollen = melt(pollen_percentiles, id.vars="Date")
+colnames(melted_pollen)
+levels(melted_pollen$variables)
+melted_pollen$variable <- factor(melted_pollen$variable, 
+                               levels = c("95%","75%","50%","25%","5%"),
+                               labels=c("95%","75%","50%","25","5%"))
 dim(melted_pollen)
 #View(melted_pollen)
 
 pollen_plot <- ggplot(melted_pollen, aes(x=Date, y=value, group=variable)) +
   theme_bw() +
-  scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
+  #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
   geom_line(aes(colour=melted_pollen$variable)) +
   theme_bw() +
-  scale_colour_manual(values = c("firebrick3","firebrick", "green","steelblue3","steelblue")) +
+  scale_colour_manual(values = c("firebrick3","red", "black","steelblue","darkblue")) +
+  #theme(legend.position=c(611, 8)) +
+  #theme(legend.title="Scenario") +
+  guides(col = guide_legend(title="Percentile")) +
   #c(611,791,1035) -> c(7184,7364,7608)
   xlab("Simulation Day") + 
   ylab("Pollen Concentration (ug/g)")
+pollen_plot
+
+pdf(file= paste(vpdir_fig, "pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
+  pollen_plot
+dev.off()
+
+png(file= paste(vpdir_fig, "pollen_plot_ts.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
+  pollen_plot
+dev.off()
