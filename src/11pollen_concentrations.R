@@ -68,48 +68,48 @@ p.avh <- p.avh + geom_point(aes(colour=avh,size=avh)) +
   labs(x = "Application Rate", y="Half-life")
 p.avh
 
-#runquantile
+####runquantile for foliar
 vector_length <- 1096
-pollen_05 <- vector(mode = "numeric", length = vector_length)
-pollen_25 <- vector(mode = "numeric", length = vector_length)
-pollen_50 <- vector(mode = "numeric", length = vector_length)
-pollen_75 <- vector(mode = "numeric", length = vector_length)
-pollen_95 <- vector(mode = "numeric", length = vector_length)
+foliar_pollen_05 <- vector(mode = "numeric", length = vector_length)
+foliar_pollen_25 <- vector(mode = "numeric", length = vector_length)
+foliar_pollen_50 <- vector(mode = "numeric", length = vector_length)
+foliar_pollen_75 <- vector(mode = "numeric", length = vector_length)
+foliar_pollen_95 <- vector(mode = "numeric", length = vector_length)
 
 dim(tdarray_foliar)
 date2 <- seq(as.Date("1988/1/1"), as.Date("1990/12/31"), "days")
 for(i in 1:1096){
-  pollen_05[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.05)
-  pollen_25[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.25)
-  pollen_50[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.5)
-  pollen_75[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.75)
-  pollen_95[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.95)
+  foliar_pollen_05[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.05)
+  foliar_pollen_25[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.25)
+  foliar_pollen_50[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.5)
+  foliar_pollen_75[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.75)
+  foliar_pollen_95[i] <- quantile(tdarray_foliar[i,19,1:1000],probs=0.95)
 }
 
 low_bound <- 611
-up_bound <- 1096
-pollen_percentiles <- as.data.frame(cbind(date2[low_bound:up_bound], 
-                                          pollen_05[low_bound:up_bound],
-                                          pollen_25[low_bound:up_bound],
-                                          pollen_50[low_bound:up_bound],
-                                          pollen_75[low_bound:up_bound],
-                                          pollen_95[low_bound:up_bound]))
-colnames(pollen_percentiles) <- c("Date","5%","25%","50%","75%","95%")
-melted_pollen = melt(pollen_percentiles, id.vars="Date")
-colnames(melted_pollen)
-levels(melted_pollen$variables)
-melted_pollen$variable <- factor(melted_pollen$variable, 
+up_bound <- 641
+foliar_pollen_percentiles <- as.data.frame(cbind(date2[low_bound:up_bound], 
+                                          foliar_pollen_05[low_bound:up_bound],
+                                          foliar_pollen_25[low_bound:up_bound],
+                                          foliar_pollen_50[low_bound:up_bound],
+                                          foliar_pollen_75[low_bound:up_bound],
+                                          foliar_pollen_95[low_bound:up_bound]))
+colnames(foliar_pollen_percentiles) <- c("Date","5%","25%","50%","75%","95%")
+melted_foliar_pollen = melt(foliar_pollen_percentiles, id.vars="Date")
+colnames(melted_foliar_pollen)
+levels(melted_foliar_pollen$variables)
+melted_foliar_pollen$variable <- factor(melted_foliar_pollen$variable, 
                                levels = c("95%","75%","50%","25%","5%"),
                                labels=c("95%","75%","50%","25","5%"))
-dim(melted_pollen)
-colnames(melted_pollen)
-#View(melted_pollen)
+dim(melted_foliar_pollen)
+colnames(melted_foliar_pollen)
+#View(melted_foliar_pollen)
 
-pollen_plot <- ggplot(melted_pollen, aes(x=Date, y=value, group=variable)) +
+pollen_plot <- ggplot(melted_foliar_pollen, aes(x=Date, y=value, group=variable)) +
   theme_bw() +
   #scale_x_discrete(breaks = c(1:10000)) +
   #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
-  geom_line(aes(x=Date,y=value,colour=melted_pollen$variable)) +
+  geom_line(aes(x=Date,y=value,colour=melted_foliar_pollen$variable)) +
   guides(fill=FALSE) +
   theme_bw() +
   #scale_x_discrete(labels = c("3/1/1988","3/1/1989","9/1/1989","3/1/1990","10/31/1990")) +
@@ -117,16 +117,146 @@ pollen_plot <- ggplot(melted_pollen, aes(x=Date, y=value, group=variable)) +
   #theme(legend.position=c(611, 8)) +
   #theme(legend.title="Scenario") +
   guides(col = guide_legend(title="Percentile")) +
+  annotate("text", x = 7210, y = 8, label = "Foliar", size=6) +
   #c(611,791,1035) -> c(7184,7364,7608)
-  xlab("Simulation Day") + 
-  #scale_x_discrete(breaks = c(melted_pollen$Date[1],melted_pollen$Date[10],melted_pollen$Date[100])) +
+  xlab("September Simulation Days") + 
+  #scale_x_discrete(breaks = c(melted_foliar_pollen$Date[1],melted_foliar_pollen$Date[10],melted_foliar_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
 pollen_plot
 
-pdf(file= paste(vpdir_fig, "pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
+pdf(file= paste(vpdir_fig, "foliar_pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
   pollen_plot
 dev.off()
 
-png(file= paste(vpdir_fig, "pollen_plot_ts.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
+png(file= paste(vpdir_fig, "foliar_pollen_ts_plot.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
   pollen_plot
 dev.off()
+
+####runquantile for seed
+vector_length <- 1096
+seed_pollen_05 <- vector(mode = "numeric", length = vector_length)
+seed_pollen_25 <- vector(mode = "numeric", length = vector_length)
+seed_pollen_50 <- vector(mode = "numeric", length = vector_length)
+seed_pollen_75 <- vector(mode = "numeric", length = vector_length)
+seed_pollen_95 <- vector(mode = "numeric", length = vector_length)
+
+dim(tdarray_seed)
+date2 <- seq(as.Date("1988/1/1"), as.Date("1990/12/31"), "days")
+for(i in 1:1096){
+  seed_pollen_05[i] <- quantile(tdarray_seed[i,19,1:1000],probs=0.05)
+  seed_pollen_25[i] <- quantile(tdarray_seed[i,19,1:1000],probs=0.25)
+  seed_pollen_50[i] <- quantile(tdarray_seed[i,19,1:1000],probs=0.5)
+  seed_pollen_75[i] <- quantile(tdarray_seed[i,19,1:1000],probs=0.75)
+  seed_pollen_95[i] <- quantile(tdarray_seed[i,19,1:1000],probs=0.95)
+}
+
+low_bound <- 611
+up_bound <- 641
+seed_pollen_percentiles <- as.data.frame(cbind(date2[low_bound:up_bound], 
+                                          seed_pollen_05[low_bound:up_bound],
+                                          seed_pollen_25[low_bound:up_bound],
+                                          seed_pollen_50[low_bound:up_bound],
+                                          seed_pollen_75[low_bound:up_bound],
+                                          seed_pollen_95[low_bound:up_bound]))
+colnames(seed_pollen_percentiles) <- c("Date","5%","25%","50%","75%","95%")
+melted_seed_pollen = melt(seed_pollen_percentiles, id.vars="Date")
+colnames(melted_seed_pollen)
+levels(melted_seed_pollen$variables)
+melted_seed_pollen$variable <- factor(melted_seed_pollen$variable, 
+                                 levels = c("95%","75%","50%","25%","5%"),
+                                 labels=c("95%","75%","50%","25","5%"))
+dim(melted_seed_pollen)
+colnames(melted_seed_pollen)
+#View(melted_seed_pollen)
+
+pollen_plot <- ggplot(melted_seed_pollen, aes(x=Date, y=value, group=variable)) +
+  theme_bw() +
+  #scale_x_discrete(breaks = c(1:10000)) +
+  #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
+  geom_line(aes(x=Date,y=value,colour=melted_seed_pollen$variable)) +
+  guides(fill=FALSE) +
+  theme_bw() +
+  #scale_x_discrete(labels = c("3/1/1988","3/1/1989","9/1/1989","3/1/1990","10/31/1990")) +
+  scale_colour_manual(values = c("firebrick3","red", "black","steelblue","darkblue")) +
+  #theme(legend.position=c(611, 8)) +
+  #theme(legend.title="Scenario") +
+  guides(col = guide_legend(title="Percentile")) +
+  annotate("text", x = 7210, y = 8, label = "Seed", size=6) +
+  #c(611,791,1035) -> c(7184,7364,7608)
+  xlab("September Simulation Days") + 
+  #scale_x_discrete(breaks = c(melted_seed_pollen$Date[1],melted_seed_pollen$Date[10],melted_seed_pollen$Date[100])) +
+  ylab("Pollen Concentration (ug/g)")
+pollen_plot
+
+pdf(file= paste(vpdir_fig, "seed_pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
+pollen_plot
+dev.off()
+
+png(file= paste(vpdir_fig, "seed_pollen_ts_plot.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
+pollen_plot
+dev.off()
+
+####runquantile for soil
+vector_length <- 1096
+soil_pollen_05 <- vector(mode = "numeric", length = vector_length)
+soil_pollen_25 <- vector(mode = "numeric", length = vector_length)
+soil_pollen_50 <- vector(mode = "numeric", length = vector_length)
+soil_pollen_75 <- vector(mode = "numeric", length = vector_length)
+soil_pollen_95 <- vector(mode = "numeric", length = vector_length)
+
+dim(tdarray_soil)
+date2 <- seq(as.Date("1988/1/1"), as.Date("1990/12/31"), "days")
+for(i in 1:1096){
+  soil_pollen_05[i] <- quantile(tdarray_soil[i,19,1:1000],probs=0.05)
+  soil_pollen_25[i] <- quantile(tdarray_soil[i,19,1:1000],probs=0.25)
+  soil_pollen_50[i] <- quantile(tdarray_soil[i,19,1:1000],probs=0.5)
+  soil_pollen_75[i] <- quantile(tdarray_soil[i,19,1:1000],probs=0.75)
+  soil_pollen_95[i] <- quantile(tdarray_soil[i,19,1:1000],probs=0.95)
+}
+
+low_bound <- 611
+up_bound <- 641
+soil_pollen_percentiles <- as.data.frame(cbind(date2[low_bound:up_bound], 
+                                          soil_pollen_05[low_bound:up_bound],
+                                          soil_pollen_25[low_bound:up_bound],
+                                          soil_pollen_50[low_bound:up_bound],
+                                          soil_pollen_75[low_bound:up_bound],
+                                          soil_pollen_95[low_bound:up_bound]))
+colnames(soil_pollen_percentiles) <- c("Date","5%","25%","50%","75%","95%")
+melted_soil_pollen = melt(soil_pollen_percentiles, id.vars="Date")
+colnames(melted_soil_pollen)
+levels(melted_soil_pollen$variables)
+melted_soil_pollen$variable <- factor(melted_soil_pollen$variable, 
+                                 levels = c("95%","75%","50%","25%","5%"),
+                                 labels=c("95%","75%","50%","25","5%"))
+dim(melted_soil_pollen)
+colnames(melted_soil_pollen)
+#View(melted_soil_pollen)
+
+pollen_plot <- ggplot(melted_soil_pollen, aes(x=Date, y=value, group=variable)) +
+  theme_bw() +
+  #scale_x_discrete(breaks = c(1:10000)) +
+  #scale_x_discrete(breaks = c(7184,7364,7608), labels = c("9/2/1989","3/1/1990","10/31/1990")) +
+  geom_line(aes(x=Date,y=value,colour=melted_soil_pollen$variable)) +
+  guides(fill=FALSE) +
+  theme_bw() +
+  #scale_x_discrete(labels = c("3/1/1988","3/1/1989","9/1/1989","3/1/1990","10/31/1990")) +
+  scale_colour_manual(values = c("firebrick3","red", "black","steelblue","darkblue")) +
+  #theme(legend.position=c(611, 8)) +
+  #theme(legend.title="Scenario") +
+  guides(col = guide_legend(title="Percentile")) +
+  annotate("text", x = 7210, y = 8, label = "Soil", size=6) +
+  #c(611,791,1035) -> c(7184,7364,7608)
+  xlab("September Simulation Days") + 
+  #scale_x_discrete(breaks = c(melted_soil_pollen$Date[1],melted_soil_pollen$Date[10],melted_soil_pollen$Date[100])) +
+  ylab("Pollen Concentration (ug/g)")
+pollen_plot
+
+pdf(file= paste(vpdir_fig, "soil_pollen_ts_plot.pdf", sep=""), width = 6, height = 4)
+pollen_plot
+dev.off()
+
+png(file= paste(vpdir_fig, "soil_pollen_ts_plot.png", sep=""), width = 6, height = 4, units='in', pointsize=12, res=300)
+pollen_plot
+dev.off()
+
