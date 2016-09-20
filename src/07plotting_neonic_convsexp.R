@@ -63,6 +63,39 @@ for (n in 1:nrows){
   cwb_soil[n] <- length(zz)/Nsims
 }
 
+#worker eggs
+we_control <- rep(NA, nrows)
+we_foliar <- rep(NA, nrows)
+we_soil <- rep(NA, nrows)
+we_seed <- rep(NA, nrows)
+for (n in 1:nrows){
+  x <- which(tdarray_control[n,10,1:Nsims] > 50)
+  y <- which(tdarray_foliar[n,10,1:Nsims] > 50)
+  z <- which(tdarray_soil[n,10,1:Nsims] > 50)
+  zz <- which(tdarray_seed[n,10,1:Nsims] > 50)
+  we_control[n] <- length(x)/Nsims
+  we_foliar[n] <- length(y)/Nsims
+  we_soil[n] <- length(z)/Nsims
+  we_seed[n] <- length(zz)/Nsims
+}
+
+#drone eggs
+de_control <- rep(NA, nrows)
+de_foliar <- rep(NA, nrows)
+de_soil <- rep(NA, nrows)
+de_seed <- rep(NA, nrows)
+for (n in 1:nrows){
+  x <- which(tdarray_control[n,9,1:Nsims] > 0)
+  y <- which(tdarray_foliar[n,9,1:Nsims] > 0)
+  z <- which(tdarray_soil[n,9,1:Nsims] > 0)
+  zz <- which(tdarray_seed[n,9,1:Nsims] > 0)
+  de_control[n] <- length(x)/Nsims
+  de_foliar[n] <- length(y)/Nsims
+  de_soil[n] <- length(z)/Nsims
+  de_seed[n] <- length(zz)/Nsims
+}
+
+
 # #free mites
 # fm_con <- rep(NA, nrows)
 # fm_exp <- rep(NA, nrows)
@@ -107,7 +140,7 @@ for (n in 1:nrows){
 #MC proportions ##########
 pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
   #start figures
-  par(mfrow=c(4,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+  par(mfrow=c(6,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
   plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 1000", ylim=c(0,1), xlab=NA)
   lines(timearray, cp_foliar, type="l", lty = 2, col="red")
   lines(timearray, cp_seed, type="l", lty = 2, col="black")
@@ -123,7 +156,15 @@ pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 
   plot(timearray, cwb_control, type="l", col="blue", ylab = "P(Capped Worker Brood) > 50", ylim=c(0,1), xlab=NA)
   lines(timearray, cwb_foliar, type="l", lty = 2, col="red")
   lines(timearray, cwb_seed, type="l", lty = 2, col="black")
-  lines(timearray, cwb_soil, type="l", lty = 2, col="green")  
+  lines(timearray, cwb_soil, type="l", lty = 2, col="green")
+  plot(timearray, we_control, type="l", col="blue", ylab = "P(Worker Eggs) > 50", ylim=c(0,1), xlab=NA)
+  lines(timearray, we_foliar, type="l", lty = 2, col="red")
+  lines(timearray, we_seed, type="l", lty = 2, col="black")
+  lines(timearray, we_soil, type="l", lty = 2, col="green")
+  plot(timearray, de_control, type="l", col="blue", ylab = "P(Drone Eggs) > 0", ylim=c(0,1), xlab=NA)
+  lines(timearray, de_foliar, type="l", lty = 2, col="red")
+  lines(timearray, de_seed, type="l", lty = 2, col="black")
+  lines(timearray, de_soil, type="l", lty = 2, col="green")
   #plot(timearray, fm_con, type="l", col="blue", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
   #lines(timearray, fm_exp, type="l", lty = 2, col="red")
   #plot(timearray, dfr_con, type="l", col="blue", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
