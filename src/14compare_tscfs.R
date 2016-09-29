@@ -1,14 +1,15 @@
 nsims = 10000
 logKow <- seq(-2,5,length.out = nsims)
 
+
 #2012 white paper (Briggs et al 1982,1983 model with modification by Ryan et al 1988)
-#Briggs,􀀃 G.,􀀃 Bromilow,􀀃 R.,􀀃 Evans,􀀃 A.,􀀃 Williams,􀀃 M.,􀀃 1983.􀀃 Relationships􀀃 between􀀃 lipophilicity􀀃 and􀀃 the􀀃
-#distribution􀀃 of􀀃non􀍲ionised􀀃chemicals􀀃 in􀀃 barley􀀃 shoots􀀃 following􀀃uptake􀀃by􀀃the􀀃 roots.􀀃 Pesticide􀀃
-#Science,􀀃14,􀀃492􀍲500.􀀃
-#Briggs,􀀃G.G.,􀀃Bromilow,􀀃R.H.,􀀃Evans,􀀃A.A.,􀀃1982.􀀃Relationships􀀃between􀀃lipophilicity􀀃and􀀃root􀀃uptake􀀃and􀀃
-#translocation􀀃of􀀃non􀍲ionised􀀃chemicals􀀃by􀀃barley.􀀃Pesticide􀀃Science,􀀃13,􀀃495􀍲504.􀀃
-#Ryan,􀀃 J.A.,􀀃 R.􀀃 M.􀀃 Bell,􀀃 J.􀀃 M.􀀃 Davidson􀀃 and􀀃 G.􀀃 A.􀀃 Oconnor.􀀃 1988.􀀃 Plant􀀃 Uptake􀀃 of􀀃 Non􀍲ionic􀀃 organic􀀃
-#chemicals 􀀃fr om􀀃soils.􀀃Chemosphere,􀀃17,􀀃2299􀍲2323.
+#Briggs,G.,Bromilow,R.,Evans,A.,Williams,M.,1983.Relationships between lipophilicity and the
+#distribution ofnon  ionisedchemicals  in  barley  shoots  following uptake by the  roots.  Pesticide 
+#Science, 14, 492  500. 
+#Briggs, G.G., Bromilow, R.H., Evans, A.A., 1982. Relationships between lipophilicity and root uptake and 
+#translocation of non  ionised chemicals by barley. Pesticide Science, 13, 495  504. 
+#Ryan,J.A., R.  M.  Bell,  J.  M.  Davidson  and  G.  A.  Oconnor.  1988.  Plant  Uptake  of  Non  ionic  organic 
+#chemicals from soils. Chemosphere, 17, 2299-2323.
 tscf2012 <- 0.784*10^(-4.34*(logKow-1.78)^2/2.44)
 
 
