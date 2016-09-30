@@ -1,6 +1,6 @@
 nsims = 10000
+#logKow <- seq(-2,5,length.out = nsims)
 logKow <- seq(-2,5,length.out = nsims)
-
 
 #2012 white paper (Briggs et al 1982,1983 model with modification by Ryan et al 1988)
 #Briggs,G.,Bromilow,R.,Evans,A.,Williams,M.,1983.Relationships between lipophilicity and the
@@ -38,12 +38,16 @@ foc <- 0.01
 conc_stem2012 <- (10^(.95*logKow-2.05)+0.82)*tscf2012*(rho/(theta+rho*koc*foc))*csoil
 conc_stem2014 <- (10^(.95*logKow-2.05)+0.82)*tscf2014*(rho/(theta+rho*koc*foc))*csoil
 
-plot(logKow,conc_stem2014,type='l',col='red')
+max_conc <- max(conc_stem2012,conc_stem2014,na.rm=T)
+min_conc <- min(conc_stem2012,conc_stem2014,na.rm=T)
+plot(logKow,conc_stem2014,type='l',col='red',ylim=c(min_conc,max_conc))
 lines(logKow,conc_stem2012,type='l')
 
-
-conc_ratio <- conc_stem2014/conc_stem2012
-#View(cbind(conc_stem2014,conc_stem2012,conc_ratio))
-min(conc_ratio)
-max(conc_ratio)
-plot(logKow,conc_ratio)
+log10_conc_ratio <- log10(conc_stem2014/conc_stem2012)
+#View(cbind(logKow,conc_stem2014,conc_stem2012,conc_ratio))
+#concentration goes negative for logKow between -1.667467 and -1.668167 (headed down)
+#also confirmed by entering logKow of -1.67 into beerex
+#also blow up log ratios
+min(log10_conc_ratio,na.rm=T)
+max(log10_conc_ratio,na.rm=T)
+plot(logKow,log10_conc_ratio)
