@@ -1,3 +1,5 @@
+#run 00
+
 nsims = 10000
 #logKow <- seq(-2,5,length.out = nsims)
 logKow <- seq(-2,5,length.out = nsims)
@@ -21,11 +23,43 @@ tscf2012 <- 0.784*10^(-4.34*(logKow-1.78)^2/2.44)
 #more conservative estimates of the concentration in stems (Appendix 5)
 #our EPA 2014 pollinator risk assessment guidance does not have an appendix 5
 tscf2014 <- -0.0648*(logKow)^2 + 0.241*logKow + 0.5822
-
 #0.2431 instead of 0.241 in beerex for tscf2014??
 
-plot(logKow,tscf2014,type='l',col='red')
-lines(logKow,tscf2012,type='l')
+#build a little long dataset for ggplot2
+#calcuated values
+tscf <- c(tscf2012,tscf2014)
+length(tscf)
+#factors for calculation plots
+tscf_factor_2012 <- rep('tscf2012',nsims)
+tscf_factor_2014 <- rep('tscf2014',nsims)
+tscf_factor <- factor(c(tscf_factor_2012,tscf_factor_2014),levels=c('tscf2012','tscf2014'))
+is.factor(tscf_factor)
+tscf_factor[1]
+tscf_factor[nsims+1]
+class(tscf_factor[1])
+length(tscf_factor)
+#log10kow as x values for plots
+log10kow <- c(logKow,logKow)
+length(log10kow)
+#bind
+compare_tscf <- cbind.data.frame(tscf,tscf_factor,log10kow)
+class(compare_tscf)
+#View(compare_tscf)
+  
+#ggplot
+p <- ggplot(data=compare_tscf,aes(x=log10kow, y=tscf, group=tscf_factor))
+p_tscf <- p + geom_line(aes(colour=tscf_factor))+theme_bw()
+p_tscf
+
+#write to pdf
+pdf(file= paste(vpdir_fig, "tscf_comparison.pdf", sep=""), width = 8, height = 6)
+  p_tscf
+dev.off()
+
+#write to jpg
+jpeg(file= paste(vpdir_fig, "tscf_comparison.jpg", sep=""), width = 10, height = 6, units='in', pointsize=12, res=300)
+  p_tscf
+dev.off()
 
 csoil <- 1.0
 rho <- 1.5
