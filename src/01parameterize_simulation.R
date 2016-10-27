@@ -8,7 +8,7 @@ inputdf<- data.frame(weather_file, sim_start, sim_end)
 ##overwrites defaults in vrp file
 
 ##base tab of https://docs.google.com/spreadsheets/d/1SG1aceXAoWoxFPag52y09zaYtvnkYH4gXVp9LXj1Yxw/edit#gid=0
-queenstrength<- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, queenstrength) #ICQueenStrength
+queenstrength<- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, queenstrength) #ICQueenStrength
 wkrdrnratio <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, wkrdrnratio) #RQWkrDrnRatio
 drnmitesurvive <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, drnmitesurvive) #ICDroneMiteSurvivorship
 wkrmitesurvive<- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, wkrmitesurvive) #ICWorkerMiteSurvivorship
