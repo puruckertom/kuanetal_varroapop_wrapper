@@ -43,3 +43,6 @@ first_pde_15 <- max(which(pde>0.15))
 pde[first_pde_15]
 propsperm[first_pde_15]
 
+#calculate number of years until queens of different strengths get to pde>0.15
+
+

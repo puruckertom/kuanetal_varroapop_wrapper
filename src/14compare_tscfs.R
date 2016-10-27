@@ -65,7 +65,7 @@ csoil <- 1.0
 rho <- 1.5
 #theta <- 1-(rho/2.65) ??
 theta <- 0.2
-koc <- 30
+koc <- 0.35*10^logKow
 foc <- 0.01
 #this equation is the same in both the 2012 white paper and the 2014 beerex manual
 #(rho/(theta+rho*koc*foc))*csoil is the ryan 1988 modification
@@ -73,7 +73,9 @@ conc_stem2012 <- (10^(.95*logKow-2.05)+0.82)*tscf2012*(rho/(theta+rho*koc*foc))*
 conc_stem2014 <- (10^(.95*logKow-2.05)+0.82)*tscf2014*(rho/(theta+rho*koc*foc))*csoil
 
 max_conc <- max(conc_stem2012,conc_stem2014,na.rm=T)
+max_conc
 min_conc <- min(conc_stem2012,conc_stem2014,na.rm=T)
+min_conc
 plot(logKow,conc_stem2014,type='l',col='red',ylim=c(min_conc,max_conc))
 lines(logKow,conc_stem2012,type='l')
 
