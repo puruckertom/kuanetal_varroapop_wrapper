@@ -52,19 +52,19 @@ if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||
     Sys.info()[4]=="Ashleys-MBP-2"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
   vpdir<-path.expand("~/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison.vrp"
+  vrp_filename <- "default.vrp"
 }
 #carmen epa desktop
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:/gitrepo/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison_carmen.vrp"
+  vrp_filename <- "default.vrp"
 }
 #carmen epa desktop 2
 if(Sys.info()[4]=="DZ2626UCKUAN"){
   vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison_kurt.vrp"
+  vrp_filename <- "default.vrp"
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
