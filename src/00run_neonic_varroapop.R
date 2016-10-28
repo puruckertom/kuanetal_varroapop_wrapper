@@ -51,19 +51,19 @@ if(Sys.info()[4]=="Ashleys-MBP"||Sys.info()[4]=="Ashleys-MacBook-Pro-2.local"||
     Sys.info()[4]=="Ashleys-MBP-2"||Sys.info()[4]=="Ashleys-MacBook-Pro.local") {
   vpdir<-path.expand("~/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison.vrp"
+  vrp_filename <- "comparison_carmen.vrp"
 }
 #carmen epa desktop
 if(Sys.info()[4]=="ACKUAN-PC"){
   vpdir<-path.expand("C:/gitrepo/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison.vrp"
+  vrp_filename <- "comparison_carmen.vrp"
 }
 #carmen epa desktop 2
 if(Sys.info()[4]=="DZ2626UCKUAN"){
   vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison_kurt.vrp"
+  vrp_filename <- "comparison_carmen.vrp"
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
@@ -96,7 +96,7 @@ vpdir_weather <- paste(vpdir, "weather/", sep = "")
 vpdir_sobol <- paste(vpdir, "sobol/", sep = "")
 
 #varroapop executable version
-vp_binary <- "VarroaPop_3_2_6_3.exe"
+vp_binary <- "VarroaPop_3_2_6_6.exe"
 vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
 
 #number of simulations 

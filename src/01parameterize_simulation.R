@@ -19,7 +19,7 @@ miteimmtype <- sample(immtype, size=Nsims, replace=T) ; inputdf <- cbind(inputdf
 #pctresistimmmites <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, pctresistimmmites) #PctImmMitesResistant
 ##Requeening
 #eggdelay <- runif(Nsims, 0, 50) ; inputdf <- cbind(inputdf, eggdelay) #RQEggLayDelay (days)
-RQQueenStrength<- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, RQQueenStrength) #ICQueenStrength
+RQQueenStrength<- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, RQQueenStrength) #ICQueenStrength
 #drnadults <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, drnadults) #ICDroneAdults
 #wkradults <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, wkradults) #ICWorkerAdults
 #drnbrood <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, drnbrood) #ICDroneBrood
@@ -36,7 +36,7 @@ RQQueenStrength<- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, RQQueenStrength
 #wkrmiteoffspring <- runif(Nsims, 0, 5) ; inputdf <- cbind(inputdf, wkrmiteoffspring) #ICWorkerMiteOffspring
 #requeendate <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, requeendate) #RQReQueenDate
 rqenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQEnableReQueen
-#rqscheduled <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQScheduled
+rqscheduled <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqscheduled) #RQScheduled
 #rqqueenstrength <- runif(Nsims, 1, 6) ; inputdf <- cbind(inputdf, rqqueenstrength) #RQQueenStrength
 #rqonce <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqonce) #RQOnce
 
@@ -79,15 +79,15 @@ ca1120nectar <- runif(Nsims, 20, 100) ; inputdf <- cbind(inputdf, ca1120nectar) 
 #cadnectar
 #cforagerpollen
 #cforagernectar
-ptrips <- runif(Nsims, 5, 15) ; inputdf <- cbind(inputdf, ptrips) #IPollenTrips (per day)
-ntrips <- runif(Nsims, 5, 15) ; inputdf <- cbind(inputdf, ntrips) #INectarTrips (per day)
+ptrips <- runif(Nsims, 4, 30) ; inputdf <- cbind(inputdf, ptrips) #IPollenTrips (per day)
+ntrips <- runif(Nsims, 4, 48) ; inputdf <- cbind(inputdf, ntrips) #INectarTrips (per day)
 #pctnectarfrgrs <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, pctnectarfrgrs) #IPercentNectarForagers
-pload <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, pload) #IPollenLoad (mg/bee)
-nload <- runif(Nsims, 0 ,10) ; inputdf <- cbind(inputdf, nload) #INectarLoad (mg/bee)
+pload <- runif(Nsims, 4, 16) ; inputdf <- cbind(inputdf, pload) #IPollenLoad (mg/bee)
+nload <- runif(Nsims, 30, 100) ; inputdf <- cbind(inputdf, nload) #INectarLoad (mg/bee)
 foliarenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, foliarenable) #FoliarEnabled
-foliar_appdate<- rep("09/01/1989", Nsims) ; inputdf <- cbind(inputdf, foliar_appdate) #FoliarAppDate
-foliar_begin<- rep("09/01/1989", Nsims) ; inputdf <- cbind(inputdf, foliar_begin) #FoliarForageBegin
-foliar_end<- rep("09/08/1989", Nsims) ; inputdf <- cbind(inputdf, foliar_end) #FoliarForageEnd
+foliar_appdate<- rep("07/01/1989", Nsims) ; inputdf <- cbind(inputdf, foliar_appdate) #FoliarAppDate
+foliar_begin<- rep("07/01/1989", Nsims) ; inputdf <- cbind(inputdf, foliar_begin) #FoliarForageBegin
+foliar_end<- rep("07/14/1989", Nsims) ; inputdf <- cbind(inputdf, foliar_end) #FoliarForageEnd
 soilenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, soilenable) #SoilEnabled
 seedenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, seedenable) #SeedEnabled
 #soiltheta <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, soiltheta) #ESoilTheta
@@ -95,10 +95,10 @@ soilp <- runif(Nsims, 1, 2) ; inputdf <- cbind(inputdf, soilp) #ESoilP
 soilfoc <- runif(Nsims, 0.001, 0.02) ; inputdf <- cbind(inputdf, soilfoc) #ESoilFoc
 #soilconc <- runif(Nsims, 1, 10) ; inputdf <- cbind(inputdf, soilconc) #ESoilConcentration
 seedconc <- runif(Nsims, 1, 10) ; inputdf <- cbind(inputdf, seedconc) #ESeedConcentration
-soil_begin <- rep("09/01/1989", Nsims) ; inputdf <- cbind(inputdf, soil_begin) #SoilForageBegin
-soil_end <- rep("09/08/1989", Nsims) ; inputdf <- cbind(inputdf, soil_end) #SoilForageEnd
-seed_begin <- rep("09/01/1989", Nsims) ; inputdf <- cbind(inputdf, seed_begin) #SeedForageBegin
-seed_end <- rep("09/08/1989", Nsims) ; inputdf <- cbind(inputdf, seed_end) #SeedForageEnd
+soil_begin <- rep("07/01/1989", Nsims) ; inputdf <- cbind(inputdf, soil_begin) #SoilForageBegin
+soil_end <- rep("07/14/1989", Nsims) ; inputdf <- cbind(inputdf, soil_end) #SoilForageEnd
+seed_begin <- rep("07/01/1989", Nsims) ; inputdf <- cbind(inputdf, seed_begin) #SeedForageBegin
+seed_end <- rep("07/14/1989", Nsims) ; inputdf <- cbind(inputdf, seed_end) #SeedForageEnd
 
 ## leftovers
 #folforagebeg <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, folforagebeg) #FoliarForageBegin
@@ -157,7 +157,7 @@ inputdata_soil <- subset(inputdf, select = -c(foliarenable, seedenable))
 #                           foliar_appdate, foliar_begin, foliar_end)
 
 #putting the input in the io directory so it can be read from there later
-write.csv(inputdata_control, file = paste(vpdir_out_control, "inputdata_control.csv", sep = ""))
-write.csv(inputdata_foliar, file = paste(vpdir_out_foliar, "inputdata_foliar.csv", sep = ""))
-write.csv(inputdata_seed, file = paste(vpdir_out_seed, "inputdata_seed.csv", sep = ""))
-write.csv(inputdata_soil, file = paste(vpdir_out_soil, "inputdata_soil.csv", sep = ""))
+write.csv(inputdata_control, file = paste(vpdir_in_control, "inputdata_control.csv", sep = ""))
+write.csv(inputdata_foliar, file = paste(vpdir_in_foliar, "inputdata_foliar.csv", sep = ""))
+write.csv(inputdata_seed, file = paste(vpdir_in_seed, "inputdata_seed.csv", sep = ""))
+write.csv(inputdata_soil, file = paste(vpdir_in_soil, "inputdata_soil.csv", sep = ""))
