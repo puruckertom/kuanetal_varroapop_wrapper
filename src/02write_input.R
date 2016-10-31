@@ -138,7 +138,7 @@ for (i in 1:Nsims) {
   write(varroainput6, file = paste(vpdir_in_control, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput6, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput6, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
-  varroainput7 <- paste(parameter7, inputvalue7, sep= "")
+  varroainput7 <- paste(parameter7, inputvalue7, sep= " ")
   write(varroainput7, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE, sep = "\n")
   write(varroainput7, file = paste(vpdir_in_control, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput7, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")

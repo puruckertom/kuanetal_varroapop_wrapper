@@ -14,11 +14,10 @@
 /log/log*exp.txt
 /log/log*.txt
 
-/input/input*.txt
-/input/control/input*.txt
-/input/foliar/input*.txt
-/input/seed/input*.txt
-/input/soil/input*.txt
+/input/control/*.*
+/input/foliar/*.*
+/input/seed/*.*
+/input/soil/*.*
 /input/*.log
 
 .Rproj.user
