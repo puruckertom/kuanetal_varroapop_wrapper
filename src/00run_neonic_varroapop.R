@@ -97,7 +97,7 @@ vpdir_weather <- paste(vpdir, "weather/", sep = "")
 vpdir_sobol <- paste(vpdir, "sobol/", sep = "")
 
 #varroapop executable version
-vp_binary <- "VarroaPop_3_2_6_6.exe"
+vp_binary <- "VarroaPop_3_2_6_9.exe"
 vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
 
 #number of simulations 
