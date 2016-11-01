@@ -6,7 +6,6 @@ if(length(new.packages)>0) {install.packages(new.packages)}
 
 #load library dependencies
 library(plyr)
-library(dplyr)
 library(reshape2)
 library(ggplot2)
 library(grid)
