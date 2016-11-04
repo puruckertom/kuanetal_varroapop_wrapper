@@ -241,105 +241,105 @@ for (r in 1:4){
 dev.off()
 
 #tornado plots #########
-
-datsrc_con<- list()
-datsrc_exp<- list()
-datpcc_con<- list()
-datpcc_exp<- list()
-
-for (i in 1:5) {
-  dfsrc_con<- mdply(srctdarray_con[i,1:5,], cbind)
-  tdfsrc_con<- t(dfsrc_con)
-  colnames(tdfsrc_con)<- outvar
-  s<- melt(tdfsrc_con)
-  datsrc_con[[i]]<- s
-  
-  dfsrc_exp<- mdply(srctdarray_exp[i,1:5,], cbind)
-  tdfsrc_exp<- t(dfsrc_exp)
-  colnames(tdfsrc_exp)<- outvar
-  m<- melt(tdfsrc_exp)
-  datsrc_exp[[i]]<- m
-}
-
-
-for (i in 1:5){
-  dfpcc_con<- mdply(pcctdarray_con[i,1:5,], cbind)
-  tdfpcc_con<- t(dfpcc_con)
-  colnames(tdfpcc_con)<- outvar
-  p<- melt(tdfpcc_con)
-  datpcc_con[[i]]<- p
-  
-  dfpcc_exp<- mdply(pcctdarray_exp[i,1:5,], cbind)
-  tdfpcc_exp<- t(dfpcc_exp)
-  colnames(tdfpcc_exp)<- outvar
-  n<- melt(tdfpcc_exp)
-  datpcc_exp[[i]]<- n
-}
-
-#create PDF tornado
-pdf(file= paste(vpdir_fig, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
-#start figures
-#create plot pages
-grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
-#start figures
-for (i in 1:length(timebreak)) { #loops by timebreak
-  aa<- ggplot(data=datsrc_con[[i]], aes(x= datsrc_con[[i]][[1]], y= datsrc_con[[i]][[3]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= paste("Control", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
-    facet_grid(. ~ Var2) +
-    theme_bw()
-  print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-}
-
-grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
-for (i in 1:length(timebreak)) { #loops by timebreak
-  cc<- ggplot(data=datsrc_exp[[i]], aes(x= datsrc_exp[[i]][[1]], y= datsrc_exp[[i]][[3]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= paste("Exposed", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
-    facet_grid(. ~ Var2) +
-    theme_bw()
-  print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-}
-
-grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
-for (i in 1:length(timebreak)) { #loops by timebreak
-  bb<- ggplot(data=datpcc_con[[i]], aes(x= datpcc_con[[i]][[1]], y= datpcc_con[[i]][[3]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= paste("Control", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
-    facet_grid(. ~ Var2) +
-    theme_bw()
-  print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-}
-
-grid.newpage()
-pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
-for (i in 1:length(timebreak)) { #loops by timebreak
-  dd<- ggplot(data=datpcc_exp[[i]], aes(x= datpcc_exp[[i]][[1]], y= datpcc_exp[[i]][[3]])) + 
-    geom_bar(stat="identity", position = "identity") +
-    scale_y_continuous(limits= c(-1,1)) +
-    coord_flip() +
-    labs(title= paste("Exposed", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
-    facet_grid(. ~ Var2) +
-    theme_bw()
-  print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
-}
-dev.off()
+# 
+# datsrc_con<- list()
+# datsrc_exp<- list()
+# datpcc_con<- list()
+# datpcc_exp<- list()
+# 
+# for (i in 1:5) {
+#   dfsrc_con<- mdply(srctdarray_con[i,1:5,], cbind)
+#   tdfsrc_con<- t(dfsrc_con)
+#   colnames(tdfsrc_con)<- outvar
+#   s<- melt(tdfsrc_con)
+#   datsrc_con[[i]]<- s
+#   
+#   dfsrc_exp<- mdply(srctdarray_exp[i,1:5,], cbind)
+#   tdfsrc_exp<- t(dfsrc_exp)
+#   colnames(tdfsrc_exp)<- outvar
+#   m<- melt(tdfsrc_exp)
+#   datsrc_exp[[i]]<- m
+# }
+# 
+# 
+# for (i in 1:5){
+#   dfpcc_con<- mdply(pcctdarray_con[i,1:5,], cbind)
+#   tdfpcc_con<- t(dfpcc_con)
+#   colnames(tdfpcc_con)<- outvar
+#   p<- melt(tdfpcc_con)
+#   datpcc_con[[i]]<- p
+#   
+#   dfpcc_exp<- mdply(pcctdarray_exp[i,1:5,], cbind)
+#   tdfpcc_exp<- t(dfpcc_exp)
+#   colnames(tdfpcc_exp)<- outvar
+#   n<- melt(tdfpcc_exp)
+#   datpcc_exp[[i]]<- n
+# }
+# 
+# #create PDF tornado
+# pdf(file= paste(vpdir_fig, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+# #start figures
+# #create plot pages
+# grid.newpage()
+# pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+# #start figures
+# for (i in 1:length(timebreak)) { #loops by timebreak
+#   aa<- ggplot(data=datsrc_con[[i]], aes(x= datsrc_con[[i]][[1]], y= datsrc_con[[i]][[3]])) + 
+#     geom_bar(stat="identity", position = "identity") +
+#     scale_y_continuous(limits= c(-1,1)) +
+#     coord_flip() +
+#     labs(title= paste("Control", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
+#     facet_grid(. ~ Var2) +
+#     theme_bw()
+#   print(aa, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
+# }
+# 
+# grid.newpage()
+# pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+# for (i in 1:length(timebreak)) { #loops by timebreak
+#   cc<- ggplot(data=datsrc_exp[[i]], aes(x= datsrc_exp[[i]][[1]], y= datsrc_exp[[i]][[3]])) + 
+#     geom_bar(stat="identity", position = "identity") +
+#     scale_y_continuous(limits= c(-1,1)) +
+#     coord_flip() +
+#     labs(title= paste("Exposed", i, sep=" "), x=" ", y= "Standardized Regression Coefficient") +
+#     facet_grid(. ~ Var2) +
+#     theme_bw()
+#   print(cc, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
+# }
+# 
+# grid.newpage()
+# pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+# for (i in 1:length(timebreak)) { #loops by timebreak
+#   bb<- ggplot(data=datpcc_con[[i]], aes(x= datpcc_con[[i]][[1]], y= datpcc_con[[i]][[3]])) + 
+#     geom_bar(stat="identity", position = "identity") +
+#     scale_y_continuous(limits= c(-1,1)) +
+#     coord_flip() +
+#     labs(title= paste("Control", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
+#     facet_grid(. ~ Var2) +
+#     theme_bw()
+#   print(bb, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
+# }
+# 
+# grid.newpage()
+# pushViewport(viewport(layout=grid.layout(length(timebreak),1), gp= gpar(cex = 0.6)))
+# for (i in 1:length(timebreak)) { #loops by timebreak
+#   dd<- ggplot(data=datpcc_exp[[i]], aes(x= datpcc_exp[[i]][[1]], y= datpcc_exp[[i]][[3]])) + 
+#     geom_bar(stat="identity", position = "identity") +
+#     scale_y_continuous(limits= c(-1,1)) +
+#     coord_flip() +
+#     labs(title= paste("Exposed", i, sep = " "), x=" ", y= "Partial Correlation Coefficient") +
+#     facet_grid(. ~ Var2) +
+#     theme_bw()
+#   print(dd, vp= viewport(layout.pos.row= i, layout.pos.col= 1), newpage= FALSE)
+# }
+# dev.off()
 
 
 #tornado plot of COLONY SIZE before and after pesticide application#######
-control_prepost <- tdarray_control[c(595, 626),1,1:Nsims] #random timestamp pre pesticide application date
-foliar_prepost <- tdarray_foliar[c(595, 626),1,1:Nsims] #random timestamp pre pesticide application date
-seed_prepost <- tdarray_seed[c(595, 626),1,1:Nsims] #random timestamp pre pesticide application date
-soil_prepost <- tdarray_soil[c(595, 626),1,1:Nsims] #random timestamp pre pesticide application date
+control_prepost <- tdarray_control[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+foliar_prepost <- tdarray_foliar[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+seed_prepost <- tdarray_seed[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+soil_prepost <- tdarray_soil[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
 
 pcccontrol_prepost<- array(data=NA, c(2,1,length(inputdata_control)), dimnames = list(c("pre", "post"),
                                                                                    c("Colony Size"),
