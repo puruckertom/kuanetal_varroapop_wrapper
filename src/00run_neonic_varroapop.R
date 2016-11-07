@@ -6,7 +6,6 @@ if(length(new.packages)>0) {install.packages(new.packages)}
 
 #load library dependencies
 library(plyr)
-library(dplyr)
 library(reshape2)
 library(ggplot2)
 library(grid)
@@ -97,7 +96,7 @@ vpdir_weather <- paste(vpdir, "weather/", sep = "")
 vpdir_sobol <- paste(vpdir, "sobol/", sep = "")
 
 #varroapop executable version
-vp_binary <- "VarroaPop_3_2_6_6.exe"
+vp_binary <- "VarroaPop_3_2_6_9.exe"
 vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
 
 #number of simulations 
@@ -135,10 +134,10 @@ source(paste(vpdir,"src/05load_io.R",sep = ""))
 
 
 # run sensitivity analysis on tdarrays
-source(paste(vpdir,"src/06sensitivity_analyses_linear.R",sep = ""))
+source(paste(vpdir,"src/06adaily_sensitivity_analyses_linear.R",sep = ""))
 
 # plot results
-source(paste(vpdir,"src/07plotting_neonic_convsexp.R",sep = ""))
+source(paste(vpdir,"src/06bdaily_sensitivity_analyses_graphics.R",sep = ""))
 
 
 ##########################################################

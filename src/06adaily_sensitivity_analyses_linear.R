@@ -17,9 +17,9 @@ tdarray_pccout_control<- array(data=NA, c(ndays,nvars_control), dimnames =colnam
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_control[i,1:1000]
+  temp<- tdoutput_control[i,1:1000]
   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-  temp_pcc<- pcc(inputdata_control[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_control, temp, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
 }

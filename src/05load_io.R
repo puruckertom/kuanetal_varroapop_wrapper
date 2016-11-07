@@ -22,16 +22,16 @@ nrows<- length(timearray)
 
 #read input files
 #CONTROL
-indata_control <- read.csv(file = paste(vpdir_out_control, "inputdata_control.csv", sep = ""), header = TRUE)
+indata_control <- read.csv(file = paste(vpdir_output, "inputdata_control.csv", sep = ""), header = TRUE)
 #cut out column "X"
-inputdata_control<- indata_control[, c(5:9,11,13:21,23:38,42:44)]
+inputdata_control<- indata_control[, c(5:9,11,14:22,24:39,44:45)]
 #FOLIAR
-indata_foliar <- read.csv(file = paste(vpdir_out_foliar, "inputdata_foliar.csv", sep = ""), header = TRUE)
-inputdata_foliar<- indata_foliar[, c(5:9,11,13:22,24:39,44:46)]
-indata_seed <- read.csv(file = paste(vpdir_out_seed, "inputdata_seed.csv", sep = ""), header = TRUE)
-inputdata_seed<- indata_seed[, c(5:9,11,13:22,24:39,44:46)]
-indata_soil <- read.csv(file = paste(vpdir_out_soil, "inputdata_soil.csv", sep = ""), header = TRUE)
-inputdata_soil<- indata_soil[, c(5:9,11,13:22,24:39,44:46)]
+indata_foliar <- read.csv(file = paste(vpdir_output, "inputdata_foliar.csv", sep = ""), header = TRUE)
+inputdata_foliar<- indata_foliar[, c(5:9,11,14:23,25:40,45:47)]
+indata_seed <- read.csv(file = paste(vpdir_output, "inputdata_seed.csv", sep = ""), header = TRUE)
+inputdata_seed<- indata_seed[, c(5:9,11,14:23,25:40,45:47)]
+indata_soil <- read.csv(file = paste(vpdir_output, "inputdata_soil.csv", sep = ""), header = TRUE)
+inputdata_soil<- indata_soil[, c(5:9,11,14:23,25:40,45:47)]
 
 #extract input vectors from dataframe
 for(i in 1:length(inputdata_control)){assign(names(inputdata_control)[i], inputdata_control[[i]])}

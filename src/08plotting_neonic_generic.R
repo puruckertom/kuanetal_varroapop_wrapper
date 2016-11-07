@@ -651,6 +651,10 @@ for (i in 1:5){
 }
 
 #create PDF tornado
+breaks <- floor(length(timearray)/5)
+timebreak<- c(breaks,breaks*2,breaks*3,breaks*4,length(timearray))
+
+
 pdf(file= paste(vpdir_output, "fig_tornado.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
   #start figures
   #create plot pages

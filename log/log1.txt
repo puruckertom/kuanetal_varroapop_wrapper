@@ -1,11 +1,4 @@
 VarroaPop Log File
-Created Oct-28, 2016  04:39 PM
+Created Nov-01, 2016  09:42 AM
 
 
-Warning - The Following Events are Outside the Simulation Period:
-
-     Immigration Start
-     Immigration End
-
-Press OK to Continue the Simulation
-Press Cancel to Stop the Simulation
