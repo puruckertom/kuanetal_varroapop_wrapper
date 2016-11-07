@@ -1,0 +1,152 @@
+Command Line Operation
+
+VarroaPop has the capability to be run in a non-graphical mode to facilitate embedded operation.
+This is typically done using the Start->Run button on the Windows desktop or from a script.
+Command-line execution allows programmatic generation of results files and graphics files from a set
+of input files.
+
+The command-line syntax for VarroaPop is:
+
+varroapop {session-file-name} {flags}
+
+Where both session-file-name and flags are optional parameters.
+
+Parameter definitions:
+
+session-file-name
+
+This is the fully-qualified path of a VarroaPop session file (.vrp).  The weather file that is
+referenced by this session file must be located in the same directory as the session file.  If the
+file is not found, an error is logged.
+
+The session file is loaded when VarroaPop is first started and if the program is not running in
+“background” mode (see “/b” flag below), the program awaits user input.  If the program is running
+in background mode, the file is loaded and the simulation is run.
+
+
+flags
+
+Flags are immediately preceded by the forward slash (‘/’) character and may optionally have a
+parameter following a separating space character.  The syntax is:  /[flag-string] {parameter-name}.
+There are 5 flags: i – input file, og – output graph file, or – output results file;  ol – output
+log file, and  b – backgound mode.
+
+/i input-file-name The input-file-name is the fully qualified path for the input file.  The input
+file is used to set the initial conditions of the session.  If used in conjunction with a command
+line session file, the session file will be loaded first and the input file will modify only those
+parameters identified in the input file.  If a session file is not used on the command line, the
+input file will modify default values of a new session.  The format and contents of the input file
+are contained in Section 9.
+
+/og output-graph-file-name The output-graph-file-name parameter is the path to the destination
+output graph of the simulation.  The filename can have an extension of either .bmp or .jpg which
+will control the output graph format.  A .jpg file is much smaller than the .bmp file.
+
+/or output-results-file-name The output-results-file-name parameter is the path to the destination
+for the results file for the simulation.
+
+/ol output-log-file-name The output-log-file-name parameter is the path to the destination for the
+log file.  The log file is a text file containing any messages or errors that would be displayed on
+a message box during program execution.  This file is particularly useful during background runs of
+VarroaPop.
+
+/b Background mode flag.  This flag causes VarroaPop to run in a non-graphical mode.  When executed
+with the /b flag, VarroaPop will load any specified session file, load the input file, run a
+simulation, output messages to the specified log file, output the graph to the output graph file,
+output the numeric results to the results file, then terminate.
+	
+
+
+Input File Format
+
+As described above, the command line arguments for VarroaPop can contain an input file flag
+that specifies the name of a file used to set the values of the Initial Condition parameters.  This
+file is a text file where each line contains a name/value pair, PARAMETER_NAME=VALUE.  The VALUE
+string can be blank in which case the parameter value is not changed.  The order of the lines is not
+important, duplicates can exist but since the file is processed sequentially from beginning to end,
+the value of a later instance of a parameter will overwrite the previous value.  There is no error
+checking to validate the values applied are appropriate or within allowed ranges so it is important
+to validate the input file operation with your specific values.
+
+The supported parameter names and example values are listed below:
+
+WeatherFileName=Southwest.wth 
+SimStart=4/1/1999 
+SimEnd=12/31/1999 
+ICDroneAdults=0
+ICWorkerAdults=5000 
+ICDroneBrood=2000 
+ICWorkerBrood=2000 
+ICDroneLarvae=2000 
+ICWorkerLarvae=3000
+ICDroneEggs=1000 
+ICWorkerEggs=1000 
+ICQueenStrength=4 
+ICForagerLifespan=9 
+ICDroneAdultInfest=10
+ICDroneBroodInfest=20 
+ICDroneMiteOffspring=1.5 
+ICDroneMiteSurvivorship=100 
+ICWorkerAdultInfest=15
+ICWorkerBroodInfest=25 
+ICWorkerMiteOffspring=1.7 
+ICWorkerMiteSurvivorship=100 
+PlotNone=true
+PlotAD=true 
+PlotAW=true 
+PlotCS=true 
+PlotDB=true 
+PlotDE=true 
+PlotDL=true 
+PlotF=true 
+PlotTM=true
+PlotMDB=true 
+PlotMWB=true 
+PlotPDB=true 
+PlotPWB=true 
+PlotPRM=true 
+PlotRM=true 
+PlotWB=true 
+PlotWE=true
+PlotWL=true 
+PlotIM=true 
+DENone=true 
+DESwarm= 
+DEChalkbrood= 
+DEResource= 
+DESupercedure= 
+DEPesticide=
+ImmType=Polynomial 
+TotalImmMites=10000 
+PctImmMitesResistant=40 
+ImmStart=06/01/1999 
+ImmEnd=08/01/1999
+ImmEnabled=false 
+RQEggLayDelay=17 
+RQWkrDrnRatio=3 
+RQReQueenDate=09/01/1999 
+RQEnableReQueen=true
+RQScheduled=true 
+RQQueenStrength=5 
+RQOnce=true 
+VTTreatmentDuration=5 
+VTMortality=90 
+VTEnable=true
+VTTreatmentStart=08/01/1999 
+InitMitePctResistant=5
+
+added in 3.2.6.10:
+InitColNectar=
+InitColPollen=
+SupPollenEnable=
+SupPollenAmount=
+SupPollenBegin=
+SupPollenEnd=
+SupNectarEnable=
+SupNectarAmount=
+SupNectarBegin=
+SupNectarEnd=
+
+All amounts are in grams, enables are "true" or "false" and the Begin and End parameters should be
+expressed as a common US date format (e.g. 10/12/2016).
+
