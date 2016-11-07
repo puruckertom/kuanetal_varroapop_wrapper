@@ -17,6 +17,17 @@ immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarith
 miteimmtype <- sample(immtype, size=Nsims, replace=T) ; inputdf <- cbind(inputdf, miteimmtype) #ImmType
 #totalimmmites <- runif(Nsims, 0, 1000) ; inputdf <- cbind(inputdf, totalimmmites) #TotalImmMites
 #pctresistimmmites <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, pctresistimmmites) #PctImmMitesResistant
+InitColNectar<- runif(Nsims, 100, 8000) ; inputdf <- cbind(inputdf, InitColNectar)
+InitColPollen<- runif(Nsims, 100, 8000) ; inputdf <- cbind(inputdf, InitColPollen)
+#SupPollenEnable= Supplemental pollen feeding
+#SupPollenAmount=
+#SupPollenBegin=
+#SupPollenEnd=
+#SupNectarEnable= supplemental nectar feeding
+#SupNectarAmount=
+#SupNectarBegin=
+#SupNectarEnd=
+
 ##Requeening
 #eggdelay <- runif(Nsims, 0, 50) ; inputdf <- cbind(inputdf, eggdelay) #RQEggLayDelay (days)
 RQQueenStrength<- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, RQQueenStrength) #ICQueenStrength

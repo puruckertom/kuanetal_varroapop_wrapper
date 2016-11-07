@@ -102,6 +102,10 @@ for (i in 1:Nsims) {
   inputvalue46 <- seed_end[i]
   parameter47 <- ("ESeedConcentration=") #seed concentration
   inputvalue47 <- seedconc[i]
+  parameter48 <- ("InitColNectar=") #initial nectar resource amount (g)
+  inputvalue48 <- InitColNectar[i]
+  parameter49 <- ("InitColPollen=") #initial pollen resource amount (g)
+  inputvalue49 <- InitColPollen[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
   write(varroainput0, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = FALSE)
@@ -304,6 +308,16 @@ for (i in 1:Nsims) {
   write(varroainput46, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   varroainput47 <- paste(parameter47, inputvalue47, sep= " ")
   write(varroainput47, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput48 <- paste(parameter48, inputvalue48, sep= " ")
+  write(varroainput48, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput48, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput48, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput48, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput49 <- paste(parameter49, inputvalue49, sep= " ")
+  write(varroainput49, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput49, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput49, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput49, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   
   write("ESeedConcentration= 0", file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
