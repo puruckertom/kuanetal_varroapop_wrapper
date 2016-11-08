@@ -52,7 +52,6 @@ ndays <- length(timearray)
 load(paste(vpdir_out_control,"tdarray_pccout_control.RData", sep = ""))
 dim(tdarray_pccout_control)
 
-dim(tdarray_pccout_control)
 colnames(tdarray_pccout_control) <- colnames(inputdata_control)
 colnames(tdarray_pccout_control)
 #1 or 61
@@ -69,8 +68,8 @@ melted_control = melt(pcc_control, id.vars="date")
 daily_sensitivity_control <-  ggplot(melted_control, aes(x=date, y=value, group=variable)) +
     geom_line(aes(colour=melted_control$variable)) +
     scale_colour_manual(values = c(
-      "firebrick3",  "steelblue", "steelblue",   "steelblue",    "blue",     "firebrick",  "steelblue", "steelblue",
-      #queenstrength wkrdrnratio  drnmitesurvive  wkrmitesurvive fgrlifespan RQQueenStrength adslope     adLD50
+      "firebrick3",  "steelblue", "steelblue",   "steelblue",    "blue",       "deeppink",   "gold3",     "firebrick",  "steelblue", "steelblue",
+      #queenstrength wkrdrnratio  drnmitesurvive  wkrmitesurvive fgrlifespan InitColNectar InitColPollen RQQueenStrength adslope     adLD50
       
       "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange","steelblue",
       #adslopec  adLD50c       lslope      lLD50       kow         koc        halflife       cl4pollen
@@ -114,9 +113,9 @@ melted_foliar = melt(pcc_foliar, id.vars="date")
 daily_sensitivity_foliar <- ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
     geom_line(aes(colour=melted_foliar$variable)) +
     scale_colour_manual(values = c(
-      "firebrick3","steelblue", "steelblue","steelblue",       "blue",    "firebrick",  "steelblue","steelblue", 
-      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,RQQueenStrength,adslope,      adLD50
-      # 0.587356118 -0.038034348 -0.057103768   -0.017899693  0.404958669   0.119566429     0.029776035  -0.028895013
+      "firebrick3","steelblue", "steelblue","steelblue",       "blue",      "deeppink" ,  "gold3",      "firebrick",  "steelblue","steelblue", 
+      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
+      # 0.587356118 -0.038034348 -0.057103768   -0.017899693  0.404958669                              0.119566429     0.029776035  -0.028895013
       
       "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
       # adslopec    adLD50c     lslope       lLD50       kow         koc         halflife     apprate 
@@ -164,9 +163,9 @@ melted_soil = melt(pcc_soil, id.vars="date")
 daily_sensitivity_soil <- ggplot(melted_soil, aes(x=date, y=value, group=variable)) +
     geom_line(aes(colour=melted_soil$variable)) +
     scale_colour_manual(values = c(
-      "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",     "firebrick", "steelblue", "steelblue", 
-      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,RQQueenStrength,adslope,      adLD50
-      # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264 0.111696614   0.035542511   -0.053950074
+      "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",         "deeppink",   "gold3"    ,  "firebrick", "steelblue", "steelblue", 
+      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
+      # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264                                   0.111696614   0.035542511   -0.053950074
       
       "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
       # adslopec     adLD50c    lslope       lLD50        kow          koc          halflife      apprate 
@@ -215,9 +214,9 @@ melted_seed = melt(pcc_seed, id.vars="date")
 daily_sensitivity_seed <- ggplot(melted_seed, aes(x=date, y=value, group=variable)) +
   geom_line(aes(colour=melted_seed$variable)) +
   scale_colour_manual(values = c(
-    "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",     "firebrick", "steelblue", "steelblue", 
-    #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,RQQueenStrength,adslope,      adLD50
-    # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264 0.111696614   0.035542511   -0.053950074
+    "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",        "deeppink",   "gold3",       "firebrick", "steelblue", "steelblue", 
+    #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
+    # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264                                 0.111696614   0.035542511   -0.053950074
     
     "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
     # adslopec     adLD50c    lslope       lLD50        kow          koc          halflife      apprate 
