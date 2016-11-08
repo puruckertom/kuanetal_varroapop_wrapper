@@ -2,7 +2,8 @@
 df <- read.table(paste(vpdir_out_control,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                 skip = 6, stringsAsFactors = FALSE, row.names=NULL)
 dim(df)
-nrows <- dim(df[1])[[1]] #this is dependent on the duration of the simulation as set in the comparison.vrp file
+nrows <- dim(df)[[1]] #this is dependent on the duration of the simulation as set in the comparison.vrp file
+ncols <- dim(df)[[2]]
 
 timearray<- array(data=NA, c(nrows))
 timearray[2:nrows]<- df[2:nrows,1]
@@ -13,50 +14,50 @@ length(timearray)
 
 # read output files
 #CONTROL
-tdarray_control <- array(data=NA, c(nrows,26,Nsims))
+tdarray_control <- array(data=NA, c(nrows,ncols-1,Nsims))
 dim(tdarray_control)
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_out_control,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                   skip = 6, stringsAsFactors = FALSE, row.names=NULL)
-  newarray <- df[,2:27]
-  tdarray_control[1:nrows,1:26,i] <- abind(newarray[1:nrows,1:26], along=3)
+  newarray <- df[,2:ncols]
+  tdarray_control[1:nrows,1:(ncols-1),i] <- abind(newarray[1:nrows,1:(ncols-1)], along=3)
 }
 
 save(tdarray_control, file = paste(vpdir_out_control,"tdarray_control.RData", sep = ""))
 rm(tdarray_control)
 
 #FOLIAR
-tdarray_foliar <- array(data=NA, c(nrows,26,Nsims))
+tdarray_foliar <- array(data=NA, c(nrows,ncols-1,Nsims))
 dim(tdarray_foliar)
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_out_foliar,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                    skip = 6, stringsAsFactors = FALSE, row.names=NULL)
-  newarray <- df[,2:27]
-  tdarray_foliar[1:nrows,1:26,i] <- abind(newarray[1:nrows,1:26], along=3)
+  newarray <- df[,2:ncols]
+  tdarray_foliar[1:nrows,1:(ncols-1),i] <- abind(newarray[1:nrows,1:(ncols-1)], along=3)
 }
 save(tdarray_foliar, file = paste(vpdir_out_foliar,"tdarray_foliar.RData", sep = ""))
 rm(tdarray_foliar)
 
 #SEED
-tdarray_seed <- array(data=NA, c(nrows,26,Nsims))
+tdarray_seed <- array(data=NA, c(nrows,ncols-1,Nsims))
 dim(tdarray_seed)
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_out_seed,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                    skip = 6, stringsAsFactors = FALSE, row.names=NULL)
-  newarray <- df[,2:27]
-  tdarray_seed[1:nrows,1:26,i] <- abind(newarray[1:nrows,1:26], along=3)
+  newarray <- df[,2:ncols]
+  tdarray_seed[1:nrows,1:(ncols-1),i] <- abind(newarray[1:nrows,1:(ncols-1)], along=3)
 }
 save(tdarray_seed, file = paste(vpdir_out_seed,"tdarray_seed.RData", sep = ""))
 rm(tdarray_seed)
 
 #SOIL
-tdarray_soil <- array(data=NA, c(nrows,26,Nsims))
+tdarray_soil <- array(data=NA, c(nrows,ncols-1,Nsims))
 dim(tdarray_soil)
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_out_soil,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                    skip = 6, stringsAsFactors = FALSE, row.names=NULL)
-  newarray <- df[,2:27]
-  tdarray_soil[1:nrows,1:26,i] <- abind(newarray[1:nrows,1:26], along=3)
+  newarray <- df[,2:ncols]
+  tdarray_soil[1:nrows,1:(ncols-1),i] <- abind(newarray[1:nrows,1:(ncols-1)], along=3)
 }
 save(tdarray_soil, file = paste(vpdir_out_soil,"tdarray_soil.RData", sep = ""))
 rm(tdarray_soil)
