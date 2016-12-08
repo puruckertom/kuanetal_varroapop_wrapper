@@ -323,3 +323,4 @@ for (i in 1:Nsims) {
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
   #write(varroainputweather, file= paste(vpdir_in_foliar, "input", i, ".txt", sep=""), append= TRUE)
 }
+

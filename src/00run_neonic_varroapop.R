@@ -62,8 +62,9 @@ if(Sys.info()[4]=="ACKUAN-PC"){
 #carmen epa desktop 2
 if(Sys.info()[4]=="DZ2626UCKUAN"){
   vpdir<-path.expand("C:/Users/ckuan/git/beeRpop/")
+  vpdir2<-path.expand("C:/Users/ckuan/Varroapop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "default.vrp"
+  vrp_filename <- "default_carmen.vrp"
 }
 #andrew epa
 if(Sys.info()[4]=="LZ2032EAKANAREK"){
@@ -96,8 +97,9 @@ vpdir_weather <- paste(vpdir, "weather/", sep = "")
 vpdir_sobol <- paste(vpdir, "sobol/", sep = "")
 
 #varroapop executable version
-vp_binary <- "VarroaPop_3_2_6_9.exe"
+vp_binary <- "VarroaPop.exe"
 vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
+vpdir2_executable <- paste(vpdir2, vp_binary, sep="")
 
 #number of simulations 
 Nsims <- 1000
