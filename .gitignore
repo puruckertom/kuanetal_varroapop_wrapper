@@ -10,6 +10,7 @@
 /output/foliar/results*.txt
 /output/seed/results*.txt
 /output/soil/results*.txt
+/output/exposed/results*.txt
 
 /log/log*exp.txt
 /log/log*.txt
