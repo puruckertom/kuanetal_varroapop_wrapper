@@ -1,6 +1,0 @@
-VarroaPop Log File
-Created Nov-07, 2016  03:02 PM
-
-
-Input File Variable Name initcolnectar not Recognized
-Input File Variable Name initcolpollen not Recognized
