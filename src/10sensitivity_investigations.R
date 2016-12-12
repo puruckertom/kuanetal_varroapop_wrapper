@@ -32,7 +32,10 @@ output_names <- c('colony_size',
 'dead_worker_larvae',
 'dead_drone_adults',
 'dead_worker_adults',
-'dead_foragers')
+'dead_foragers',
+'queen_strength',
+'avg_temp',
+'precip')
 
 colnames(tdarray_control) <- output_names
 colnames(tdarray_foliar) <- output_names
@@ -51,17 +54,20 @@ p.qvf <- p.qvf + geom_jitter(aes(colour=tdarray_control[791,1,])) +
     scale_colour_gradientn(colours = rainbow(20), guide = guide_legend(title = "Colony Size")) + 
     theme_bw() +
     labs(x = "Initial Queen Strength", y="Forager Lifespan (days)")
-p.qvf
+pdf(file=paste(vpdir_fig,"fig_qsvsfl_scatter.pdf",sep = ""))
+  p.qvf
+dev.off()
 
 ## next thing
-p.pvn <- ggplot(tdarray_control, aes(conc_pollen_pest, conc_nectar_pest))
+p.pvn <- ggplot(inputdata_control, aes(pload, nload))
 #day 791 is sep 30, 1989
 p.pvn <- p.pvn + geom_jitter(aes(colour=tdarray_control[791,1,])) + 
   scale_colour_gradientn(colours = rainbow(20), guide = guide_legend(title = "Colony Size")) + 
   theme_bw() +
-  labs(x = "Initial Queen Strength", y="Forager Lifespan (days)")
-p.pvn
-
+  labs(x = "Pollen Pesticide Concentration", y="Nectar Pesticide Concentration")
+pdf(file=paste(vpdir_fig,"fig_polvsnecconc_scatter.pdf",sep = ""))
+  p.pvn
+dev.off()
 
 
 

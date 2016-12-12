@@ -8,8 +8,8 @@ library(ggplot2)
 ## plot pollen time series with percentiles 25,50,75
 
 #plot of pollen and nectar concentrations over time
-#19 pollen conc
-#21 nectar conc
+#33 pollen conc
+#34 nectar conc
 #melt
 
 
@@ -45,8 +45,8 @@ plot(1:1000,log(soil_pollen_concs))
 plot(1:1000,log(foliar_pollen_concs))
 
 ## determinants of foliar pollen concentration
-#pollen gits hit by neonics on day 611. sometimes later?..
-plot(611:1096,tdarray_foliar[611:1096,19,7])
+#pollen gits hit by neonics on day 648 
+plot(548:1096,tdarray_foliar[548:1096,19,7])
 
 #View(tdarray_foliar[791,19,])
 avh <- tdarray_foliar[821,19,]
@@ -119,7 +119,7 @@ foliar_pollen_plot <- ggplot(melted_foliar_pollen, aes(x=Date, y=value, group=va
   guides(col = guide_legend(title="Percentile")) +
   annotate("text", x = 7210, y = 8, label = "Foliar", size=6) +
   #c(611,791,1035) -> c(7184,7364,7608)
-  xlab("September Simulation Days") + 
+  xlab("July Simulation Days") + 
   #scale_x_discrete(breaks = c(melted_foliar_pollen$Date[1],melted_foliar_pollen$Date[10],melted_foliar_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
 foliar_pollen_plot
@@ -183,7 +183,7 @@ seed_pollen_plot <- ggplot(melted_seed_pollen, aes(x=Date, y=value, group=variab
   guides(col = guide_legend(title="Percentile")) +
   annotate("text", x = 7210, y = 8, label = "Seed", size=6) +
   #c(611,791,1035) -> c(7184,7364,7608)
-  xlab("September Simulation Days") + 
+  xlab("July Simulation Days") + 
   #scale_x_discrete(breaks = c(melted_seed_pollen$Date[1],melted_seed_pollen$Date[10],melted_seed_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
 seed_pollen_plot
@@ -247,7 +247,7 @@ soil_pollen_plot <- ggplot(melted_soil_pollen, aes(x=Date, y=value, group=variab
   guides(col = guide_legend(title="Percentile")) +
   annotate("text", x = 7210, y = 8, label = "Soil", size=6) +
   #c(611,791,1035) -> c(7184,7364,7608)
-  xlab("September Simulation Days") + 
+  xlab("July Simulation Days") + 
   #scale_x_discrete(breaks = c(melted_soil_pollen$Date[1],melted_soil_pollen$Date[10],melted_soil_pollen$Date[100])) +
   ylab("Pollen Concentration (ug/g)")
 soil_pollen_plot

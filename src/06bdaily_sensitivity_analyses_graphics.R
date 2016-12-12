@@ -276,7 +276,7 @@ sens_vars_labels <- c("Queen Strength","Forager Lifespan", "ReQueen Strength",
                "Soil foc", "All others")
 sens_colors_list <- rep(sens_colors, each=5)
 order_list <- rep(1:16,each=5)
-Variables <- rep(sens_vars, each=5)
+Variables <- rep(sens_vars_levels, each=5)
 df <- data.frame(x=rep(1:5, 16), val=sample(1:100, 80), 
                  variable=rep(sens_vars_levels, each=5), order_list2 = order_list)
 #reorder factor for labeling

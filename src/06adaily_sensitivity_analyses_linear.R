@@ -18,7 +18,7 @@ tdarray_pccout_control<- array(data=NA, c(ndays,nvars_control), dimnames =colnam
 #partial correlation coefficients
 for (i in 1:ndays){  #break
   temp<- tdoutput_control[i,1:1000]
-  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  inputdata_control[,1]<- tdarray_control[i,27,]
   temp_pcc<- pcc(inputdata_control, temp, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
@@ -49,7 +49,7 @@ tdarray_pccout_foliar<- array(data=NA, c(ndays,nvars_foliar), dimnames =colnames
 #partial correlation coefficients
 for (i in 1:ndays){  #break
   tempinput<- tdoutput_foliar[i,1:1000]
-  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  inputdata_foliar[,1]<- tdarray_foliar[i,27,]
   temp_pcc<- pcc(inputdata_foliar[1:1000,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_foliar[i,] <- temp_pcc$PCC[[1]]
@@ -79,7 +79,7 @@ tdarray_pccout_soil<- array(data=NA, c(ndays,nvars_soil), dimnames =colnames(inp
 #partial correlation coefficients
 for (i in 1:ndays){  #break
   tempinput<- tdoutput_soil[i,1:1000]
-  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  inputdata_soil[,1]<- tdarray_soil[i,27,]
   temp_pcc<- pcc(inputdata_soil[1:1000,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_soil[i,] <- temp_pcc$PCC[[1]]
@@ -109,7 +109,7 @@ tdarray_pccout_seed<- array(data=NA, c(ndays,nvars_seed), dimnames =colnames(inp
 #partial correlation coefficients
 for (i in 1:ndays){  #break
   tempinput<- tdoutput_seed[i,1:1000]
-  #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
+  inputdata_seed[,1]<- tdarray_seed[i,27,]
   temp_pcc<- pcc(inputdata_seed[1:1000,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_seed[i,] <- temp_pcc$PCC[[1]]

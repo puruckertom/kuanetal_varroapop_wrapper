@@ -172,6 +172,33 @@ pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 
   #mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
 
+png(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.png", sep=""), width = 7, height = 10, units='in', pointsize=12, res=300)
+par(mfrow=c(6,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 1000", ylim=c(0,1), xlab=NA)
+lines(timearray, cp_foliar, type="l", lty = 2, col="red")
+lines(timearray, cp_seed, type="l", lty = 2, col="black")
+lines(timearray, cp_soil, type="l", lty = 2, col="green")
+plot(timearray, fa_control, type="l", col="blue", ylab= "P(Foragers) > 50", ylim=c(0,1), xlab=NA) 
+lines(timearray, fa_foliar, type="l", lty = 2, col="red")
+lines(timearray, fa_seed, type="l", lty = 2, col="black")
+lines(timearray, fa_soil, type="l", lty = 2, col="green")
+plot(timearray, aw_control, type="l", col="blue", ylab= "P(Adult Workers) > 50", ylim=c(0,1), xlab=NA) 
+lines(timearray, aw_foliar, type="l", lty = 2, col="red")
+lines(timearray, aw_seed, type="l", lty = 2, col="black")
+lines(timearray, aw_soil, type="l", lty = 2, col="green")
+plot(timearray, cwb_control, type="l", col="blue", ylab = "P(Capped Worker Brood) > 50", ylim=c(0,1), xlab=NA)
+lines(timearray, cwb_foliar, type="l", lty = 2, col="red")
+lines(timearray, cwb_seed, type="l", lty = 2, col="black")
+lines(timearray, cwb_soil, type="l", lty = 2, col="green")
+plot(timearray, we_control, type="l", col="blue", ylab = "P(Worker Eggs) > 50", ylim=c(0,1), xlab=NA)
+lines(timearray, we_foliar, type="l", lty = 2, col="red")
+lines(timearray, we_seed, type="l", lty = 2, col="black")
+lines(timearray, we_soil, type="l", lty = 2, col="green")
+plot(timearray, de_control, type="l", col="blue", ylab = "P(Drone Eggs) > 0", ylim=c(0,1), xlab=NA)
+lines(timearray, de_foliar, type="l", lty = 2, col="red")
+lines(timearray, de_seed, type="l", lty = 2, col="black")
+lines(timearray, de_soil, type="l", lty = 2, col="green")
+dev.off()
 
 #time series plotting #######
 resvar<- c(1,3,4,10,18)
@@ -239,6 +266,32 @@ for (r in 1:4){
 }
 #mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
 dev.off()
+
+png(file= paste(vpdir_fig, "fig_quantile_timeseries.png", sep=""), width = 7, height = 7, units='in', pointsize=12, res=300)
+#start figures
+#time series plots
+par(mfrow=c(4,4), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
+
+for (r in 1:4){
+  plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
+  lines(timearray, tempout_control[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_control[,r,3], type = "l", lty= 4, col = "blue")
+  
+  plot(timearray, tempout_foliar[,r,2], type = "l", ylim = c(0,max(tempout_foliar[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Foliar")
+  lines(timearray, tempout_foliar[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_foliar[,r,3], type = "l", lty= 4, col = "blue")
+  
+  plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Seed")
+  lines(timearray, tempout_seed[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_seed[,r,3], type = "l", lty= 4, col = "blue")
+  
+  plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Soil")
+  lines(timearray, tempout_soil[,r,1], type = "l", lty= 2, col = "red")
+  lines(timearray, tempout_soil[,r,3], type = "l", lty= 4, col = "blue")
+}
+#mtext(text = paste("Fig. 14 Time series plots of lower, middle, and upper quartiles."), side = 1, line = 1, outer = T)
+dev.off()
+
 
 #tornado plots #########
 # 
@@ -479,6 +532,17 @@ pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
   print(hh, vp= viewport(layout.pos.row= 4, layout.pos.col= 2), newpage= FALSE)
 dev.off()
 
+png(file= paste(vpdir_fig, "fig_tornado_prepost.png", sep=""), width = 8, height = 6, units='in', pointsize=12, res=300)
+pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
+print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)  
+print(ee, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
+print(bb, vp= viewport(layout.pos.row= 2, layout.pos.col= 1), newpage= FALSE)
+print(ff, vp= viewport(layout.pos.row= 2, layout.pos.col= 2), newpage= FALSE)
+print(cc, vp= viewport(layout.pos.row= 3, layout.pos.col= 1), newpage= FALSE)
+print(gg, vp= viewport(layout.pos.row= 3, layout.pos.col= 2), newpage= FALSE)
+print(dd, vp= viewport(layout.pos.row= 4, layout.pos.col= 1), newpage= FALSE)
+print(hh, vp= viewport(layout.pos.row= 4, layout.pos.col= 2), newpage= FALSE)
+dev.off()
 
 
 ################## Tornado Plot - avg colony size ###########
@@ -594,3 +658,48 @@ pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
   print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 4), newpage= FALSE)
 
 dev.off()
+
+png(file= paste(vpdir_fig, "fig_tornado_colonysize.png", sep=""), width = 8, height = 6, units='in', pointsize=12, res=300)
+#start figures
+#create plot pages
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1,4), gp= gpar(cex = 0.6)))
+#start figures
+aa<- ggplot(data=control_pcc, aes(x= control_pcc[[2]], y= control_pcc[[3]])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Control", x=" ", y= "Partial Correlation Coefficient") +
+  #facet_grid(. ~ Colony Size) +
+  theme_bw()
+print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)
+
+bb<- ggplot(data=foliar_pcc, aes(x= foliar_pcc[[2]], y= foliar_pcc[[3]])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Foliar", x=" ", y= "Partial Correlation Coefficient") +
+  #facet_grid(. ~ Var2) +
+  theme_bw()
+print(bb, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
+
+cc<- ggplot(data=seed_pcc, aes(x= seed_pcc[[2]], y= seed_pcc[[3]])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Seed", x=" ", y= "Partial Correlation Coefficient") +
+  #facet_grid(. ~ Var2) +
+  theme_bw()
+print(cc, vp= viewport(layout.pos.row= 1, layout.pos.col= 3), newpage= FALSE)
+
+dd<- ggplot(data=soil_pcc, aes(x= soil_pcc[[2]], y= soil_pcc[[3]])) + 
+  geom_bar(stat="identity", position = "identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  coord_flip() +
+  labs(title= "Soil", x=" ", y= "Partial Correlation Coefficient") +
+  #facet_grid(. ~ Var2) +
+  theme_bw()
+print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 4), newpage= FALSE)
+
+dev.off()
+
