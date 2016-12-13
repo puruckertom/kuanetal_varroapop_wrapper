@@ -48,6 +48,7 @@ head(df_hist)
 
 ggplot(df_hist, aes(x=log(conc), color=app)) +
   geom_histogram(fill="white", alpha=0.5, position="identity")
+  +theme_bw()
 
 #log figure
 par(mfrow=c(1,1))
