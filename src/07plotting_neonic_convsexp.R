@@ -416,6 +416,7 @@ for (i in 1:2){  #break
 }
 pcc_control_prepost <- adply(pcccontrol_prepost, 3)
 sig_control_prepost <- subset(pcc_control_prepost, abs(pcc_control_prepost$pre) > 0.062 & abs(pcc_control_prepost$post) > 0.062)
+sig_control_prepost$Method <- "Control"
 ordered_control_pre <- pcc_control_prepost[order(abs(pcc_control_prepost$pre), decreasing = T),1:2]
 ordered_control_post <- pcc_control_prepost[order(abs(pcc_control_prepost$post), decreasing = T),c(1,3)]
 control_pcc_prepost <- cbind(ordered_control_pre[1:10,], ordered_control_post[1:10,])
@@ -429,6 +430,7 @@ for (i in 1:2){  #break
 }
 pcc_foliar_prepost <- adply(pccfoliar_prepost, 3)
 sig_foliar_prepost <- subset(pcc_foliar_prepost, abs(pcc_foliar_prepost$pre) > 0.062 & abs(pcc_foliar_prepost$post) > 0.062)
+sig_foliar_prepost$Method <- "Foliar"
 ordered_foliar_pre <- pcc_foliar_prepost[order(abs(pcc_foliar_prepost$pre), decreasing = T),1:2]
 ordered_foliar_post <- pcc_foliar_prepost[order(abs(pcc_foliar_prepost$post), decreasing = T),c(1,3)]
 foliar_pcc_prepost <- cbind(ordered_foliar_pre[1:10,], ordered_foliar_post[1:10,])
@@ -442,6 +444,7 @@ for (i in 1:2){  #break
 }
 pcc_soil_prepost <- adply(pccsoil_prepost, 3)
 sig_soil_prepost <- subset(pcc_soil_prepost, abs(pcc_soil_prepost$pre) > 0.062 & abs(pcc_soil_prepost$post) > 0.062)
+sig_soil_prepost$Method <- "Soil"
 ordered_soil_pre <- pcc_soil_prepost[order(abs(pcc_soil_prepost$pre), decreasing = T),1:2]
 ordered_soil_post <- pcc_soil_prepost[order(abs(pcc_soil_prepost$post), decreasing = T),c(1,3)]
 soil_pcc_prepost <- cbind(ordered_soil_pre[1:10,], ordered_soil_post[1:10,])
@@ -454,14 +457,17 @@ for (i in 1:2){  #break
 }
 pcc_seed_prepost <- adply(pccseed_prepost, 3)
 sig_seed_prepost <- subset(pcc_seed_prepost, abs(pcc_seed_prepost$pre) > 0.062 & abs(pcc_seed_prepost$post) > 0.062)
+sig_seed_prepost$Method <- "Seed"
 ordered_seed_pre <- pcc_seed_prepost[order(abs(pcc_seed_prepost$pre), decreasing = T),1:2]
 ordered_seed_post <- pcc_seed_prepost[order(abs(pcc_seed_prepost$post), decreasing = T),c(1,3)]
 seed_pcc_prepost <- cbind(ordered_seed_pre[1:10,], ordered_seed_post[1:10,])
 #seed_pcc <- subset(pccdf_seed, abs(pccdf_seed$V1) > 0.062)
 
-
-cbind(sig_control_prepost$pre,sig_foliar_prepost$pre,sig_seed_prepost$pre,sig_soil_prepost$pre, depar)
-
+sig_prepost <- melt(rbind(sig_control_prepost,sig_foliar_prepost,sig_soil_prepost,sig_seed_prepost))
+ii <- ggplot(data = sig_prepost,aes(x = sig_prepost$Method, y=sig_prepost$value)) +
+  geom_histogram(stat="identity") +
+  scale_y_continuous(limits= c(-1,1)) +
+  facet_grid(. ~ X1)
 
 aa<- ggplot(data=control_pcc_prepost, aes(x= control_pcc_prepost[[1]], y= control_pcc_prepost[[2]])) +
   geom_bar(stat="identity", position = "identity") +
