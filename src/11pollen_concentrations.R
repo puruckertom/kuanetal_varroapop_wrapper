@@ -39,6 +39,16 @@ hist(soil_pollen_concs)
 max(soil_pollen_concs)
 length(soil_pollen_concs)
 
+#stitch concs together for ggplot
+df_hist <- data.frame(
+  app=factor(rep(c("Foliar", "Seed", "Soil"), each=1000)),
+  conc=c(foliar_pollen_concs, seed_pollen_concs, soil_pollen_concs)
+)
+head(df_hist)
+
+ggplot(df_hist, aes(x=log(conc), color=app)) +
+  geom_histogram(fill="white", alpha=0.5, position="identity")
+
 #log figure
 par(mfrow=c(1,1))
 plot(1:1000,log(soil_pollen_concs))
@@ -62,7 +72,7 @@ p.avh
 
 #day 791 is sep 30, 1989
 #p.avh <- p.avh + geom_point(aes(colour=tdarray_foliar[791,19,])) + 
-p.avh <- p.avh + geom_point(aes(colour=avh,size=avh)) +
+p.avh <- p.avh + geom_point(aes(colour=avh)) +
   scale_colour_gradientn(colours = rainbow(10),guide = guide_legend(title = "Pollen Concentration")) + 
   theme_bw() +
   labs(x = "Application Rate", y="Half-life")

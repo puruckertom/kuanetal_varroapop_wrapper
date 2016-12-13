@@ -48,12 +48,16 @@ dim(tdarray_control)
 colnames(tdarray_control)
 
 #plot of control scenario controlling parameters for colony_size
-p.qvf <- ggplot(inputdata_control, aes(floor(queenstrength), fgrlifespan))
+p.qvf <- ggplot(inputdata_control, aes(queenstrength, fgrlifespan))
 #day 791 is sep 30, 1989
 p.qvf <- p.qvf + geom_jitter(aes(colour=tdarray_control[791,1,])) + 
     scale_colour_gradientn(colours = rainbow(20), guide = guide_legend(title = "Colony Size")) + 
     theme_bw() +
-    labs(x = "Initial Queen Strength", y="Forager Lifespan (days)")
+    labs(x = "Queen Strength", y="Forager Lifespan (days)")
+p.qvf
+png(file=paste(vpdir_fig, "fig_qsvsfl_scatter.png", sep=""), width = 5.5, height = 4, units='in', pointsize=10, res=300)
+  p.qvf
+dev.off()
 pdf(file=paste(vpdir_fig,"fig_qsvsfl_scatter.pdf",sep = ""))
   p.qvf
 dev.off()
