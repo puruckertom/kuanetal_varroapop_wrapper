@@ -532,7 +532,7 @@ pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
   print(hh, vp= viewport(layout.pos.row= 4, layout.pos.col= 2), newpage= FALSE)
 dev.off()
 
-png(file= paste(vpdir_fig, "fig_tornado_prepost.png", sep=""), width = 8, height = 6, units='in', pointsize=12, res=300)
+png(file= paste(vpdir_fig, "fig_tornado_prepost.png", sep=""), width = 8, height = 7, units='in', pointsize=12, res=300)
 pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
 print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)  
 print(ee, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
@@ -546,10 +546,10 @@ dev.off()
 
 
 ################## Tornado Plot - avg colony size ###########
-out_control_colsize <- tdarray_control[,1,1:Nsims] 
-out_foliar_colsize <- tdarray_foliar[,1,1:Nsims]
-out_seed_colsize <- tdarray_seed[,1,1:Nsims]
-out_soil_colsize <- tdarray_soil[,1,1:Nsims]
+out_control_colsize <- tdarray_control[549:579,1,1:Nsims]
+out_foliar_colsize <- tdarray_foliar[549:579,1,1:Nsims]
+out_seed_colsize <- tdarray_seed[549:579,1,1:Nsims]
+out_soil_colsize <- tdarray_soil[549:579,1,1:Nsims]
 
 avg_control_colsize <- colMeans(out_control_colsize) #average across entire simulation period
 avg_foliar_colsize <- colMeans(out_foliar_colsize) #average across enture simulation period
