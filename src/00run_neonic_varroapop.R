@@ -20,15 +20,10 @@ Sys.info()[4]
 version
 
 #Determine path directory based on the user machine######
-#tom epa windows
-if(Sys.info()[4]=="DC2626UTPURUCKE"){
-  vpdir<-path.expand("C:/git/beeRpop/")
-  # varroapop file (without directory, the file needs to be in vpdir_exe above)
-  vrp_filename <- "comparison.vrp"
-}
 #tom epa windows 2
 if(Sys.info()[4]=="DZ2626UTPURUCKE"){
   vpdir<-path.expand("k:/git/beeRpop/")
+  vpdir2<-path.expand("k:/git/beeRpop/")
   # varroapop file (without directory, the file needs to be in vpdir_exe above)
   vrp_filename <- "comparison_stp_epaw.vrp"
 }

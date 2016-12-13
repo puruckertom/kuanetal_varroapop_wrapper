@@ -140,7 +140,7 @@ for (n in 1:nrows){
 #MC proportions ##########
 pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 5, height = 9, onefile = TRUE, paper = "USr")
   #start figures
-  par(mfrow=c(6,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+  par(mfrow=c(3,2), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
   plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 1000", ylim=c(0,1), xlab=NA)
   lines(timearray, cp_foliar, type="l", lty = 2, col="red")
   lines(timearray, cp_seed, type="l", lty = 2, col="black")
@@ -172,8 +172,9 @@ pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 
   #mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
 dev.off()
 
-png(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.png", sep=""), width = 7, height = 10, units='in', pointsize=12, res=300)
-par(mfrow=c(6,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+png(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp_combined.png", sep=""), width = 7, height = 6, units='in', pointsize=12, res=300)
+#start figures
+par(mfrow=c(3,2), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
 plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 1000", ylim=c(0,1), xlab=NA)
 lines(timearray, cp_foliar, type="l", lty = 2, col="red")
 lines(timearray, cp_seed, type="l", lty = 2, col="black")
@@ -198,6 +199,43 @@ plot(timearray, de_control, type="l", col="blue", ylab = "P(Drone Eggs) > 0", yl
 lines(timearray, de_foliar, type="l", lty = 2, col="red")
 lines(timearray, de_seed, type="l", lty = 2, col="black")
 lines(timearray, de_soil, type="l", lty = 2, col="green")
+#plot(timearray, fm_con, type="l", col="blue", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
+#lines(timearray, fm_exp, type="l", lty = 2, col="red")
+#plot(timearray, dfr_con, type="l", col="blue", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
+#lines(timearray, dfr_exp, type="l", lty = 2, col="red")
+#mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
+dev.off()
+
+png(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp_adults.png", sep=""), width = 7, height = 10, units='in', pointsize=12, res=300)
+  par(mfrow=c(3,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+  plot(timearray, cp_control, type="l", col="blue", ylab = "P(Colony Size) > 1000", ylim=c(0,1), xlab=NA)
+    lines(timearray, cp_foliar, type="l", lty = 2, col="red")
+    lines(timearray, cp_seed, type="l", lty = 2, col="black")
+    lines(timearray, cp_soil, type="l", lty = 2, col="green")
+  plot(timearray, fa_control, type="l", col="blue", ylab= "P(Foragers) > 50", ylim=c(0,1), xlab=NA) 
+    lines(timearray, fa_foliar, type="l", lty = 2, col="red")
+    lines(timearray, fa_seed, type="l", lty = 2, col="black")
+    lines(timearray, fa_soil, type="l", lty = 2, col="green")
+  plot(timearray, aw_control, type="l", col="blue", ylab= "P(Adult Workers) > 50", ylim=c(0,1), xlab=NA) 
+    lines(timearray, aw_foliar, type="l", lty = 2, col="red")
+    lines(timearray, aw_seed, type="l", lty = 2, col="black")
+    lines(timearray, aw_soil, type="l", lty = 2, col="green")
+dev.off()    
+
+png(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp_recruitment.png", sep=""), width = 7, height = 10, units='in', pointsize=12, res=300)
+par(mfrow=c(3,1), mar=c(2,4,1,0.5), oma=c(4,2,2,1))
+  plot(timearray, cwb_control, type="l", col="blue", ylab = "P(Capped Worker Brood) > 50", ylim=c(0,1), xlab=NA)
+    lines(timearray, cwb_foliar, type="l", lty = 2, col="red")
+    lines(timearray, cwb_seed, type="l", lty = 2, col="black")
+    lines(timearray, cwb_soil, type="l", lty = 2, col="green")
+  plot(timearray, we_control, type="l", col="blue", ylab = "P(Worker Eggs) > 50", ylim=c(0,1), xlab=NA)
+    lines(timearray, we_foliar, type="l", lty = 2, col="red")
+    lines(timearray, we_seed, type="l", lty = 2, col="black")
+    lines(timearray, we_soil, type="l", lty = 2, col="green")
+  plot(timearray, de_control, type="l", col="blue", ylab = "P(Drone Eggs) > 0", ylim=c(0,1), xlab=NA)
+    lines(timearray, de_foliar, type="l", lty = 2, col="red")
+    lines(timearray, de_seed, type="l", lty = 2, col="black")
+    lines(timearray, de_soil, type="l", lty = 2, col="green")
 dev.off()
 
 #time series plotting #######
@@ -389,11 +427,10 @@ dev.off()
 
 
 #tornado plot of COLONY SIZE before and after pesticide application#######
-control_prepost <- tdarray_control[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
-foliar_prepost <- tdarray_foliar[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
-seed_prepost <- tdarray_seed[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
-soil_prepost <- tdarray_soil[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
-
+control_prepost <- tdarray_control[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+foliar_prepost <- tdarray_foliar[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+seed_prepost <- tdarray_seed[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+soil_prepost <- tdarray_soil[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
 
 pcccontrol_prepost<- array(data=NA, c(2,1,length(inputdata_control)), dimnames = list(c("pre", "post"),
                                                                                    c("Colony Size"),
@@ -415,7 +452,6 @@ for (i in 1:2){  #break
   pcccontrol_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_control_prepost <- adply(pcccontrol_prepost, 3)
-sig_control_prepost <- subset(pcc_control_prepost, abs(pcc_control_prepost$pre) > 0.062 & abs(pcc_control_prepost$post) > 0.062)
 ordered_control_pre <- pcc_control_prepost[order(abs(pcc_control_prepost$pre), decreasing = T),1:2]
 ordered_control_post <- pcc_control_prepost[order(abs(pcc_control_prepost$post), decreasing = T),c(1,3)]
 control_pcc_prepost <- cbind(ordered_control_pre[1:10,], ordered_control_post[1:10,])
@@ -428,7 +464,6 @@ for (i in 1:2){  #break
   pccfoliar_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_foliar_prepost <- adply(pccfoliar_prepost, 3)
-sig_foliar_prepost <- subset(pcc_foliar_prepost, abs(pcc_foliar_prepost$pre) > 0.062 & abs(pcc_foliar_prepost$post) > 0.062)
 ordered_foliar_pre <- pcc_foliar_prepost[order(abs(pcc_foliar_prepost$pre), decreasing = T),1:2]
 ordered_foliar_post <- pcc_foliar_prepost[order(abs(pcc_foliar_prepost$post), decreasing = T),c(1,3)]
 foliar_pcc_prepost <- cbind(ordered_foliar_pre[1:10,], ordered_foliar_post[1:10,])
@@ -441,7 +476,6 @@ for (i in 1:2){  #break
   pccsoil_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_soil_prepost <- adply(pccsoil_prepost, 3)
-sig_soil_prepost <- subset(pcc_soil_prepost, abs(pcc_soil_prepost$pre) > 0.062 & abs(pcc_soil_prepost$post) > 0.062)
 ordered_soil_pre <- pcc_soil_prepost[order(abs(pcc_soil_prepost$pre), decreasing = T),1:2]
 ordered_soil_post <- pcc_soil_prepost[order(abs(pcc_soil_prepost$post), decreasing = T),c(1,3)]
 soil_pcc_prepost <- cbind(ordered_soil_pre[1:10,], ordered_soil_post[1:10,])
@@ -453,15 +487,10 @@ for (i in 1:2){  #break
   pccseed_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_seed_prepost <- adply(pccseed_prepost, 3)
-sig_seed_prepost <- subset(pcc_seed_prepost, abs(pcc_seed_prepost$pre) > 0.062 & abs(pcc_seed_prepost$post) > 0.062)
 ordered_seed_pre <- pcc_seed_prepost[order(abs(pcc_seed_prepost$pre), decreasing = T),1:2]
 ordered_seed_post <- pcc_seed_prepost[order(abs(pcc_seed_prepost$post), decreasing = T),c(1,3)]
 seed_pcc_prepost <- cbind(ordered_seed_pre[1:10,], ordered_seed_post[1:10,])
 #seed_pcc <- subset(pccdf_seed, abs(pccdf_seed$V1) > 0.062)
-
-
-cbind(sig_control_prepost$pre,sig_foliar_prepost$pre,sig_seed_prepost$pre,sig_soil_prepost$pre, depar)
-
 
 aa<- ggplot(data=control_pcc_prepost, aes(x= control_pcc_prepost[[1]], y= control_pcc_prepost[[2]])) +
   geom_bar(stat="identity", position = "identity") +
@@ -526,6 +555,7 @@ hh<- ggplot(data=soil_pcc_prepost, aes(x= soil_pcc_prepost[[3]], y= soil_pcc_pre
   labs(title= "Soil", x=" ", y= "Partial Correlation Coefficient") +
   #facet_grid(. ~ Var2) +
   theme_bw()
+
 
 
 pdf(file= paste(vpdir_fig, "fig_tornado_prepost.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
@@ -710,4 +740,3 @@ dd<- ggplot(data=soil_pcc, aes(x= soil_pcc[[2]], y= soil_pcc[[3]])) +
 print(dd, vp= viewport(layout.pos.row= 1, layout.pos.col= 4), newpage= FALSE)
 
 dev.off()
-
