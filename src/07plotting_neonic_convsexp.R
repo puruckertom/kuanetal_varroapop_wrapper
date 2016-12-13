@@ -389,10 +389,11 @@ dev.off()
 
 
 #tornado plot of COLONY SIZE before and after pesticide application#######
-control_prepost <- tdarray_control[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
-foliar_prepost <- tdarray_foliar[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
-seed_prepost <- tdarray_seed[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
-soil_prepost <- tdarray_soil[c(519, 580),1,1:Nsims] #random timestamp pre pesticide application date
+control_prepost <- tdarray_control[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
+foliar_prepost <- tdarray_foliar[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
+seed_prepost <- tdarray_seed[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
+soil_prepost <- tdarray_soil[c(519, 579),1,1:Nsims] #random timestamp pre pesticide application date
+
 
 pcccontrol_prepost<- array(data=NA, c(2,1,length(inputdata_control)), dimnames = list(c("pre", "post"),
                                                                                    c("Colony Size"),
@@ -414,6 +415,7 @@ for (i in 1:2){  #break
   pcccontrol_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_control_prepost <- adply(pcccontrol_prepost, 3)
+sig_control_prepost <- subset(pcc_control_prepost, abs(pcc_control_prepost$pre) > 0.062 & abs(pcc_control_prepost$post) > 0.062)
 ordered_control_pre <- pcc_control_prepost[order(abs(pcc_control_prepost$pre), decreasing = T),1:2]
 ordered_control_post <- pcc_control_prepost[order(abs(pcc_control_prepost$post), decreasing = T),c(1,3)]
 control_pcc_prepost <- cbind(ordered_control_pre[1:10,], ordered_control_post[1:10,])
@@ -426,6 +428,7 @@ for (i in 1:2){  #break
   pccfoliar_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_foliar_prepost <- adply(pccfoliar_prepost, 3)
+sig_foliar_prepost <- subset(pcc_foliar_prepost, abs(pcc_foliar_prepost$pre) > 0.062 & abs(pcc_foliar_prepost$post) > 0.062)
 ordered_foliar_pre <- pcc_foliar_prepost[order(abs(pcc_foliar_prepost$pre), decreasing = T),1:2]
 ordered_foliar_post <- pcc_foliar_prepost[order(abs(pcc_foliar_prepost$post), decreasing = T),c(1,3)]
 foliar_pcc_prepost <- cbind(ordered_foliar_pre[1:10,], ordered_foliar_post[1:10,])
@@ -438,6 +441,7 @@ for (i in 1:2){  #break
   pccsoil_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_soil_prepost <- adply(pccsoil_prepost, 3)
+sig_soil_prepost <- subset(pcc_soil_prepost, abs(pcc_soil_prepost$pre) > 0.062 & abs(pcc_soil_prepost$post) > 0.062)
 ordered_soil_pre <- pcc_soil_prepost[order(abs(pcc_soil_prepost$pre), decreasing = T),1:2]
 ordered_soil_post <- pcc_soil_prepost[order(abs(pcc_soil_prepost$post), decreasing = T),c(1,3)]
 soil_pcc_prepost <- cbind(ordered_soil_pre[1:10,], ordered_soil_post[1:10,])
@@ -449,10 +453,15 @@ for (i in 1:2){  #break
   pccseed_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_seed_prepost <- adply(pccseed_prepost, 3)
+sig_seed_prepost <- subset(pcc_seed_prepost, abs(pcc_seed_prepost$pre) > 0.062 & abs(pcc_seed_prepost$post) > 0.062)
 ordered_seed_pre <- pcc_seed_prepost[order(abs(pcc_seed_prepost$pre), decreasing = T),1:2]
 ordered_seed_post <- pcc_seed_prepost[order(abs(pcc_seed_prepost$post), decreasing = T),c(1,3)]
 seed_pcc_prepost <- cbind(ordered_seed_pre[1:10,], ordered_seed_post[1:10,])
 #seed_pcc <- subset(pccdf_seed, abs(pccdf_seed$V1) > 0.062)
+
+
+cbind(sig_control_prepost$pre,sig_foliar_prepost$pre,sig_seed_prepost$pre,sig_soil_prepost$pre, depar)
+
 
 aa<- ggplot(data=control_pcc_prepost, aes(x= control_pcc_prepost[[1]], y= control_pcc_prepost[[2]])) +
   geom_bar(stat="identity", position = "identity") +
@@ -517,7 +526,6 @@ hh<- ggplot(data=soil_pcc_prepost, aes(x= soil_pcc_prepost[[3]], y= soil_pcc_pre
   labs(title= "Soil", x=" ", y= "Partial Correlation Coefficient") +
   #facet_grid(. ~ Var2) +
   theme_bw()
-
 
 
 pdf(file= paste(vpdir_fig, "fig_tornado_prepost.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
