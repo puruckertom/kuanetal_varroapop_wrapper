@@ -46,9 +46,13 @@ df_hist <- data.frame(
 )
 head(df_hist)
 
-ggplot(df_hist, aes(x=log(conc), color=app)) +
-  geom_histogram(fill="white", alpha=0.5, position="identity")
-  +theme_bw()
+p.pollen <- ggplot(df_hist, aes(x=log(conc))) +
+  geom_histogram(aes(fill=df_hist$app),alpha=0.5, position="identity") +
+  theme_bw() + labs(x = "log(Pollen Concentration)", y="Frequency")
+
+png(file=paste(vpdir_fig, "fig_compare_pollen.png", sep=""), width = 5.5, height = 4, units='in', pointsize=10, res=300)
+  p.pollen
+dev.off()
 
 #log figure
 par(mfrow=c(1,1))

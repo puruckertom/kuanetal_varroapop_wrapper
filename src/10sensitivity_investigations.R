@@ -53,7 +53,7 @@ p.qvf <- ggplot(inputdata_control, aes(queenstrength, fgrlifespan))
 p.qvf <- p.qvf + geom_jitter(aes(colour=tdarray_control[791,1,])) + 
     scale_colour_gradientn(colours = rainbow(20), guide = guide_legend(title = "Colony Size")) + 
     theme_bw() +
-    labs(x = "Queen Strength", y="Forager Lifespan (days)")
+    labs(x = "Initial Queen Strength", y="Forager Lifespan (days)")
 p.qvf
 png(file=paste(vpdir_fig, "fig_qsvsfl_scatter.png", sep=""), width = 5.5, height = 4, units='in', pointsize=10, res=300)
   p.qvf
