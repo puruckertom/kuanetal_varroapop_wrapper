@@ -469,7 +469,7 @@ seed_pcc_prepost <- cbind(ordered_seed_pre[1:10,], ordered_seed_post[1:10,])
 sig_prepost <- melt(rbind(sig_control_prepost,sig_foliar_prepost,sig_soil_prepost,sig_seed_prepost))
 ii <- ggplot(data = sig_prepost,aes(x = sig_prepost$X1, y=sig_prepost$value)) +
   geom_histogram(stat="identity") +
-  scale_y_continuous(limits= c(-0.75,0.75)) +
+  scale_y_continuous(limits= c(-1,1)) +
   facet_grid(variable~Method) +
   labs(x = " ", y = "Partial Correlation Coefficient") +
   coord_flip() +
