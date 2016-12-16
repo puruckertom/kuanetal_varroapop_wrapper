@@ -16,8 +16,8 @@ nvars_control <- length(inputdata_control)
 tdarray_pccout_control<- array(data=NA, c(ndays,nvars_control), dimnames =colnames(inputdata_control))
 
 #partial correlation coefficients
-for (i in 1:1){  #break
-  temp<- tdoutput_control[i,1:1000]
+for (i in 1:Nsims){  #break
+  temp<- tdoutput_control[i,1:Nsims]
   inputdata_control$RQQueenStrength <- tdarray_control[i,27,] #replace output qs for requeen strength input
   inputdata_control$AvgTemp <- tdarray_control[i,28,1:Nsims] #append avg temp to input dataframe
   inputdata_control$Precip <- tdarray_control[i,29,1:Nsims] #append precip to input dataframe
@@ -50,11 +50,11 @@ tdarray_pccout_foliar<- array(data=NA, c(ndays,nvars_foliar), dimnames =colnames
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_foliar[i,1:1000]
+  tempinput<- tdoutput_foliar[i,1:Nsims]
   inputdata_foliar$RQQueenStrength <- tdarray_foliar[i,27,] #replace output qs for requeen strength input
   inputdata_foliar$AvgTemp <- tdarray_foliar[i,28,1:Nsims] #append avg temp to input dataframe
   inputdata_foliar$Precip <- tdarray_foliar[i,29,1:Nsims] #append precip to input dataframe
-  temp_pcc<- pcc(inputdata_foliar[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_foliar[1:Nsims,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_foliar[i,] <- temp_pcc$PCC[[1]]
 }
@@ -82,11 +82,11 @@ tdarray_pccout_soil<- array(data=NA, c(ndays,nvars_soil), dimnames =colnames(inp
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_soil[i,1:1000]
+  tempinput<- tdoutput_soil[i,1:Nsims]
   inputdata_soil$RQQueenStrength <- tdarray_soil[i,27,] #replace output qs for requeen strength input
   inputdata_soil$AvgTemp <- tdarray_soil[i,28,1:Nsims] #append avg temp to input dataframe
   inputdata_soil$Precip <- tdarray_soil[i,29,1:Nsims] #append precip to input dataframe
-  temp_pcc<- pcc(inputdata_soil[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_soil[1:Nsims,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_soil[i,] <- temp_pcc$PCC[[1]]
 }
@@ -114,7 +114,7 @@ tdarray_pccout_seed<- array(data=NA, c(ndays,nvars_seed), dimnames =colnames(inp
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_seed[i,1:1000]
+  tempinput<- tdoutput_seed[i,1:Nsims]
   inputdata_seed$RQQueenStrength <- tdarray_seed[i,27,] #replace output qs for requeen strength input
   inputdata_seed$AvgTemp <- tdarray_seed[i,28,1:Nsims] #append avg temp to input dataframe
   inputdata_seed$Precip <- tdarray_seed[i,29,1:Nsims] #append precip to input dataframe
@@ -179,9 +179,9 @@ save(tdarray_pccout_seed, file = paste(vpdir_out_seed,"tdarray_pccout_seed.RData
 # }
 # 
 # foreach(i = 1:ndays, .options.multicore=list(preschedule=TRUE)) %dopar% {
-#   tempinput<- tdoutput_control[i,1:1000]
+#   tempinput<- tdoutput_control[i,1:Nsims]
 #   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-#   temp_pcc<- pcc(inputdata_control[1:1000,], tempinput, rank = F)
+#   temp_pcc<- pcc(inputdata_control[1:Nsims,], tempinput, rank = F)
 #   print(paste(i,"out of",ndays))
 #   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
 # }
