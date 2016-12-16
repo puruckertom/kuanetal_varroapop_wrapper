@@ -97,7 +97,7 @@ vpdir_executable <- paste(vpdir_exe, vp_binary, sep="")
 vpdir2_executable <- paste(vpdir2, vp_binary, sep="")
 
 #number of simulations 
-Nsims <- 1000
+Nsims <- 5000
 
 #weather file
 #can be .dvf or .wth
