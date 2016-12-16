@@ -16,9 +16,11 @@ nvars_control <- length(inputdata_control)
 tdarray_pccout_control<- array(data=NA, c(ndays,nvars_control), dimnames =colnames(inputdata_control))
 
 #partial correlation coefficients
-for (i in 1:ndays){  #break
-  temp<- tdoutput_control[i,1:1000]
-  inputdata_control[,8]<- tdarray_control[i,27,] #replace output qs for requeen strength input
+for (i in 1:Nsims){  #break
+  temp<- tdoutput_control[i,1:Nsims]
+  inputdata_control$RQQueenStrength <- tdarray_control[i,27,] #replace output qs for requeen strength input
+  inputdata_control$AvgTemp <- tdarray_control[i,28,1:Nsims] #append avg temp to input dataframe
+  inputdata_control$Precip <- tdarray_control[i,29,1:Nsims] #append precip to input dataframe
   temp_pcc<- pcc(inputdata_control, temp, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
@@ -48,9 +50,11 @@ tdarray_pccout_foliar<- array(data=NA, c(ndays,nvars_foliar), dimnames =colnames
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_foliar[i,1:1000]
-  inputdata_foliar[,8]<- tdarray_foliar[i,27,] #replace output qs for requeen strength input
-  temp_pcc<- pcc(inputdata_foliar[1:1000,], tempinput, rank = F)
+  tempinput<- tdoutput_foliar[i,1:Nsims]
+  inputdata_foliar$RQQueenStrength <- tdarray_foliar[i,27,] #replace output qs for requeen strength input
+  inputdata_foliar$AvgTemp <- tdarray_foliar[i,28,1:Nsims] #append avg temp to input dataframe
+  inputdata_foliar$Precip <- tdarray_foliar[i,29,1:Nsims] #append precip to input dataframe
+  temp_pcc<- pcc(inputdata_foliar[1:Nsims,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_foliar[i,] <- temp_pcc$PCC[[1]]
 }
@@ -78,9 +82,11 @@ tdarray_pccout_soil<- array(data=NA, c(ndays,nvars_soil), dimnames =colnames(inp
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_soil[i,1:1000]
-  inputdata_soil[,8]<- tdarray_soil[i,27,] #replace output qs for requeen strength input
-  temp_pcc<- pcc(inputdata_soil[1:1000,], tempinput, rank = F)
+  tempinput<- tdoutput_soil[i,1:Nsims]
+  inputdata_soil$RQQueenStrength <- tdarray_soil[i,27,] #replace output qs for requeen strength input
+  inputdata_soil$AvgTemp <- tdarray_soil[i,28,1:Nsims] #append avg temp to input dataframe
+  inputdata_soil$Precip <- tdarray_soil[i,29,1:Nsims] #append precip to input dataframe
+  temp_pcc<- pcc(inputdata_soil[1:Nsims,], tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_soil[i,] <- temp_pcc$PCC[[1]]
 }
@@ -108,9 +114,11 @@ tdarray_pccout_seed<- array(data=NA, c(ndays,nvars_seed), dimnames =colnames(inp
 
 #partial correlation coefficients
 for (i in 1:ndays){  #break
-  tempinput<- tdoutput_seed[i,1:1000]
-  inputdata_seed[,8]<- tdarray_seed[i,27,] #replace output qs for requeen strength input
-  temp_pcc<- pcc(inputdata_seed[1:1000,], tempinput, rank = F)
+  tempinput<- tdoutput_seed[i,1:Nsims]
+  inputdata_seed$RQQueenStrength <- tdarray_seed[i,27,] #replace output qs for requeen strength input
+  inputdata_seed$AvgTemp <- tdarray_seed[i,28,1:Nsims] #append avg temp to input dataframe
+  inputdata_seed$Precip <- tdarray_seed[i,29,1:Nsims] #append precip to input dataframe
+  temp_pcc<- pcc(inputdata_seed, tempinput, rank = F)
   print(paste(i,"out of",ndays))
   tdarray_pccout_seed[i,] <- temp_pcc$PCC[[1]]
 }
@@ -126,33 +134,33 @@ save(tdarray_pccout_seed, file = paste(vpdir_out_seed,"tdarray_pccout_seed.RData
 #############################################################################################
 ####
 
-#customize colors
-#line_colors_foliar <- rep("#CC6666",nvars)
-#line_colors_foliar[1:10] <- "#9999CC"
-line_colors_foliar <- unlist(rep(rep("steelblue",35),1097))
-
-length(line_colors_foliar)
-dim(tdarray_pccout_foliar)
-colnames(tdarray_pccout_foliar) <- colnames(inputdata_foliar)
-colnames(tdarray_pccout_foliar)
-date <- 1:ndays
-
-#qs = melted_foliar$value[which(melted_foliar$variable=="queenstrength")]
-#plot foliar daily sensitivities
-pdf(file= paste(vpdir_fig, "daily_sensitivity_foliar.pdf", sep=""), width = 8, height = 6)
-  pcc_foliar <- as.data.frame(cbind(date, tdarray_pccout_foliar))
-  colnames(pcc_foliar)
-  melted_foliar = melt(pcc_foliar, id.vars="date")
-  ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
-    geom_line(aes(colour=melted_foliar$variable)) +
-    #geom_line(aes(y=qs), colour = "red") +
-    xlab("Simulation Day") + 
-    ylab("Partial Correlation Coefficient") +
-    #scale_color_manual(values=c("coral", "chocolate", "cornsilk", "papayawhip", "blanchedalmond")) +
-    ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
-    theme_bw()
-dev.off()
-
+# #customize colors
+# #line_colors_foliar <- rep("#CC6666",nvars)
+# #line_colors_foliar[1:10] <- "#9999CC"
+# line_colors_foliar <- unlist(rep(rep("steelblue",35),1097))
+# 
+# length(line_colors_foliar)
+# dim(tdarray_pccout_foliar)
+# colnames(tdarray_pccout_foliar) <- colnames(inputdata_foliar)
+# colnames(tdarray_pccout_foliar)
+# date <- 1:ndays
+# 
+# #qs = melted_foliar$value[which(melted_foliar$variable=="queenstrength")]
+# #plot foliar daily sensitivities
+# pdf(file= paste(vpdir_fig, "daily_sensitivity_foliar.pdf", sep=""), width = 8, height = 6)
+#   pcc_foliar <- as.data.frame(cbind(date, tdarray_pccout_foliar))
+#   colnames(pcc_foliar)
+#   melted_foliar = melt(pcc_foliar, id.vars="date")
+#   ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
+#     geom_line(aes(colour=melted_foliar$variable)) +
+#     #geom_line(aes(y=qs), colour = "red") +
+#     xlab("Simulation Day") + 
+#     ylab("Partial Correlation Coefficient") +
+#     #scale_color_manual(values=c("coral", "chocolate", "cornsilk", "papayawhip", "blanchedalmond")) +
+#     ggtitle("Daily Sensitivity (PCC) for Foliar Scenario") +
+#     theme_bw()
+# dev.off()
+# 
 
 
 
@@ -171,9 +179,9 @@ dev.off()
 # }
 # 
 # foreach(i = 1:ndays, .options.multicore=list(preschedule=TRUE)) %dopar% {
-#   tempinput<- tdoutput_control[i,1:1000]
+#   tempinput<- tdoutput_control[i,1:Nsims]
 #   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-#   temp_pcc<- pcc(inputdata_control[1:1000,], tempinput, rank = F)
+#   temp_pcc<- pcc(inputdata_control[1:Nsims,], tempinput, rank = F)
 #   print(paste(i,"out of",ndays))
 #   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
 # }

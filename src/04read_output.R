@@ -1,4 +1,5 @@
 # load up varroapop data into a 3d array dataframe ######
+i <- 1
 df <- read.table(paste(vpdir_out_control,"results",i,".txt", sep=""), header= FALSE, sep= "", 
                 skip = 6, stringsAsFactors = FALSE, row.names=NULL)
 dim(df)
