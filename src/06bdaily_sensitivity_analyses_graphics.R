@@ -80,8 +80,8 @@ daily_sensitivity_control <-  ggplot(melted_control, aes(x=date, y=value, group=
       "steelblue",     "steelblue", "steelblue", "gold",     "steelblue", "gold3",     "deeppink", "steelblue",
       #ca410nectar    ca1120pollen    ca1120nectar          ptrips          ntrips           pload           nload  soilp
       
-      "brown",  "steelblue",    "black",    "red")) +
-      #soilfoc        seedconc   AvgTemp    Precip
+      "brown",  "steelblue")) +
+      #soilfoc        seedconc
     guides(fill=FALSE) +  
     xlab("Simulation Day") + 
     ylab("Partial Correlation Coefficient") +
@@ -129,8 +129,8 @@ daily_sensitivity_foliar <- ggplot(melted_foliar, aes(x=date, y=value, group=var
       # ca410pollen  ca410nectar  ca1120pollen ca1120nectar ptrips      ntrips       pload        nload 
       # 0.060323879  -0.009879763 -0.009316751 0.020296364  0.061448508 -0.006315187 -0.060226437 -0.112289169 
       
-      "steelblue",   "brown",  "steelblue",      "black",  "red")) +
-      # soilp         soilfoc       seedconc    AvgTemp   precip
+      "steelblue",   "brown",  "steelblue")) +
+      # soilp         soilfoc       seedconc
       # -0.035085428  -0.029659169  0.009032147 
         guides(fill=FALSE) +  
     xlab("Simulation Day") + 
@@ -179,8 +179,8 @@ daily_sensitivity_soil <- ggplot(melted_soil, aes(x=date, y=value, group=variabl
       # ca410pollen  ca410nectar  ca1120pollen ca1120nectar ptrips       ntrips      pload        nload 
       # 0.117236572  -0.008777357 0.048595296  0.015513097  -0.141418576 0.013836205 -0.375044973 0.020742109 
       
-      "steelblue",   "brown",  "steelblue",   "black",  "red")) +
-      # soilp         soilfoc       seedconc   AvgTemp   precip
+      "steelblue",   "brown",  "steelblue")) +
+      # soilp         soilfoc       seedconc
       # -0.012744520  -0.083988351    -0.013500727 
     guides(fill=FALSE) +  
     xlab("Simulation Day") + 
@@ -230,8 +230,8 @@ daily_sensitivity_seed <- ggplot(melted_seed, aes(x=date, y=value, group=variabl
     # ca410pollen  ca410nectar  ca1120pollen ca1120nectar ptrips       ntrips      pload        nload 
     # 0.117236572  -0.008777357 0.048595296  0.015513097  -0.141418576 0.013836205 -0.375044973 0.020742109 
     
-    "steelblue",   "brown",  "steelblue",  "black",  "red")) +
-  # soilp         soilfoc       soilconc   AvgTemp   precip
+    "steelblue",   "brown",  "steelblue")) +
+  # soilp         soilfoc       soilconc
   # -0.012744520  -0.083988351    -0.013500727 
   guides(fill=FALSE) +  
   xlab("Simulation Day") + 
@@ -263,17 +263,17 @@ sens_colors <- c("firebrick3",  "blue",     "firebrick",
                  "palegreen4", "darkgreen", "darkorange", "blueviolet",
                  "goldenrod","deeppink4", "goldenrod3",
                  "gold4", "gold", "gold3", "deeppink",   
-                 "brown",  "steelblue", "black", "red")
+                 "brown",  "steelblue")
 sens_vars_levels <- c("queenstrength","fgrlifespan", "RQQueenStrength",
                       "adslopec", "adLD50c", "halflife", "apprate",
                       "cl5pollen", "cl5nectar", "cldpollen", 
                       "ca410pollen", "ptrips", "pload", "nload",
-                      "soilfoc", "others", "AvgTemp", "Precip")
+                      "soilfoc", "others")
 sens_vars_labels <- c("Queen Strength","Forager Lifespan", "ReQueen Strength",
                "adslopec", "adLD50c", "Half-life", "Application rate",
                "cl5pollen", "cl5nectar", "cldpollen", 
                "ca410pollen", "Pollen trips", "Pollen load", "Nectar load",
-               "Soil foc", "All others", "Avg Temp", "Precipitation")
+               "Soil foc", "All others")
 sens_colors_list <- rep(sens_colors, each=5)
 order_list <- rep(1:16,each=5)
 Variables <- rep(sens_vars_levels, each=5)

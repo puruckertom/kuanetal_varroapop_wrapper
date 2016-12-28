@@ -24,6 +24,9 @@
 .Rproj.user
 beeRpop.Rproj
 
+.RData
+.RHistory
+
 .idea/
 
 

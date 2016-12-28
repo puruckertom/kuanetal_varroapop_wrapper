@@ -409,9 +409,9 @@ pccsoil_prepost<- array(data=NA, c(2,1,length(inputdata_soil)), dimnames = list(
                                                                             c(colnames(inputdata_soil))))
 
 for (i in 1:2){  #break
-  tempinput<- control_prepost[i,1:1000]
+  tempinput<- control_prepost[i,1:Nsims]
   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-  temp_pcc<- pcc(inputdata_control[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_control[1:Nsims,], tempinput, rank = F)
   pcccontrol_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_control_prepost <- adply(pcccontrol_prepost, 3)
@@ -424,9 +424,9 @@ control_pcc_prepost <- cbind(ordered_control_pre[1:10,], ordered_control_post[1:
 #control_pcc <- subset(pccdf_control, abs(pccdf_control$V1) > 0.062)
 
 for (i in 1:2){  #break
-  tempinput<- foliar_prepost[i,1:1000]
+  tempinput<- foliar_prepost[i,1:Nsims]
   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-  temp_pcc<- pcc(inputdata_foliar[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_foliar[1:Nsims,], tempinput, rank = F)
   pccfoliar_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_foliar_prepost <- adply(pccfoliar_prepost, 3)
@@ -438,9 +438,9 @@ foliar_pcc_prepost <- cbind(ordered_foliar_pre[1:10,], ordered_foliar_post[1:10,
 #foliar_pcc <- subset(pccdf_foliar, abs(pccdf_foliar$V1) > 0.062)
 
 for (i in 1:2){  #break
-  tempinput<- soil_prepost[i,1:1000]
+  tempinput<- soil_prepost[i,1:Nsims]
   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-  temp_pcc<- pcc(inputdata_soil[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_soil[1:Nsims,], tempinput, rank = F)
   pccsoil_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_soil_prepost <- adply(pccsoil_prepost, 3)
@@ -451,9 +451,9 @@ ordered_soil_post <- pcc_soil_prepost[order(abs(pcc_soil_prepost$post), decreasi
 soil_pcc_prepost <- cbind(ordered_soil_pre[1:10,], ordered_soil_post[1:10,])
 
 for (i in 1:2){  #break
-  tempinput<- seed_prepost[i,1:1000]
+  tempinput<- seed_prepost[i,1:Nsims]
   #pcc(input_dataframe, output, rank = FALSE, nboot = 0, conf = 0.95)
-  temp_pcc<- pcc(inputdata_seed[1:1000,], tempinput, rank = F)
+  temp_pcc<- pcc(inputdata_seed[1:Nsims,], tempinput, rank = F)
   pccseed_prepost[i,,] <- temp_pcc$PCC[[1]]
 }
 pcc_seed_prepost <- adply(pccseed_prepost, 3)
@@ -547,7 +547,7 @@ hh<- ggplot(data=soil_pcc_prepost, aes(x= soil_pcc_prepost[[3]], y= soil_pcc_pre
   theme_bw()
 
 
-pdf(file= paste(vpdir_fig, "fig_tornado_prepost.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_fig, "fig_tornado_prepost_2.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
   print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)  
   print(ee, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
@@ -559,7 +559,7 @@ pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
   print(hh, vp= viewport(layout.pos.row= 4, layout.pos.col= 2), newpage= FALSE)
 dev.off()
 
-png(file= paste(vpdir_fig, "fig_tornado_prepost.png", sep=""), width = 8, height = 7, units='in', pointsize=12, res=300)
+png(file= paste(vpdir_fig, "fig_tornado_prepost_2.png", sep=""), width = 8, height = 7, units='in', pointsize=12, res=300)
 pushViewport(viewport(layout=grid.layout(4,2), gp= gpar(cex = 0.6)))
 print(aa, vp= viewport(layout.pos.row= 1, layout.pos.col= 1), newpage= FALSE)  
 print(ee, vp= viewport(layout.pos.row= 1, layout.pos.col= 2), newpage= FALSE)
