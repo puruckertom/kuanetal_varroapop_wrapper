@@ -13,6 +13,7 @@ wkrdrnratio <- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, wkrdrnratio) #RQWk
 drnmitesurvive <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, drnmitesurvive) #ICDroneMiteSurvivorship
 wkrmitesurvive<- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, wkrmitesurvive) #ICWorkerMiteSurvivorship
 fgrlifespan <- runif(Nsims, 4, 16) ; inputdf <- cbind(inputdf, fgrlifespan) #ICForagerLifespan
+ForagerMaxProp <- runif(Nsims, 0, 1); inputdf <- cbind(inputdf, ForagerMaxProp) #IC active forager proportion
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=Nsims, replace=T) ; inputdf <- cbind(inputdf, miteimmtype) #ImmType
 #totalimmmites <- runif(Nsims, 0, 1000) ; inputdf <- cbind(inputdf, totalimmmites) #TotalImmMites

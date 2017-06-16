@@ -106,6 +106,8 @@ for (i in 1:Nsims) {
   inputvalue48 <- InitColNectar[i]
   parameter49 <- ("InitColPollen=") #initial pollen resource amount (g)
   inputvalue49 <- InitColPollen[i]
+  parameter50 <- ("ForagerMaxProp=") #forager proportion
+  inputvalue50 <- ForagerMaxProp[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
   write(varroainput0, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = FALSE)
@@ -318,6 +320,11 @@ for (i in 1:Nsims) {
   write(varroainput49, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput49, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput49, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput50 <- paste(parameter50, inputvalue50, sep = " ")
+  write(varroainput50, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput50, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput50, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput50, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   
   write("ESeedConcentration= 0", file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
