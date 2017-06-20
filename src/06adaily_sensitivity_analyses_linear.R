@@ -22,7 +22,7 @@ for (i in 1:ndays){  #break
 #  inputdata_control$AvgTemp <- tdarray_control[i,28,1:Nsims] #append avg temp to input dataframe
 #  inputdata_control$Precip <- tdarray_control[i,29,1:Nsims] #append precip to input dataframe
   temp_pcc<- pcc(inputdata_control, temp, rank = F)
-  print(paste(i,"out of",ndays))
+  print(paste(i,"out of",ndays)) 
   tdarray_pccout_control[i,] <- temp_pcc$PCC[[1]]
 }
 

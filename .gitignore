@@ -11,6 +11,11 @@
 /output/seed/results*.txt
 /output/soil/results*.txt
 /output/exposed/results*.txt
+/output/control/*.RData
+/output/foliar/*.RData
+/output/seed/*.RData
+/output/soil/*.RData
+/output/*.RData
 
 /log/log*exp.txt
 /log/log*.txt
@@ -20,6 +25,9 @@
 /input/seed/*.*
 /input/soil/*.*
 /input/*.log
+
+/src/.RData
+/src/.Rhistory
 
 .Rproj.user
 beeRpop.Rproj

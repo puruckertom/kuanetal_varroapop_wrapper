@@ -24,14 +24,14 @@ nrows<- length(timearray)
 #CONTROL
 indata_control <- read.csv(file = paste(vpdir_in_control, "inputdata_control.csv", sep = ""), header = TRUE)
 #cut out column "X"
-inputdata_control<- indata_control[, c(5:9,11:13,16:24,26:41,45:47)]
+inputdata_control<- indata_control[, c(5:10,12:14,17:25,27:42,46:48)]
 #FOLIAR
 indata_foliar <- read.csv(file = paste(vpdir_in_foliar, "inputdata_foliar.csv", sep = ""), header = TRUE)
-inputdata_foliar<- indata_foliar[, c(5:9,11:13,16:25,27:42,47:49)]
+inputdata_foliar<- indata_foliar[, c(5:10,12:14,17:26,28:43,48:50)]
 indata_seed <- read.csv(file = paste(vpdir_in_seed, "inputdata_seed.csv", sep = ""), header = TRUE)
-inputdata_seed<- indata_seed[, c(5:9,11:13,16:25,27:42,47:49)]
+inputdata_seed<- indata_seed[, c(5:10,12:14,17:26,28:43,48:50)]
 indata_soil <- read.csv(file = paste(vpdir_in_soil, "inputdata_soil.csv", sep = ""), header = TRUE)
-inputdata_soil<- indata_soil[, c(5:9,11:13,16:25,27:42,47:49)]
+inputdata_soil<- indata_soil[, c(5:10,12:14,17:26,28:43,48:50)]
 
 #extract input vectors from dataframe
 for(i in 1:length(inputdata_control)){assign(names(inputdata_control)[i], inputdata_control[[i]])}

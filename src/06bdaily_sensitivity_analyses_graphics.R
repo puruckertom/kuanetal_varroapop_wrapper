@@ -68,8 +68,8 @@ melted_control = melt(pcc_control, id.vars="date")
 daily_sensitivity_control <-  ggplot(melted_control, aes(x=date, y=value, group=variable)) +
     geom_line(aes(colour=melted_control$variable)) +
     scale_colour_manual(values = c(
-      "firebrick3",  "steelblue", "steelblue",   "steelblue",    "blue",       "deeppink",   "gold3",     "firebrick",  "steelblue", "steelblue",
-      #queenstrength wkrdrnratio  drnmitesurvive  wkrmitesurvive fgrlifespan InitColNectar InitColPollen RQQueenStrength adslope     adLD50
+      "firebrick3",  "steelblue", "steelblue",   "steelblue",    "blue",    "limegreen"      ,   "deeppink",   "gold3",     "firebrick",  "steelblue", "steelblue",
+      #queenstrength wkrdrnratio  drnmitesurvive  wkrmitesurvive fgrlifespan fgrmaxprop  InitColNectar InitColPollen RQQueenStrength adslope     adLD50
       
       "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange","steelblue",
       #adslopec  adLD50c       lslope      lLD50       kow         koc        halflife       cl4pollen
@@ -113,8 +113,8 @@ melted_foliar = melt(pcc_foliar, id.vars="date")
 daily_sensitivity_foliar <- ggplot(melted_foliar, aes(x=date, y=value, group=variable)) +
     geom_line(aes(colour=melted_foliar$variable)) +
     scale_colour_manual(values = c(
-      "firebrick3","steelblue", "steelblue","steelblue",       "blue",      "deeppink" ,  "gold3",      "firebrick",  "steelblue","steelblue", 
-      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
+      "firebrick3","steelblue", "steelblue","steelblue",       "blue",    "limegreen" ,   "deeppink" ,  "gold3",      "firebrick",  "steelblue","steelblue", 
+      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,fgrmaxprop,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
       # 0.587356118 -0.038034348 -0.057103768   -0.017899693  0.404958669                              0.119566429     0.029776035  -0.028895013
       
       "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
@@ -163,8 +163,8 @@ melted_soil = melt(pcc_soil, id.vars="date")
 daily_sensitivity_soil <- ggplot(melted_soil, aes(x=date, y=value, group=variable)) +
     geom_line(aes(colour=melted_soil$variable)) +
     scale_colour_manual(values = c(
-      "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",         "deeppink",   "gold3"    ,  "firebrick", "steelblue", "steelblue", 
-      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
+      "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",    "limegreen"  ,  "deeppink",   "gold3"    ,  "firebrick", "steelblue", "steelblue", 
+      #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,fgrmaxprop,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
       # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264                                   0.111696614   0.035542511   -0.053950074
       
       "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
@@ -214,8 +214,8 @@ melted_seed = melt(pcc_seed, id.vars="date")
 daily_sensitivity_seed <- ggplot(melted_seed, aes(x=date, y=value, group=variable)) +
   geom_line(aes(colour=melted_seed$variable)) +
   scale_colour_manual(values = c(
-    "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",        "deeppink",   "gold3",       "firebrick", "steelblue", "steelblue", 
-    #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
+    "firebrick3","steelblue", "steelblue",  "steelblue",  "blue",     "limegreen",   "deeppink",   "gold3",       "firebrick", "steelblue", "steelblue", 
+    #queenstrength,wkrdrnratio,drnmitesurvive,wkrmitesurvive,fgrlifespan,fgrmaxprop,InitColNectar,InitColPollen, RQQueenStrength,adslope,      adLD50
     # 0.464859410  -0.035015120 -0.015619560 -0.009523889 0.265147264                                 0.111696614   0.035542511   -0.053950074
     
     "palegreen4", "darkgreen", "steelblue", "steelblue","steelblue", "steelblue",  "darkorange", "blueviolet",
@@ -259,25 +259,25 @@ dev.off()
 #create custom legend
 # dummy data
 set.seed(45)
-sens_colors <- c("firebrick3",  "blue",     "firebrick", 
+sens_colors <- c("firebrick3",  "blue", "limegreen",    "firebrick", 
                  "palegreen4", "darkgreen", "darkorange", "blueviolet",
                  "goldenrod","deeppink4", "goldenrod3",
                  "gold4", "gold", "gold3", "deeppink",   
                  "brown",  "steelblue")
-sens_vars_levels <- c("queenstrength","fgrlifespan", "RQQueenStrength",
+sens_vars_levels <- c("queenstrength","fgrlifespan", "ForagerMaxProp", "RQQueenStrength",
                       "adslopec", "adLD50c", "halflife", "apprate",
                       "cl5pollen", "cl5nectar", "cldpollen", 
                       "ca410pollen", "ptrips", "pload", "nload",
                       "soilfoc", "others")
-sens_vars_labels <- c("Queen Strength","Forager Lifespan", "ReQueen Strength",
+sens_vars_labels <- c("Queen Strength","Forager Lifespan", "Forager Max Proportion","ReQueen Strength",
                "adslopec", "adLD50c", "Half-life", "Application rate",
                "cl5pollen", "cl5nectar", "cldpollen", 
                "ca410pollen", "Pollen trips", "Pollen load", "Nectar load",
                "Soil foc", "All others")
 sens_colors_list <- rep(sens_colors, each=5)
-order_list <- rep(1:16,each=5)
+order_list <- rep(1:17,each=5)
 Variables <- rep(sens_vars_levels, each=5)
-df <- data.frame(x=rep(1:5, 16), val=sample(1:100, 80), 
+df <- data.frame(x=rep(1:5, 17), val=sample(1:100, 85), 
                  variable=rep(sens_vars_levels, each=5), order_list2 = order_list)
 #reorder factor for labeling
 df$variable <- factor(df$variable, levels=sens_vars_levels, labels=sens_vars_labels)
