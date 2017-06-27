@@ -16,8 +16,8 @@ fgrlifespan <- runif(Nsims, 4, 16) ; inputdf <- cbind(inputdf, fgrlifespan) #ICF
 ForagerMaxProp <- runif(Nsims, 0, 1); inputdf <- cbind(inputdf, ForagerMaxProp) #IC active forager proportion
 immtype <- c("Polynomial", "Cosine", "Sine", "Exponential", "Tangent", "Logarithmic")
 miteimmtype <- sample(immtype, size=Nsims, replace=T) ; inputdf <- cbind(inputdf, miteimmtype) #ImmType
-#totalimmmites <- runif(Nsims, 0, 1000) ; inputdf <- cbind(inputdf, totalimmmites) #TotalImmMites
-#pctresistimmmites <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, pctresistimmmites) #PctImmMitesResistant
+totalimmmites <- runif(Nsims, 0, 1000) ; inputdf <- cbind(inputdf, totalimmmites) #TotalImmMites
+pctresistimmmites <- runif(Nsims, 0, 100) ; inputdf <- cbind(inputdf, pctresistimmmites) #PctImmMitesResistant
 InitColNectar<- runif(Nsims, 100, 8000) ; inputdf <- cbind(inputdf, InitColNectar)
 InitColPollen<- runif(Nsims, 100, 8000) ; inputdf <- cbind(inputdf, InitColPollen)
 #SupPollenEnable= Supplemental pollen feeding
@@ -40,12 +40,12 @@ RQQueenStrength<- runif(Nsims, 1, 5) ; inputdf <- cbind(inputdf, RQQueenStrength
 #wkrlarv <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, wkrlarv) #ICWorkerLarvae
 #drneggs <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, drneggs) #ICDroneEggs
 #wkreggs <- runif(Nsims, 1, 5000) ; inputdf <- cbind(inputdf, wkreggs) #ICWorkerEggs
-#drnadultinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, drnadultinfest) #ICDroneAdultInfest
-#drnbroodinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, drnbroodinfest) #ICDroneBroodInfest
-#drnmiteoffspring <- runif(Nsmis, 0, 5) ; inputdf <- cbind(inputdf, drnmiteoffspring) #ICDroneMiteOffspring
-#wkradultinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, wkradultinfest) #ICWorkerAdultInfest
-#wkrbroodinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, wkrbroodinfest) #ICWorkerBroodInfest
-#wkrmiteoffspring <- runif(Nsims, 0, 5) ; inputdf <- cbind(inputdf, wkrmiteoffspring) #ICWorkerMiteOffspring
+drnadultinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, drnadultinfest) #ICDroneAdultInfest
+drnbroodinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, drnbroodinfest) #ICDroneBroodInfest
+drnmiteoffspring <- runif(Nsims, 0, 5) ; inputdf <- cbind(inputdf, drnmiteoffspring) #ICDroneMiteOffspring
+wkradultinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, wkradultinfest) #ICWorkerAdultInfest
+wkrbroodinfest <- runif(Nsims, 0, 10) ; inputdf <- cbind(inputdf, wkrbroodinfest) #ICWorkerBroodInfest
+wkrmiteoffspring <- runif(Nsims, 0, 5) ; inputdf <- cbind(inputdf, wkrmiteoffspring) #ICWorkerMiteOffspring
 #requeendate <- rep("mm/dd/yyyy", Nsims) ; inputdf <- cbind(inputdf, requeendate) #RQReQueenDate
 rqenable <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqenable) #RQEnableReQueen
 rqscheduled <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqscheduled) #RQScheduled
@@ -63,7 +63,6 @@ rqscheduled <- rep("true", Nsims) ; inputdf <- cbind(inputdf, rqscheduled) #RQSc
 ## pesticide tab of https://docs.google.com/spreadsheets/d/1SG1aceXAoWoxFPag52y09zaYtvnkYH4gXVp9LXj1Yxw/edit#gid=1238958414
 ##pesticide exposure
 adslope<- runif(Nsims, 1, 9) ; inputdf <- cbind(inputdf, adslope)  #AIAdultSlope
-#adLD50<- runif(Nsims, 0.001, 100) ; inputdf <- cbind(inputdf, adLD50)  #AIAdultLD50 (ug/bee)
 adLD50<- runif(Nsims, 0.001, 1) ; inputdf <- cbind(inputdf, adLD50)  #AIAdultLD50 (ug/bee)
 adslopec<- runif(Nsims, 1,10) ; inputdf <- cbind(inputdf, adslopec)  #AIAdultSlopeContact
 adLD50c<- runif(Nsims, 0.001, 100) ; inputdf <- cbind(inputdf, adLD50c)  #AIAdultLD50Contact (ug/bee)
