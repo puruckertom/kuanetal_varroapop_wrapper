@@ -108,6 +108,22 @@ for (i in 1:Nsims) {
   inputvalue49 <- InitColPollen[i]
   parameter50 <- ("ForagerMaxProp=") #forager proportion
   inputvalue50 <- ForagerMaxProp[i]
+  parameter51 <- ("TotalImmMites=") #TotalImmMites
+  inputvalue51 <- totalimmmites[i]
+  parameter52 <- ("PctImmMitesResistant=") #PctImmMitesResistant
+  inputvalue52 <- pctresistimmmites[i]
+  parameter53 <- ("ICDroneAdultInfest=") #ICDroneAdultInfest
+  inputvalue53 <- drnadultinfest[i]
+  parameter54 <- ("ICDroneBroodInfest=") #ICDroneBroodInfest
+  inputvalue54 <- drnbroodinfest[i]
+  parameter55 <- ("ICDroneMiteOffspring=") #ICDroneMiteOffspring
+  inputvalue55 <- drnmiteoffspring[i]
+  parameter56 <- ("ICWorkerAdultInfest=") #ICWorkerAdultInfest
+  inputvalue56 <- wkradultinfest[i]
+  parameter57 <- ("ICWorkerBroodInfest=") #ICWorkerBroodInfest
+  inputvalue57 <- wkrbroodinfest[i]
+  parameter58 <- ("#ICWorkerMiteOffspring=") #ICWorkerMiteOffspring
+  inputvalue58 <- wkrmiteoffspring[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
   write(varroainput0, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = FALSE)
@@ -325,6 +341,46 @@ for (i in 1:Nsims) {
   write(varroainput50, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput50, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   write(varroainput50, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput51 <- paste(parameter51, inputvalue51, sep = " ")
+  write(varroainput51, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput51, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput51, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput51, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput52 <- paste(parameter52, inputvalue52, sep = " ")
+  write(varroainput52, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput52, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput52, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput52, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput53 <- paste(parameter53, inputvalue53, sep = " ")
+  write(varroainput53, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput53, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput53, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput53, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput54 <- paste(parameter54, inputvalue54, sep = " ")
+  write(varroainput54, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput54, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput54, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput54, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput55 <- paste(parameter55, inputvalue55, sep = " ")
+  write(varroainput55, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput55, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput55, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput55, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput56 <- paste(parameter56, inputvalue56, sep = " ")
+  write(varroainput56, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput56, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput56, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput56, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput57 <- paste(parameter57, inputvalue57, sep = " ")
+  write(varroainput57, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput57, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput57, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput57, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  varroainput58 <- paste(parameter58, inputvalue58, sep = " ")
+  write(varroainput58, file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
+  write(varroainput58, file = paste(vpdir_in_foliar, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput58, file = paste(vpdir_in_seed, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
+  write(varroainput58, file = paste(vpdir_in_soil, "input", i, ".txt", sep = ""), append = TRUE, sep = "\n")
   
   write("ESeedConcentration= 0", file = paste(vpdir_in_control, "input", i, ".txt", sep=""), append = TRUE, sep = "\n")
   #varroainputweather <- paste(weather, weathervalue, sep= " ")
