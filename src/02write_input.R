@@ -122,7 +122,7 @@ for (i in 1:Nsims) {
   inputvalue56 <- wkradultinfest[i]
   parameter57 <- ("ICWorkerBroodInfest=") #ICWorkerBroodInfest
   inputvalue57 <- wkrbroodinfest[i]
-  parameter58 <- ("#ICWorkerMiteOffspring=") #ICWorkerMiteOffspring
+  parameter58 <- ("ICWorkerMiteOffspring=") #ICWorkerMiteOffspring
   inputvalue58 <- wkrmiteoffspring[i]
   
   varroainput0 <- paste(parameter0, inputvalue0, sep = " ")
