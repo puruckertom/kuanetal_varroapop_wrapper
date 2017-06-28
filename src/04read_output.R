@@ -12,6 +12,14 @@ timearray<- as.Date(timearray,"%m/%d/%Y")
 timediff <- timearray[3]-timearray[2]
 timearray[1] <- timearray[2]-timediff
 length(timearray)
+outvar<- c("Date","Colony Size","Adult Drones","Adult Workers", "Foragers", "Capped Drone Brood", "Capped Worker Brood",
+           "Drone Larvae", "Worker Larvae", "Drone Eggs", "Worker Eggs", "Free Mites", "Drone Brood Mites",
+           "Worker Brood Mites", "Mites/Drone Cell", "Mites/Worker Cell", "Mites Dying", "Proportion Mites Dying",
+           "Colony Pollen (g)", "Pollen Pesticide Concentration", "Colony Nectar", "Nectar Pesticide Concentration",
+           "Dead Drone Larvae", "Dead Worker Larvae", "Dead Drone Adults", "Dead Worker Adults", "Dead Foragers",
+           "Queen Strength", "Average Temperature (celsius)", "Rain")
+
+
 
 # read output files
 #CONTROL
@@ -19,7 +27,7 @@ tdarray_control <- array(data=NA, c(nrows,ncols-1,Nsims))
 dim(tdarray_control)
 for (i in 1:Nsims) {
   df <- read.table(paste(vpdir_out_control,"results",i,".txt", sep=""), header= FALSE, sep= "", 
-                  skip = 6, stringsAsFactors = FALSE, row.names=NULL)
+                  skip = 6, stringsAsFactors = FALSE, row.names=NULL, col.names = outvar)
   newarray <- df[,2:ncols]
   tdarray_control[1:nrows,1:(ncols-1),i] <- abind(newarray[1:nrows,1:(ncols-1)], along=3)
 }

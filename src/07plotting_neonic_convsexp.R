@@ -5,10 +5,10 @@ cp_foliar <- rep(NA, nrows)
 cp_soil <- rep(NA, nrows)
 cp_seed <- rep(NA, nrows)
 for (n in 1:nrows){
-  x <- which(tdarray_control[n,1,1:Nsims] > 1000) # queries colony size > 1000 for 1000 simulations at each time point
-  y <- which(tdarray_foliar[n,1,1:Nsims] > 1000)
-  z <- which(tdarray_soil[n,1,1:Nsims] > 1000)
-  zz <- which(tdarray_seed[n,1,1:Nsims] > 1000)
+  x <- which(tdarray_control[n,1,1:Nsims] > 0) # queries colony size > 1000 for 1000 simulations at each time point
+  y <- which(tdarray_foliar[n,1,1:Nsims] > 0)
+  z <- which(tdarray_soil[n,1,1:Nsims] > 0)
+  zz <- which(tdarray_seed[n,1,1:Nsims] > 0)
   cp_control[n] <- length(x)/Nsims #appends vector x with proportion of simulations per time step with Col Size > 0
   cp_foliar[n] <- length(y)/Nsims
   cp_soil[n] <- length(z)/Nsims

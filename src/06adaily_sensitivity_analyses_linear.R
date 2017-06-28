@@ -4,7 +4,7 @@ ndays <- length(timearray)
 ## load control data
 #tdarray_control[day, output_variable, simulation]
 dim(tdarray_control)
-head(tdarray_control)
+tdarray_control[1:10,,1]
 #colony size is 1
 tdoutput_control <- tdarray_control[,1,1:Nsims]
 #tdoutput_control <- tdarray_control[timebreak,resvar,1:Nsims]

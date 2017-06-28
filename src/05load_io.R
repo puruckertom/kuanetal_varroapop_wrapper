@@ -2,9 +2,6 @@
 #CONTROL
 load(paste(vpdir_out_control,"tdarray_control.RData", sep = ""))
 dim(tdarray_control)
-#do we need names here?
-names(tdarray_control)
-
 #FOLIAR
 load(paste(vpdir_out_foliar,"tdarray_foliar.RData", sep = ""))
 dim(tdarray_foliar)
@@ -20,18 +17,19 @@ nrows<- length(timearray)
 #rownames(tdarray)
 #days, outputs, simulations
 
+
 #read input files
 #CONTROL
 indata_control <- read.csv(file = paste(vpdir_in_control, "inputdata_control.csv", sep = ""), header = TRUE)
 #cut out column "X"
-inputdata_control<- indata_control[, c(5:10,12:14,17:25,27:42,46:48)]
+inputdata_control<- indata_control%>%select_if(is.numeric)%>%select(-1)
 #FOLIAR
 indata_foliar <- read.csv(file = paste(vpdir_in_foliar, "inputdata_foliar.csv", sep = ""), header = TRUE)
-inputdata_foliar<- indata_foliar[, c(5:10,12:14,17:26,28:43,48:50)]
+inputdata_foliar<- indata_foliar%>%select_if(is.numeric)%>%select(-1)
 indata_seed <- read.csv(file = paste(vpdir_in_seed, "inputdata_seed.csv", sep = ""), header = TRUE)
-inputdata_seed<- indata_seed[, c(5:10,12:14,17:26,28:43,48:50)]
+inputdata_seed<- indata_seed%>%select_if(is.numeric)%>%select(-1)
 indata_soil <- read.csv(file = paste(vpdir_in_soil, "inputdata_soil.csv", sep = ""), header = TRUE)
-inputdata_soil<- indata_soil[, c(5:10,12:14,17:26,28:43,48:50)]
+inputdata_soil<- indata_soil%>%select_if(is.numeric)%>%select(-1)
 
 #extract input vectors from dataframe
 for(i in 1:length(inputdata_control)){assign(names(inputdata_control)[i], inputdata_control[[i]])}
@@ -43,5 +41,6 @@ for(i in 1:length(inputdata_soil)){assign(names(inputdata_soil)[i], inputdata_so
 #linputdata <- as.list(inputdata)
 #withdraw miteimmtype from list
 #listinput<- as.list(linputdata[c(1:5,7:16)]) 
-outvar<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)")
+
+
 

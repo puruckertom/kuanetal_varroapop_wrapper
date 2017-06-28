@@ -12,6 +12,7 @@ library(grid)
 library(gridExtra)
 library(sensitivity)
 library(abind)
+library(dplyr)
 
 #echo environment
 Sys.info()
