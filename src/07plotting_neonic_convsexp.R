@@ -201,15 +201,17 @@ lines(timearray, de_soil, type="l", lty = 2, col="green")
 dev.off()
 
 #time series plotting #######
-resvar<- c(1,3,4,10,18)
+resvar<- c(1,3,4,10,18) #colony size, adult wkr, foragers, wkr eggs, colony pollen
+resvar_names<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)")
+
 temparray_control <- tdarray_control[1:nrows,resvar,1:Nsims]
 temparray_foliar <- tdarray_foliar[1:nrows,resvar,1:Nsims]
 temparray_seed <- tdarray_seed[1:nrows,resvar,1:Nsims]
 temparray_soil <- tdarray_soil[1:nrows, resvar, 1:Nsims]
-dimnames(temparray_control)<- list(c(as.character(timearray)), c(outvar))
-dimnames(temparray_foliar)<- list(c(as.character(timearray)), c(outvar))
-dimnames(temparray_seed)<- list(c(as.character(timearray)), c(outvar))
-dimnames(temparray_soil)<- list(c(as.character(timearray)), c(outvar))
+dimnames(temparray_control)<- list(c(as.character(timearray)), c(resvar_names))
+dimnames(temparray_foliar)<- list(c(as.character(timearray)), c(resvar_names))
+dimnames(temparray_seed)<- list(c(as.character(timearray)), c(resvar_names))
+dimnames(temparray_soil)<- list(c(as.character(timearray)), c(resvar_names))
 tempout_control<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
                                                            c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"),
                                                            c("25%","50%","75%")))
@@ -248,19 +250,19 @@ pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, 
 par(mfrow=c(4,4), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
 for (r in 1:4){
-  plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
+  plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Control")
   lines(timearray, tempout_control[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_control[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_foliar[,r,2], type = "l", ylim = c(0,max(tempout_foliar[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Foliar")
+  plot(timearray, tempout_foliar[,r,2], type = "l", ylim = c(0,max(tempout_foliar[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Foliar")
   lines(timearray, tempout_foliar[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_foliar[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Seed")
+  plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Seed")
   lines(timearray, tempout_seed[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_seed[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Soil")
+  plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Soil")
   lines(timearray, tempout_soil[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_soil[,r,3], type = "l", lty= 4, col = "blue")
 }
@@ -273,19 +275,19 @@ png(file= paste(vpdir_fig, "fig_quantile_timeseries.png", sep=""), width = 7, he
 par(mfrow=c(4,4), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
 for (r in 1:4){
-  plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Control")
+  plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Control")
   lines(timearray, tempout_control[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_control[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_foliar[,r,2], type = "l", ylim = c(0,max(tempout_foliar[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Foliar")
+  plot(timearray, tempout_foliar[,r,2], type = "l", ylim = c(0,max(tempout_foliar[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Foliar")
   lines(timearray, tempout_foliar[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_foliar[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Seed")
+  plot(timearray, tempout_seed[,r,2], type = "l", ylim = c(0,max(tempout_seed[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Seed")
   lines(timearray, tempout_seed[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_seed[,r,3], type = "l", lty= 4, col = "blue")
   
-  plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(outvar[r]), xlab = NA, main= "Soil")
+  plot(timearray, tempout_soil[,r,2], type = "l", ylim = c(0,max(tempout_soil[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Soil")
   lines(timearray, tempout_soil[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_soil[,r,3], type = "l", lty= 4, col = "blue")
 }
