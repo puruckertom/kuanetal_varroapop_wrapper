@@ -5,10 +5,10 @@ cp_foliar <- rep(NA, nrows)
 cp_soil <- rep(NA, nrows)
 cp_seed <- rep(NA, nrows)
 for (n in 1:nrows){
-  x <- which(tdarray_control[n,1,1:Nsims] > 0) # queries colony size > 1000 for 1000 simulations at each time point
-  y <- which(tdarray_foliar[n,1,1:Nsims] > 0)
-  z <- which(tdarray_soil[n,1,1:Nsims] > 0)
-  zz <- which(tdarray_seed[n,1,1:Nsims] > 0)
+  x <- which(tdarray_control[n,1,1:Nsims] > 1000) # queries colony size > 1000 for 1000 simulations at each time point
+  y <- which(tdarray_foliar[n,1,1:Nsims] > 1000)
+  z <- which(tdarray_soil[n,1,1:Nsims] > 1000)
+  zz <- which(tdarray_seed[n,1,1:Nsims] > 1000)
   cp_control[n] <- length(x)/Nsims #appends vector x with proportion of simulations per time step with Col Size > 0
   cp_foliar[n] <- length(y)/Nsims
   cp_soil[n] <- length(z)/Nsims
@@ -96,16 +96,22 @@ for (n in 1:nrows){
 }
 
 
-# #free mites
-# fm_con <- rep(NA, nrows)
-# fm_exp <- rep(NA, nrows)
-# for (n in 1:nrows){
-#   x <- which(tdarray_con[n,11,1:Nsims] > 0)
-#   y <- which(tdarray_exp[n,11,1:Nsims] > 0)
-#   fm_con[n] <- length(x)/Nsims 
-#   fm_exp[n] <- length(y)/Nsims 
-# }
-# 
+#free mites
+fm_control <- rep(NA, nrows)
+fm_foliar <- rep(NA, nrows)
+fm_soil <- rep(NA, nrows)
+fm_seed <- rep(NA, nrows)
+for (n in 1:nrows){
+  x <- which(tdarray_control[n,11,1:Nsims] > 0)
+  y <- which(tdarray_foliar[n,11,1:Nsims] > 0)
+  z <- which(tdarray_soil[n,11,1:Nsims] > 0)
+  zz <- which(tdarray_seed[n,11,1:Nsims] > 0)
+  fm_control[n] <- length(x)/Nsims
+  fm_foliar[n] <- length(y)/Nsims
+  fm_soil[n] <- length(z)/Nsims
+  fm_seed[n] <- length(zz)/Nsims
+}
+
 # #dead foragers
 # dfr_con <- rep(NA, nrows)
 # dfr_exp <- rep(NA, nrows)
@@ -126,15 +132,21 @@ for (n in 1:nrows){
 #   dm_exp[n] <- length(y)/Nsims
 # }
 # 
-# #capped drone brood
-# cdb_con <- rep(NA, nrows)
-# cdb_exp <- rep(NA, nrows)
-# for (n in 1:nrows){
-#   x <- which(tdarray_con[n, 5, 1:Nsims] > 0)
-#   y <- which(tdarray_exp[n, 5, 1:Nsims] > 0)
-#   cdb_con[n] <- length(x)/Nsims
-#   cdb_exp[n] <- length(y)/Nsims
-# }
+#capped drone brood
+cdb_control <- rep(NA, nrows)
+cdb_foliar <- rep(NA, nrows)
+cdb_soil <- rep(NA,nrows)
+cdb_seed <- rep(NA,nrows)
+for (n in 1:nrows){
+  x <- which(tdarray_control[n, 5, 1:Nsims] > 50)
+  y <- which(tdarray_foliar[n, 5, 1:Nsims] > 50)
+  z <- which(tdarray_soil[n,5,1:Nsims] > 50)
+  zz <- which(tdarray_seed[n,5,1:Nsims] > 50)
+  cdb_control[n] <- length(x)/Nsims
+  cdb_foliar[n] <- length(y)/Nsims
+  cdb_soil[n] <- length(z)/Nsims
+  cdb_seed[n] <- length(zz)/Nsims
+}
 
 
 #MC proportions ##########
@@ -157,16 +169,22 @@ pdf(file= paste(vpdir_fig, "fig_1_MCproportions_convsexp.pdf", sep=""), width = 
   lines(timearray, cwb_foliar, type="l", lty = 2, col="red")
   lines(timearray, cwb_seed, type="l", lty = 2, col="black")
   lines(timearray, cwb_soil, type="l", lty = 2, col="green")
-  plot(timearray, we_control, type="l", col="blue", ylab = "P(Worker Eggs) > 50", ylim=c(0,1), xlab=NA)
-  lines(timearray, we_foliar, type="l", lty = 2, col="red")
-  lines(timearray, we_seed, type="l", lty = 2, col="black")
-  lines(timearray, we_soil, type="l", lty = 2, col="green")
+  # plot(timearray, we_control, type="l", col="blue", ylab = "P(Worker Eggs) > 50", ylim=c(0,1), xlab=NA)
+  # lines(timearray, we_foliar, type="l", lty = 2, col="red")
+  # lines(timearray, we_seed, type="l", lty = 2, col="black")
+  # lines(timearray, we_soil, type="l", lty = 2, col="green")
+  plot(timearray, cdb_control, type="l", col="blue", ylab= "P(Capped Drone Brood) > 50", ylim=c(0,1), xlab=NA)
+  lines(timearray, cdb_foliar, type="l", lty = 2, col="red")
+  lines(timearray, cdb_seed, type="l", lty = 2, col="black")
+  lines(timearray, cdb_soil, type="l", lty = 2, col="green")
   plot(timearray, de_control, type="l", col="blue", ylab = "P(Drone Eggs) > 0", ylim=c(0,1), xlab=NA)
   lines(timearray, de_foliar, type="l", lty = 2, col="red")
   lines(timearray, de_seed, type="l", lty = 2, col="black")
   lines(timearray, de_soil, type="l", lty = 2, col="green")
-  #plot(timearray, fm_con, type="l", col="blue", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA) 
-  #lines(timearray, fm_exp, type="l", lty = 2, col="red")
+  # plot(timearray, fm_control, type="l", col="blue", ylab= "P(Free Mites) > 0", ylim=c(0,1), xlab=NA)
+  # lines(timearray, fm_foliar, type="l", lty = 2, col="red")
+  # lines(timearray, fm_seed, type="l", lty = 2, col="black")
+  # lines(timearray, fm_soil, type="l", lty = 2, col="green")
   #plot(timearray, dfr_con, type="l", col="blue", ylab= "P(Dead Foragers) > 0", ylim=c(0,1), xlab=NA) 
   #lines(timearray, dfr_exp, type="l", lty = 2, col="red")
   #mtext(text = paste("Fig. 1 Proportion of simulations with values greater than zero"), side = 1, line = 1, outer = T)
@@ -201,8 +219,8 @@ lines(timearray, de_soil, type="l", lty = 2, col="green")
 dev.off()
 
 #time series plotting #######
-resvar<- c(1,3,4,10,18) #colony size, adult wkr, foragers, wkr eggs, colony pollen
-resvar_names<- c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)")
+resvar<- c(1,3,4,6,13) #colony size, adult wkr, foragers, capped wkr brood, wbrood mites
+resvar_names<- c("Colony Size","Adult Workers", "Foragers", "Capped Worker Brood", "Worker Brood Mites")
 
 temparray_control <- tdarray_control[1:nrows,resvar,1:Nsims]
 temparray_foliar <- tdarray_foliar[1:nrows,resvar,1:Nsims]
@@ -213,16 +231,16 @@ dimnames(temparray_foliar)<- list(c(as.character(timearray)), c(resvar_names))
 dimnames(temparray_seed)<- list(c(as.character(timearray)), c(resvar_names))
 dimnames(temparray_soil)<- list(c(as.character(timearray)), c(resvar_names))
 tempout_control<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
-                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"),
+                                                           c("Colony Size","Adult Workers", "Foragers", "Capped Worker Brood", "Worker Brood Mites"),
                                                            c("25%","50%","75%")))
 tempout_foliar<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
-                                                           c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
+                                                           c("Colony Size","Adult Workers", "Foragers", "Capped Worker Brood", "Worker Brood Mites"), 
                                                            c("25%","50%","75%")))
 tempout_seed<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
-                                                              c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
+                                                              c("Colony Size","Adult Workers", "Foragers", "Capped Worker Brood", "Worker Brood Mites"), 
                                                               c("25%","50%","75%")))
 tempout_soil<- array(data=NA, c(nrows,5,3), dimnames = list(c(as.character(timearray)), 
-                                                              c("Colony Size","Adult Workers", "Foragers", "Worker Eggs", "Colony Pollen (g)"), 
+                                                              c("Colony Size","Adult Workers", "Foragers", "Capped Worker Brood", "Worker Brood Mites"), 
                                                               c("25%","50%","75%")))
 for (r in 1:5){
   for (t in 1:nrows){
@@ -244,12 +262,12 @@ for (r in 1:5){
 }
 
 #create PDF timeseries
-pdf(file= paste(vpdir_fig, "fig_quantile_timeseries.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
+pdf(file= paste(vpdir_fig, "fig_quantile_timeseries_2.pdf", sep=""), width = 8.5, height = 11, onefile = TRUE, paper = "USr")
 #start figures
 #time series plots
-par(mfrow=c(4,4), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
+par(mfrow=c(5,4), mar=c(2, 4, 2, 0.5), oma= c(3,2,2,6.5))
 
-for (r in 1:4){
+for (r in 1:5){
   plot(timearray, tempout_control[,r,2], type = "l", ylim = c(0,max(tempout_control[,r,3])), ylab= paste(resvar_names[r]), xlab = NA, main= "Control")
   lines(timearray, tempout_control[,r,1], type = "l", lty= 2, col = "red")
   lines(timearray, tempout_control[,r,3], type = "l", lty= 4, col = "blue")
