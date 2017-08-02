@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/36322565.svg)](https://zenodo.org/badge/latestdoi/36322565)
+
 # beeRpop
 Rwrapper for beepop/varroapop pesticide manual, private github repository
 
