@@ -1,0 +1,17 @@
+ICQueenStrength= 3.2677611252293
+RQWkrDrnRatio= 2.05379006825387
+ICDroneMiteSurvivorship= 74.9325663316995
+ICWorkerMiteSurvivorship= 37.8311252454296
+ICForagerLifespan= 6.74856563378125
+ImmType= Exponential
+RQQueenStrength= 4.58124316670001
+RQEnableReQueen= true
+ForagerMaxProp= 0.292610218981281
+TotalImmMites= 482.19742346555
+PctImmMitesResistant= 45.3373890835792
+ICDroneAdultInfest= 5.44129865476862
+ICDroneBroodInfest= 9.60364617174491
+ICDroneMiteOffspring= 4.38145666732453
+ICWorkerAdultInfest= 2.58045447524637
+ICWorkerBroodInfest= 3.70206050341949
+ICWorkerMiteOffspring= 0.30387234990485
